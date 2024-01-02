@@ -1,0 +1,192 @@
+{
+  "main": {
+    "id": "3583105be003142c",
+    "type": "split",
+    "children": [
+      {
+        "id": "475ed215b76112ad",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "823d3d9d06b26154",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5aefd75e3d461cec",
+    "type": "split",
+    "children": [
+      {
+        "id": "7052aec304a3bad1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d510a73e3142c4df",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "1aa6a3f5e08a1424",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "32786d7000c464f0",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "f4a864b39cd2bdd0",
+    "type": "split",
+    "children": [
+      {
+        "id": "0772a53c9d39890b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "89f2f024069ca695",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "4d72977170089ebc",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "c9d7abf9275210d5",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "acc3b94a2ddeb625",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Apri selezione rapida": false,
+      "graph:Apri vista grafo": false,
+      "canvas:Crea nuova lavagna": false,
+      "daily-notes:Apri nota del giorno": false,
+      "templates:Inserisci modello": false,
+      "command-palette:Apri riquadro comandi": false
+    }
+  },
+  "active": "823d3d9d06b26154",
+  "lastOpenFiles": [
+    "AR/05 - Reti come grafi dalla struttura disomogenea.md",
+    "root.md.md",
+    "AR/04 - Il fenomeno Small World.md",
+    "AR/imgs/05-ar_img04.png",
+    "AR/imgs/05-ar_img03.png",
+    "lemma precedente.md",
+    "AR/imgs/05-ar_img01.png",
+    "AR/imgs/04-ar_img06.png",
+    "AR/imgs/05-ar_img02.png",
+    "AR/06 - Processi di diffusione.md",
+    "AR/03 - Grafi Geometrici aleatori e reti wireless.md",
+    "AGT/07 - Meccanismi senza pagamenti e kidney exchange.md",
+    "AGT/01 - Introduzione alla AGT.md",
+    "agt.zip",
+    "zi5QwowD",
+    "AGT/06 - Algorithmic Mechanism Design III.md",
+    "AGT/05 - Algorithmic Mechanism Design II.md",
+    "AGT/04 - Algorithmic Mechanism Design I.md",
+    "AGT/imgs/07-agt_img01.png",
+    "AGT/imgs/07-agt_img07.png",
+    "AGT/imgs/07-agt_img06.png",
+    "AGT/imgs/07-agt_img05.png",
+    "AGT/imgs/07-agt_img04.png",
+    "AR/07 - Seguire il gregge.md",
+    "AR/01 - Introduzione e grafi di Erdős-Rényi.md",
+    "AR/02 - Questione di popolarità.md",
+    "01 - Introduzione.md",
+    "Il modello di Erdős-Rényi.md",
+    "AR/Il modello di Erdős-Rényi.md",
+    "ar-lesson02-img2.png.md",
+    "AR/2 - Power Law.md",
+    "Il.md",
+    "SDCC/08 - Docker.md",
+    "SDCC/07 - Virtualizzazione.md",
+    "architetture decentralizzate (temp).md",
+    "Architetture decentralizzate new.md",
+    "domande esonero 1.md",
+    "CNS/notes.md",
+    "AGT/imgs",
+    "AGT",
+    "Senza nome.canvas",
+    "home/davide/uni/master/sdcc/code/rabbitmq-go/rabbitmq_1_hello",
+    "home/davide/uni/master/sdcc/code/rabbitmq-go",
+    "home/davide/uni/master/sdcc/code",
+    "home/davide/uni/master/sdcc",
+    "home/davide/uni/master",
+    "home/davide/uni"
+  ]
+}

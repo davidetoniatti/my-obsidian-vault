@@ -1,0 +1,12 @@
+{
+  "accentColor": "",
+  "baseFontSize": 20,
+  "enabledCssSnippets": [
+    "justify",
+    "images"
+  ],
+  "monospaceFontFamily": "Fira Code",
+  "textFontFamily": "SF Pro Text",
+  "theme": "obsidian",
+  "cssTheme": "Tokyo Night Storm"
+}

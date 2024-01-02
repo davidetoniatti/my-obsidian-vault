@@ -1,0 +1,61 @@
+{
+  "userAdmonitions": {
+    "theorem": {
+      "type": "theorem",
+      "color": "0, 173, 12",
+      "icon": {
+        "name": "bookmark",
+        "type": "font-awesome"
+      },
+      "command": false,
+      "title": "Teorema",
+      "injectColor": true,
+      "noTitle": false
+    },
+    "lemma": {
+      "type": "lemma",
+      "color": "0, 181, 194",
+      "icon": {
+        "name": "bookmark",
+        "type": "font-awesome"
+      },
+      "command": false,
+      "title": "Lemma",
+      "injectColor": true,
+      "noTitle": false
+    },
+    "proof": {
+      "type": "proof",
+      "color": "163, 158, 0",
+      "icon": {
+        "name": "pen",
+        "type": "font-awesome"
+      },
+      "command": false,
+      "title": "Dimostrazione",
+      "injectColor": true,
+      "noTitle": false
+    }
+  },
+  "syntaxHighlight": false,
+  "copyButton": false,
+  "version": "10.1.1",
+  "autoCollapse": false,
+  "defaultCollapseType": "open",
+  "injectColor": true,
+  "parseTitles": true,
+  "dropShadow": true,
+  "hideEmpty": false,
+  "open": {
+    "admonitions": true,
+    "icons": true,
+    "other": true,
+    "advanced": false
+  },
+  "icons": [],
+  "useFontAwesome": true,
+  "rpgDownloadedOnce": false,
+  "msDocConverted": false,
+  "useSnippet": false,
+  "snippetPath": "custom-admonitions.304e3e"
+}
