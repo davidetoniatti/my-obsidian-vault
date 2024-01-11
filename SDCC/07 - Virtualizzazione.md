@@ -1,11 +1,42 @@
-La virtualizzazione ha lo scopo di astrarre i dettagli di una implementazione sottostante per avere una vista logica differente dalla vista fisica. Astrarre le risorse computazionali a disposizione disaccoppiando l'architettura percepita dall'utente con la realizzazione fisica.
+La virtualizzazione ha lo scopo di astrarre i dettagli di una implementazione sottostante per avere una vista logica differente dalla vista fisica. L'idea è quella di astrarre le risorse computazionali a disposizione disaccoppiando l'architettura percepita dalle applicazioni a livello utente con la realizzazione fisica.
+I vantaggi della virtualizzazione sono numerosi: realizzare soluzioni più agili e flessibili, migliorare le prestazioni, migliorare la scalabilità orizzontale, migliorare la sicurezza creando ambienti maggiormente isolati tra loro, e molti altri.
+## componenti dell'ambiente virtualizzato
+Sono tre gli attori principali presenti in un'ambiente virtualizzato:
+- **Guest.** È il livello più alto nell'architettura ed è colui che utilizza l'ambiente virtualizzato: non interagisce col sistema fisico ma si interfaccia con una vista astratta del sistema fisico per mezzo del *layer di virtualizzazione*, con il quale interagisce per mezzo delle risorse virtualizzate che sono esposte.
+- **Host**. È l'ambiente fisico originale, in cui sono presenti le risorse fisiche: queste risorse vengono utilizzate dal *guest* in modo indiretto, grazie al *layer di virtualizzazione*.
+- **Layer di virtualizzazione.**  È il layer di indirezione, responsabile della creazione dell'ambiente virtualizzato in cui l'host andrà ad operare.
+# Macchina virtuale
+Una **macchina virtuale** è un'ambiente di calcolo completo con le proprie capacità computazionali, di memoria e di comunicazione. Consente di rappresentare le risorse hardware e software a disposizione in modo differente rispetto alla rappresentazione fisica: risorse hardware differenti da risorse hardware reali e risorse software, ad esempio sistema operativo, diverse dalle risorse software reali.
+Il primo aspetto fondamentale della virtualizzazione basata su macchine virtuali è la possibilità di poter eseguire **molteplici** macchine virtuali su una **singola** macchina fisica.
+![](Pasted%20image%2020240102230607.png)
+## Storia delle macchine virtuale
+#TODO
+## Vantaggi delle macchine virtuali
+Si elencano una serie di vantaggi che porta la virtualizzazione per mezzo di macchine virtuali.
+- Facilita la **compatibiltà, portabilità, interoperabillità e migrazione** di applicazioni e ambienti. Ad esempio, è possibile eseguire un programma che funziona interfacciandosi con un sistema software A  su un sistema software B utilizzando un layer di virtualizzazione grazie al quale viene mimata l'interfaccia del sistema A sul sistema B. Dunque la virtualizzazione permette di avere **hardware independence**, cioè di poter eseguire una applicazione su ogni host indipendentemente. Inoltre, creando delle macchine virtuale con sistema operativo legacy, è possibile far girare applicazioni legacy su sistemi più moderni;
+![](Pasted%20image%2020240102233058.png)
+- Permette il **consolidamento dei server** in un data center. I server possono essere sfruttati al massimo, eseguendo sullo stesso server fisico diverse macchine virtuali. Ad esempio, un applicazione web composto da tre layer ognuno dei quali viene eseguito su un sistema operativo differente, non dovrà occupare tre server fisici differenti: verranno create tre macchine virtuali distinte che potranno essere eseguite su un unico server fisico. L'obiettivo è chiaramente quello di ridurre il numero di server fisici ed usarli in modo efficiente, con lo scopo di ridurre i costi di risorse come il consumo energetico, lo spazio occupato e la manutenzione. Inoltre, la migrazione live delle macchine virtuali riduce i tempi di disservizio.
+![](Pasted%20image%2020240102233840.png)
+- Permette di **isolare le componenti delle applicazioni**. Questo porta numerosi vantaggi nell'ambito della sicurezza e della gestione dei guasti: una componente mal funzionante o sotto attacco, non può danneggiare le altre componenti in esecuzione su macchine virtuali differenti dato che non è in grado di accedere alle loro risorse.
+- Permette di **isolare le performance** sulle differenti macchine virtuali. Il layer di virtualizzazione offre un ulteriore livello di *scheduling* che permette di schedulare le risorse alle macchine virtuali in esecuzione.
+- Permette di **bilanciare il carico** sulle macchine fisiche. Questo si ottiene grazie alla possibilità di **migrare** le macchine virtuale da una macchina fisica all'altra.
+## Livelli implementativi della virtualizzazione
+La virtualizzazione può essere implementata a diversi livelli operazionali: nella trattazione si vedrà l'implementazione a livello hardware (sistemi di macchine virtuali) e l'implementazione a livello di sistema operativo (container).
+### Interfacce in un calcolatore e virtualizzazione
+Si ricordano i tre livelli di interfaccia presenti nei calcolatori moderni, elencati dal livello più basso al livello più alto:
+- livello **ISA (instruction set architecture)**: è un interfaccia posizionata tra hardware e software che si distingue in ISA di sistema e ISA utente:
+	- ISA di sistema: utilizzata primariamente per la gestione delle risorse, dunque contiene quelle istruzioni *privileggiate* eseguibili solamente dal sistema operativo;
+	- ISA utente: utilizzato primariamente per operazioni computazionali, contiene le istruzioni *non privileggiate* eseguibili da ogni programma;
+- livello dato dal sistema operativo che offre due interfacce:  le chiamate di sistema o *system call* e la application binary interface;
+- livello dato dalle librerie utente che offrono le API (Application Programming Interface).
+Dunque in generale una applicazione usa le chiamate API offerte dalla libreria, che andranno a fare delle chiamate di sistema, le quali andranno a far eseguire delle istruzioni macchina a livello ISA.
 
-componenti ambiente virtualizzato: 3 principali attori: guest,host,layer di virtualizzazione
-Guest: livello piu alto, che sfrutta la virtualizzazione, e dunque non interagisce col sistema fisico ma vede una vista astratta di essa tramite il layer di virtualizzazione, con il quale interagisce e che espone le risorse virtualizzate.
-Host: ambiente fisico originale, in cui abbiamo le risorse fisica, è il sistema che indirettamente, tramite il layer, il nostro guest andrà a utilizzare.
-Layer di virtualizzazione: layer di indirezione
-
-Una macchina virtuale consente di rappresentare le risorse hw/sw a disposizione in modo differente rispetto alla rappresentazione fisica. 
+La virtualizzazione può essere implementata in questi livelli di interfaccia; in particolare, l'obiettivo della virtualizzazione per un certo livello è quello di **imitare** il comportamento dell'interfaccia in tale livello. 
+#### Implementazione a livello ISA
+L'obiettivo dell'implementazione della virtualizzazione a livello ISA è quello di **emulare** una certa interfaccia ISA al di sopra dell'interfaccia ISA della macchina host: dare l'illusione di lavorare su un ISA diverso da quello originale della macchina. Ad esempio, eseguire codice MIPS su una macchina x86 con il supporto dell'emulazione ISA.
+L'emulazione ISA si può ottenere per mezzo di due tecniche:
+- **code interpretation**: letteralmente interpretazione del codice, in generale una operazione lenta, dato che ogni istruzione sorgente viene interpretata dall'emulatore per poter eseguire le corrispettive istruzioni ISA native;
+- **Dynamic binary translation**: è una tecnica che genera meno overhead, dato che vengono convertiti blocchi di istruzioni e non singole istruzioni.
 
 quali modalità di dialogo tra vm ed il vmm per l'accesso alle risorse fisiche, ovvero come gesitre l'esecuzione di istruzioni privilegiate.
 

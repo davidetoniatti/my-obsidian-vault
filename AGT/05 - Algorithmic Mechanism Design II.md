@@ -20,8 +20,8 @@ $$ f(t) = \arg\min_{P \in \mathcal{F}} \sum_{e \in E} v_{e}(\tau_{e},P) $$
 Dunque il problema è utilitario, per cui è possibile utilizzare i meccanismi VCG per risolvere il problema in modo truthful.
 ### Meccanismo VCG
 Si ricorda che un meccanismo $M = \langle g(r),p(r) \rangle$ è VCG se è della forma:
-- $g(r) = x^* = \arg\min_{x \in F} \sum_{j} v_{j}(r_{j},x)$
-- $p_{i}(x) = \sum_{j \neq i}v_{j}(r_{j},g(r_{-i})) - \sum_{j\neq i} v_{j}(r_{j},x^*)$
+- $g(r) = x = \arg\min_{y \in F} \sum_{j} v_{j}(r_{j},y)$
+- $p_{i}(r) = \sum_{j \neq i}v_{j}(r_{j},g(r_{-i})) - \sum_{j\neq i} v_{j}(r_{j},x)$
 Nel caso di questo problema dunque:
 - L'algoritmo $g(r)$ calcola un cammino minimo $P_G(s,t)$ in $G=(V,E,r)$ pesato con i tipi riportati;
 - Fissato un outcome $g(r) = P_G(s,t)$, l'agente $e \in E$ viene pagato una quantità pari a $$p_{e}(r) = \sum_{j \neq e}v_{j}(r_{j},g(r_{-e})) - \sum_{j\neq e} v_{j}(r_{j},P_{G}(s,t))$$ cioè $$p_{e}(r) = \begin{cases}
@@ -41,8 +41,6 @@ Sia $n = |V|$ e $m = |E|$ e sia $d_G(s,t)$ la **distanza** in $G$ da $s$ a $t$.
 Inoltre, si lavora sotto l'ipotesi che nel grafo i nodi $s$ e $t$ sono **2-edge connessi**, cioè esistono in $G$ almeno due cammini tra $s$ e $t$ che sono disgiunti sugli archi. Dunque, per ogni arco $e$ del  cammino $P_G(s,t)$ che viene rimosso esiste almeno un cammino alternativo in $G-e$.
 Se così non fosse, allora ci sarebbe almeno un arco $e$ in $P_G(s,t)$ che è un **ponte**, cioè un arco che se rimosso spezza $G$ in due componenti $C_1,C_2$ con $s \in C_1$ e $t \in C_2$. In questo caso, non esiste un cammino minimo da $s$ a $t$ che *non* passa per $e$, cioè $d_{G-e}(s,t) = +\infty$. In altre parole, il possessore di questo arco ponte *tiene in pugno* il sistema e può chiedere una qualsiasi cifra.
 
-
-
 Per calcolare i pagamenti si applica per ogni arco $e \in P_G(s,t)$ l'algoritmo di **Dijkstra** al grafo $G-e$. La complessità con questo approccio è pari a
 $$ \underbrace{O(n)}_{\text{nro di archi in }P_{G}(s,t)} \cdot \underbrace{O(m+n\log{n})}_{\text{Calcolo $P_{G-e}(s,t)$ fissato $e \in P_{G}(s,t$)}} = O(nm+n^2\log{n}) $$
 In realtà vale un risultato ancora migliore, in cui si dimostra che il problema è risolvibile in tempo $O(m+m\log{n})$.
@@ -57,17 +55,17 @@ Un problema è **one-parameter** se:
 Per questi problemi esiste una classe di meccanismi truthful detta **meccanismi one-parameter**. A differenza dei meccanismi VCG, dove le valutazioni (costi) e i tipi sono *arbitrari* ma possono essere applicati solo a problemi utilitari (aka sono vincolati a problemi con funzione di scelta sociale ben precisa), i meccanismi OP ammettono una funzione di *scelta sociale arbitraria* ma i tipi devono essere a singolo parametro e le valutazioni vincolate.
 Si descrivono ora le caratteristiche dei meccanismi one-parameter.
 ## Meccanismo truthful se e solo se $g(\cdot)$ monotona
-Si introduce una definizione utile per dimostrare una condizione necessaria per la truthfullness di un meccanismo per un problema OP.
+Si introduce una definizione utile per dimostrare una condizione necessaria per la truthfulness di un meccanismo per un problema OP.
 ```ad-theorem
 title: Definizione
 Un algoritmo $g(\cdot)$ per un problema OP di minimizzazione è **monotono** se per ogni agente $a_i$, il carico di lavoro $w_i(g(r_{-i},r_i))$ è **non crescente** rispetto a $r_i$ per tutti gli $r_{-i} = (r_1,\dots,r_{i-i},r_{i+i},\dots,r_n)$.
 ```
 dunque, vale il seguente teorema.
-### Teorema 1: CN truthfullness (Mayerson '81)
+### Teorema 1: CN truthfulness (Mayerson '81)
 Una *condizione necessaria* affinché un meccanismo $M=\langle g(r), p(r) \rangle$ per un problema OP sia *veritiero* è che $g(r)$ sia monotono.
 #### Dimostrazione
 Si suppone per assurdo che l'algoritmo $g(\cdot)$ non sia monotono e si mostra che nessuno schema di pagamento può rendere $M$ veritiero.
-Se $g(\cdot)$ non è monotono, esiste un agente $a_i$ e un vettore $r_{-i}$ tale che $w_i(r_{-i},r_i)$ è non *non crescente* rispetto a $r_i$. Graficamente,
+Se $g(\cdot)$ non è monotono, esiste un agente $a_i$ e un vettore $r_{-i}$ tale che $w_i(g(r_{-i},r_i))$ è non *non crescente* rispetto a $r_i$. Graficamente,
 ![[agt_img05.png]]
 Si considerano i quattro casi seguenti:
 1. $t_i = x, r_i = x \implies v_i(t_i,o) = x \cdot w_i(g(r_{-i},x))$
@@ -80,27 +78,27 @@ Sia $\Delta p = p_i(r_{-i},y) - p_i(r_{-i},x)$, se $M$ è veritiero deve essere:
 - $\Delta p \leqslant A$: se cosi non fosse, nel caso in cui $t_i = x$ all'agente $a_i$ converrebbe mentire e dichiarare $r_{i}=y$ in quanto l'aumento di pagamento ($> A$) supererebbe l'aumento di costo ($A$), dunque la sua utilità aumenta.
 - $\Delta p \geqslant A+k$: se cosi non fosse, nel caso in cui $t_i = y$ all'agente $a_i$ converrebbe mentire e dichiarare $r_{i}=x$ in quanto l'aumento di pagamento nel dichiarare $y$ non supererebbe il risparmio che si ottiene riportando $x$ $, dunque la sua utilità aumenta.
 Ma $k$ è un valore strettamente positivo, dunque non possono valere le due condizioni contemporaneamente.
- $$\tag*{$\blacksquare$}$$
+$$\tag*{$\blacksquare$}$$
 ## Meccanismo one-parameter
-Dato un problema one-parameter, un meccanismo per risolvere il problema è $M = \langle g(r),p(r) \rangle$ dove $g(r)$ è un qualsiasi algoritmo **monotono** (condizione necessaria per la truthfullness) e, fissato un outcome $o$, il pagamento per l'agente $a_i$ quando dichiara $r_i$ è pari a
+Dato un problema one-parameter, un meccanismo per risolvere il problema è $M = \langle g(r),p(r) \rangle$ dove $g(r)$ è un qualsiasi algoritmo **monotono** (condizione necessaria per la truthfulness) e, fissato un outcome $o$, il pagamento per l'agente $a_i$ quando dichiara $r_i$ è pari a
 $$
 p_{i}(r) = h_{i}(r_{-i}) + r_{i}w_{i}(r) - \int_{0}^{r_{i}} w_{i}(r_{-i},z)  \, dz
 $$ 
 con $h_i(r_{-i})$ funzione arbitraria indipendente da $r_i$.
-Si osserva che il meccanismo presentato è **truthfull**, infatti vale il teorema seguente.
+Si osserva che il meccanismo presentato è **truthful**, infatti vale il teorema seguente.
 ### Teorema 2:  (Mayerson '81)
 Un meccanismo OP, per un problema OP, è veritierio.
 #### Dimostrazione
 Per dimostrare il teorema, bisogna mostrare che l'utilità di un agente $a_i$ può *solo decrescere* se $a_i$ dichiara il falso.
 Siano $r_{-i}$ le dichiarazioni degli altri agenti fissate. Il pagamento fornito ad $a_i$ quando dichiara $r_i$ è pari a
 $$
-p_{i}(g(r)) = h_{i}(r_{-i}) + r_{i}w_{i}(g(r)) - \int_{0}^{r_{i}} w_{i}(g(r_{-i},z))  \, dz
+p_{i}(r) = h_{i}(r_{-i}) + r_{i}w_{i}(g(r)) - \int_{0}^{r_{i}} w_{i}(g(r_{-i},z))  \, dz
 $$ 
 dato che $h_i(r_{-i})$ non dipende dalla scelta $r_i$ dell'agente $a_i$, si ignora questo fattore ponendo $h_i(r_{-i}) = 0$.
 L'utilità dell'agente $a_i$ quando dichiara la verità $t_i$ è pari a
 $$
 \begin{align}
-u_{i}(t_{i},g(r_{-i},t_{i})) &= p_{i}(g(r_{-i},t_{i})) - v_{i}(t_{i},g(r_{-i},t_{i})) \\
+u_{i}(t_{i},g(r_{-i},t_{i})) &= p_{i}((r_{-i},t_{i})) - v_{i}(t_{i},g(r_{-i},t_{i})) \\
 &= \left(t_{i} \cdot w_{i}(g(r_{-i},t_{i})) - \int_{0}^{t_{i}} w_{i}(g(r_{-i},z))  \, dz\right) - t_{i} \cdot w_{i}(g(r_{-i},t_{i})) \\
 &= - \int_{0}^{t_{i}} w_{i}(g(r_{-i},z))  \, dz
 \end{align}
@@ -113,14 +111,14 @@ v_{i}(t_{i},g(r_{-i},x)) = t_{i} \cdot w_{i}(g(r_{-i},x)) = C
 $$
 il pagamento ad $a_i$  è pari a
 $$
-p_{i}(g(r_{-i},x)) = x \cdot w_{i}(g(r_{-i},x)) -
+p_{i}((r_{-i},x)) = x \cdot w_{i}(g(r_{-i},x)) -
 \int_{0}^{x} w_{i}(g(r_{-i},z))  \, dz = P
 $$
 dunque, l'utilità di $a_i$ è pari a
 $$
 \begin{align}
 U &= u_{i}(t_{i},g(r_{-i},x))  \\
-&= p_{i}(g(r_{-i},x)) - v_{i}(t_{i},g(r_{-i},x)) \\
+&= p_{i}((r_{-i},x)) - v_{i}(t_{i},g(r_{-i},x)) \\
 &= \left(x \cdot w_{i}(g(r_{-i},x)) - \int_{0}^{x} w_{i}(g(r_{-i},z))  \, dz\right) - t_{i} \cdot w_{i}(g(r_{-i},x)) \\
 &= (x - t_{i}) \cdot w_{i}(g(r_{-i},x)) - \int_{0}^{t_{i}} w_{i}(g(r_{-i},z))  \, dz \\
 &= P-C
@@ -140,11 +138,11 @@ h_{i}(r_{-i}) = \int_{0}^{\infty} w_{i}(g(r_{-i},z)) \, dz
 $$
 in questo modo, il pagamento diventa
 $$
-p_{i}(g(r)) = r_{i}w_{i}(g(r)) + \int_{0}^{\infty} w_{i}(g(r_{-i},z)) \, dz
+p_{i}(r) = r_{i}w_{i}(g(r)) + \int_{r_{i}}^{\infty} w_{i}(g(r_{-i},z)) \, dz
 $$
 e l'utilità di un agente che dichiara il vero diventa
 $$
-u_{i}(t_{i},g(r)) = \int_{0}^{\infty} w_{i}(g(r_{-i},z)) \, dz \geqslant 0
+u_{i}(t_{i},g(r)) = \int_{r_{i}}^{\infty} w_{i}(g(r_{-i},z)) \, dz \geqslant 0
 $$
 # Meccanismi OP: il problema Shortest Path Tree con Selfish-Edges
 Come esempio applicativo dei meccanismi one-parameter, si studia ora la versione *egoistica* del problema di calcolare l'albero dei cammini minimi di un grafo.

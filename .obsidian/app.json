@@ -10,5 +10,6 @@
   },
   "focusNewTab": true,
   "alwaysUpdateLinks": true,
-  "useMarkdownLinks": true
+  "useMarkdownLinks": true,
+  "attachmentFolderPath": "./attachments"
 }

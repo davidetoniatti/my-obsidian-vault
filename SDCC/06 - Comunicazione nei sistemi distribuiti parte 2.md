@@ -7,7 +7,7 @@ Una coda di messaggi è un'entità che permette di memorizzare in modo temporane
 Possono leggere più destinatari (consumer) dalla coda di messaggi e ciascun messaggio è consegnato ad un singolo consumer, dunque il pattern di comunicazione è one-to-one.
 Inoltre, le code dei messaggi sono tipicamente unidirezionali: nel caso di request-response si utilizzano due code.
 Le code di messaggi si possono anche utilizzare per fare scheduling di task tra più consumer che rappresentano le componenti che vanno ad eseguire i task.
-![[SDCC/imgs/06-img01.png|center|700]]
+![[SDCC/attachments/06-img01.png|center|700]]
 La tipica interfaccia di un sistema a coda di messaggi è la seguente.
 - **put**: invio non bloccante
 	- Appende un messaggio nella coda specificata;
@@ -23,7 +23,7 @@ In questo caso, i componenti dell'applicazione che devono produrre dei messaggi 
 L'implementazione più usuale è quella di un sistema pub/sub topic based, cioè basato su argomenti a cui i vari messaggi fanno riferimento, vedremo in dettaglio Kafka.
 Rispetto al pattern a coda di messaggi, con il pattern publish-subscribe lo stesso messaggio può essere consegnato a molteplici consumer.
 A livello logico, il servizio pub/sub deve tenere traccia dei subscriber interessati ai topic che il sistema rende disponibili.
-![[SDCC/imgs/06-img04.png]]
+![[SDCC/attachments/06-img04.png]]
 Molti consumer possono iscriversi ad un topic con o senza applicazione di filtro, e le sottoscrizioni sono collezionate da una componente che fa dispaching degli eventi, cioè che si occupa di indirizzare gli eventi a tutti i subscriber interessati.
 Il vantaggio dei sistemi pub/sub è il disaccoppiamento completo tra le componenti che pubblicano informazioni e quelle che sono interessate a ricevere informazioni.
 Il sistema pub/sub è una generalizzazione del sistema a code di messaggi.
@@ -39,29 +39,29 @@ L'interfaccia generica di un sistema pub/sub è la seguente.
 ### Middleware orientato ai messaggi: funzionalità
 Il middleware orientato ai messaggi si occupa di funzionalità di indirizzamento, per smistare correttamente i messaggi dai mittenti ai destinatari; deve rendere la comunicazione disponibile e spesso offre funzionalità di trasformazione dei formati dei messaggi. Infatti chi comunica potrebbe usare formati differenti.
 
-![[SDCC/imgs/06-img05.png]]
+![[SDCC/attachments/06-img05.png]]
 ### Semantiche di comunicazione nella ricezione in MOM
 Quando il producer manda il messaggio, quali sono le garanzie che il messaggio venga consegnato? I sistemi MOM offrono le seguenti semantiche.
 #### At-least-once delivery
 Il middleware deve consegnare il messaggio *almeno* una volta: affinché il mittente sappia che il messaggio è stato consegnato almeno una volta, il destinatario deve mandare un messaggio di acknowledge ogniqualvolta riceve un messaggio. A questo punto il mittente rimanda il messaggio se dopo un certo tempo non riceve alcun messaggio di ack. Naturalmente l'applicazione deve essere idempotente, perché è possibile che riceva la stesso messaggio più di una volta, ad esempio quando il messaggio di acknowledge viene perso nella trasmissione.
 
-![[SDCC/imgs/06-img06.png]]
+![[SDCC/attachments/06-img06.png]]
 #### Exactly-once delivery
 In questo caso, i meccanismi devono garantire che un messaggio sia consegnato esattamente una sola volta al destinatario. Dunque è necessario identificare i messaggi duplicati e filtrarli, assegnando un identificativo univoco ad ogni messaggio. Inoltre è necessario che i componenti del sistema middleware siano tolleranti a guasti.
-![[SDCC/imgs/06-img07.png]]
+![[SDCC/attachments/06-img07.png]]
 #### Transaction-based delivery
 Una variante dell'exatly once, in cui i messaggi vengono cancellati dalla coda soltanto nel momento in cui vengono ricevuti con successo certamente da un destinatario. Questo avviene tramite la partecipazione del sistema MOM e del destinatario ad una transizione, garantendo le proprietà ACID.
 
-![[SDCC/imgs/06-img08.png]]
+![[SDCC/attachments/06-img08.png]]
 #### Timeout-based delivery
 Garantire che il messaggio sia cancellato dalla coda quando è stato ricevuto e processato con successo *almeno* una volta: garanzia un po più forte dell'at-least-once.
 Questa semantica è implementata in Amazon SQS. L'idea è che il messaggio, una volta consegnato, non viene cancellato immediatamente ma diventa invisibile ad altri mittenti, per un periodo di tempo definito da un timeout di visibilità. Se il destinatario processa il messaggio correttamente, manda un acknowledge al sistema MOM e a questo punto il messaggio viene cancellato. Se destinatario non manda l'acknowledge entro il timeout, allora il messaggio torna ad essere visibile, e dunque potrà essere recapitato da un altro destinatario.
 
-![[SDCC/imgs/06-img09.png]]
+![[SDCC/attachments/06-img09.png]]
 ### Routing dei messaggi
 #### Modello generale
 In generale, le code sono gestite da *gestori delle code (queue managers)*. Ogni host del sistema ha un queue manager, e le applicazioni possono solamente estrarre ed inserire messaggi in code locali all'host su cui si trova. Il gestore della coda è responsabile del routing dei messaggi verso altre code.
-![[SDCC/imgs/06-img02.png|center|600]]
+![[SDCC/attachments/06-img02.png|center|600]]
 Dunque l'insieme dei gestori delle code va a formare una *rete di overlay*, nella quale possono esserci dei gestori che operano soltanto come router, cioè dei gestori che non sono direttamente collegati a componenti applicative, ma fanno solamente da instradatori per i messaggi che coinvolgono altre code.
 ![[06-img26.png|center|500]]
 Il meccanismo di routing nella rete di overlay dei gestori delle code può essere configurata due modi:
@@ -78,12 +78,12 @@ Il sistema è basato su un modello di polling, dunque per l'estrazione di un mes
 #### Features
 SQS è (secondo AWS) un sistema affidabile, altamente disponibile e scalabile. Questo fa intuire che il sistema sottostante è composto da un insieme di server, aspetto necessario per garantire l'affidabilità. Infatti, i singoli server del servizio SQS che gestiscono le code sono server replicati. Dalla figura si comprende che, la coda è unica, ma i messaggi contenuti sono replicati e distribuiti su un insieme di server dislocati nella stessa regione AWS.
 
-![[SDCC/imgs/06-img10.png|center|600]]
+![[SDCC/attachments/06-img10.png|center|600]]
 
 In SQS un consumer che riceve un messaggio **deve** eliminare espressamente il messaggio dalla coda. Inoltre, le code sono delle locazioni in cui i messaggi sono mantenuti in modo temporaneo, quindi c'è un periodo di retention, cioè un periodo dopo il quale un messaggio viene eliminato dalla coda se non è inviato (e quindi cancellato) ad un consumer.
 Il servizio fornisce un delivery basato su **timeout**, dunque i messaggio inviati vengono mantenuti in coda ma vengono nascosti per un certo periodo, nel quale il consumer processa il messaggio. Se lato consumer fallisce il processamento, allora il timeout scade e il messaggio viene reso nuovamente disponibile in coda. L'operazione di eliminazione del messaggio lanciato dal consumer è il segnale che il processamento è andato a buon fine.
 
-![[SDCC/imgs/06-img11.png|center|600]]
+![[SDCC/attachments/06-img11.png|center|600]]
 
 Per ricevere i messaggi dalla coda, il consumer deve effettuare **polling** da essa. Amazon mette a disposizione due modalità di polling: lo *short* polling e il *long* polling.
 Lo short polling prevede che nel momento in cui una componente dell'applicazione chiama la funzione di ricezione su una coda SQS, il sistema va ad interrogare un sottoinsieme di server, selezionato randomicamente, che possono avere messaggi della coda. In questo modo Amazon riduce il traffico, ma da punto di vista dello sviluppatore, Amazon potrebbe selezionare dei server che non contengono il messaggio a cui sono interessato: nella coda logica esiste il messaggio, ma il sottoinsieme di server scelto non contiene quel messaggio.
@@ -154,7 +154,7 @@ Ognuna delle componenti illustrate in questi esempi (producer, consumers e i bro
 #### Esempio 1
 Classico pattern a coda di messaggi: producer e consumer singoli o multipli, i messaggi sono consegnati ad un solo consumer e la politica di ricezione è *push-based*
 
-![[SDCC/imgs/06-img12.png|center|600]]
+![[SDCC/attachments/06-img12.png|center|600]]
 Codice da **STUDIARE BENE** in `sdcc/code/rabbitm-go/rabbitmq_1_hello`.
 
 
@@ -167,13 +167,13 @@ Kafka è capace anche di fare data processing, ma nel corso ci si concentra al p
 Kafka premette di memorizzare dei feed di messaggi all'interno di categorie, o *topics*. Per ciascun messaggio, il producer, cioè chi pubblica il messaggio, deve indicare il topic in cui vuole inserire quel messaggio. Dunque Kafka è un sistema publish-subscribe **topic based**.
 I topic non sono esattamente delle code, e ciascun topic può avere 0,1 o molteplici consumer iscritti che consumano i messaggi del topic.
 Chi pubblica producer o publisher, chi consuma e processa i messaggi consumer o subscriber. 
-![[SDCC/imgs/06-img03.png|center|600]]
+![[SDCC/attachments/06-img03.png|center|600]]
 Kafka cluster: log di dati distribuiti su cluster di server anche detti broker.
 Un producer, per pubblicare un messaggio, deve indicare un topic in cui inserire il messaggio: il topicsistema rappresenta la categoria in cui un messaggio viene pubblicato. Per ciascun topic, un Kafka cluster mantiene un **log partizionato**. Con **log** si intende una struttura dati che permette di memorizzare dei messaggi ed eventi inserendoli nel log soltanto in modalità append, ovvero sono aggiunti solamente in in modo incrementale alla fine del log, dunque la struttura dati mantiene gli elementi in modo totalmente ordinato rispetto al tempo.
 Con **partizionato** si intende che ciascun topic non è memorizzato in un singolo log, ma viene suddiviso in un numero di partizioni: la partizione è l'unità minima di parallelismo di un topic. Questo garantisce che producer differenti e consumer differenti possano usare in modo parallelo lo stesso topic di Kafka, proprio perché accedono a partizioni differenti dello stesso log.
 Dunque Kafka utilizza il partizionamento come tecnica di distribuzione dei dati.
 La gestione delle partizioni di ciascun topic è affidata ai broker del cluster Kafka.
-![[SDCC/imgs/06-img13.png|center|600]]
+![[SDCC/attachments/06-img13.png|center|600]]
 A ciascun messaggio è assegnato un numero, che indica l'*offset*, e viene utilizzato dai consumer.
 Di default, i messaggi pubblicati in un topic vengono inseriti in modo round robin all'interno delle partizioni di quel topic. In alternativa, la scelta della partizione può avvenire sulla base di una chiave: nel messaggio inserito dal producer, è presente un elemento che rappresenta la chiave del messaggio, e quindi il partizionamento tra le partizioni dello stesso topic è basato su chiave.
 
@@ -181,7 +181,7 @@ Ad esempio, si suppone di usare kafka per memorizzare richieste fatte da diversi
 
 In Kafka il producer pubblica i messaggi (anche detti record o eventi) nelle partizioni dei topic, e i consumer ottengono e consumano i record pubblicati nei topic.
 Ogni partizione di un topic è una sequenza di record *ordinata, numerata* e *immutabile*, dove ogni record viene appeso come ultimo elemento della partizione. A ciascun record inserito nel log è associato un numero che ce cresce in modo monotono detto *offset*, che permette di identificare in modo univoco un messaggio e la sua posizione all'interno di una partizione.
-![[SDCC/imgs/06-img14.png|center|600]]
+![[SDCC/attachments/06-img14.png|center|600]]
 Dalla figura, si notano due consumer che leggono contemporaneamente dalla stessa partizione, ma in due punti differenti. Per leggere indicano da quale record leggere, ossia indicano l'offset. E compito del consumer tenere traccia dell'offset
 
 Per migliorare la scalabilità: le partizioni appartenenti allo stesso topic possono essere distribuiti su server differenti (su broker differenti). Grazie a ciò, il throughput I/O aumenta ed è inoltre possibile effettuare letture e scritture parallele su partizioni dello stesso topic (ma su macchine differenti).
@@ -212,7 +212,7 @@ Abbiamo visto come RabbitMQ utilizza un modello *push*, cioè il broker RabbitMQ
 L'alternativa è liberare il broker da questo compito di spingere i messaggi verso i consumer, facendo si che i consumer *tirano* i messaggi dal broker.
 Questo è il cosiddetto modello *pull* nel quale è compito dei consumer andare a recuperarsi i messaggi dal broker.
 Nel caso di Kafka, il consumer deve mantenere l'offset, cioè il punto fin dove il consumer ha letto, per identificare il prossimo messaggio che deve processare. I consumer possono leggere dalla stessa partizioni a partire da offset differenti.
-![[SDCC/imgs/06-img15.png|center|600]]
+![[SDCC/attachments/06-img15.png|center|600]]
 Delegando la ricezione dei messaggi ai consumer, si da meno carico di lavoro ai broker, da cui si ottiene una migliore scalabilità; inoltre il sistema è flessibile alle diverse velocità dei consumer. Di contro, se non ci sono dati, il consumer potrebbe rimanere in polling (busy-waiting) sulla partizione in attesa che arrivino dati.
 
 Dato che il consumer deve mantenere l'offset, per migliorare la sua tolleranza ai guasti conserva il valore dell'offset in una zona sicura di memoria ogni volta che legge un messaggio, ad esempio tramite Zookeeper o all'interno di un topic speciale di Kafka chiamato `__consumer_offsets`.
@@ -220,13 +220,13 @@ Dunque un consumer agisce come producer inviando l'offset a cui è arrivato in q
 ### Consumer Group
 Kafka permette di definire un gruppo logico di consumer, cioè un'insieme di consumer che cooperano tra di loro per leggere dati da uno stesso topic e che condividono un identificatore del gruppo.
 Dal punto di vista di Kafka, un gruppo di consumer appare come un unico consumer logico, quindi il messaggio letto da un gruppo sarò consegnato ad un solo consumer nel gruppo; inoltre ciascun gruppo mantiene il suo offset di gruppo per una determinata partizione.
-![[SDCC/imgs/06-img18.png|center|600]]
+![[SDCC/attachments/06-img18.png|center|600]]
 
-![[SDCC/imgs/06-img19.png|center|600]]
+![[SDCC/attachments/06-img19.png|center|600]]
 I gruppi di consumer sono utili per la scalabilità nei sistemi a microservizi: supponiamo di avere due microservizi che comunicano con Kafka
-![[SDCC/imgs/06-img16.png|center|600]]
+![[SDCC/attachments/06-img16.png|center|600]]
 allora posso replicare i due servizi e mettere le repliche in uno stesso gruppo di consumer: in questo modo, i messaggi non verranno processati da tutte le repliche, ma solo da una di queste. Dunque svolge anche il ruolo di load balancer.
-![[SDCC/imgs/06-img17.png|center|600]]
+![[SDCC/attachments/06-img17.png|center|600]]
 ### Ordinamento
 I messaggi pubblicati da un producer su una partizione di un topic sono ordinati rispetto all'ordine con cui sono stati inviati alla partizione. I consumer vedono i record in ordine rispetto a come sono salvati nella partizione.
 Dunque Kafka garantisce l'ordinamento dei messaggi *solo rispetto ad una partizione*: i messaggi sono totalmente ordinati all'interno di una partizione, ma non è preservato l'ordinamento dei messaggi tra partizioni differenti, dunque l'ordinamento non è garantito a livello di topic.
@@ -246,7 +246,7 @@ At-least-once è la semantica di default. Garantisce che nessun messaggio venga 
 Per implementare questa semantica, il producer dopo aver mandato un messaggio, aspetta un messaggio di acknowledge da parte del broker leader (settando il parametri `acks=1`).
 Se non viene ricevuto l'acknowledge entro certo intervallo di tempo, il producer rimanda il messaggio al broker.
 Per implementare la semantica lato consumer, è sufficiente fare commit dell'offset **dopo** aver processato correttamente il messaggio.
-![[SDCC/imgs/06-img20.png|center|600]]
+![[SDCC/attachments/06-img20.png|center|600]]
 #### exactly-once semantic
 Nella semantica exactly-once si deve garantire che nessun messaggio venga perso, che nessun messaggio sia duplicato e che si mantenga l'ordinamento, a costo di una maggiore latenza e un throughput minore.
 Per ottenere tale semantica, è necessario implementare il meccanismo di acknowledge lato producer: si aspetta di ricevere un acknowledge da parte del broker leader della partizione; se non riceve l'acknowledge entro un certo timeout, il producer ritrasmette il messaggio.
@@ -255,7 +255,7 @@ Questo meccanismo si ottiene settando il parametro di configurazione `ack=all` n
 Per evitare i duplicati, occorre identificare in modo univoco ogni messaggio e ogni producer: utilizzando un ID per ogni producer e assegnando ad ogni messaggio un numero di sequenza si possono identificare in modo univoco i messaggi; in questo modo, è possibile identificare ed eliminare messaggi replicati e dunque mantenere le partizioni ordinate rispetto all'ordine di invio del producer. In questo modo, un producer diventa *idempotente*.
 Infine, lato consumer, sarà necessario fare commit dell'offset dopo il processamento del messaggio e avere delle repliche *in-sync* degli offset committati.
 L'exactly-once offerto da Kafka **non** è completa: infatti questa semantica è garantita per il flusso di dati prodotto da un singolo producer in una sessione; infatti, se avviene crash di un producer, il suo ID cambia.
-![[SDCC/imgs/06-img21.png|center|600]]
+![[SDCC/attachments/06-img21.png|center|600]]
 #### at-most-once
 In questa semantica, i messaggi devono essere consegnati al massimo una volta. Dunque è possibile che un messaggio venga perso e mai più consegnato. Questa semantica si ottiene possibile disabilitando il sistema di acknowledge (settando `acks=0`) e facendo commit dell'offset prima del processamento del messaggio, dunque immediatamente dopo la consegna di esso.
 
@@ -343,7 +343,7 @@ Si supponga di avere un nodo P che sceglie a caso tra i suoi vicini il nodo Q: c
 - **pull**: Solamente il nodo P chiede di ricevere gli aggiornamenti presenti nel nodo Q;
 - **push-pull**: I nodi P e Q si scambiano gli aggiornamenti l'uno con l'altro.
 Come si può vedere da questi grafici, la strategia più performante è la **push-pull**; infatti risulta che in $O(\log_2 N)$ round gli aggiornamenti si propagano su $N$ nodi, dove per *round* (o *gossip cycle*) si intende l'intervallo di tempo in cui ogni nodo comincia uno scambio di informazioni. 
-![[SDCC/imgs/06-img22.png|center|600]]
+![[SDCC/attachments/06-img22.png|center|600]]
 Con *oblivius node* si intende il numero di nodi che non sono ancora stati raggiunti dall'informazione.
 ![[06-img23.png|center|600]]
 #### rumor spreading

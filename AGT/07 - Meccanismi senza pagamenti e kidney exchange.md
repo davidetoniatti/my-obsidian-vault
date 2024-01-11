@@ -75,10 +75,9 @@ Attualmente, il compenso per la donazione di organi è illegale negli Stati Unit
 Una prima idea è quella di modellare il problema del *kidney exchange* come un problema di *house allocation*. L'idea è di considerare ogni coppia paziente-donatore come un'agente, dove il donatore incompatibile corrisponde alla casa che viene inizialmente assegnata all'agente nell'house allocation problem. Dunque ogni paziente definisce un ordinamento totale sui donatori, cioè un *ranking* dei donatori rispetto alla probabilità di successo del trapianto, basato sul gruppo sanguigno e altri fattori.
 A questo punto è sufficiente applicare l'algoritmo TTC per trovare una reallocazione dei donatori. Per le proprietà dell'algoritmo, la reallocazione suggerita può solamente migliorare la probabilità di successo del trapianto al paziente.
 In particolare, il risultato migliore si ottiene quando l'algoritmo TTC trova cicli come quello nella figura successiva, che corrisponde al kidney exchange nella figura precedente.
-![](07-agt_img04.png)
-
+![|center|500](AGT/attachments/07-agt_img04.png)
 Il problema principale dell'applicazione dell'algoritmo TTC è che potrebbe suggerire riallocazioni che utilizzano cicli lunghi, come mostrato nella Figura seguente.
-![](07-agt_img05.png)
+![|center|500](07-agt_img05.png)
 Infatti un ciclo di lunghezza due corrisponde già a quattro interventi chirurgici: due per estrarre i reni dai donatori e due per impiantarli nei pazienti. Inoltre, questi quattro interventi devono avvenire simultaneamente. Infatti se, ad esempio, gli interventi chirurgici per $P1$ e $D2$ avvengono per primi, c'è il rischio che $D1$ possa ritirare la sua offerta di donare il suo rene a $P2$ (è illegale stipulare un contratto per una donazione di organi, un donatore può rifiutarsi in qualsiasi momento).
 Dunque da una parte, $P1$ ottiene un rene *gratuitamente*. Il problema molto più serio è che $P2$ non può più partecipare ad uno scambio di reni, dato che il suo donatore $D2$ ha donato. A causa di questo rischio, gli interventi chirurgici non simultanei non sono quasi mai utilizzati negli scambi di reni.
 Dato che far avvenire tante operazioni simultaneamente in un ospedale è molto dispendioso, è fondamentale ottenere dei cicli di lunghezza corta.
@@ -87,12 +86,12 @@ Un altro problema dell'approccio con TTC è che modellare le preferenze dei pazi
 I due obiettivi di avere cicli corti e preferenze di tipo binario suggeriscono la modellazione del problema come un problema di **graph matching**.
 Un *matching* in un grafo non diretto è un sottoinsieme di archi che non condividono alcun nodo. 
 In questo caso, il grafo è dato dall'insieme dei vertici $V$ corrispondente alle coppie paziente-donatore incompatibili (un vertice per coppia) in cui esiste un arco non diretto tra due nodi $\{(P1,D1),(P2,D2)\}$ se e soltanto se $P1$ e $D2$ sono compatibili e $P2$ e $D1$ sono compatibili. Il grafo corrispondente all'esempio iniziale è il seguente.
-![](07-agt_img06.png)
+![|center|500](07-agt_img06.png)
 Dunque un matching in tale grafo corrisponde ad un'insieme di coppie che possono effettuare uno scambio: ogni scambio implica quattro interventi simultanei.
 Allora l'obiettivo è massimizzare il numero di coppie che possono effettuare uno scambio, che corrisponde a trovare il matching di dimensione massima nel grafo.
 Inoltre, si assume che ogni paziente $i$ abbia un insieme $E_i$ di donatori compatibili che appartengono ad coppie paziente-donatore, e che $i$ può dichiarare come donatori compatibili un qualsiasi sottoinsieme $F_i \subseteq E_i$ al meccanismo. Questa assunzione è ragionevole dato che un paziente può rifiutare uno scambio per qualsiasi motivo; inoltre nessun paziente può dichiarare un insieme che contiene dei donatori non compatibili.
 Un algoritmo (meccanismo) che massimizza li numero di kidney exchange rispetto alle dichiarazioni $E_i$ è il seguente.
-![](07-agt_img07.png)
+![|center](07-agt_img07.png)
 Tale meccanismo è truthful se per ogni paziente $i$ è strategia dominante dichiarare completamente l'insieme $E_i$ al meccanismo. In particolare, la truthfulness del meccanismo dipende da come viene scelto il matching massimo tra quelli possibili:
 - Se due matching massimi differenti accoppiano lo stesso insieme di vertici, allora è sufficiente sceglierne uno. Infatti, i pazienti non sono interessati al donatore scelto per lui fintantoché è compatibile;![|center|500](07-agt_img08.png)
 - Più significativo il caso in cui due matching massimi accoppiano un insieme di nodi differente. Nella figura seguente, un nodo si trova in ogni matching massimo, ma solo uno degli altri tre nodi può essere accoppiato con lui: come scegliere questo nodo? 
@@ -100,7 +99,7 @@ Tale meccanismo è truthful se per ogni paziente $i$ è strategia dominante dich
 
 Una soluzione è quella di dare delle priorità alle coppie paziente-donatore prima che il meccanismo inizi. La maggior parte degli ospedali si affida già a schemi di priorità per gestire i propri pazienti. La priorità di un paziente in lista d'attesa è determinata dalla durata del tempo in cui è stata in lista, dalla difficoltà di trovare un rene compatibile e da altri fattori.
 In dettaglio, si implementa il terzo passo del meccanismo nel modo seguente, supponendo che i vertici $V = \{1, 2, \dots n\}$ di $G$ siano ordinati dalla priorità più alta a quella più bassa.
-![](07-agt_img10.png)
+![|center](07-agt_img10.png)
 Dunque, dopo aver calcolato l'insieme dei matching massimi di $G$, si considerano i vertici secondo la priorità; si verifica in ogni iterazione $i$ se esiste un matching massimo che:
 1. soddisfa gli accoppiamenti già stabiliti per i pazienti con maggiore priorità;
 2. accoppia il paziente $i$.
@@ -118,12 +117,12 @@ Nel mondo reale, le coppie paziente-donatore vengono segnalate nel sistema nazio
 In generale, l'obiettivo dell'ospedale di accoppiare il maggior numero dei suoi pazienti non è perfettamente in linea con l'obiettivo sociale di accoppiare il maggior numero di pazienti su tutti quanti. Si fanno degli esempi per evidenziare le differenze.
 ### Esempio 1. Riportare tutte le coppie
 Siano $H_1,H_{2}$ due ospedali, ognuno con tre coppie paziente-donatore, come in figura.
-![](07-agt_img11.png)
+![|center|500](07-agt_img11.png)
 Ogni arco collega coppie che sono mutualmente compatibili. Ogni ospedale ha due coppie paziente-donatore che si accoppiano internamente, cioè le due coppie risiedono nello stesso ospedale. Allora gli ospedali potrebbero non riportare queste coppie nel sistema nazionale, e effettuare l'accoppiamento e lo scambio internamente. Così facendo però non si potrebbero risolvere tutti gli accoppiamenti possibili. Nell'esempio, non riportando al sistema nazionale le coppie 1,2,5 e 6, le coppie 3 e 4 rimangono disaccoppiate. Se invece i due ospedali riportano tutte le coppie, allora 1,2 e 3 possono essere accoppiati con 4,5 e 6 rispettivamente e tutti i pazienti possono ricevere un rene nuovo.
 In generale, l'obiettivo è incentivare gli ospedali a dichiarare tutte le coppie paziente-donatore per salvare il maggior numero di vite.
 ### Esempio 2: risultato di impossibilità
 Si considerano nuovamente due ospedali, con sette pazienti distribuiti come in figura.
-![](07-agt_img12.png)
+![|center|500](07-agt_img12.png)
 Sia inoltre il meccanismo di exchange in grado di calcolare il matching massimo rispetto alle coppie dichiarate dagli ospedali.
 Si osserva che con un numero dispari di coppie, ogni matching lascia un paziente non accoppiato.
 - se $H_1$ riporta solo il paziente 7 e $H_2$ riporta tutti i pazienti, allora l'ospedale $H_1$ accoppia ogni paziente: l'unico matching massimo è quello che accoppia 6 con 7 (e 4 con 5) e $H_1$ può accoppiare 2 con 3 internamente;

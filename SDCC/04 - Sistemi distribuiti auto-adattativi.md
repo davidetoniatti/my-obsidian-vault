@@ -139,7 +139,7 @@ I vantaggi di questa politica sono la semplicità e la facilità di utilizzo: l'
 - I valori di soglia potrebbero essere troppo aggressivi o troppo conservativi;
 - Non è possibile utilizzare metriche specifiche dell'applicazione (es. tempo di risposta);
 Infine, essendo un sistema reattivo, non è robusto a pattern di carico variabili.
-![[SDCC/imgs/04-img07.png]]
+![[04-img07.png]]
 ###### Predictive scaling
 Il *predictive scaling* è una politica di scaling *proattiva* basata su Machine Learning. Viene usato un modello di ML addestrato per prevedere il traffico e l'utilizzo delle risorse EC2 futuro, su base giornaliera e settimanale.
 Per utilizzare questa politica, è necessario dare accesso al modello i dati storici collezionati da CloudWatch: in particolare, il modello deve avere almeno una giornata di dati storici per fare previsioni e viene rivalutato ogni 24 ore per fare previsioni delle successive 48 ore.

@@ -148,7 +148,7 @@ Il processo chiamate inserisce nello stack i parametri di input e l'indirizzo de
 Per la realizzazione del meccanismo RPC in modo da essere trasparente allo sviluppatore si aggiunge un livello di **indirezione**. Si aggiungono due componenti intermediarie: un proxy  lato client detto **client stub** e proxy lato server detto **sever stub**.
 - **Client stub**: espone l'interfaccia del servizio che verrà eseguito dal server remoto.
 - **Server stub**: riceve le richieste e si occupa di gestire la chiamata locale e restituire il messaggio al client stub.
-![[SDCC/imgs/05-img13.png|center|500]]
+![[05-img13.png|center|500]]
 Ricordando che l'obiettivo è la trasparenza alla distribuzione, è conveniente che questi intermediari siano generati automaticamente cosicché lo sviluppatore si possa concentrare sullo sviluppo della logica dell'applicazione.
 ### Basic steps
 Gli step basici dell'architettura RPC sono i seguenti:

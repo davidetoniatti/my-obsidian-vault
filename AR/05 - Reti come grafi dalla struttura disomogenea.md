@@ -216,4 +216,116 @@ Si conclude la prova mostrando che $G$ è partizionabile in due strong web-commu
 	- tutti i nodi $c_j, l_{j1},l_{j2},l_{j3}$ per ogni $j \in [m]$;
 	- tutti i nodi $x_i,y_i,t_i$ e i senza nome adiacenti ad $x_i$ tali che $a(x_i) = \texttt{true}$;
 	- tutti i nodi $w_i,y_i,t_i$ e i senza nome adiacenti ad $w_i$ tali che $a(x_i) = \texttt{false}$;
-	Poiché $a$ soddisfa tutte le clausole, 
+	Poiché $a$ soddisfa tutte le clausole, ogni nodo $c_j$ ha 4 dei suoi 6 vicini nella comunità di $T$ (i tre nodi $l_{j_{1}},l_{j_{2}},l_{j_{3}}$ e il nodo corrispondente al letterale vero): dunque $c_j$ può essere effettivamente inserito nella stessa comunità di $T$. Inoltre, per ogni letterale $x_i$ i nodi $x_i$ hanno tutti i vicini nella comunità di $T$ tranne $z_i$; per ogni letterale $\lnot x_i$, i nodi $w_i$ hanno tutti i vicini nella comunità di $T$ tranne $z_i$. Si osserva che anche i nodi non inseriti nella comunità di $T$, sono correttamente parte della comunità di $F$: in particolare, se il letterale $x_i$ viene collocato in tale comunità e compare in $k$ clausole di $f$, poiché i $k$ nodi $c_j$ tali che $x_i \in c_j$ sono nella comunità di $T$, allora $k$ vicini di $x_i$ sono nella comunità di $T$; dato che $x_i$ ha $k+1$ vicini senza nome, allora $x_i$ può fa, correttamente, parte della comunità di $F$.
+# Metodi euristici per partizionare in comunità
+In generale, come con le web-communities, le definizioni combinatoriche proposte per partizionare un grafo in comunità portano a problemi intrattabili. Dunque a partire da una definizione di comunità come un generico insieme coeso di nodi, sono stati proposti numerosi modelli *euristici* che partizionano un grafo in comunità.
+Queste tecniche si classificano in due categorie
+- **Metodi partitivi**: si inizia considerando il grafo come un'unica comunità per poi rimuovere gli archi passo dopo passo fino a quando risulta partizionato in componenti connesse; il processo continua in modo iterativo sulle componenti, fino a quando non si ottiene un certo livello di granuralità o un insieme di comunità di dimensioni prestabilite;
+- **Metodi agglomerativi**: si inizia considerando ciascun nodo come una comunità e poi si aggiungono gli archi passo dopo passo fino a quando si ottiene un numero di comunità adeguato o comunità di certe dimensioni prestabilite.
+Si osserva che entrambi i metodi consentono di ottenere delle **partizioni nidificate** (**nested**), infatti nel metodo partitivo si genera una partizione a partire da una più grande (approccio **top-down**), e nel metodo agglomerativo si genera una partizione come composizione di altre più piccole (approccio **bottom-up**).
+Si osserva infine che entrambi i metodi richiedono la scelta di un arco da rimuovere o aggiungere ad ogni passo: questo criterio di scelta è ciò che distingue i diversi metodi.
+## Betwennes di un arco
+Un particolare criterio per rimuovere archi in un metodo partitio è basato sul concetto di **betwenness** di un arco. Tale concetto a sua volta si basa sulle proprietà di un arco di essere _bridge_ o _local bridge_.
+Per definizione, rimuovere un arco bridge disconnette due porzioni di grafo, mentre rimuovere un local bridge certamente peggiora la connettività tra due regioni del grafo: questi ponti connettono regioni che, senza tali archi, avrebberro difficoltà ad interagire.
+Inoltre, gli archi bridge e local brdige sono dei _weak ties_. Perciò l'idea si basa sul fatto che, rimuovendo tutti i weak ties da un grafo, rimangono solamente gruppi di nodi connessi da relazioni forti (_strong ties_), e tali gruppi rispecchiano il concetto intuitivo di comunità (ovvero gruppi di persone collegati da legami forti).
+Purtroppo però esistono casi in cui anche rimuovendo tutti i weak ties non avviene un partizionamento in comunità.
+![Esempio weak ties|center||500](05-ar_img05.png)
+Si utilizza dunque una proprietà differente, basata sulla nozione di traffico: gli archi che formano dei *ponti* tra gruppi di nodi coesi sono quelli attraverso i quali passa più traffico, misurato come *flusso* che attraversa gli archi a partire da un nodo $s$ fino a raggiungere un nodo $t$.
+Dunque, si considerano come "nuovi archi ponte" tutti quegli archi attraverso i quali passa una grande quantità di flusso, e che se rimossi rendono più difficile la comunicazione tra due comunità.
+Secondo questo criterio si rimuovono gli archi sui quali passa maggior flusso, finché non si ottiene un partizionamento accettabile della rete.
+
+Formalmente, dato un grafo $G=(V,E)$ non orientato, per ogni coppia di nodi $s,t \in V$ e per ogni arco $(u,v) \in E$ si definisce
+$$
+\sigma_{st}(u,v) := \text{numero di shortest path fra $s$ e $t$ che attraversano }(u,v)
+$$
+Si definisce poi con
+$$
+b_{st}(u,v) = \frac{\sigma_{st}(u,v)}{\sigma_{st}}
+$$
+la **edge-betwennes relativa di** $(u,v)$ rispetto ai nodi $s,t$, che indica la frazione degli shortest path fra $s$ e $t$ che passano per l'arco $(u,v)$. Con $\sigma_{st}$ si denota il numero totale di shortest path tra $s$ e $t$.
+Infine, la **edge-betwennes** $b(u,v)$ di un arco $(u,v) \in E$ è la semi-somma delle *edge-betwenness relative* ad ogni coppia di nodi
+$$
+b(u,v) = \frac{1}{2}\sum_{s,t \in V} b_{st}(u,v)
+$$
+semisomma per non contare le ripetizioni del tipo $b_{st}(u,v)$ e $b_{st}(v,u)$.
+Analogamente alla **edge-betweenness** si può definire una **node-betweenness**, seguendo la stessa definizione.
+## Il metodo di Grivan-Newman
+Il metodo di *Girvan-Newman* è un metodo partitivo per il partizionamento, basato sul concetto di *edge-betweenness*.
+I passaggi sono i seguenti:
+1.  Si calcola l'arco $(u,v)$ con betweenness $b(u,v)$ **massima**, e lo si rimuove.
+2. Se il grafo residuo risulta partizionato con in una granularità desiderata allora abbiamo concluso.
+3. Se così non fosse si ricalcola il nuovo arco con betweenness massima del nuovo grafo e si itera finché non si ottiene il risultato desiderato.
+La parte più complessa di questo metodo è il calcolo della betwenness.
+## Calcolo della edge-betwenness
+Per ogni nodo $s \in V$, l'algoritmo per il calcolo della edge-betwenness esegue i seguenti tre passi:
+1. Calcolare il sottografo $T(s)$ dei cammini minimi uscenti da $s$ mediante una visita BFS;
+2. Mediante una visita top-down di $T(s)$, calcolare $\sigma_{st}$ per ogni $v \in V$;
+3. mediante una visita bottom-up di $T(s)$, e usando quanto calcolato al punto precedente, calcolare per ogni $(u,v) \in T(s)$ tutte le edge-betwenness relative a cammini minimi che partono da $s$, cioè il valore $$ b_{s}(u,v) = \sum_{t \in V - \{ s \}} b_{st}(u,v) $$
+Dopo aver calcolato $b_s(u,v)$ per ogni $s \in V$, si possono ricavare i valore della edge-betwenness come segue
+$$
+b(u,v) = \frac{1}{2} \sum_{s \in V}b_{s}(u,v)
+$$
+Si osserva che nel punto `3` si calcolano $b_s(u,v)$ solo per gli archi di $T(s)$ , in quanto se $(u,v)$ non appartiene al sottografo degli shortest path $T(s)$ allora vuol dire che non appartiene nessun shortest path, e quindi non avrebbe senso calcolarlo (per definizione di betweenness).
+
+Si vedono ora in dettaglio i passaggi con un esempio.
+### Fase 1: BFS
+Per calcolare $T(s)$ si effettua una BFS opportunamente modificata.
+Sia $L_h$ l'insieme dei nodi che si trovano a distanza $h$ dalla sorgente. Allora un nodo $v$ si trova a livello $h$ se $v \in L_h$.
+Se un nodo $v$ si trova al livello $h$, allora certamente **tutti** i cammini minimi da $s$ a $v$ termineranno con archi che partono da $L_{h-1}$.
+Perciò, tutti gli archi $(u,v)$ con $u \in L_{h-1}$ e $v \in L_h$ faranno parte di $T(s)$.
+Dunque si calcola $T(s)$ nella seguente maniera:
+1. Inizialmente $L_0 = \lbrace s \rbrace$ e $T(s) = \emptyset$.
+2. Per ogni $h \geq 0$ calcolare $L_{h+1}$ come tutti quei nodi **fuori** $L_0 \cup L_1 \cup ... \cup L_h$ tali che hanno almeno un vicino in $v \in L_h$, ovvero come $$ L_{h+1} \equiv \lbrace v \in V \setminus (L_0 \cup L_1 \cup ... \cup L_h) | \exists u \in L_h : (u,v) \in E  \rbrace$$
+3. Calcolato $L_{h+1}$ si pone $T(s)$ come $$T(s) = T(s) \cup \lbrace (u,v) \in E | u \in L_h \land v \in L_{h+1} \rbrace$$ 
+![BFS|center|500](05-ar_img06.png)
+### Fase 2: visita top-down
+Mediante una visita top-down di $T(s)$, si calcola per ogni $v \in V$ la quantità $\sigma_{sv}$, ovvero il numero di cammini minimi che vanno da $s$ a $v$.
+
+Si osservi che per ogni nodo $v$ nel livello 1, il numero di cammini minimi sarà pari ad 1 (perché $v$ è diretto vicino di $s$).
+
+Invece al livello 2, il numero di cammini minimi di un generico nodo $v \in L_2$ è pari alla somma di tutti i $\sigma_{su}$, tali che esiste $(u,v)$ con $u \in L_1$. Più in generale, per ogni $v \in L_h$, si calcola $\sigma_{sv}$ con la seguente formula ricorsiva
+$$
+\begin{align*}
+	\sigma_{sv} &= 1  &h = 1\\
+	\sigma_{sv} &= \sum_{u \in N(v) \cap L_{h-1}} \sigma_{su}  &h > 1
+\end{align*}
+$$
+
+![Fase2|center|600](05-ar_img07.png)
+### Fase 3: visita bottom-up
+Si devono calcolare per ogni $(u,v) \in T(s)$ tutte le edge-betwenness relative a cammini minimi che partono da $s$, cioè il valore $$ b_{s}(u,v) = \sum_{t \in V - \{ s \}} b_{st}(u,v) $$
+Sia $d$ il numero di livelli in $T(s)$.
+Si consideri un arco $(y,x) \in T(s)$ con $y \in L_{d-1}$ e $x \in L_d$. 
+Allora tutti gli shortest path che partono da $s$ e passano per l'arco $(y,x)$ sono tutti shortest path che terminano in $y$.
+Perciò il flusso che passa su $(y,x)$ rispetto a $s$ sarà pari al rapporto tra il numero di shortest path che vanno da $s$ a $y$ (ovvero $\sigma_{sy}$) e il numero complessivo di shortest path che vanno da $s$ ad $x$ (ovvero $\sigma_{sx}$).
+$$b_s(y,x) = \sum_{t \in V \setminus \lbrace s \rbrace} b_{st}(y,x) = b_{sx}(y,x) = \frac{\sigma_{sx}(y,x)}{\sigma_{sx}} = \frac{\sigma_{sy}}{\sigma_{sx}}$$
+Analogamente possiamo applicare questo ragionamento per tutti gli archi che collegano nodi dell'ultimo livello, come mostrato nella seguente [figura](#^94bfa8).
+![Fase3|center](05-ar_img08.png) ^94bfa8
+Adesso, si considerino gli archi che entrano nel livello $L_{d-1}$. 
+Rifacendosi all'[immagine di esempio](#^7f8792), consideriamo l'arco $(z, y)$, con $z \in L_{d-2}$ e $y \in L_{d-1}$.
+![|center|400](05-ar_img09.png) ^7f8792
+Si osserva che gli shortest path che passano per $(z,y)$ sono:
+- gli shortest path da $s$ a $y$ che passano per $z$, ossia $\frac{\sigma_{sz}}{\sigma_{sy}}$;
+- per ogni discendente $x$ di $y$, gli shortest path che passano attraverso $z$ e attraverso $y$, cioè una frazione $\frac{\sigma_{sz}}{\sigma_{sy}}$ della frazione di shortest path da $s$ ad $x$ che passano per l'arco $(y,x)$, ovvero $\frac{\sigma_{sz}}{\sigma_{sy}} \cdot \frac{\sigma_{sy}}{\sigma_{sx}} = \frac{\sigma_{sz}}{\sigma_{sx}}$.
+Per comprendere, si considerano un paio di esempi.
+#### Esempio 1
+Rifacendosi all'[immagine di esempio](#^7f8792), i $\frac{3}{5}$ degli shortest path da $s$ a $x$ passano per $(y,x)$; di questi, $1/3$ passa per $(z,y)$, $1/3$ passa per $(a,y)$  e $1/3$ passa per $(b,y)$. Dunque per $(z,y)$ passano $1/3$ degli shortest path da $s$ a $y$ e $1/3 \cdot 3/5 = 1/5$ degli shortest path da $s$ a $x$, allora
+$$
+b_{s}(z,y) = \frac{1}{3}+\frac{1}{5} = \frac{8}{15}
+$$
+#### Esempio 2
+Si consideri l'arco $(a,c)$ della figura seguente.
+![|center|400](05-ar_img10.png)
+Allora $1/2$ degli shortest path da $s$ a $c$ passano per l'arco $(a,c)$, ossia $\frac{\sigma_{sa}}{\sigma_{sc}}=\frac{1}{2}$. Si considerano ora i nodi $w$ e $x$ discendenti di $c$.
+- $2/5$ degli shortest path da $s$ a $x$ passano per l'arco $(c,x)$: di questi, $1/2$ passano per l'arco $(b,c)$ e $1/2$ passano per l'arco $(a,c)$;
+- $2/4$ degli shortest path da $s$ a $w$ passano per l'arco $(c,w)$: di questi, $1/2$ passano per l'arco $(b,c)$ e $1/2$ passano per l'arco $(a,c)$;
+Dunque vale
+$$
+b_{s}(a,c) = \frac{1}{2}+\frac{1}{2}\cdot \frac{2}{5} + \frac{1}{2} \cdot \frac{2}{4} = \frac{19}{20}
+$$
+### Fase finale - Calcolo Betweenness
+Concludendo, si calcola la betweennes di tutti gli archi come già descritto in precedenza $$b(u,v) = \frac{1}{2} \sum_{s \in V} b_s(u,v)$$
+Notiamo che questa procedura permette di calcolare la betweennes degli archi in tempo *polinomiale* nella grandezza della rete (e non esponenziale).
+Infatti la [fase 1](#Fase%201%20BFS) è una semplice visita in ampiezza del grafo (e si può calcolare in tempo $O(|V| + |E|)$), la [fase 2](#Fase%202%20visita%20top-down) è un'ulteriore visita in ampiezza di $T(s)$ (e si può calcolare ancora in tempo $O(|V| + |E|)$), e infine la [fase 3](#Fase%203%20visita%20bottom-up) è nuovamente una visita in ampiezza, partendo però dal livello più basso (ancora una volta $O(|V| + |E|)$).
+Dato che si itera il procedimento per ogni nodo del grafo, e dato che nel caso peggiore si trattano grafi molto densi con $\Theta(n^2)$ archi, la complessità temporale dell'esecuzione di questo algoritmo per il calcolo delle betweennes sarà $O(nm) \in O(n^3)$.
+# Rilassare il modello

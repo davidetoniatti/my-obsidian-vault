@@ -66,11 +66,11 @@ Si osserva che esistono almeno due configurazioni di equilibrio:
 Si vedono ora alcuni esempi di processi di diffusione, nell'ottica di studiare quando termina il processo di diffusione, ossia quali configurazioni di equilibrio ha il network coordination game e perché proprio in tali configurazioni la diffusione si interrompe.
 
 #### Esempio 1
-![[AR/imgs/06-img01.png|center|500]]
+![[AR/attachments/06-img01.png|center|500]]
 In questo esempio, lo stato $A$ viene forzato all'inizio sui nodi $v$ e $w$; in questo caso $a = 3$ e $b = 2$, quindi $q = \frac{2}{3+2}$, ossia, per adottare $A$, un nodo deve avere i $2/5$ dei vicini nello stato $A$. Perciò in questo esempio, tutti i nodi della rete adottano $A$.
 
 #### Esempio 2
-![[AR/imgs/06-img02.png|center|500]]
+![[AR/attachments/06-img02.png|center|500]]
 1. se $a = 2$, $b = 3$, ossia $q = 2/5$, in questo caso non tutti i nodi della rete adottano $A$; infatti $A$ non riesce a raggiungere i nodi fuori dall'esagono.
 2. se $a = 4$, $b = 2$, ossia $q = 1/3$, in questo caso dopo aver raggiunto tutti i nodi dell'esagono, $A$ è adottato dai nodi 2, 11 e 14; poi da 1, 3, 12, 13, 17 e infine da 15 e 16; tutti i nodi adottano $A$.
 
@@ -171,27 +171,27 @@ Dunque dato un grafo infinito, qual è la soglia di adozione massima $q_{max}$ i
 
 #### Esempio: $G$ è una catena infinita
 Se $|V_0| = 1$, ossia, $V_0$ contiene un solo nodo, allora occorre $q = 1/2$ per generare una cascata completa
-![[AR/imgs/06-img03.png|center]]
+![[AR/attachments/06-img03.png|center]]
 Anche scegliendo un insieme più grande, non è possibile generare una cascata con $q < 1/2$, perché i nodi al confine con $V_0$ ($x$ e $y$) hanno comunque bisogno di $q = 1/2$ per passare ad $A$.
-![[AR/imgs/06-img04.png|center]]
+![[AR/attachments/06-img04.png|center]]
 Allora in una catena infinita: $q_{max} = 1/2$.
 
 #### Esempio: $G$ è una griglia infinita
 Se $|V_0| = 1$, allora occorre $q = 1/8$ per generare una cascata completa.
 
-![[AR/imgs/06-img05.png|center|500]]
+![[AR/attachments/06-img05.png|center|500]]
 
 Se $|V_0| = 2$, allora scegliendo i due nodi come nodi adiacenti, occorre $q = 1/4$ per influenzare $u,v,x,y$ e poi per generare una cascata completa.
 
-![[AR/imgs/06-img06.png|center|500]]
+![[AR/attachments/06-img06.png|center|500]]
 
 Se $|V_0| = 3$, allora scegliendo i tre nodi come nodi adiacenti, occorre $q = 3/8$ per influenzare $v$ e $y$, poi $u,v,x,y$ e cosi via fino a generare una cascata completa.
 
-![[AR/imgs/06-img06.png|center|500]]
+![[AR/attachments/06-img06.png|center|500]]
 
 Aumentando $|V_0|$ non si riesce ad aumentare la soglia di adozione: una volta influenzati tutti i nodi nel rettangolo (giallo) che contiene gli iniziatori, occorre uscire da esso e per farlo è necessario $q = 3/8$.
 
-![[AR/imgs/06-img07.png|center|500]]
+![[AR/attachments/06-img07.png|center|500]]
 
 Allora, in una griglia infinita: $q_{max} = 3/8$.
 
@@ -294,11 +294,11 @@ Tuttavia, questo modello è poco realistico: ciascun individuo nella rete ha un 
 Allora, per ogni nodo $u$ nella rete, $a_u$ e $b_u$ sono il beneficio che $u$ ottiene nel relazionarsi, rispettivamente, con un nodo che adotta $A$ o con un nodo che adotta $B$.
 Si assume, cioè, che il beneficio reciproco di adottare $A$ o $B$ da parte dei nodi adiacenti $u$ e $v$ sia quello illustrato nella seguente tabella.
 
-![[AR/imgs/06-img09.png|center|500]]
+![[AR/attachments/06-img09.png|center|500]]
 
 Allora, un nodo $v \in V$ nello stato $B$ passa allo stato $A$ sulla base del valore $q_v = \frac{b_v}{a_v + b_v}$.
 
-![[AR/imgs/06-img10.png|center|500]]
+![[AR/attachments/06-img10.png|center|500]]
 
 Osservando la figura, in cui accanto ad ogni nodo $v$ è indicata la sua soglia di adesione $q_v$, che anche se il nodo $1$ è in posizione centrale, non riuscirebbe a portare nessuno in $A$ se non fosse che $q_3 = 0.1$ è molto piccolo.
 Allora, **non è sufficiente scegliere gli iniziatori in base alla loro centralità nella rete**, occorre anche considerare *la loro possibilità di avere accesso a nodi facilmente influenzabili*.
@@ -333,20 +333,20 @@ Ma $v$ non può sapere se $u$ ha o meno dei vicini che non siano anche suoi vici
 Si vede ora con degli esempi, in che modo i nodi arrivano a prendere una decisione.
 #### Esempio 1
 Si osservi la figura seguente:
-![[AR/imgs/06-img11.png|center|400]]
+![[AR/attachments/06-img11.png|center|400]]
 
 - $x$ non aderisce, non ha abbastanza vicini;
 - $v$ ha bisogno di due vicini che aderiscano: ma vede che $x$ vuole che almeno 3 vicini aderiscano per aderire a sua volta e, poiché $v$ vede di $x$ i soli vicini che hanno in comune (il nodo $u$), non può sapere se $x$ aderirà o meno e, quindi, $v$ non aderisce;
 - ad $u$ sarebbe sufficiente che uno solo dei suoi vicini aderisse. Per lo stesso ragionamento fatto da $v$, $u$ non può sapere se $x$ aderirà o meno. Inoltre, $u$ sa che $v$ ha bisogno di almeno due vicini che aderiscano per aderire, ma non può sapere se $v$ dispone di informazioni supplementari circa l’adesione di $x$: perciò, non può dedurre che $v$ parteciperà. Di conseguenza, neanche $u$ aderisce.
 #### Esempio 2
 
-![[AR/imgs/06-img12.png|center|400]]
+![[AR/attachments/06-img12.png|center|400]]
 
 In questo esempio, $u$ vede che $k_{v} = k_{x} = 3$ e capisce che loro tre ($u, v$ e $x$) potrebbero aderire, ma $u$ non vede $y$, non sa se $v$ ha o meno altri vicini oltre sé stesso e, quindi, non sa se $v$ può dedurre che almeno due dei suoi vicini aderiranno, e poiché $u$ ha bisogno di certezze, $u$ non aderisce!
 Poiché il grafo è perfettamente simmetrico, nessuno aderisce alla protesta anche se, qualora avessero avuto accesso a informazioni complete, la protesta avrebbe avuto luogo!
 #### Esempio 3
 
-![[AR/imgs/06-img13.png|center|400]]
+![[AR/attachments/06-img13.png|center|400]]
 
 In questo esempio invece, $u, v, x$ si vedono l’un l’altro, così, $u$ sa che $v$ e $x$, per partecipare, hanno bisogno che altri due partecipino, ma $u$ sa anche che anche $v$ e $x$ sanno esattamente le stesse cose che sa egli stesso e, poiché si fidano uno dell’altro, partecipano tutti e tre, senza aver bisogno di conoscere altro della rete, ossia indipendentemente da $y$.
 
@@ -360,7 +360,7 @@ Naturalmente, un nodo adotta lo stato misto $AB$ ogniqualvolta ne trae beneficio
 
 Sia $(u,v)$ un arco della rete: il beneficio reciproco di adottare $A$,$B$ o $AB$ sia quello illustrato nella tabella seguente.
 
-![[AR/imgs/06-img14.png|center|500]]
+![[AR/attachments/06-img14.png|center|500]]
 
 Sia invece, per ogni nodo $u$, il costo per $u$ di essere nello stato $AB$ pari a $c$.
 Siano $V_{A},V_{B},V_{C}$ gli insiemi dei nodi che sono, rispettivamente, negli stati $A,B$ e $AB$ (tutti i nodi hanno uno stato, dunque $V_{A} \cup V_{B} \cup V_{C} = V$).
@@ -386,23 +386,23 @@ Siano $a = 5, b = 3, c = 1$.
 
 Per simmetrica, è sufficiente considerare una catena infinita solo a destra, il cui primo nodo è nello stato $A$ (giallo) e tutti gli altri sono nello stato $B$ (blu).
 
-![[AR/imgs/06-img15.png|center|500]]
+![[AR/attachments/06-img15.png|center|500]]
 
 Al primo passo, $u$ adotta $AB$ (verde): infatti $p_A(u) = 5, p_B(u) = 3$ e $p_{AB}(u) = 5+3-1 = 7$
 
-![[AR/imgs/06-img16.png|center|500]]
+![[AR/attachments/06-img16.png|center|500]]
 
 Al secondo passo $v$ adotta $AB$: infatti $p_A(u) = 5, p_B(u) = 3+3 = 6$ e $p_{AB}(u) = 5+3-1 = 7$
 
-![[AR/imgs/06-img17.png|center|500]]
+![[AR/attachments/06-img17.png|center|500]]
 
 Al terzo passo: $z$ adotta $AB$ per le stesse ragioni di $v$, ma ora a $u$ conviene abbandonare $AB$ e passare ad $A$ perché $p_A(u) = 10, p_B(u) = 0$ e $p_{AB}(u) = 5+5-1 = 9$
 
-![[AR/imgs/06-img18.png|center|500]]
+![[AR/attachments/06-img18.png|center|500]]
 
 A questo punto, il fenomeno si ripete:
 
-![[AR/imgs/06-img19.png|center|500]]
+![[AR/attachments/06-img19.png|center|500]]
 
 dopo un periodo transitorio durante il quale un nodo adotta lo stato misto, esso passerà ad adottare definitivamente il nuovo stato e quindi si genera una cascata completa nella quale il vecchio stato viene completamente soppiantato dal nuovo.
 
@@ -424,7 +424,7 @@ Uno studio qualitativo ha evidenziato uno strano comportamento:
 - infine, $A$ fa fatica a imporsi anche quando $c$ non è né troppo grande né troppo piccolo rispetto ad $a$ - questo è strano.
 Per comprendere questa stranezza, consideriamo sempre la catena infinita $G$ con parametri $a$ e $c$.
 
-![[AR/imgs/06-img20.png|center|500]]
+![[AR/attachments/06-img20.png|center|500]]
 
 Se $x$ è nello stato $A$ (giallo) e $v$ nello stato $B$ (blu), poiché $p_A(u) = a, p_B(u) = 1, p_{AB}(u) = a+1-c$ :
 - se $p_{A}(u) \geqslant p_{B}(u)$ e $p_{A}(u) \geqslant p_{AB}(u)$, $u$ adotterà $A$, e questo accade quando $a \geqslant 1 \land a \geqslant a+1-c$, ossia quando $a \geqslant 1 \land c \geqslant 1$;
@@ -436,13 +436,13 @@ Si riassume tutto ciò nel seguente grafico nel piano $ac$
 - $a < 1$ e $a < c$, $u$ rimarrà in $B$: regione blu;
 - $c < 1$ e $a \geqslant c$, $u$ adotterà $AB$: regione verde.
 
-![[AR/imgs/06-img21.png|center|500]]
+![[AR/attachments/06-img21.png|center|500]]
 
 Si possono trarre delle conclusioni:
 - se $u$ è rimasto nello stato $B$, allora la diffusione dello stato $A$ è stata bloccata sul nascere: il processo di diffusione non ha avuto nemmeno inizio;
 - se $u$ è passato allo stato $A$, allora, al passo successivo il nodo $v$ (adiacente a $u$) passerà allo stato $A$, e così via: si è innescato il processo di diffusione di $A$, che genererà una diffusione completa senza mai passare per lo stato misto $AB$.
 Resta da studiare cosa accade quando i parametri cadono nella regione verde, cioè quando siamo nella situazione nella figura seguente, dove $u$ ha adottato $AB$.
 
-![[AR/imgs/06-img22.png|center|500]]
+![[AR/attachments/06-img22.png|center|500]]
 
 Si vede ora quale stato conviene adottare al nodo $v$.
