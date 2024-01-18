@@ -53,10 +53,10 @@ Non è conveniente per il giocatore $i$ dichiarare un valore diverso da $t_i$.
 In questo caso, esiste un giocatore $j$ che da un valore più alto del quadro rispetto al giocatore $i$.
 - Dichiarando $r_i = t_i$, il giocatore $i$ non vince e riceve un utilità pari a $u_i = 0$; infatti vince il giocatore che ha tipo riportato pari a $R$;
 - Dichiarando un qualsiasi $r_i < R$ con $r_i \neq t_i$, il giocatore $i$ non vince e continua ad avere utilità pari a zero $u_i = 0$; non si ottiene nessun vantaggio a riportare meno di $t_i$.
-- Dichiarando un qualsiasi $r_i > R$, il giocatore $i$ vince ma ottiene utilità  $u_i = r_{i}-R < 0$;  dunque l'outcome è peggiore per il giocatore $i$.
+- Dichiarando un qualsiasi $r_i > R$, il giocatore $i$ vince ma ottiene utilità  $u_i = t_{i}-R < 0$;  dunque l'outcome è peggiore per il giocatore $i$.
 Non è conveniente per il giocatore $i$ dichiarare un valore diverso da $t_i$.
 
-In tutti i casi, riportare un tipo *falso* (cioè un tipo riportato diverso dal tipo) non produce una utilità migliore, dunque riportare $r_i = t_i$ , o dichiarare la verità, è una *strategia dominante*.
+In tutti i casi, riportare un tipo *falso* (cioè un tipo riportato diverso dal tipo privato) non produce una utilità migliore, dunque riportare $r_i = t_i$ , o dichiarare la verità, è una *strategia dominante*.
 ## Vickrey's Second Price Auction: versione di minimizzazione
 Il meccanismo d'asta del secondo prezzo di Vickrey nel contesto della vendita del quadro ha lo scopo di assegnare l'opera all'agente che massimizza la sua valutazione reale.
 Si può definire una versione di minimizzazione di tale meccanismo: ad esempio quando si vuole allocare un lavoro ad un macchina tra un insieme di macchine.
@@ -82,7 +82,6 @@ A questo punto, l'obiettivo del mechanism design è quello di implementare un **
 - $p(r)$ è uno **schema di pagamento** che specifica il pagamento di ogni agente rispetto ai tipi riportati dagli agenti $r = (r_1,\dots,r_n)$.
 Il meccanismo deve essere implementato in modo tale da garantire che nelle situazioni di equilibrio rispetto alle utilità dei vari agenti si ottiene
 $$ x = g(r) = f(t) $$
-
 Se questo è vero in equilibrio di strategie dominanti, allora ogni agente $a_i$ riporterà il tipo $r_i$ che permette di calcolare l'outcome $x = f(t)$.
 Il gioco indotto da un problema di mechanism design è il gioco in cui gli $n$ agenti sono i giocatori e la matrice dei payoff è implicitamente definita nelle funzioni di utilità.
 
@@ -103,7 +102,7 @@ in modo che la social choice function sottostante sia implementata in maniera tr
 Come già descritto nelle righe precedenti, i problemi di mechanism design possono essere pensati come problemi di **ottimizzazione** in cui parte dell'istanza è nascosta dagli agenti. L'obiettivo del meccanismo è quello di incentivare gli agenti a rivelare la porzione di input **reale** che tengono nascosta.
 I risultati riportati nel corso della trattazione saranno per problemi di *minimizzazione* (si possono definire anche per problemi di massimizzazione in modo analogo). Dunque si considera la seguente impostazione.
 - per ogni outcome, o soluzione, $x \in \mathcal{F}$, la **funzione di valutazione** $v_i(t_i,x)$ rappresenta il **costo** pagato dall'agente $a_i$ nel particolare outcome $x$;
-- la **funzione di scelta sociale** $f(t)$ associa al vettore dei tipi $t$ una soluzione $x$ che **minimizza** una qualche misura su $x$;
+- la **funzione di scelta sociale** $f(t)$ associa al vettore dei tipi $t$ viene mappata ad una soluzione $x$ che **minimizza** una qualche misura su $x$;
 - I **pagamenti** vanno sempre dal meccanismo verso gli agenti. Gli agenti negli outcome sostenere un costo, e vengono pagati per sostenerlo. L'utile è dato per ogni agente è dato dal pagamento meno il costo.
 Una classe di problemi per cui esiste una famiglia di meccanismi truthful è la classe dei problemi **utilitari**.
 
@@ -150,7 +149,7 @@ cioè l'utilità dell'agente $a_i$ è migliore quando dichiara la verità $t_i$.
 ## Come definire $h_i(r_{-i})$
 Si osserva che se tutti gli agenti sono *costretti* a partecipare ad un gioco, allora la funzione $h_i(r_{-i})$ può essere definita in modo arbitrario. In generale però questa non è una buona assunzione, dunque è necessario definire una funzione $h_i(r_{-i})$ che sia *ragionevole*: non tutte le funzioni hanno senso.
 
-Ad esempio, si consideri l'asta di Vickrey in cui $h_i(r_i)=0$ per ogni $i$.
+Ad esempio, si consideri l'asta di Vickrey in cui $h_i(r_{-i})=0$ per ogni $i$.
 Sia $a_i$ l'agente che ha vinto l'asta, allora il suo utile vale
 $$
 \begin{align}

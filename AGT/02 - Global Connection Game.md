@@ -219,7 +219,7 @@ $$
 \textnormal{cost}(S^N) \leq AB \cdot \textnormal{cost}(S^*)
 $$
 ### Upper bound al PoS del GCG
-Si torna ora al global connection game. Mediante i teoremi appena enunciati, si è dimostrato che esiste sempre un equilibrio di Nash per il gioco studiato. Bisogna ora fornire una delimitazione superiore al suo prezzo della stabilità.
+Si torna ora al global connection game. Mediante i teoremi appena enunciati, e definendo una funzione potenziale per il gioco, si dimostra che esiste sempre un equilibrio di Nash per il gioco studiato. 
 Si consideri un'istanza del global connection game, ed un vettore di strategia $S=(P_1,P_2,\ldots,P_k)$ contenente un cammino $s_i - t_i$ per ogni giocatore $i$. Per ogni arco $e$, si definisce una funzione $\Psi(S)$, che mappa i vettori di strategia in valori reali come segue
 $$
 \Psi_e(S) = c_e \cdot \mathcal{H}_{k_e}
@@ -228,14 +228,14 @@ dove $k_e$ è il numero di giocatori che usano l'arco $e$ in $S$, e $\mathcal{H_
 $$
 \Psi(S) = \sum_{e} \Psi_e(S)
 $$
-Il seguente lemma mostra come $\Psi(S)$ sia una funzione potenziale per il global connection game.
+Il seguente lemma mostra come $\Psi(S)$ sia una funzione potenziale per il global connection game. Dopodiché, si dimostra un lemma che garantisce un lower bound al prezzo della stabilità del global connection game, il quale sarà pari ad $\mathcal{H}_k$.
 #### Lemma 1
 Sia $S=(P_1,P_2,\ldots,P_k)$, e sia $P_i^{'} \neq P_i$ un cammino alternativo per un giocatore $i$, e si definisca un nuovo vettore di strategia $S^{'}=(S_{-i},P_i^{'})$. Allora
 $$
 \Psi(S) - \Psi(S^{'}) = \textnormal{cost}_i(S) - \textnormal{cost}_i(S^{'})
 $$
 ##### Dimostrazione
-Questo lemma afferma che quando un giocatore $i$ cambia le sue strategie, il corrispondente cambio in $\Psi(\cdot)$ rispecchia esattamente il cambio nel payoff di $i$. Sia $k_e$ il numero di giocatori che utilizzano $e$ in $S$. Per ogni arco $e$ che appare in entrambi $P_i$ e $P_i^{'}$ o in nessuno di esi, il costo pagato da $i$ per $e$ è lo stesso sia per $S$ che per $S^{'}$. Quindi, $\Psi_e(\cdot)$ ha lo stesso valore sotto e $S$ e $S^{'}$. Per ogni arco $e$ in $P_i$ ma non in $P_i^{'}$, cambiando strategia da $S$ ad $S^{'}$, $i$ risparmia (e quindi migliora il suo payoff di) $c_e/k_e$, che risulta essere precisamente la diminuizione in $\Psi_e(\cdot)$. Similmente, per un arco $e$ in $P_i^{'}$ ma non in $P_i$, il giocatore $i$ paga un costo di $c_e/(k_e+1)$ cambiando da $S$ ad $S^{'}$, che corrisponde all'aumento in $\Psi_e(\cdot)$. Essendo $\Psi(\cdot)$ semplicemente la somma di $\Psi_e(\cdot)$ su tutti gli archi, il cambio collettivo nel payoff di $i$ è esattamente la negazione del cambio in $\Psi(\cdot)$.
+Questo lemma afferma che quando un giocatore $i$ cambia le sue strategie, il corrispondente cambio in $\Psi(\cdot)$ rispecchia esattamente il cambio nel payoff di $i$. Sia $k_e$ il numero di giocatori che utilizzano $e$ in $S$. Per ogni arco $e$ che appare in entrambi $P_i$ e $P_i^{'}$ o in nessuno di essi, il costo pagato da $i$ per $e$ è lo stesso sia per $S$ che per $S^{'}$. Quindi, $\Psi_e(\cdot)$ ha lo stesso valore sotto e $S$ e $S^{'}$. Per ogni arco $e$ in $P_i$ ma non in $P_i^{'}$, cambiando strategia da $S$ ad $S^{'}$, $i$ risparmia (e quindi migliora il suo payoff di) $c_e/k_e$, che risulta essere precisamente la diminuzione in $\Psi_e(\cdot)$. Similmente, per un arco $e$ in $P_i^{'}$ ma non in $P_i$, il giocatore $i$ paga un costo di $c_e/(k_e+1)$ cambiando da $S$ ad $S^{'}$, che corrisponde all'aumento in $\Psi_e(\cdot)$. Essendo $\Psi(\cdot)$ semplicemente la somma di $\Psi_e(\cdot)$ su tutti gli archi, il cambio collettivo nel payoff di $i$ è esattamente la negazione del cambio in $\Psi(\cdot)$.
 #### Lemma 2
 Per ogni vettore di strategia $S$, si ha che 
 $$
@@ -265,18 +265,13 @@ Il seguente teorema viene dimostrato mediante una riduzione polinomiale dal prob
 ## Problema 3D-Matching
 Il problema **3D-Matching** è il seguente: dati tre insiemi disgiunti $X,Y,Z$, ciascuno di dimensione $n$, e dato un insieme $T \subseteq X \times Y \times Z$ di triple ordinate, esiste un insieme di $n$ triple $M \subseteq T$ tale per cui ogni elemento di $X \cup Y \cup Z$ è contenuto in esattamente una di queste triple?
 ## Dimostrazione di NP-completezza
-Data un'istanza di 3D-Matching con insiemi di nodi $X,Y,Z$, si costruisce un grafo come segue:
-- Inserisci un nodo per ogni nodo in $X,Y,Z$.
-- Inserisci un nodo $v_{i,j,k}$ per ogni  arco $3D$ $(x_i,y_j,z_k)$.
-- Inserisci un nodo $t$.
-- Aggiungi un arco diretto da ciascun nodo $v_{i,j,k}$ verso $t$ avente costo $c_e =3$.
-- Per ogni nodo $v$ in $X,Y,Z$ aggiungi un arco diretto da $v$ verso tutti i nodi che rappresentano un arco $3D$ contenente $v$, aventi costo $c_e=0$.
-- Sia $k=|X|+|Y|+|Z|$. Aggiungi un giocatore per ciascun nodo $v$ in $X \cup Y \cup Z$. Questo giocatore ha due nodi terminali: $v$ nodo sorgente e $t$ nodo pozzo.
-
-Se esite un 3D matching per l'istanza di 3D-Matching, allora esiste un equilibrio di Nash nel global connection game di costo $k$:
-Sia $M$ il 3D matching, e sia $S_i$, per il giocatore avente come nodi terminali $v$ e $t$, il cammino da $v$ a $t$ contenente:
-- l'arco da $v$ verso l'unico nodo $v_{i,j,k}$ corrispondente all'arco $3D$ in $M$, dove l'unicità di $v_{i,j,k}$ è data dal fatto che $M$ è un Matching.
-- l'arco da questo $v_{i,j,k}$ a $t$.
-
-Essendo $M$ un matching, il costo di $S$, dove $S$ è il profilo di strategia contenente $S_i$ per ogni giocatore $i$, è esattamente $3k/3=k$. $S$ è quindi un equilibrio di Nash, visto che una qualsiasi deviazione da questo profilo di strategia da parte di un giocatore comporta il pagamento di un arco avente costo $3$, mentre la quantità pagata secondo l'attuale profilo di strategia è $1$, essendo tale arco coinvolto in $S$ condiviso dagli altri giocatori appartenenti alla rispettiva tripla del matching.
-Se non esiste un $3D$ Matching, allora ogni soluzione del gobal connection game deve costare più di $k$. Quindi, non può esistere un equilibrio di Nash avente costo al più $k$.
+Data un'istanza $I$ di 3D-Matching con insiemi di nodi $X,Y,Z$, si costruisce un grafo come segue:
+- Si inserisce un nodo $s_i$ per ogni elemento $i$ in $X \cup Y \cup Z$; dunque si hanno $k = |X \cup Y \cup Z| = 3n$ giocatori
+- Si inserisce un nodo *centrale* per ogni tripla $(x_i,y_j,z_k)$.
+- Si inserisce un nodo $t$ che è destinazione per ogni $s_i$.
+- Si aggiunge un arco diretto da ciascun nodo *centrale* verso $t$, con costo $c_e =3$.
+- Per ogni nodo $v \in X \cup Y \cup Z$, si aggiunge un arco diretto da $v$ verso tutti i nodi *centrali* che rappresentano una tripla contenente $v$, con costo $c_e=0$.
+![|center|500](02-agt_img07.png)
+Si dimostra ora che esiste un 3D matching nell'istanza $I$ se e solo se esiste un NE di costo al più $k=3n$ nell'istanza del gioco GCG appena costruita.
+- $(\implies)$: sia $M$ un 3D matching e sia $S$ il profilo di strategie in cui ogni giocatore $i$ sceglie l'unico cammino da $s_i$ a $t$ che passa per il nodo *centrale* associato alla tripla contenuta in $M$. Allora $cost(S) = k = 3n$, in quanto in $S$ ciascun giocatore paga esattamente 1 perché condivide l'arco dal nodo *centrale* associato alla tripla in cui è contenuto al nodo $t$ con gli altri due nodi che sono contenuti nella tripla. Inoltre questo $S$ è un equilibrio di Nash perché una qualsiasi deviazione da questo profilo di strategia da parte di un giocatore comporta il pagamento di un arco avente costo 3, dato che la deviazione dovrà passare per un nodo centrale che non è utilizzato da nessun'altro giocatore.
+- $(\impliedby)$: sia $S$ un equilibrio di Nash di costo $\leq k=3n$. Tale equilibrio utilizza al più $n$ archi di costo 3 e non può utilizzare meno di $n$ archi di costo 3, in quanto ci sono $k=3n$ giocatori e ogni arco di costo 3 può essere utilizzato da al più 3 giocatori. Dunque $S$ utilizza esattamente $n$ archi di costo 3. Infine, ciascun arco di costo 3 definisce una particolare tripla, che insieme coprono tutti gli oggetti una sola volta. L'insieme di queste $n$ triple risolve l'istanza del problema 3D matching.

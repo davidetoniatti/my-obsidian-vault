@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "ce2567b02366f1b1",
+        "id": "fad2bced73ed4b61",
         "type": "tabs",
         "children": [
           {
-            "id": "4ca6387da463227c",
+            "id": "760b74523ff7e2d2",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "AGT/02 - Global Connection Game.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "AGT/02 - Global Connection Game.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "AGT/02 - Global Connection Game.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "AGT/02 - Global Connection Game.md"
-              }
+              "state": {}
             }
           }
         ],
@@ -134,7 +126,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -146,53 +139,54 @@
       "command-palette:Apri riquadro comandi": false
     }
   },
-  "active": "4ca6387da463227c",
+  "active": "760b74523ff7e2d2",
   "lastOpenFiles": [
-    "AGT_andrea/Teoria dei giochi algoritmica.md",
+    "AGT.zip",
+    "ziUKrXKb",
+    "SDCC/08 - Docker.md",
+    "schifezze/esonero 2.md",
+    "SDCC/elezione.md",
+    "SDCC/07 - Virtualizzazione.md",
+    "SDCC/consistenza.md",
+    "SDCC/attachments/Pasted image 20240116195424.png",
+    "SDCC/attachments/Pasted image 20240116195401.png",
+    "SDCC/kubernetes.md",
+    "SDCC/attachments/Pasted image 20240116192524.png",
+    "SDCC/06 - Comunicazione nei sistemi distribuiti parte 2.md",
+    "SDCC/attachments/Pasted image 20240116165334.png",
+    "SDCC/attachments/Pasted image 20240116164228.png",
+    "SDCC/attachments/Pasted image 20240116153056.png",
+    "SDCC/attachments/Pasted image 20240116151019.png",
+    "SDCC/attachments/Pasted image 20240116145552.png",
+    "SDCC/attachments/Pasted image 20240116101439.png",
+    "SDCC/attachments/Pasted image 20240116095514.png",
     "AGT/02 - Global Connection Game.md",
+    "AGT/05 - Algorithmic Mechanism Design II.md",
     "AGT/08 - PLS Completezza.md",
     "AGT/07 - Meccanismi senza pagamenti e kidney exchange.md",
-    "AGT/06 - Algorithmic Mechanism Design III.md",
-    "AGT/05 - Algorithmic Mechanism Design II.md",
-    "AGT/04 - Algorithmic Mechanism Design I.md",
     "AGT/03 - Local Connection Game.md",
-    "AGT/attachments/03-agt_img03.png",
-    "AGT_andrea/08-agt_img01.png",
-    "AGT/attachments/03-agt_img01.png",
-    "SDCC/07 - Virtualizzazione.md",
+    "AGT/06 - Algorithmic Mechanism Design III.md",
+    "AGT/04 - Algorithmic Mechanism Design I.md",
     "AGT/01 - Introduzione alla AGT.md",
-    "ABD/04 - Contention resolution e hash tables.md",
-    "AGT/attachments/02-agt_img06.png",
-    "AGT/attachments/02-agt_img05.png",
-    "AGT/attachments/02-agt_img04.png",
-    "AGT/attachments/02-agt_img03.png",
-    "AGT/attachments/02-agt_img02.png",
-    "AGT/attachments/02-agt_img01.png",
-    "AGT/attachments/01-agt_img06.png",
-    "ABD/01 - Introduzione agli algoritmi probabilistici.md",
-    "ABD/Mining data stream.md",
+    "SDCC/mutua esclusione ed elezione.md",
+    "schifezze/Architetture decentralizzate new.md",
+    "schifezze/architetture decentralizzate (temp).md",
+    "SDCC/05 - Comunicazione nei sistemi distribuiti.md",
+    "SDCC/03 - Architetture dei sistemi distribuiti.md",
+    "SDCC/04 - Sistemi distribuiti auto-adattativi.md",
+    "SDCC/01 - Introduzione ai Sistemi Distribuiti.md",
+    "Senza nome 1.md",
+    "Senza nome.md",
+    "root.md",
+    "schifezze",
     "AGT_andrea",
     "ABD/attachments",
-    "AR/07 - Seguire il gregge.md",
-    "AR/06 - Processi di diffusione.md",
-    "AR/05 - Reti come grafi dalla struttura disomogenea.md",
-    "AR/04 - Il fenomeno Small World.md",
-    "AR/01 - Introduzione e grafi di Erdős-Rényi.md",
-    "SDCC/02 - Introduzione al Cloud Computing.md",
-    "AR/03 - Grafi Geometrici aleatori e reti wireless.md",
-    "AR/02 - Questione di popolarità.md",
-    "^f.md",
-    "root.md.md",
-    "lemma precedente.md",
     "agt.zip",
     "zi5QwowD",
-    "01 - Introduzione.md",
     "AGT/attachments",
     "AGT",
     "Senza nome.canvas",
     "home/davide/uni/master/sdcc/code/rabbitmq-go/rabbitmq_1_hello",
-    "home/davide/uni/master/sdcc/code/rabbitmq-go",
-    "home/davide/uni/master/sdcc/code",
-    "home/davide/uni/master/sdcc"
+    "home/davide/uni/master/sdcc/code/rabbitmq-go"
   ]
 }

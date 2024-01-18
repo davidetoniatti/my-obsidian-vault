@@ -74,10 +74,12 @@ Si osserva esplicitamente che se si fosse definita, per ogni giocatore $a_{i}$, 
 ## Equilibrio di strategia dominante
 I due esempi visti in precedenza hanno una particolare proprietà: in ciascuno di questi giochi, ogni giocatore ha un'unica strategia migliore, indipendentemente dalle strategie adottate dagli altri giocatori. Si dice che un gioco ha una *strategia dominante* se possiede questa proprietà.
 Più formalmente, per un vettore di strategia $s \in S$  sia $s_i$ la strategia giocata dal giocatore $a_i$ e sia $s_{-i}$ il vettore di dimensione $n-1$ delle strategie giocate da tutti i restanti giocatori. Si ha quindi che $u_i(s)=u_i(s_i,s_{-i})$.
+```ad-lemma
+title: Definizione
 Un **equilibrio con strategia dominante** è un vettore di strategia $s^{*}=(s_1^*,s_2^*,\ldots,s_n^*)$ tale per cui $s_i^*$ è una **strategia dominante** per ogni $i$, ossia, per ogni possibile profilo di strategia alternativo $s=(s_1,s_2,\ldots,s_i,\ldots,s_n)$ si ha che:
 - Se $p_i$ è un'utilità, allora $p_i(s_i^*,s_{-i}) \geq p_i(s_i,s_{-i})$
 - Se $p_i$ è un costo, allora $p_i(s_i^*,s_{-i}) \leq p_i(s_i,s_{-i})$
-
+```
 Seguono alcune osservazioni.
 - Per ogni giocatore, una strategia dominante è la miglior risposta per qualsiasi strategia adottata dai restanti giocatori.
 - Se un gioco ha un equilibrio con strategia dominante, allora i giocatori convergeranno immediatamente ad esso.
@@ -104,10 +106,12 @@ p_i(s_{i1},s_{-i}) = p_i(s_{i2},s_{-i})
 $$
 ## Equilibrio di Nash
 Raramente i giochi possiedono equilibri con strategie dominanti. Si definisce ora un concetto di soluzione meno stringente e più applicabile.
-
-Un equilibrio di Nash è un vettore di strategia $s^{*}=(s_1^*,s_2^*,\ldots,s_n^*)$ tale per cui per ogni $i$, $s_i^*$ è la miglior risposta a $s_{-i}^*$, ossia, per ogni possibile strategia alternativa $s_i$ del giocatore $i$ si ha che:
+```ad-lemma
+title: Definizione
+Un **equilibrio di Nash** è un vettore di strategia $s^{*}=(s_1^*,s_2^*,\ldots,s_n^*)$ tale per cui per ogni $i$, $s_i^*$ è la miglior risposta a $s_{-i}^*$, ossia, per ogni possibile strategia alternativa $s_i$ del giocatore $i$ si ha che:
 - Se $p_i$ è un'utilità, allora $p_i(s_i^*,s_{-i}^*)\geq p_i(s_i,s_{-i}^*)$
 - Se $p_i$ è un costo, allora $p_i(s_i^*,s_{-i}^*)\leq p_i(s_i,s_{-i}^*)$
+```
 In altre parole, nessun giocatore $i$ può migliorare il suo payoff cambiando la sua strategia da $s_i^*$ ad $s_i$, assumendo che gli altri giocatori non cambino le strategie scelte in $s^*$. Si osserva esplicitamente che nel momento in cui tale profilo di strategia venga assunto dai giocatori, è nell'interesse di tutti mantenerlo, ed è quindi definito *stabile*. Inoltre, è chiaro che un equilibrio con strategia dominante sia un equilibrio di Nash. Ancor di più, nel caso in cui il profilo di strategia sia strettamente dominante (ossia se la sua adozione migliora strettamente l'esito del gioco), allora questo è l'unico equilibrio di Nash. 
 
 Gli equilibri di Nash possono non essere unici. Ad esempio, giochi di coordinazione possono avere più equilibri. Inoltre, possono non essere ottimali per i giocatori. Per i giochi con più equilibri di Nash, equilibri differenti possono avere payoffs differenti per i giocatori.

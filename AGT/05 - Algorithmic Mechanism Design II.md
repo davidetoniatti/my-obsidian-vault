@@ -76,7 +76,7 @@ Dove $A$ e $k$ sono le due aree in figura:
 ![[agt_img06.png]]
 Sia $\Delta p = p_i(r_{-i},y) - p_i(r_{-i},x)$, se $M$ è veritiero deve essere:
 - $\Delta p \leqslant A$: se cosi non fosse, nel caso in cui $t_i = x$ all'agente $a_i$ converrebbe mentire e dichiarare $r_{i}=y$ in quanto l'aumento di pagamento ($> A$) supererebbe l'aumento di costo ($A$), dunque la sua utilità aumenta.
-- $\Delta p \geqslant A+k$: se cosi non fosse, nel caso in cui $t_i = y$ all'agente $a_i$ converrebbe mentire e dichiarare $r_{i}=x$ in quanto l'aumento di pagamento nel dichiarare $y$ non supererebbe il risparmio che si ottiene riportando $x$ $, dunque la sua utilità aumenta.
+- $\Delta p \geqslant A+k$: se cosi non fosse, nel caso in cui $t_i = y$ all'agente $a_i$ converrebbe mentire e dichiarare $r_{i}=x$ in quanto l'aumento di pagamento nel dichiarare $y$ non supererebbe il risparmio che si ottiene riportando $x$, dunque la sua utilità aumenta.
 Ma $k$ è un valore strettamente positivo, dunque non possono valere le due condizioni contemporaneamente.
 $$\tag*{$\blacksquare$}$$
 ## Meccanismo one-parameter
@@ -95,6 +95,7 @@ $$
 p_{i}(r) = h_{i}(r_{-i}) + r_{i}w_{i}(g(r)) - \int_{0}^{r_{i}} w_{i}(g(r_{-i},z))  \, dz
 $$ 
 dato che $h_i(r_{-i})$ non dipende dalla scelta $r_i$ dell'agente $a_i$, si ignora questo fattore ponendo $h_i(r_{-i}) = 0$.
+
 L'utilità dell'agente $a_i$ quando dichiara la verità $t_i$ è pari a
 $$
 \begin{align}
