@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "fad2bced73ed4b61",
+        "id": "d0bc0f79c61b4967",
         "type": "tabs",
         "children": [
           {
-            "id": "760b74523ff7e2d2",
+            "id": "d6313ceb3a7a7b95",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "ABD/07 - Link analysis.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "ABD/07 - Link analysis.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "ABD/07 - Link analysis.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "ABD/07 - Link analysis.md"
+              }
             }
           }
         ],
@@ -126,8 +134,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 487.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -136,57 +143,57 @@
       "canvas:Crea nuova lavagna": false,
       "daily-notes:Apri nota del giorno": false,
       "templates:Inserisci modello": false,
-      "command-palette:Apri riquadro comandi": false
+      "command-palette:Apri riquadro comandi": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "760b74523ff7e2d2",
+  "active": "d6313ceb3a7a7b95",
   "lastOpenFiles": [
-    "AGT.zip",
-    "ziUKrXKb",
-    "SDCC/08 - Docker.md",
-    "schifezze/esonero 2.md",
-    "SDCC/elezione.md",
-    "SDCC/07 - Virtualizzazione.md",
-    "SDCC/consistenza.md",
-    "SDCC/attachments/Pasted image 20240116195424.png",
-    "SDCC/attachments/Pasted image 20240116195401.png",
-    "SDCC/kubernetes.md",
-    "SDCC/attachments/Pasted image 20240116192524.png",
-    "SDCC/06 - Comunicazione nei sistemi distribuiti parte 2.md",
-    "SDCC/attachments/Pasted image 20240116165334.png",
-    "SDCC/attachments/Pasted image 20240116164228.png",
-    "SDCC/attachments/Pasted image 20240116153056.png",
-    "SDCC/attachments/Pasted image 20240116151019.png",
-    "SDCC/attachments/Pasted image 20240116145552.png",
-    "SDCC/attachments/Pasted image 20240116101439.png",
-    "SDCC/attachments/Pasted image 20240116095514.png",
-    "AGT/02 - Global Connection Game.md",
-    "AGT/05 - Algorithmic Mechanism Design II.md",
-    "AGT/08 - PLS Completezza.md",
-    "AGT/07 - Meccanismi senza pagamenti e kidney exchange.md",
-    "AGT/03 - Local Connection Game.md",
-    "AGT/06 - Algorithmic Mechanism Design III.md",
+    "ABD/06 - Data streams.md",
+    "ABD/05 - Similar items.md",
+    "ABD/04 - Hash function & Similar items.md",
+    "ABD/03 - Algoritmi probabilistici.md",
+    "ABD/02 - Richiami di probabilità.md",
+    "ABD/01 - Introduzione al Data Mining.md",
+    "ABD/attachments/BloomFilterAnalysis.png",
+    "ABD/attachments/DataStreamManagementSystem.png",
+    "ABD/attachments/Pasted image 20240103110920.png",
+    "ABD/Mining data stream.md",
+    "ABD/attachments/MinhashAlg1.png",
+    "ABD/attachments/MinhashAlg2.png",
+    "ABD/attachments/charMatrix.png",
+    "ABD/07 - Link analysis.md",
+    "ABD/04 - Contention resolution e hash tables.md",
     "AGT/04 - Algorithmic Mechanism Design I.md",
+    "AGT/03 - Local Connection Game.md",
+    "AGT/02 - Global Connection Game.md",
+    "ABD/02 - Variabile aleatorie, linearità del valore atteso, analisi del RandomQS.md",
+    "ABD/RandomQs2.excalidraw.md",
+    "ABD/Qs1.excalidraw.md",
+    "Excalidraw/Drawing 2024-01-30 22.28.01.excalidraw.md",
+    "Excalidraw",
+    "ABD/01 - Introduzione agli algoritmi probabilistici.md",
+    "AR/02 - Questione di popolarità.md",
+    "AR/03 - Grafi Geometrici aleatori e reti wireless.md",
+    "AR/01 - Introduzione e grafi di Erdős-Rényi.md",
     "AGT/01 - Introduzione alla AGT.md",
-    "SDCC/mutua esclusione ed elezione.md",
-    "schifezze/Architetture decentralizzate new.md",
-    "schifezze/architetture decentralizzate (temp).md",
-    "SDCC/05 - Comunicazione nei sistemi distribuiti.md",
-    "SDCC/03 - Architetture dei sistemi distribuiti.md",
-    "SDCC/04 - Sistemi distribuiti auto-adattativi.md",
-    "SDCC/01 - Introduzione ai Sistemi Distribuiti.md",
-    "Senza nome 1.md",
-    "Senza nome.md",
-    "root.md",
+    "AGT/08 - PLS Completezza.md",
+    "AR/06 - Processi di diffusione.md",
+    "AR/05 - Reti come grafi dalla struttura disomogenea.md",
+    "AR/07 - Seguire il gregge.md",
+    "AGT.zip",
+    "zizKgNdo",
+    "AR.zip",
+    "ziUCCASi",
+    "AGT/attachments/Pasted image 20240126124647.png",
+    "Pasted image 20231202234352.png",
+    "Pasted image 20231202234926.png",
+    "Pasted image 20231203123120.png",
+    "ziUKrXKb",
     "schifezze",
     "AGT_andrea",
     "ABD/attachments",
     "agt.zip",
-    "zi5QwowD",
-    "AGT/attachments",
-    "AGT",
-    "Senza nome.canvas",
-    "home/davide/uni/master/sdcc/code/rabbitmq-go/rabbitmq_1_hello",
-    "home/davide/uni/master/sdcc/code/rabbitmq-go"
+    "Senza nome.canvas"
   ]
 }

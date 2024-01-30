@@ -1,7 +1,6 @@
-# Nascita della Algorithmic Game Theory
-L'**algorithmic game theory (AGT)** nasce dalla combinazione della *teoria dei giochi* con la *teoria degli algoritmi*.
-
-Gli studenti di Informatica conoscono già la **teoria degli algoritmi**: è l'area di ricerca che cerca di rispondere a problemi di natura *computazionale*; in particolare:
+L'**Algorithmic Game Theory (AGT)** è una disciplina che combina la *teoria dei giochi* con la *teoria degli algoritmi*.
+# Algorithmic Game Theory
+La **teoria degli algoritmi** è l'area di ricerca che cerca di rispondere a problemi di natura *computazionale*; in particolare:
 - Cosa può essere calcolato? (Teoria della calcolabilità, macchine di Turing ecc)
 - Quante risorse sono necessarie per calcolare una soluzione? (Teoria della complessità, NP-Completezza ecc)
 - Qual'è la qualità della soluzione calcolata rispetto alla soluzione ottima? (Algoritmi approssimanti ecc)
@@ -28,7 +27,7 @@ Informalmente, un **gioco** nello scenario della teoria di giochi consiste in:
 - Per ogni possibile combinazione di strategie dei giocatori bisogna specificare i **payoff** (guadagni) per ogni giocatori: il payoff è un valore numerico specifico per ogni giocatore che dipende dalle strategie e che indica o un guadagno o un pagamento per ogni giocatore.
 La teoria dei giochi classica cerca di fare una previsione sull'**outcome** del gioco, cioè una previsione sul risultato dell'interazione tra i giocatori.
 ## Esempi di gioco
-Per capire meglio il concetto di gioco, si vede ora un paio di esempi classici
+Per capire meglio il concetto di gioco, si vede ora un paio di esempi classici nella teoria dei giochi.
 ### Esempio 1: The Prisoner's Dilemma
 Due prigionieri, $\mathbf{P1}$ e $\mathbf{P2}$, sono in giudizio per aver commesso un crimine, e ciascuno di essi si ritrova a decidere se confessare la sua colpevolezza o rimanere in silenzio. Se entrambi rimangono in silenzio, le autorità non saranno in grado di dimostrare le accuse contro di essi, ed entrambi dovranno scontare una pena di $2$ anni per reati minori. Se solo uno dei due confessa, la sua pena verrà ridotta ad $1$ anno, e verrà usato come testimone per incriminare l'altro, il quale riceverà una pena di $5$ anni. Infine, se entrambi confessano, entrambi riceveranno uno sconto di pena per aver cooperato con le autorità, e dovendo scontare $4$ anni in carcere invece che $5$. I costi sostenuti dai giocatori, dipendenti dalla strategia adottata da entrambi, possono essere schematizzati nella seguente *matrice dei costi*.
 ![01-agt_img01|center|500](01-agt_img01.png)
@@ -117,8 +116,6 @@ In altre parole, nessun giocatore $i$ può migliorare il suo payoff cambiando la
 Gli equilibri di Nash possono non essere unici. Ad esempio, giochi di coordinazione possono avere più equilibri. Inoltre, possono non essere ottimali per i giocatori. Per i giochi con più equilibri di Nash, equilibri differenti possono avere payoffs differenti per i giocatori.
 Si vede ora un esempio in cui vi sono più esiti che possono essere considerati stabili.
 ### Esempio 1: Battaglia dei sessi
-Questo esempio riguarda un gioco di coordinazione. In generale, un semplice gioco di coordinazione è definito in maniera tale che due giocatori devono scegliere tra due possibili opzioni, volendo scegliere la stessa.
-
 Si considerino due giocatori, un ragazzo ed una ragazza, i quali devono decidere su come passare il pomeriggio assieme. Considerano entrambi due possibilità: andare al cinema o andare allo stadio. Il ragazzo preferirebbe andare allo stadio, mentre la ragazza preferirebbe andare al cinema, ma entrambi vorrebbero passare il pomeriggio assieme piuttosto che separatamente. Le preferenze dei giocatori sono espressi mediante payoffs (utilità in questo caso) come segue, facendo presente che **B** è la strategia associata allo stadio mentre **S** al cinema.
 ![01-agt_img03|center|500](01-agt_img03.png)
 Chiaramente, le due soluzioni dove i due giocatori scelgono strategie differenti sono non stabili: in ciascuno dei casi, uno dei giocatori può migliorare il suo payoff cambiando la strategia scelta. Le due opzioni rimanenti sono entrambi soluzioni stabili, infatti:
@@ -126,7 +123,7 @@ Chiaramente, le due soluzioni dove i due giocatori scelgono strategie differenti
 - $(S,S)$ è un equilibrio di Nash.
 Questo perché, fissata la strategia di un giocatore, il restante può massimizzare il suo profitto scegliendo la stessa strategia dell'altro.
 
-La risposta ottima, o best response, di un giocatore è una strategia che produce l'esito più favorevole, per quel giocatore, in risposta ad una data combinazione di strategie degli altri giocatori.
+La *risposta ottima*, o **best response**, di un giocatore è una strategia che produce l'esito più favorevole, per quel giocatore, in risposta ad una data combinazione di strategie degli altri giocatori.
 ### Esempio 2: routing congestion game
 Si supponga che due flussi di traffico abbiano origine dal nodo $O$, e che debbano venir instradati all'interno di una rete. Si supponga che $O$ sia connesso al resto della rete mediante due punti di connessione $A$ e $B$, dove $A$ è leggermente più vicino ad $O$ rispetto a $B.$ Entrambi i punti di connessioni vengono congestionati facilmente, quindi inviare entrambi i flussi tramite lo stesso punto di connessione causa un ritardo aggiuntivo. In particolar modo, si ha che, senza congestione
 $$

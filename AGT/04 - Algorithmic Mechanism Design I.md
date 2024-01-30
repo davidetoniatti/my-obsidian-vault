@@ -7,7 +7,7 @@ Bisogna far presente che i giochi indotti da meccanismi presentano delle differe
 
 In generale, è possibile interpretare gli obiettivi dei meccanismi progettati nei termini astratti di una *scelta sociale*. Una scelta sociale è semplicemente un'aggregazione di preferenze dei diversi partecipanti verso una singola decisione collettiva. Il mechanism design si occupa quindi di implementare le scelte sociali desiderate in uno scenario strategico, assumendo che i diversi agenti coinvolti agiscano in maniera egoistica e razionale.
 
-L'idea del Mechanism design è quella quindi di ottenere delle situazioni ottimali per un dato scenario,  incentivando gli agenti a comportarsi *bene*, in modo socialmente utile. 
+L'idea del Mechanism design è quella di ottenere delle situazioni ottimali per un dato scenario,  incentivando gli agenti a comportarsi *bene*, in modo socialmente utile. 
 Dunque alla base del Mechanism Design vi è la progettazione di un sistema che, caratterizzato da un ambiente popolato da agenti egoistici, deve raggiungere un certo obiettivo. A tale scopo, il sistema incentiva gli agenti a cooperare col sistema tramite un sistema di pagamento che premia gli agenti che collaborano al suo raggiungimento: deve generare una situazione di equilibrio, per il quale agli agenti non conviene fare una scelta diversa rispetto a quella *giusta* per il sistema.
 
 Un aspetto fondamentale nella progettazione di meccanismi è che si applica in situazioni in cui gli agenti hanno determinate preferenze sull'outcome del gioco: si vuole, date queste preferenze, decidere un esito che soddisfi tutti gli agenti. Il problema in queste aggregazioni è, come detto in precedenza, che le informazioni effettivamente dichiarate dagli agenti al sistema possono non rispettare le loro preferenze reali, cioè i giocatori possono mentire al sistema per manipolarlo ed ottenere dei vantaggi. Dunque, idealmente, il sistema deve incentivare i giocatori a esprimere la preferenza reale, cioè a dire la *verità*.
@@ -20,7 +20,7 @@ L'agente $a_i$ che vince il quadro dovrà pagare $p$ per ottenere un utile di $u
 L'obiettivo del venditore del quadro è quello di definire un *meccanismo d'asta* che venda il quadro al compratore con il valore privato $t_i$ più alto.
 Il meccanismo non conosce i valori privati e gli agenti potrebbero dichiarare dei valori inferiori ai valori privati, dato che essi vogliono massimizzare il profitto (da qui la natura *egoistica* del gioco), dunque il meccanismo deve essere in grado di far dichiarare ad ogni agente il valore reale.
 In particolare, il meccanismo d'asta deve:
-- Decidere chi vince l'asta in funzione dei valori dichiarati $r_1,\dots,r_n$;
+- Decidere l'agente che vince l'asta in funzione dei valori dichiarati $r_1,\dots,r_n$;
 - Decidere quanto dovrà pagare il vincitore per prendersi il quadro.
 Inoltre, il meccanismo d'asta è pubblico, dunque tutti gli agenti che partecipano sanno come viene scelto il vincitore e quanto dovrà pagare nel caso di vittoria.
 Dunque il meccanismo dovrà regolare queste due decisioni in modo che per ogni agente è conveniente dichiarare come offerta il valore reale che attribuisce al quadro. In questo modo il meccanismo raggiunge il suo scopo, ossia assegnare il quadro all'agente con il valore privato più alto.
@@ -33,7 +33,7 @@ Allora il sistema non è in grado di assegnare il quadro all'agente con valore p
 In questo meccanismo, come nel precedente, il quadro viene attribuito all'agente $a_i$ che ha dichiarato l'offerta più alta $r_i = \max_{j=1,\dots,k}\{ r_{j} \}$. Questa volta, il vincitore paga il quadro tanto quanto il valore da lui dichiarato $r_i$.
 Si nota che anche tale meccanismo non incentiva gli agenti a dire la verità. Infatti ogni agente dichiara $r_i < t_i$ in modo da avere utilità positiva in caso di vittoria del quadro. Dunque non sempre il quadro viene assegnato al giocatore il valore privato $t_i$ più alto.
 ## Vickrey's Second Price Auction
-In questo meccanismo il quadro viene sempre attribuito all'agente $a_i$ che ha dichiarato l'offerta più alta $r_i = \max_{j=1,\dots,k}\{ r_{j} \}$. Il vincitore del quadro paga il quadro tanto quanto il secondo valore dichiarato più alto $R = \max_{j \neq i} \{r_i\}$, cioè quanto la seconda miglior offerta.
+In questo meccanismo il quadro viene sempre attribuito all'agente $a_i$ che ha dichiarato l'offerta più alta $r_i = \max_{j=1,\dots,k}\{ r_{j} \}$. Il vincitore del quadro paga il quadro tanto quanto il secondo valore dichiarato più alto $R = \max_{j \neq i} \{r_j\}$, cioè quanto la seconda miglior offerta.
 Questo meccanismo funziona, cioè incentiva gli agenti a dire la verità. Infatti vale il seguente teorema.
 ```ad-theorem
 title: Teorema
@@ -41,38 +41,35 @@ Nell'asta di Vickrey, $r_i = t_i$ è una strategia dominante  per ogni giocatore
 ```
 Dunque nell'asta di Vickrey ogni giocatore massimizza la sua utilità quando dichiara la verità, indipendentemente dal tipo riportato dagli altri giocatori.
 ### Dimostrazione
-Siano $i$, $t_i$ e il vettore di strategie degli altri giocatori $r_{-i}$ fissati.
-Sia $R=\max_{j\neq i} \{r_j\}$, cioè $R$ è la miglior offerta escludendo quella del giocatore $i$. Si osserva che $R$ non è noto al giocatore $i$, dato che le offerte sono fatte a busta chiusa.
+Siano $a_{i}$, $t_i$ e il vettore di strategie degli altri giocatori $r_{-i}$ fissati.
+Sia $R=\max_{j\neq i} \{r_j\}$, cioè $R$ è la miglior offerta escludendo quella del giocatore $i$. Si osserva che $R$ non è noto all'agente $a_{i}$, dato che le offerte sono fatte a busta chiusa.
 #### Caso $t_i \geqslant R$ 
-In questo caso, $i$ è il giocatore che da valore più alto al quadro.
-- Dichiarando $r_i = t_i$, il giocatore $i$ riceve un utilità pari a $u_i = t_i - R \geq 0$; infatti il giocatore vince se $t_i > R$, mentre se $t_i = R$ il giocatore può sia vincere che perdere (in base alle regole per lo spareggio), ma l'utilità è sempre zero.
-- Dichiarando un qualsiasi $r_i > R$ con $r_i \neq t_i$, il giocatore $i$ vince e continua ad avere utilità $u_i = t_i - R \geq 0$; non si ottiene nessun vantaggio a dichiarare più di $t_i$.
-- Dichiarando un qualsiasi $r_i < R$, il giocatore $i$ non vince e riceve utilità pari a zero $u_i = 0$; questo outcome è peggiore per il giocatore $i$.
-Non è conveniente per il giocatore $i$ dichiarare un valore diverso da $t_i$.
-#### Caso $t_i \leqslant R$ 
-In questo caso, esiste un giocatore $j$ che da un valore più alto del quadro rispetto al giocatore $i$.
-- Dichiarando $r_i = t_i$, il giocatore $i$ non vince e riceve un utilità pari a $u_i = 0$; infatti vince il giocatore che ha tipo riportato pari a $R$;
-- Dichiarando un qualsiasi $r_i < R$ con $r_i \neq t_i$, il giocatore $i$ non vince e continua ad avere utilità pari a zero $u_i = 0$; non si ottiene nessun vantaggio a riportare meno di $t_i$.
-- Dichiarando un qualsiasi $r_i > R$, il giocatore $i$ vince ma ottiene utilità  $u_i = t_{i}-R < 0$;  dunque l'outcome è peggiore per il giocatore $i$.
-Non è conveniente per il giocatore $i$ dichiarare un valore diverso da $t_i$.
+In questo caso, $a_{i}$ è l'agente che da valore più alto al quadro.
+- Dichiarando $r_i = t_i$, l'agente $a_i$ riceve un utilità pari a $u_i = t_i - R \geq 0$; infatti l'agente vince se $t_i > R$, mentre se $t_i = R$ l'agente può sia vincere che perdere (in base alle regole per lo spareggio), ma l'utilità è sempre zero.
+- Dichiarando un qualsiasi $r_i > R$ con $r_i \neq t_i$, l'agente $a_{i}$ vince e continua ad avere utilità $u_i = t_i - R \geq 0$; non si ottiene nessun vantaggio a dichiarare più di $t_i$.
+- Dichiarando un qualsiasi $r_i < R$, l'agente $a_{i}$ non vince e riceve utilità pari a zero $u_i = 0$; questo outcome è peggiore per l'agente $a_{i}$.
+Non è conveniente per l'agente $a_{i}$ dichiarare un valore diverso da $t_i$.
+#### Caso $t_i < R$ 
+In questo caso, esiste un'agente $a_{j}$ che da un valore più alto del quadro rispetto all'agente $a_{i}$.
+- Dichiarando $r_i = t_i$, l'agente $a_{i}$ non vince e riceve un utilità pari a $u_i = 0$; infatti vince l'agente che ha tipo riportato pari a $R$;
+- Dichiarando un qualsiasi $r_i < R$ con $r_i \neq t_i$, l'agente $a_{i}$ non vince e continua ad avere utilità pari a zero $u_i = 0$; non si ottiene nessun vantaggio a riportare meno di $t_i$.
+- Dichiarando un qualsiasi $r_i > R$, l'agente $a_{i}$ vince ma ottiene utilità  $u_i = t_{i}-R < 0$;  dunque l'outcome è peggiore per l'agente $a_{i}$.
+Non è conveniente per l'agente $a_{i}$ dichiarare un valore diverso da $t_i$.
 
 In tutti i casi, riportare un tipo *falso* (cioè un tipo riportato diverso dal tipo privato) non produce una utilità migliore, dunque riportare $r_i = t_i$ , o dichiarare la verità, è una *strategia dominante*.
-## Vickrey's Second Price Auction: versione di minimizzazione
-Il meccanismo d'asta del secondo prezzo di Vickrey nel contesto della vendita del quadro ha lo scopo di assegnare l'opera all'agente che massimizza la sua valutazione reale.
-Si può definire una versione di minimizzazione di tale meccanismo: ad esempio quando si vuole allocare un lavoro ad un macchina tra un insieme di macchine.
 # Ingredienti per definire un problema di mechanism design
 Volendo generalizzare il problema specifico appena affrontato, l'idea dietro alla **algorithmic mechanism design** è quella di incentivare gli agenti a comportarsi in modo tale che le scelte individuali ed egoistiche degli agenti riescono ad ottenere dei buoni livelli di welfare.
 
 Un modo per pensare ad un problema di mechanism design è il seguente: il sistema deve risolvere un problema di ottimizzazione, ma non è a conoscenza di alcune parti dell'istanza in input. Queste informazioni sconosciute sono mantenute da agenti razionali ed egoistici. Tali agenti dovranno dichiarare le informazioni mancanti al sistema e riceveranno un pagamento in base all'informazione rivelata al sistema. In particolare, gli agenti possono **mentire** al sistema per ottenere un maggiore guadagno.
 Allora il sistema deve avere un meccanismo composto da:
-- un'algoritmo che calcola soluzione ottima (o buona);
+- un'algoritmo che calcola una soluzione ottima (o buona);
 - uno schema di pagamento che ricompensa gli agenti in modo da far dichiarare le parti di input *reali*, cioè in grado di far rivelare la verità da ogni agente.
 Grazie a questo meccanismo, il sistema può calcolare la soluzione ottima rispetto all'istanza reale in input.
 
 Gli ingredienti da considerare nell'ambito del mechanism design sono i seguenti.
 - $N$ **agenti** o giocatori: ogni agente ha una sola informazione privata $t_i \in T_i$ detta **tipo** (type);
-- Un insieme di outcome ammissibili $F$: il sistema dovrà decidere uno degli outcome in $F$.
-- Per ogni vettore dei tipi $t=(t_1,\dots,t_N)$, una *funzione di scelta sociale* $f(t) \in F$ specifica l'outcome che si vuole ottenere dato $t$; in altre parole, se il sistema conoscesse il vettore $t$ dei tipi di ogni giocatore, allora $f(t)$ è l'outcome da implementare. Inoltre il sistema, vorrebbe calcolare esattamente un outcome di $F$ che dipende dai tipi reali, dunque deve implementare la funzione di scelta sociale $f(t) \in F$.
+- Un insieme di outcome ammissibili $F$: il sistema dovrà decidere uno degli outcome in $F$. Nell'asta di Vickery, l'insieme $F$ è dato da tutti gli agenti che partecipano all'asta: un'outcome è un giocatore che vince l'asta.
+- Per ogni vettore dei tipi $t=(t_1,\dots,t_N)$, una *funzione di scelta sociale* $f(t) \in F$ specifica l'outcome che si vuole ottenere dato $t$; in altre parole, se il sistema conoscesse il vettore $t$ dei tipi di ogni giocatore, allora $f(t)$ è l'outcome da implementare. Inoltre il sistema, vorrebbe calcolare esattamente un outcome di $F$ che dipende dai tipi reali, dunque deve implementare la funzione di scelta sociale $f(t) \in F$. Nell'asta di Vickery, la funzione di scelta sociale è l'assegnazione dell'oggetto all'agente con il **costo reale** più basso $$f(t) = \arg\min_{i}(t_{1},\dots,t_{n})$$
 - Ogni agente ha uno *spazio di strategie* $S_i$. Questa trattazione si restringe ai meccanismi detti *direct revelation mechanism*, in cui l'azione che un agente può eseguire è quella di dichiarare un tipo $r_i \in T_i = S_i$. Si osserva che il tipo riportato può essere diverso dal tipo reale di un'agente, ovvero $r_i \neq t_i$.
 - Per ogni possibile outcome $x \in \mathcal{F}$, ciascun agente effettua una **valutazione** $v_i(t_i,x)$ rispetto alla sua preferenza per quel particolare outcome.
 - Per ogni possibile vettore $r$ dei tipi riportati, ciascun agente riceve un **pagamento** $p_i(r)$. I pagamento vengono utilizzati dal meccanismo per incentivare gli agenti a collaborare.
@@ -84,8 +81,8 @@ Il meccanismo deve essere implementato in modo tale da garantire che nelle situa
 $$ x = g(r) = f(t) $$
 Se questo è vero in equilibrio di strategie dominanti, allora ogni agente $a_i$ riporterà il tipo $r_i$ che permette di calcolare l'outcome $x = f(t)$.
 Il gioco indotto da un problema di mechanism design è il gioco in cui gli $n$ agenti sono i giocatori e la matrice dei payoff è implicitamente definita nelle funzioni di utilità.
-
-Inoltre, si può formalizzare la proprietà principale dell'asta di Vickrey, cioè che a tutti gli agenti conviene dire la verità, con le seguenti definizioni.
+## Meccanismi truthful
+Si può formalizzare la proprietà principale dell'asta di Vickrey, cioè che a tutti gli agenti conviene dire la verità, con le seguenti definizioni.
 ```ad-lemma
 title: Definizione
 Un meccanismo $M = \langle g(r),p(r) \rangle$ è un'**implementazione con strategie dominanti** se esiste un vettore di tipi riportati $r^* = (r_1^*,\dots,r_n^*)$ tale che $f(t) = g(r^*)$ in equilibrio di strategie dominanti, cioè per ogni agente $a_i$  e per ogni vettore dei tipi riportati $r = (r_1,\dots,r_n)$ vale
@@ -100,15 +97,22 @@ A questo punto, la questione principale da affrontare è come progettare dei mec
 in modo che la social choice function sottostante sia implementata in maniera truthful?
 # Come progettare meccanismi truthful?
 Come già descritto nelle righe precedenti, i problemi di mechanism design possono essere pensati come problemi di **ottimizzazione** in cui parte dell'istanza è nascosta dagli agenti. L'obiettivo del meccanismo è quello di incentivare gli agenti a rivelare la porzione di input **reale** che tengono nascosta.
+## Problemi di minimizzazione
 I risultati riportati nel corso della trattazione saranno per problemi di *minimizzazione* (si possono definire anche per problemi di massimizzazione in modo analogo). Dunque si considera la seguente impostazione.
 - per ogni outcome, o soluzione, $x \in \mathcal{F}$, la **funzione di valutazione** $v_i(t_i,x)$ rappresenta il **costo** pagato dall'agente $a_i$ nel particolare outcome $x$;
 - la **funzione di scelta sociale** $f(t)$ associa al vettore dei tipi $t$ viene mappata ad una soluzione $x$ che **minimizza** una qualche misura su $x$;
 - I **pagamenti** vanno sempre dal meccanismo verso gli agenti. Gli agenti negli outcome sostenere un costo, e vengono pagati per sostenerlo. L'utile è dato per ogni agente è dato dal pagamento meno il costo.
-Una classe di problemi per cui esiste una famiglia di meccanismi truthful è la classe dei problemi **utilitari**.
-
+### Vickrey's Second Price Auction: versione di minimizzazione
+Il meccanismo d'asta del secondo prezzo di Vickrey nel contesto della vendita del quadro ha lo scopo di assegnare l'opera all'agente che massimizza la sua valutazione reale.
+Si può definire una versione di minimizzazione di tale meccanismo, in cui l'obiettivo è assegnare una risorsa all'agente che incorre nel minor costo. In questa versione del problema si ha che:
+- Il tipo $t_i$ rappresenta il costo che l'agente $a_i$ incorre se dovesse vincere l'asta;
+- Il valore $p_i$ rappresenta il pagamento che il sistema offre all'agente che vince l'asta;
+- L'utilità dell'agente $a_i$ è data da $u_i = p_i - t_i$: più alto è il pagamento rispetto al costo del lavoro, e più all'agente $a_i$ conviene vincere l'asta.
+In questa versione il lavoro (l'oggetto dell'asta), va all'agente che richiede meno costo, che verrà pagato una quantità pari al costo della seconda del secondo agente più economico.
+## Problemi utilitari
 Un problema è **utilitario** se l'outcome desiderato è quello che minimizza la somma delle valutazioni degli agenti. Formalmente, un problema è utilitario se la funzione obiettivo (o funzione di scelta sociale) ha la forma
 $$ f(t) := \arg\min_{x \in \mathcal{F}} \sum_{i} v_{i}(t_{i},x) $$
-Per questa classe di problemi, esiste una classe di meccanismi truthful.
+Per questa classe di problemi, esiste una classe di meccanismi truthful: il **meccanismo VCG**.
 # Il meccanismo VCG
 Il meccanismo **VCG** (Vickrey, Clarke, Groves) è l'unico meccanismo **truthful** per i problemi utilitari, ed è descritto come segue:
 - L'algoritmo $g(r)$ calcola l'outcome $x$ che minimizza la somma delle valutazioni rispetto ai tipi riportati dagli agenti $$x = g(r) = \arg\min_{y \in \mathcal{F}} \sum_{i} v_{i}(r_{i},y)$$
@@ -122,12 +126,12 @@ I meccanismi VCG sono truthful per problemi utilitari.
 Fissato il tipo $t_i$ di un'agente $a_i$ e fissato il vettore dei tipi riportati dagli altri agenti $r_{-i}$, si applica l'algoritmo $g(\cdot)$ per calcolare due outcomes: uno in cui $a_i$ dichiara $r_i = t_i$, cioè dice la verità, e uno in cui $a_i$ dichiara $r_i \neq t_i$, cioè non dice la verità.
 - Quando $r_i = t_i$ ($a_i$ **dice la verità**), vale $$ x = g(t_{i},r_{-i}) = g(\hat{r})$$ In questo caso, l'utilità per $a_i$ è pari a $$ \begin{align}
 u_{i}(t_{i},x) &= p_{i}(t_{i},r_{-i}) - v_{i}(t_{i},x)\\
-&= \left(h_{i}(r_{-i}) - \sum_{j\neq i} v_{j}(r_{j},x) \right) - v_{i}(r_{i},x) \\
+&= \left(h_{i}(r_{-i}) - \sum_{j\neq i} v_{j}(r_{j},x) \right) - v_{i}(t_{i},x) \\
 &= h_{i}(r_{-i}) - \sum_{j} v_{j}(\hat{r}_{j},x)
 \end{align}  $$
 - Quando $r_i \neq t_i$ ($a_i$ **mente**), vale $$ x' = g(r_{i},r_{-i}) $$ In questo caso, l'utilità per $a_i$ è pari a $$ \begin{align}
 u_{i}(t_{i},x') &= p_{i}(r_{i},r_{-i}) - v_{i}(t_{i},x')\\
-&= \left(h_{i}(r_{-i}) - \sum_{j\neq i} v_{j}(r_{j},x') \right) - v_{i}(r_{i},x') \\
+&= \left(h_{i}(r_{-i}) - \sum_{j\neq i} v_{j}(r_{j},x') \right) - v_{i}(t_{i},x') \\
 &= h_{i}(r_{-i}) - \sum_{j} v_{j}(\hat{r}_{j},x')
 \end{align}  $$
 A questo punto si osserva che, per come è definito, l'algoritmo $g(\cdot)$ calcola l'outcome $x$ che calcola la soluzione ottima rispetto al vettore dei tipi riportati $\hat{r}=(r_{-i},t_{i})$. Dunque $x$ è l'outcome per cui la quantità  $\sum_{i}v_{i}(\hat{r},x)$ è minima.
@@ -178,7 +182,7 @@ Il meccanismo è **truthful** anche con $h_i(r_{-i})=0$.
 #### Pagamento di clarke
 Uno schema di pagamento coerente per l'asta di Vickrey deve garantire una utilità maggiore di zero per il vincitore e uguale a zero per tutti gli altri agenti partecipanti. Per ottenere tali garanzie, si utilizza un particolare schema di pagamento detto **clarke payment**, dove
 $$ h_{i}(r_{-i}) = \sum_{j \neq i}v_{j}(r_{j},g(r_{-i})) $$
-dove $g(r_{-i})$ è un outcome in cui il player $i$ non partecipa. Allora il pagamento per ogni agente è pari a
+dove $g(r_{-i})$ è un outcome in cui l'agente $a_i$ non partecipa. Allora il pagamento per ogni agente è pari a
 $$ p_{i}(r) = \underbrace{\sum_{j \neq i}v_{j}(r_{j}g(r_{-i}))}_{{(1)}} - \underbrace{\sum_{j \neq i}v_{j}(r_{j},g(r))}_{(2)} $$
 si può dimostrare che con questo schema di pagamento, tutte le utilità degli agenti sono non negative. Dunque, tutti gli agenti sono interessati a partecipare all'asta.
 

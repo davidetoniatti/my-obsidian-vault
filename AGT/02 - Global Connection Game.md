@@ -18,15 +18,15 @@ In generale, i giocatori non sono interessati alla formazione di una rete ottima
 Si vuole quindi dare una delimitazione alla perdita di efficienza di una rete dovuto al comportamento egoistico dei giocatori, ossia al raggiungimento di un profilo di strategia stabile.
 # Modello del Global Connection Game
 Si ha un grafo diretto $G=(V,E)$, con pesi degli archi $c_e$ non negativi per tutti gli archi $e \in E$. Si hanno $k$ giocatori, e ciascun giocatore $i$ ha associato uno specifico nodo sorgente $s_i$ ed un nodo pozzo $t_i$, dove lo stesso nodo può essere una sorgente o un pozzo per molteplici giocatori.
-L'obiettivo del giocatore $i$ è quello di costruire una rete nella quale $t_i$ è raggiungibile da $s_i$, pagando il minor costo possibile. Una strategia per il giocatore $i$ è un cammino $P_i$ da $s_i$ a $t_i$ in $G$. Scegliendo $P_i$, il giocatore $i$ partecipa alla costruzione di tutti gli archi in $P_i$ nella rete finale. Dato un vettore di strategia $S$, si definisce la *rete costruita* come $N(S)=\bigcup_i P_i$.
-Si deve ora allocare il costo di ciascun arco nella rete ai giocatori che lo utilizzano. Questo permetterà ai giocatori di valutare l'utilità di ciascuna strategia.
-Per fare ciò, si considera il meccanismo che divide il costo di un arco $e$ equamente tra tutti i giocatori per i quali la loro strategia contiene $e$, ossia, sia $k_e(S)$ il numero di giocatori per i quali il loro cammino contiene l'arco $e$, allora tale arco assegna una frazione di costo pari a $c_e/k_e(S)$ a ciascun giocatore che lo utilizza. Quindi, il costo totale impiegato dal giocatore $i$ per il vettore strategia $S$ è dato da
+L'obiettivo del giocatore $i$ è quello di costruire un cammino da $s_i$ a  $t_i$, pagando il minor costo possibile. Dunque una strategia per il giocatore $i$ è un cammino $P_i$ da $s_i$ a $t_i$ in $G$. Scegliendo $P_i$, il giocatore $i$ partecipa alla costruzione di tutti gli archi in $P_i$ nella rete finale. Dato un vettore di strategia $S$, si definisce la *rete costruita* come $N(S)=\bigcup_i P_i$.
+Il costo di un arco $e$ viene diviso equamente tra tutti i giocatori per i quali la loro strategia contiene $e$: sia $k_e(S)$ il numero di giocatori per i quali il loro cammino contiene l'arco $e$, allora tale arco assegna una frazione di costo pari a $c_e/k_e(S)$ a ciascun giocatore che lo utilizza.
+Questo schema di divisione di costi è detto *fair* o *Shapley cost-sharing mechanism*. 
+Quindi, il costo totale impiegato dal giocatore $i$ per il vettore strategia $S$ è dato da
 $$
 \textnormal{cost}_i(S) = \sum_{e \in P_i}c_e/k_e(S)
 $$
-In altri termini, il costo della rete costruita è condiviso da tutti i giocatori mediante la formula appena definita. Si osserva quindi esplicitamente che il costo totale assegnato a tutti i giocatori è esattamente il costo della rete costruita.
-Si fa presente come, per comodità di notazione, se $S$ è intuibile dal contesto, si scriverà $k_e$ invece di $k_e(S)$.
-Ci si riferisce a questo schema di divisione di costi come *fair* o *Shapley cost-sharing mechanism*. 
+In altri termini, il costo della rete costruita è condiviso da tutti i giocatori mediante la formula appena definita. Si osserva che il costo totale assegnato a tutti i giocatori è esattamente il costo della rete costruita.
+Per comodità di notazione, se $S$ è intuibile dal contesto, si scriverà $k_e$ invece di $k_e(S)$.
 L'obiettivo sociale di questo gioco è quindi il costo della rete costruita.
 
 Si osserva che, a differenza dei giochi di routing, i giocatori **non** sono sensibili agli effetti di congestione. Dunque, mentre nei giochi di routing i giocatori sono incentivati a cercare cammini poco trafficati, nel global connection game la condivisione di archi è incoraggiata, dato che l'unico obiettivo è quello di minimizzare i costi.
@@ -51,12 +51,12 @@ Si osserva che, per le strategie adottate dai player, la rete non risulta essere
 Anche la rete definita a partire dalla nuova scelta dei cammini non risulta essere stabile. Infatti, tale profilo di strategia non è un equilibrio di Nash. Questo perché il secondo giocatore ottimizza il suo costo individuale scegliendo l'arco inferiore. Tale strategie rende la rete stabile, portando alla definizione di una rete avente costo sociale pari a $16$.
 ![02-agt_img04|center|500](02-agt_img04.png)
 # PoA e PoS del Global Connection Game
-Come detto in precedenza, si vuole studiare come il comportamento egoistico dei giocatori, definito dalla scelta di un cammino che risulti avere costo minimo dal nodo sorgente al nodo pozzo, vada a degradare il valore della soluzione ottima, ossia della rete di costo minimo.
-Per fare ciò, si cerca di dare una delimitazione al prezzo dell'anarchia e al prezzo della stabilità del gioco. In particolar modo, ci si chiede se
-- Esiste sempre una rete stabile.
-- E' possibile dare una delimitazione al Prezzo dell'Anarchia.
-- E' possibile dare una delimitazione al Prezzo della Stabilità.
-- La versione ripetuta del gioco converge sempre ad una rete stabile.
+Si vuole studiare come il comportamento egoistico dei giocatori, definito dalla scelta di un cammino che risulti avere costo minimo dal nodo sorgente al nodo pozzo, vada a degradare il valore della soluzione ottima, ossia della rete di costo minimo.
+Per fare ciò, si cerca di dare una delimitazione al *prezzo dell'anarchia* e al *prezzo della stabilità* del gioco. In particolar modo, ci si chiede se
+- *Esiste sempre* una rete stabile.
+- E' possibile dare una *delimitazione* al Prezzo dell'Anarchia.
+- E' possibile dare una *delimitazione* al Prezzo della Stabilità.
+- La versione ripetuta del gioco *converge* sempre ad una rete *stabile*.
 
 Si definiscono quindi le misure di inefficienza per un grafo $G$ per il Global connection Game.
 ```ad-lemma
@@ -71,7 +71,7 @@ $$
 \textnormal{PoS del gioco in }G = \textnormal{min}_{S \textnormal{ t.c } S \textnormal{ è un equilibrio di Nash}} \frac{\textnormal{cost}(S)}{\textnormal{cost}(S_G^*)}
 $$
 ```
-Tali misure vogliono essere delimitate nel caso peggiore, si definiscono quindi PoA e PoS per il Global connection game.
+Tali misure vogliono essere delimitate nel caso peggiore, si definiscono quindi *PoA* e *PoS* per il Global connection game.
 ```ad-lemma
 title: Definizione
 Il prezzo dell'anarchia del Global Connection Game è definito come
@@ -101,8 +101,8 @@ dove $k$ è il numero di giocatori. Cosi facendo si ottiene che il prezzo dell'a
 Sia $G$ il grafo seguente.
 ![02-agt_img05|center|500](02-agt_img05.png)
 in cui ciascun giocatore ha lo stesso nodo sorgente $s$ e lo stesso nodo destinazione $t$. I costi degli archi sono $k$ per l'arco superiore e $1+\varepsilon$ per l'arco inferiore, con $\varepsilon > 0$ e arbitrariamente piccolo.
-Nell'ottimo sociale, tutti i giocatori scelgono l'arco inferiore. Questo esito è anche un equilibrio di Nash. La rete costruita per questo profilo di strategia, quindi, ha costo $1+\varepsilon$ e risulta essere stabile. Inoltre è il miglior equilibrio per questa istanza, infatti il prezzo della stabilità del gioco per questo grafo è pari ad $1+\varepsilon$.
-D'altra parte, si supponga che tutti i giocatori scelgano l'arco superiore. Ogni giocatore incorre quindi in costo $1$, e nessuno è incentivato a deviare verso l'arco inferiore, essendo che pagherebbe il costo maggiore di $1 + \varepsilon$. Quest'altro profilo di strategia è quindi un secondo equilibrio di Nash, ed ha costo $k$, e risulta essere il peggior equilibrio per l'istanza presentata. Il prezzo della stabilità del gioco per questo grafo è quindi esattamente pari a $k$ e dunque il prezzo dell'anarchia per il gioco deve essere **maggiore o uguale** a $k$.
+Nell'ottimo sociale, tutti i giocatori scelgono l'arco inferiore. Questo esito è anche un equilibrio di Nash. La rete costruita per questo profilo di strategia, quindi, ha costo $1+\varepsilon$ e risulta essere stabile. Inoltre è il miglior equilibrio per questa istanza, infatti il prezzo della stabilità del gioco per questo grafo è pari ad $1$.
+D'altra parte, si supponga che tutti i giocatori scelgano l'arco superiore. Ogni giocatore incorre quindi in costo $1$, e nessuno è incentivato a deviare verso l'arco inferiore, essendo che pagherebbe il costo maggiore di $1 + \varepsilon$. Quest'altro profilo di strategia è quindi un secondo equilibrio di Nash, ed ha costo $k$, e risulta essere il peggior equilibrio per l'istanza presentata. Il prezzo dell'anarchia del gioco per questo grafo è quindi esattamente pari a $k$ e dunque il prezzo dell'anarchia per il gioco deve essere **maggiore o uguale** a $k$.
 ## Upper Bound
 Si da ora un **upper bound** sul prezzo dell'anarchia. In particolare, dato un equilibrio di Nash e l'ottimo sociale, si dimostra che il costo sociale per tale equilibrio è al più $k$ volte l'ottimo sociale.
 Per fare ciò, si da un upper bound al costo di ogni singolo player, mostrando come ciascun giocatore $i$ per l'equilibrio di Nash paga al più l'ottimo. Facendo la somma dei costi di ogni giocatore, si avrà che il costo totale della rete è al più $k$ volte l'ottimo.
@@ -111,12 +111,12 @@ Il prezzo dell'anarchia nel Global Connection Game con $k$ giocatori è al più 
 #### Dimostrazione
 Sia $G=(V,E)$ un grafo diretto fissato. Sia $S$ un profilo di strategia tale per cui $S$ è un equilibrio di Nash, e sia $S^*$ un profilo di strategia che minimizza il costo sociale. 
 Si vuole mostrare che il costo sociale del profilo di strategia $S$ è al più $k$ volte il costo sociale di $S^*$.
-Per ogni giocatore $j$, si definisce $\pi_j$ il cammino minimo in $G$ da $s_j$ a $t_j$.
-Sia ora $i$ un giocatore. Allora $i$, per il profilo di strategia $S$, non può migliorare il suo payoff cambiando strategia, essendo $S$ un equilibrio di Nash. Dunque vale
+Per ogni giocatore $j$, sia $\pi_j$ il cammino minimo in $G$ da $s_j$ a $t_j$.
+Sia $i$ un giocatore. Allora $i$ non può migliorare il suo payoff cambiando strategia, essendo $S$ un equilibrio di Nash. Dunque vale
 $$
 \textnormal{cost}_i(S) \leq \textnormal{cost}_i(S_{-i},\pi_i)
 $$
-Ossia, il costo del player $i$ per l'equilibrio di Nash scelto è minore o uguale del costo del profilo di strategia in cui tutti i restanti giocatori mantengono la strategia in $S$, mentre $i$ gioca come strategia un cammino minimo dalla sua sorgente al suo pozzo.
+Ossia, il costo del player $i$ per l'equilibrio di Nash $S$ è minore o uguale del costo del profilo di strategia in cui tutti i restanti giocatori mantengono la strategia in $S$, mentre $i$ gioca come strategia un cammino minimo dalla sua sorgente al suo pozzo.
 
 Sia ora $d_G(s_i,t_i)$ la distanza in $G$ da $s_i$ a $t_i$, ossia la lunghezza del cammino minimo $\pi_i$. Si osserva che, scegliendo come strategia $\pi_i$, il giocatore $i$ paga al più la lunghezza di $\pi_i$. Infatti, nel caso in cui la strategia di $i$ sia l'unica a comprendere gli archi di $\pi_i$, allora $i$ paga individualmente il costo del cammino. Altrimenti, alcuni degli archi di $\pi_i$ sono compresi nella strategia di altri giocatori $j \neq i$, i quali costi andranno suddivisi. Di conseguenza, vale che
 $$
@@ -157,12 +157,12 @@ Nelle dimostrazioni dei bound precedenti, è stato dato per vero che ogni istanz
 Dunque, si dimostreranno i seguenti teoremi.
 ```ad-theorem
 title: Teorema
-Ogni istanza del GCG ha un equilibrio di Nash puro, che può essere ottenuto giocando in modo ripetuto con la better response dynamics.
+Ogni istanza del *GCG* ha un equilibrio di Nash puro, che può essere ottenuto giocando in modo ripetuto con la better response dynamics.
 ```
-Una dinamica di best response è un processo di gioco iterativo nel quale, ad ogni passo, i giocatori selezionano una strategia che risulta essere una best response alle strategie scegli da tutti gli altri giocatori al passo precedente.
+Una **dinamica di best response** è un processo di gioco iterativo nel quale, ad ogni passo, i giocatori selezionano una strategia che risulta essere una best response rispetto alle strategie scelte da tutti gli altri giocatori al passo precedente.
 ```ad-theorem
 title: Teorema
-Il prezzo della stabilità nel global connection game con $k$ giocatori è al più $\mathcal{H}_k$, il $k-$esimo numero armonico.
+Il prezzo della stabilità nel *GCG* con $k$ giocatori è al più $\mathcal{H}_k$, il $k-$esimo numero armonico.
 ```
 Per dimostrare i due teoremi si utilizza il **metodo della funzione potenziale**; in particolare, verranno utilizzati due risultati validi per una classe di giochi detta **giochi potenziali**.
 ### Metodo della funzione potenziale
@@ -220,7 +220,7 @@ $$
 $$
 ### Upper bound al PoS del GCG
 Si torna ora al global connection game. Mediante i teoremi appena enunciati, e definendo una funzione potenziale per il gioco, si dimostra che esiste sempre un equilibrio di Nash per il gioco studiato. 
-Si consideri un'istanza del global connection game, ed un vettore di strategia $S=(P_1,P_2,\ldots,P_k)$ contenente un cammino $s_i - t_i$ per ogni giocatore $i$. Per ogni arco $e$, si definisce una funzione $\Psi(S)$, che mappa i vettori di strategia in valori reali come segue
+Si consideri un'istanza del global connection game, ed un vettore di strategia $S=(P_1,P_2,\ldots,P_k)$ contenente un cammino $s_i - t_i$ per ogni giocatore $i$. Per ogni arco $e$, si definisce una funzione $\Psi_{e}(S)$, che mappa i vettori di strategia in valori reali come segue
 $$
 \Psi_e(S) = c_e \cdot \mathcal{H}_{k_e}
 $$
@@ -235,7 +235,18 @@ $$
 \Psi(S) - \Psi(S^{'}) = \textnormal{cost}_i(S) - \textnormal{cost}_i(S^{'})
 $$
 ##### Dimostrazione
-Questo lemma afferma che quando un giocatore $i$ cambia le sue strategie, il corrispondente cambio in $\Psi(\cdot)$ rispecchia esattamente il cambio nel payoff di $i$. Sia $k_e$ il numero di giocatori che utilizzano $e$ in $S$. Per ogni arco $e$ che appare in entrambi $P_i$ e $P_i^{'}$ o in nessuno di essi, il costo pagato da $i$ per $e$ è lo stesso sia per $S$ che per $S^{'}$. Quindi, $\Psi_e(\cdot)$ ha lo stesso valore sotto e $S$ e $S^{'}$. Per ogni arco $e$ in $P_i$ ma non in $P_i^{'}$, cambiando strategia da $S$ ad $S^{'}$, $i$ risparmia (e quindi migliora il suo payoff di) $c_e/k_e$, che risulta essere precisamente la diminuzione in $\Psi_e(\cdot)$. Similmente, per un arco $e$ in $P_i^{'}$ ma non in $P_i$, il giocatore $i$ paga un costo di $c_e/(k_e+1)$ cambiando da $S$ ad $S^{'}$, che corrisponde all'aumento in $\Psi_e(\cdot)$. Essendo $\Psi(\cdot)$ semplicemente la somma di $\Psi_e(\cdot)$ su tutti gli archi, il cambio collettivo nel payoff di $i$ è esattamente la negazione del cambio in $\Psi(\cdot)$.
+Questo lemma afferma che quando un giocatore $i$ cambia le sue strategie, il corrispondente cambio in $\Psi(\cdot)$ rispecchia esattamente il cambio nel payoff di $i$.
+Mostriamo che per ogni arco $e \in E$, la differenza di potenziale dell'arco $e$ nelle due strategie $S$ e $S'$ è uguale alla differenza del costo pagato dal giocatore $i$ per $e$ nelle due strategie.
+Per ogni arco $e$ tale che $(e \in P_i \land e \in P_i') \lor (e \not\in P_i \land e \not\in P_i')$, il costo pagato da $i$ per $e$ è lo stesso sia per $S$ che per $S^{'}$, come è lo stesso $\Psi_e(\cdot)$ nelle due strategie.
+Per ogni arco $e$ in $P_i$ ma non in $P_i^{'}$, cambiando strategia da $S$ ad $S^{'}$, $i$ risparmia (e quindi migliora il suo payoff di) $c_e/k_e$ nella nuova strategia $S'$. Questo risparmio risulta essere precisamente la diminuzione in $\Psi_e(\cdot)$ calcolato nelle due strategie, infatti:
+- Il potenziale di $e$ calcolato in $S$ è pari a $$ \Psi_{e}(S) = c_{e} \left( 1 + \frac{1}{2} + \dots + \frac{1}{k_{e}(S)-1} + \frac{1}{k_{e}(S)} \right) $$
+- Il potenziale di $e$ calcolato in $S'$ è pari a $$ \Psi_{e}(S') = c_{e} \left( 1 + \frac{1}{2} + \dots + \frac{1}{k_{e}(S)-1} \right) $$
+Dunque la differenza tra i due potenziali è
+$$
+\Psi_{e}(S) - \Psi_{e}(S')= \frac{c_{e}}{k_{e}(S)}
+$$
+che è pari al risparmio ottenuto da $i$.
+Similmente, per un arco $e$ in $P_i^{'}$ ma non in $P_i$, il giocatore $i$ paga un costo di $c_e/(k_e+1)$ cambiando da $S$ ad $S^{'}$, che corrisponde all'aumento in $\Psi_e(\cdot)$.
 #### Lemma 2
 Per ogni vettore di strategia $S$, si ha che 
 $$
@@ -246,14 +257,18 @@ Sia ora $e$ un arco usato nel profilo di strategia $S$. La funzione $\Psi_e(S)$ 
 $$
 c_e \leq \Psi_e(S) \leq \mathcal{H}_kc_e
 $$
-Essendo $$\textnormal{cost}(S) = \sum_{e \in N(S)}c_e$$$$\Psi(S)= \sum_{e \in N(S)}\Psi_e(S)=\sum_{e\in N(S)}c_e \mathcal{H}_{k_e(S)}$$
+Sommando per ogni $e \in N(S)$, si ottiene
+$$
+\sum_{e \in N(S)} c_e \leq \sum_{e \in N(S)}\Psi_e(S) \leq \sum_{e \in N(S)}\mathcal{H}_kc_e
+$$
+
+Essendo
+$$\sum_{e \in N(S)}c_e = \textnormal{cost}(S)$$
 e
+$$\sum_{e \in N(S)}\Psi_e(S)=\Psi(S)$$
+si ottiene 
 $$
-\sum_{e\in N(S)}c_e \mathcal{H}_{k_e(S)} \leq \sum_{e \in N(S)} \mathcal{H}_kc_e
-$$
-dove si ricorda $1\leq k_e(S) \leq k$ per ogni $e \in N(S)$ essere il numero di giocatori che usano l'arco $e$,  si ha che 
-$$
-\textnormal{cost}(S) \leq \Psi(S) = \sum_{e\in N(S)}c_e \mathcal{H}_{k_e(S)} \leq \sum_{e \in N(S)} \mathcal{H}_kc_e = \mathcal{H}_k\textnormal{cost}(S)
+\textnormal{cost}(S) \leq \Psi(S) \leq \mathcal{H}_k\textnormal{cost}(S)
 $$
 # Determinare il costo di un equilibrio di Nash
 Si vuole studiare ora quanto sia difficile, data un'istanza di un global connection game ed un valore $C$, determinare se il gioco possiede un equilibrio di Nash di costo al più $C$.

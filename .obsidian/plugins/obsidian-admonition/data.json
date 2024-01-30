@@ -1,8 +1,8 @@
 {
   "userAdmonitions": {
-    "theorem": {
-      "type": "theorem",
-      "color": "0, 173, 12",
+    "Teorema": {
+      "type": "Teorema",
+      "color": "160, 162, 11",
       "icon": {
         "name": "bookmark",
         "type": "font-awesome"
@@ -10,11 +10,38 @@
       "command": false,
       "title": "Teorema",
       "injectColor": true,
-      "noTitle": false
+      "noTitle": false,
+      "copy": false
     },
-    "lemma": {
-      "type": "lemma",
-      "color": "0, 181, 194",
+    "Definizione": {
+      "type": "Definizione",
+      "color": "0, 225, 255",
+      "icon": {
+        "name": "bookmark",
+        "type": "font-awesome"
+      },
+      "command": false,
+      "title": "Definizione",
+      "injectColor": true,
+      "noTitle": true,
+      "copy": false
+    },
+    "Proprieta": {
+      "type": "Proprieta",
+      "color": "0, 255, 76",
+      "icon": {
+        "name": "bookmark",
+        "type": "font-awesome"
+      },
+      "command": false,
+      "title": "Proprietà",
+      "injectColor": true,
+      "noTitle": false,
+      "copy": false
+    },
+    "Lemma": {
+      "type": "Lemma",
+      "color": "250, 0, 0",
       "icon": {
         "name": "bookmark",
         "type": "font-awesome"
@@ -24,15 +51,65 @@
       "injectColor": true,
       "noTitle": false
     },
-    "proof": {
-      "type": "proof",
-      "color": "163, 158, 0",
+    "Dimostrazione": {
+      "type": "Dimostrazione",
+      "color": "174, 0, 255",
       "icon": {
-        "name": "pen",
+        "name": "bookmark",
         "type": "font-awesome"
       },
       "command": false,
       "title": "Dimostrazione",
+      "injectColor": true,
+      "noTitle": false
+    },
+    "Osservazione": {
+      "type": "Osservazione",
+      "color": "17, 0, 255",
+      "icon": {
+        "name": "bookmark",
+        "type": "font-awesome"
+      },
+      "command": false,
+      "title": "Osservazione",
+      "injectColor": true,
+      "noTitle": false,
+      "copy": true
+    },
+    "Problema": {
+      "type": "Problema",
+      "color": "255, 123, 0",
+      "icon": {
+        "name": "bookmark",
+        "type": "font-awesome"
+      },
+      "command": false,
+      "title": "Problema",
+      "injectColor": true,
+      "noTitle": true,
+      "copy": true
+    },
+    "Proposizione": {
+      "type": "Proposizione",
+      "color": "251, 0, 255",
+      "icon": {
+        "name": "bookmark",
+        "type": "font-awesome"
+      },
+      "command": false,
+      "title": "Proposizione",
+      "injectColor": true,
+      "noTitle": false
+    },
+    "Claim": {
+      "type": "Claim",
+      "color": "0, 255, 179",
+      "icon": {
+        "name": "chess-knight",
+        "type": "font-awesome"
+      },
+      "command": false,
+      "title": "Claim",
       "injectColor": true,
       "noTitle": false
     }

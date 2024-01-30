@@ -1,17 +1,15 @@
 Si riprende la trattazione del mechanism design esaminando una applicazione del meccanismo VCG ad un problema utilitario su grafo: il problema del cammino minimo tra due nodi in un grafo con archi privati.
 # Shortest Path con Selfish-Edges
 Si può associare a questo problema il seguente scenario: in un grafo gli archi sono controllati da *agenti egoistici*, per cui solo l'agente conosce il peso associato al proprio arco. Dati due nodi del grafo, l'obiettivo è quello di calcolare un cammino minimo tra i due nodi rispetto ai pesi *reali*. A tale scopo, si deve progettare un *meccanismo truthful*, che con un pagamento opportuno incentiva gli agenti a dire la *verità*.
-Intuitivamente, il problema è cosi descritto:
-- Input composto da un grafo $G=(V,E)$ in cui ogni arco $e \in E$ è un agente egoistico; inoltre sono dati due nodi $s,t \in V$ di *sorgente* e di *destinazione*, rispettivamente. Il **tipo** di un agente è il costo di utilizzo dell'arco: questa è l'informazione privata dell'agente, che non viene necessariamente riportata. La **valutazione** di un agente è uguale al valore del tipo.
-- La **social-choice function** è un *vero* cammino minimo in $G=(V,E,\tau)$ tra $s$ e $t$, dove $\tau$ è il vettore dei tipi degli agenti (aka il peso reale di ogni arco).
-Più formalmente:
-- Le **soluzioni ammissibili**, cioè i possibili outcome del gioco, è l'insieme $\mathcal{F}$ dei cammini minimi tra $s$ e $t$;
+Formalmente, il problema è cosi descritto:
+- Input composto da un grafo $G=(V,E)$ in cui ogni arco $e \in E$ è un agente egoistico; inoltre sono dati due nodi $s,t \in V$ di *sorgente* e di *destinazione*, rispettivamente.
+- L'insieme delle **soluzioni ammissibili**, cioè i possibili outcome del gioco, è l'insieme $\mathcal{F}$ dei cammini tra $s$ e $t$;
 - Il **tipo** dell'agente $e$ è il valore $\tau_e$ che rappresenta il peso *reale* dell'arco $e$ in $G$. Intuitivamente, $\tau_e$ è il costo che l'agente sostiene per utilizzare $e$. In generale, il tipo riportato $r_e$ dall'agente $e$ può essere diverso da $\tau_e$.
 - Dato un outcome $P \in \mathcal{F}$, la **valutazione** dell'agente $e$ nel cammino $P$ è data da $$ v_{e}(\tau_{e},P) = \begin{cases}
 \tau_{e}, \quad e \in P \\
 	0, \quad \text{altrimenti}
 \end{cases}$$ cioè l'agente $e$ paga al sistema $\tau_e$ se il suo arco fa parte del cammino minimo, zero altrimenti.
-- Dato il vettore dei tipi riportati $\tau$, o i pesi *reali* degli archi, la social-choice function calcola lo **shortest path** in $G=(V,E,\tau)$ tra i due nodi $s,t$.
+- Dato il vettore dei tipi degli agenti $\tau$, o i pesi *reali* degli archi, la **social-choice function** è un *vero* cammino minimo in $G=(V,E,\tau)$ tra  $s$ e $t$, .
 ## Un meccanismo truthful per il problema
 Si osserva che il problema presentato è **utilitario**. Infatti, calcolare il cammino minimo significa calcolare il cammino di costo minimo. Dato un cammino $P$, la sua vera lunghezza è data dalla somma dei pesi (tipi reali) degli archi presenti nel cammino, che per come è definita la funzione di valutazione, è proprio pari alla somma delle valutazioni degli agenti nell'outcome $P$. In formule
 $$ \sum_{e \in P}\tau_{e} = \sum_{e \in E}v_{e}(\tau_{e},P) $$
@@ -75,17 +73,17 @@ Si considerano i quattro casi seguenti:
 Dove $A$ e $k$ sono le due aree in figura:
 ![[agt_img06.png]]
 Sia $\Delta p = p_i(r_{-i},y) - p_i(r_{-i},x)$, se $M$ è veritiero deve essere:
-- $\Delta p \leqslant A$: se cosi non fosse, nel caso in cui $t_i = x$ all'agente $a_i$ converrebbe mentire e dichiarare $r_{i}=y$ in quanto l'aumento di pagamento ($> A$) supererebbe l'aumento di costo ($A$), dunque la sua utilità aumenta.
-- $\Delta p \geqslant A+k$: se cosi non fosse, nel caso in cui $t_i = y$ all'agente $a_i$ converrebbe mentire e dichiarare $r_{i}=x$ in quanto l'aumento di pagamento nel dichiarare $y$ non supererebbe il risparmio che si ottiene riportando $x$, dunque la sua utilità aumenta.
+- $\Delta p \leqslant A$: altrimenti, quando $t_i = x$ all'agente $a_i$ converrebbe mentire e dichiarare $r_{i}=y$ in quanto l'aumento di pagamento ($> A$) supererebbe l'aumento di costo ($A$), dunque la sua utilità aumenta.
+- $\Delta p \geqslant A+k$: altrimenti, quando $t_i = y$ all'agente $a_i$ converrebbe mentire e dichiarare $r_{i}=x$ in quanto l'aumento di pagamento nel dichiarare $y$ non supererebbe il risparmio che si ottiene riportando $x$, dunque la sua utilità aumenta.
 Ma $k$ è un valore strettamente positivo, dunque non possono valere le due condizioni contemporaneamente.
 $$\tag*{$\blacksquare$}$$
 ## Meccanismo one-parameter
-Dato un problema one-parameter, un meccanismo per risolvere il problema è $M = \langle g(r),p(r) \rangle$ dove $g(r)$ è un qualsiasi algoritmo **monotono** (condizione necessaria per la truthfulness) e, fissato un outcome $o$, il pagamento per l'agente $a_i$ quando dichiara $r_i$ è pari a
+Dato un problema one-parameter, un meccanismo per risolvere il problema è $M = \langle g(r),p(r) \rangle$ dove $g(r)$ è un qualsiasi algoritmo **monotono** (condizione necessaria per la truthfulness) e, fissato un outcome $g(r)$, il pagamento per l'agente $a_i$ quando dichiara $r_i$ è pari a
 $$
-p_{i}(r) = h_{i}(r_{-i}) + r_{i}w_{i}(r) - \int_{0}^{r_{i}} w_{i}(r_{-i},z)  \, dz
+p_{i}(r) = h_{i}(r_{-i}) + r_{i}w_{i}(g(r)) - \int_{0}^{r_{i}} w_{i}(g(r_{-i},z))  \, dz
 $$ 
 con $h_i(r_{-i})$ funzione arbitraria indipendente da $r_i$.
-Si osserva che il meccanismo presentato è **truthful**, infatti vale il teorema seguente.
+Il meccanismo presentato è **truthful**, infatti vale il teorema seguente.
 ### Teorema 2:  (Mayerson '81)
 Un meccanismo OP, per un problema OP, è veritierio.
 #### Dimostrazione
@@ -106,7 +104,9 @@ u_{i}(t_{i},g(r_{-i},t_{i})) &= p_{i}((r_{-i},t_{i})) - v_{i}(t_{i},g(r_{-i},t_{
 $$
 Graficamente,
 ![[agt_img07.png]]
-Se l'agente $a_i$ mente, allora dichiara un valore $r_i \neq t_i$: sia questo valore denotato con $x = r_i$. In questo caso, la valutazione è pari a
+Dunque se $a_i$ dichiara la verità, allora in utilità perde una quantità pari all'area azzurra nel grafico. Questo accade perché è stato posto $h_i(r_{-i})=0$.
+Dunque si mostra che se l'agente $a_i$ mente, cioè dichiara un valore $r_i \neq t_i$, allora in utilità perde una quantità maggiore all'area azzurra nella figura precedente, dunque ad $a_i$ conviene sempre dichiarare il tipo reale.
+Sia $x = r_i \neq t_{i}$. In questo caso, la valutazione è pari a
 $$ 
 v_{i}(t_{i},g(r_{-i},x)) = t_{i} \cdot w_{i}(g(r_{-i},x)) = C
 $$
@@ -125,14 +125,13 @@ U &= u_{i}(t_{i},g(r_{-i},x))  \\
 &= P-C
 \end{align}
 $$
-
 Allora l'agente $a_i$, se mente, dichiara o $x > t_i$ o $x < t_i$:
-- se $x > t_i$, graficamente vale, <br>![[agt_img08.png]] cioè l'area sottesa al grafico presa in considerazione è più grande di una quantità $G$. Dato che l'area definita dall'integrale viene sottratta nel calcolo dell'utilità, si conclude che $a_i$ sta perdendo $G$ di utile, dunque non ha convenienza a mentire.
-- se $x < t_i$, graficamente vale, <br>![[agt_img11.png]] cioè l'area sottesa al grafico presa in considerazione è più grande di una quantità $G$. Come nel caso precedente, l'area viene sottratta nel calcolo dell'utilità. Si conclude che $a_i$ sta perdendo $H$ di utile, dunque non ha convenienza a mentire.
+- se $x > t_i$, graficamente vale, <br>![[agt_img08.png]] cioè l'area sottesa al grafico presa in considerazione è più grande di una quantità $G$. Dato che l'area considerata viene sottratta nel calcolo dell'utilità, si conclude che $a_i$ sta perdendo un'ulteriore quantità $G$ di utile, dunque non ha convenienza a mentire.
+- se $x < t_i$, graficamente vale, <br>![[agt_img11.png]] cioè l'area presa in considerazione è più grande di una quantità $H$. Come nel caso precedente, l'area viene sottratta nel calcolo dell'utilità. Si conclude che $a_i$ sta perdendo un'ulteriore quantità $H$ di utile, dunque non ha convenienza a mentire.
 Allora in entrambi i casi, l'agente $a_i$ non ha convenienza a mentire, cioè a dichiarare un tipo diverso da $t_i$.
  $$\tag*{$\blacksquare$}$$
 ### Sulla funzione $h_i(r_{-i})$
-Per ottenere la **volontaria partecipazione (VP)** ad un gioco, il meccanismo deve garantire che l'utilità di un qualsiasi agente che dichiara il vero ha sempre un utile non negativo.
+Per ottenere la **volontaria partecipazione (VP)** ad un gioco, il meccanismo deve garantire che un qualsiasi agente che dichiara il vero ha sempre un utile non negativo.
 Per ottenere VP nei meccanismi one-parameter, è sufficiente scegliere la costante
 $$
 h_{i}(r_{-i}) = \int_{0}^{\infty} w_{i}(g(r_{-i},z)) \, dz
@@ -143,7 +142,7 @@ p_{i}(r) = r_{i}w_{i}(g(r)) + \int_{r_{i}}^{\infty} w_{i}(g(r_{-i},z)) \, dz
 $$
 e l'utilità di un agente che dichiara il vero diventa
 $$
-u_{i}(t_{i},g(r)) = \int_{r_{i}}^{\infty} w_{i}(g(r_{-i},z)) \, dz \geqslant 0
+u_{i}(t_{i},g(r)) = \int_{t_{i}}^{\infty} w_{i}(g(r_{-i},z)) \, dz \geqslant 0
 $$
 # Meccanismi OP: il problema Shortest Path Tree con Selfish-Edges
 Come esempio applicativo dei meccanismi one-parameter, si studia ora la versione *egoistica* del problema di calcolare l'albero dei cammini minimi di un grafo.
@@ -203,6 +202,7 @@ quindi il valore soglia per l'arco $e$ è tale che
 $$
 d_{G}(s,u) + \theta_{e} = d_{G-e}(s,v) \iff \theta_{e} = d_{G-e}(s,v) - d_{G}(s,u)
 $$
+![](Pasted%20image%2020240126124647.png)
 ### Una soluzione banale: risultati di complessità
 Una soluzione banale per il problema dello SPT non cooperativo consiste nel calcolare $S_G(s)$ utilizzando l'algoritmo di Dijkstra sul grafo con i pesi riportati, per poi calcolare, per ogni $e = (u,v)$, $d_{G-e}(s,v)$ applicando Dijkstra al grafo $G-e$ in modo tale da calcolare il pagamento per ogni $a_{e}$.
 La complessità di tale soluzione è pari a

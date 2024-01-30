@@ -3,17 +3,17 @@ Questa tipologia di meccanismi esiste e viene studiata perché esistono degli sc
 In generale, progettare un meccanismo senza poter pagare gli agenti comporta grandi limitazioni: la ricerca ha mostrato forti risultati di impossibilità (vedi [Teorema di Arrow]). Ciò nonostante, ci sono alcuni problemi specifici per cui esistono meccanismi truthful senza pagamenti.
 # House allocation problem & Top Trading Cycle algorithm
 ## House allocation problem
-L'**House allocation problem** è un problema in cui ci sono $N$ agenti, ognuno dei quali possiede inizialmente una casa. Inoltre, ogni agente $a_{i}$ ha un *ranking* di preferenze rispetto alle case degli altri, rappresentato da un ordinamento totale sulle $n$ case piuttosto che da valutazioni numeriche. Infine, non è necessario che un agente preferisca la propria casa rispetto alle altre. 
+L'**House allocation problem** è un problema in cui ci sono $N$ agenti, ognuno dei quali possiede inizialmente una casa. Ogni agente $a_{i}$ ha un *ranking* di preferenze rispetto alle case degli altri, rappresentato da un ordinamento totale sulle $n$ case piuttosto che da valutazioni numeriche. In particolare, non è necessario che un agente preferisca la propria casa rispetto alle altre. 
 
-L'obiettivo del problema è trovare una nuova allocazione delle case agli agenti in modo tale da *renderli più felici* rispetto alle preferenze. Dunque si deve progettare un algoritmo che rialloca le case con tale obiettivo; tale algoritmo deve essere **truthful**, cioè al riallocamento delle case a tutti gli agenti deve convenire dichiarare le reali preferenze.
+L'obiettivo del problema è trovare una nuova allocazione delle case agli agenti in modo tale da *renderli più felici* rispetto alle preferenze. Dunque si deve progettare un algoritmo che rialloca le case con tale obiettivo; tale algoritmo deve essere **truthful**, cioè a tutti gli agenti deve convenire dichiarare le reali preferenze.
 
 Per risolvere il problema ottenendo i due obiettivi, si utilizza un algoritmo detto **Top Trading Cycle (TTC)**.
 ## Top Trading Cycle Algorithm (TTC)
 L'allocazione delle case avviene per fasi. In particolare, ad ogni iterazione:
 - tutti gli agenti rimasti, cioè gli agenti a cui non è stata assegnata una nuova casa, partecipano all'allocazione con la propria casa iniziale;
-- tutti gli agenti rimasti, *puntano* (indicano) la casa che preferiscono fra quelle rimaste (cioè quelle ancora non assegnate); questo passaggio genera un grafo diretto, dove ogni agente $a_i$ è un nodo e un arco diretto $(i,l)$ indica che la casa preferita di $a_i$ fra quelle rimaste è la casa (iniziale) dell'agente $a_l$. Si osserva che ogni agente deve puntare alla casa preferita, dunque ogni nodo ha un arco uscente: se la casa preferita dell'agente $a_i$ è proprio la sua casa iniziale, allora il grafo conterrà l'arco $(i,i)$.
-- si guardano i cicli formati nel grafo diretto generato nell'iterazione precedente e si scambiano le case come suggerito da un ciclo.
-- gli agenti che si sono scambiati le case vengono rimossi, cioè gli agenti facenti parte del ciclo selezionato.
+- tutti gli agenti rimasti, *puntano* (indicano) la casa che preferiscono fra quelle rimaste (cioè quelle ancora non assegnate); questo passaggio genera un grafo diretto, dove ogni agente $a_i$ è un nodo e un arco diretto $(i,l)$ indica che la casa preferita di $a_i$ fra quelle rimaste è la casa dell'agente $a_l$. Si osserva che ogni agente deve puntare alla casa preferita, dunque ogni nodo ha un arco uscente: se la casa preferita dell'agente $a_i$ è proprio la sua casa iniziale, allora il grafo conterrà l'arco $(i,i)$.
+- si guardano i cicli formati nel grafo e si scambiano le case come suggerito da questi cicli.
+- gli agenti che si sono scambiati le case, cioè quelli facenti parte dei cicli, vengono rimossi.
 Formalmente, l'algoritmo è così definito.
 ![|center|500](07-agt_img01.png)
 Si osserva che, per costruzione, almeno un ciclo in $G$ deve esistere: tutti i nodi hanno un arco uscente, dunque l'attraversamento di una sequenza di archi uscenti deve alla fine ripetere un vertice.
@@ -25,8 +25,8 @@ Sia $N=\{ 1,2,3,4 \}$. Si supponga che ogni agente preferisce la casa dell'agent
 ### Proprietà dell'algoritmo
 Si osserva che, per ogni agente, l'algoritmo non assegna una casa peggiore rispetto a quella iniziale. Infatti, ogni agente partecipa all'allocazione con la propria casa, dunque se per un agente $a_i$ le case rimanenti nell'allocazione a cui partecipa non sono migliori della propria, può puntare alla propria casa: si crea un ciclo (self-loop su $a_i$). Dunque ad ogni agente $a_i$ nel caso peggiore viene assegnata la propria casa.
 ```ad-lemma
-Sia $N_k$ l'insieme degli agenti rimossi all'iterazione $k$ dell'algoritmo TTC, cioè gli agenti nel ciclo individuato a tale iterazione.
-Ogni agente in $N_k$ riceve la casa in posizione $k$ nel proprio ranking, ossia la casa preferita al di fuori di quelle già allocate agli agenti in $N_1 \cup \dots \cup N_{k-1}$. Inoltre, tale casa appartiene inizialmente ad un agente che viene servito all'iterazione $k$, cioè un agente in $N_k$.
+Sia $N_k$ l'insieme degli agenti rimossi all'iterazione $k$ dell'algoritmo TTC, cioè gli agenti nei cicli individuati in tale iterazione.
+Ogni agente in $N_k$ riceve la casa preferita al di fuori di quelle già allocate agli agenti in $N_1 \cup \dots \cup N_{k-1}$. Inoltre, tale casa appartiene inizialmente ad un agente che viene servito all'iterazione $k$, cioè un agente in $N_k$.
 ```
 Si guarda ora l'aspetto *game teoretico* dell'algoritmo (o meccanismo). In particolare, un agente potrebbe dichiarare un ranking differente in modo tale che gli venga assegnata una casa che rispetto al suo reale ranking è migliore. Con questo algoritmo ciò non avviene, infatti si dimostra che l'algoritmo TTC è truthful, in particolare si dimostra che è sempre strategia dominante dichiarare il ranking reale per ogni agente.
 #### Teorema
@@ -43,22 +43,22 @@ Dunque $a_i$ non può far parte di nessun ciclo che coinvolge agenti in $N_1 \cu
 Si osserva che il teorema precedente non è così sorprendente. Infatti, per esempio, anche il meccanismo che non rialloca mai le case è truthful.
 La vera caratteristica importante dell'algoritmo TTC è che, oltre a garantire la truthfulness, garantisce una allocazione delle case che è la migliore possibile, *ottimale*. Si chiarisce formalizzando questa proprietà.
 
-Data una allocazione delle case agli agenti, un sottoinsieme di agenti forma una **blocking coalition** se questi possono scambiarsi le case iniziali in modo tale che *nessuno* di loro peggiora e *almeno uno* di loro migliora.
+Data una qualsiasi allocazione delle case agli agenti, un sottoinsieme di agenti forma una **blocking coalition** per questa allocazione se possono scambiarsi le case originali (cioè quelle possedute inizialmente da ogni agente) in modo tale che *nessuno* di loro peggiora e *almeno uno* di loro migliora.
 Una allocazione che presenta delle blocking coalition non è una allocazione *stabile*, perché gli agenti della coalizione possono scambiarsi le case iniziali per migliorare.
 
 Una **core allocation** è una allocazione senza nessuna blocking coalition: una core allocation è una allocazione *stabile*, cioè l'allocazione *ottimale*. Infatti, gli agenti non possono scambiarsi le case iniziali per migliorare.
 
-Dunque si può dimostrare il teorema seguente
+Dunque si può dimostrare il teorema seguente.
 #### Teorema
 Per ogni House Allocation Problem, l'allocazione calcolata dall'algoritmo TTC è l'*unica core allocation*.
 ##### Dimostrazione
 Per dimostrare il teorema, si dimostrano due claim.
 ###### Claim 1: ogni allocazione diversa da quella del TTC non è una core allocation
-Si dimostra che fissata una allocazione diversa da quella del TTC esiste una blocking coalition.
-Nell'allocazione del TTC, ogni agente in $N_1$ riceve la prima scelta nel ranking. Quindi, gli agenti in $N_1$ formano una blocking coalition per ogni allocazione che si discosta dall'allocazione fatta dal TTC per un agente in $N_1$. Dunque ogni core allocation deve essere uguale all'allocazione del TTC per gli agenti in $N_1$. Similmente, ogni agente in $N_2$ riceve la prima scelta nel ranking al di fuori delle case in $N_1$. Quindi, gli agenti in $N_2$ formano una blocking coalition per ogni allocazione che si discosta dall'allocazione fatta dal TTC che è uguale a quella del TTC su $N_1$ per un agente in $N_2$. Dunque ogni core allocation deve essere uguaele all'allocazione del TTC per gli agenti in $N_1$ e $N_2$. Continuando induttivamente, si conclude che ogni allocazione che si discosta da quella dall'allocazione del TTC non è una core allocation.
+Si dimostra che fissata una allocazione diversa da quella del TTC esiste una blocking coalition in tale allocazione.
+Nell'allocazione del TTC, ogni agente in $N_1$ riceve la prima scelta nel ranking. Quindi, gli agenti in $N_1$ formano una blocking coalition per ogni allocazione che si discosta dall'allocazione fatta dal TTC per un agente in $N_1$. Dunque ogni core allocation deve essere uguale all'allocazione del TTC per gli agenti in $N_1$. Similmente, ogni agente in $N_2$ riceve la prima scelta nel ranking al di fuori delle case in $N_1$. Quindi, gli agenti in $N_2$ formano una blocking coalition per ogni allocazione che si discosta dall'allocazione fatta dal TTC uguale a quella su $N_1$, per un agente in $N_2$. Dunque ogni core allocation deve essere uguale all'allocazione del TTC per gli agenti in $N_1$ e $N_2$. Continuando induttivamente, si conclude che ogni allocazione che si discosta da quella dall'allocazione del TTC non è una core allocation.
 ###### Claim 2: L'allocazione trovata da TTC è una core allocation
 Sia $S$ un sottoinsieme arbitrario di agenti. Si consideri una riallocazione interna delle case di proprietà degli agenti in $S$. Questa riallocazione partiziona $S$ in cicli diretti. Sia $C$ uno di questi cicli diretti.
-- Se $C$ contiene due agenti $a_{i} \in N_j$ e $a_{t} \in N_k$ con $j < k$ allora dalla riallocazione $a_i$ ottiene una casa che è posseduta da $a_t$, dunque $a_i$ peggiora rispetto all'allocazione del TTC;
+- Se $C$ contiene agenti di $N_j$ e $N_k$ con $j < k$ allora dalla riallocazione almeno un agente $a_i \in N_{j}$ ottiene una casa che è posseduta da un'agente in $N_k$, dunque $a_i$ peggiora rispetto all'allocazione del TTC;
 - Se $C$ contiene tutti agenti in $N_k$, ogni agente che non riceve la sua casa favorita tra quelle in $N_k$ peggiora rispetto all'allocazione del TTC.
 Si conclude che se la riallocazione interna delle case in $S$ si discosta dall'allocazione calcolata dall'algoritmo TTC, allora almeno un agente in $S$ peggiora. Siccome $S$ è arbitrario, l'allocazione TTC non ha blocking coalitions ed è una core allocation.
 # Case study: Kidney exchange
@@ -109,9 +109,14 @@ Allora per induzione su $i$, $M_i$ è un sottoinsieme non vuoto di matching mass
 
 Si dimostra che usando questo meccanismo basato su priorità, per ogni paziente $i$ è strategia dominante dichiarare l'intero insieme $E_i$ dei donatori compatibili.
 ### Il meccanismo con priorità è truthful
-Nel meccanismo con priorità per il kidney exchange, per ogni paziente $i$ e per ogni dichiarazione fatta dagli altri pazienti, nessuna dichiarazione di $F_i \subset E_i$ porta ad un outcome migliore per $i$ rispetto a dichiarare $F_{i} = E_i$.
+Nel meccanismo con priorità per il kidney exchange, per ogni paziente $i$ e per ogni dichiarazione fatta dagli altri pazienti, nessuna dichiarazione $F_i \subset E_i$ porta ad un outcome migliore per $i$ rispetto a dichiarare $F_{i} = E_i$.
 #### Dimostrazione
-PER ESERCIZIO NEGRO.
+Sia $M$ il matching scelto dal meccanismo quando ogni paziente $i$ dichiara $F_i = E_i$. Sia $i$ un agente che, dichiarando $F_i = E_i$, non viene accoppiato in $M$; allora $i$ decide di sotto dichiarare $F_i \subset E_i$.
+Si osserva che in seguito a tale azione:
+- Non si creano nuovi matching, dato che non vengono aggiunti archi: potenzialmente alcuni matching potrebbero non esistere più;
+- Il matching $M$ continua ad esistere, dato che non contiene nessun arco rimosso dalla sotto dichiarazione di $i$; se cosi non fosse, allora $i$ risulterebbe accoppiato quando dichiara $F_i = E_i$.
+Siccome nessun nuovo matching viene creato e il matching $M$ continua ad esistere, allora il meccanismo sceglie $M$ anche quando $F_i \subset E_i$, escludendo nuovamente $i$ dal matching.
+Dunque ad ogni paziente $i$ non accoppiato dal meccanismo non conviene sotto dichiarare $E_i$.
 ## Incentivi per gli ospedali
 Nel mondo reale, le coppie paziente-donatore vengono segnalate nel sistema nazionale per lo scambio dei reni da parte degli ospedali.
 In generale, l'obiettivo dell'ospedale di accoppiare il maggior numero dei suoi pazienti non è perfettamente in linea con l'obiettivo sociale di accoppiare il maggior numero di pazienti su tutti quanti. Si fanno degli esempi per evidenziare le differenze.

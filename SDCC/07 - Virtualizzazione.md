@@ -4,7 +4,7 @@ I vantaggi della virtualizzazione sono numerosi: realizzare soluzioni più agili
 Sono tre gli attori principali presenti in un'ambiente virtualizzato:
 - **Guest.** È il livello più alto nell'architettura ed è colui che utilizza l'ambiente virtualizzato: non interagisce col sistema fisico ma si interfaccia con una vista astratta del sistema fisico per mezzo del *layer di virtualizzazione*, con il quale interagisce per mezzo delle risorse virtualizzate che sono esposte.
 - **Host**. È l'ambiente fisico originale, in cui sono presenti le risorse fisiche: queste risorse vengono utilizzate dal *guest* in modo indiretto, grazie al *layer di virtualizzazione*.
-- **Layer di virtualizzazione.**  È il layer di indirezione, responsabile della creazione dell'ambiente virtualizzato in cui l'host andrà ad operare.
+- **Layer di virtualizzazione.**  È il layer di indirezione, responsabile della creazione dell'ambiente virtualizzato in cui il guest andrà ad operare.
 # Le macchine virtuali
 Una **macchina virtuale** è un'ambiente di calcolo completo con le proprie capacità computazionali, di memoria e di comunicazione. Consente di rappresentare le risorse hardware e software a disposizione in modo differente rispetto alla rappresentazione fisica: risorse hardware differenti da risorse hardware reali e risorse software, ad esempio sistema operativo, diverse dalle risorse software reali.
 Il primo aspetto fondamentale della virtualizzazione basata su macchine virtuali è la possibilità di poter eseguire **molteplici** macchine virtuali su una **singola** macchina fisica.
@@ -64,7 +64,7 @@ Un **hypervisor di sistema** ha la caratteristica di essere direttamente posizio
 ![](Pasted%20image%2020240112222040.png)
 
 Un **hypervisor di sistema** o di tipo 1 viene eseguito direttamente sopra l'hardware, dunque risulta essere un sistema operativo semplice (cioè non complesso come un classico sistema operativo host) che offre le funzionalità di virtualizzazione. In particolare, può avere un microkernel o un classico kernel monolitico e risulterà avere un minor overhead rispetto ad un hypervisor di tipo 2, dato che non c'è il livello del sistema operativo host tra VMm e hardware.
-Un **hypervisor ospitato** o di tipo 2 viene eseguito al di sopra del sistema operativo host, quindi accede alle risorse hardware tramite le chiamate di sistema del sistema operativo. Dunque può i servizi di basso livello che sono offerti dall'host OS, come la gestione dell' I/O o lo scheduling delle risorse. Inoltre, non è necessario modificare il sistema operativo guest (tranne che nel caso della paravirtualizzazione).
+Un **hypervisor ospitato** o di tipo 2 viene eseguito al di sopra del sistema operativo host, quindi accede alle risorse hardware tramite le chiamate di sistema del sistema operativo. Dunque può utilizzare i servizi di basso livello che sono offerti dall'host OS, come la gestione dell' I/O o lo scheduling delle risorse. Inoltre, non è necessario modificare il sistema operativo guest (tranne che nel caso della paravirtualizzazione).
 ## Virtualizzazione completa vs paravirtualizzazione
 La **virtualizzazione completa** e la **paravirtualizzazione** sono le due modalità di dialogo tra macchine virtuali e hypervisor  che permettono l'esecuzione di istruzioni privilegiate. Le due modalità si differenziano in base come vengono gestite tali esecuzioni.
 
@@ -132,7 +132,7 @@ Infine, gli indirizzi fisici assegnati alle diverse macchine virtuali devono ess
 #### Shadow page table
 Per evitare il degrado di performance dato dal memory mapping aggiuntivo, l'hypervisor mantiene una *shadow page table*, cioè una tabella che mappa *direttamente* indirizzi di memoria virtuale del guest in indirizzi di memoria fisica dell'host. In particolare, questa shadow page table viene creata dall'hypervisor e caricata nell'MMU, e deve essere mantenuta aggiornata dall'hypervisor rispetto a cambiamenti fatti da ogni sistema operativo guest alle proprie page table, che vengono create e gestite dal SO guest in modo classico (naturalmente queste page table non sono usate dalla MMU dell'host).
 ![](Pasted%20image%2020240113214016.png)
-Dunque l'hypervisor usa il TLB per mappare memoria virtuale delle V; in memoria fisica della macchina per evitare una doppia traduzione ad ogni accesso alla memoria da parte delle VM.
+Dunque l'hypervisor usa il TLB per mappare memoria virtuale delle VM in memoria fisica della macchina per evitare una doppia traduzione ad ogni accesso alla memoria da parte delle VM.
 Inoltre l'hypervisor deve mantenere le shadow page table consistenti con le tabelle delle pagine dei sistemi operativi guest. Questo richiede che ogni cambiamento fatto ad una page table di un sistema operativo guest venga propagato nella shadow page table. In particolare, per effettuare tali aggiornamenti viene implementato un meccanismo di trap che richiama l'hypervisor ogni volta che il sistema operativo guest scrive su una sua page table; dunque l'hypervisor scrive il cambiamento sia nella shadow page table che nella page table del SO guest e restituisce il controllo al SO guest. Tale meccanismo aggiunge dell'overhead.
 ![](Pasted%20image%2020240113231044.png)
 Quella delle shadow page table è una soluzione software, che presenta diversi aspetti critici:
@@ -195,7 +195,7 @@ In un primo studio, confrontando quattro hypervisor differenti con virtualizzazi
 Anche in un secondo studio, fatto su applicazioni per i big data, è risultato che per operazioni CPU-intensive le differenze in prestazione tra i diversi hypervisor è minima, mentre per operazioni I/O-intensive le differenze in prestazioni sono più significative.
 # Portabilità delle macchine virtuali
 Lo strumento delle macchine virtuali a livello di sistema, va nella direzione della **portabilità**. Infatti per una macchina virtuale è definita una **immagine** associata a tale macchina virtuale.
-Una **immagine di macchina virtuale** è un singolo file che contiene il sistema operativo, i dati, le applicazioni e le librerie. In generale, una immagine di macchina virtuale pesa svariati GB e può avere diversi formati. Per evitare vendor lock-in rispetto ad un prodotto di virtualizzazione e per avere maggiore portabilità, esiste un formato standard e open per le immagini di macchine virtuali: **Open Virtualization Forma (OVF)**.
+Una **immagine di macchina virtuale** è un singolo file che contiene il sistema operativo, i dati, le applicazioni e le librerie. In generale, una immagine di macchina virtuale pesa svariati GB e può avere diversi formati. Per evitare vendor lock-in rispetto ad un prodotto di virtualizzazione e per avere maggiore portabilità, esiste un formato standard e open per le immagini di macchine virtuali: **Open Virtualization Format (OVF)**.
 Il formato OVF è uno standard open utilizzato per impacchettare e distribuire macchine virtuali, supportato da diversi prodotti di virtualizzazione. L'immagine della macchina virtuale è contenuta in un file `.ova`, mentre la configurazione di essa è specificata in XML all'interno di un file di supporto con estensione `.ovx`.
 # Ridimensionamento e migrazione di macchine virtuali
 Tramite lo strumento della virtualizzazione, è possibile implementare delle tecniche utili al deploy e alla gestione di ambienti virtualizzati a larga scala. In particolare, è possibile fare agilmente lo **scaling verticale** di macchine virtuali, cioè fare un *ridimensionamento dinamico* delle risorse a disposizione di una macchina virtuale; inoltre, è possibile effettuare la **migrazione live** di macchine virtuali, ossia è possibile spostarle su macchine fisiche differenti senza mai fermarne l'esecuzione. 
@@ -230,10 +230,7 @@ La migrazione delle macchine virtuali è utile nella gestione dei sistemi cluste
 - è uno strumento di **bilanciamento del carico**, migrando le macchine virtuali che si trovano in macchine fisiche sovraccariche su macchine con meno carico di lavoro.
 La migrazione deve essere supportata dall'hypervisor; inoltre l'overhead di migrazione non è trascurabile e la migrazione in rete WAN è scarsamente supportata.
 
-In generale, esistono due approcci per migrare istanze di macchine virtuali tra differenti macchine virtuali:
-- **Stop and copy**
-
-In generale, esistono due approcci per migrare istanze di macchine virtuali tra differenti macchine virtuali:
+In generale, esistono due approcci per migrare istanze di macchine virtuali tra differenti macchine :
 - **Stop and copy**: approccio banale nel quale si spegne la macchina virtuale da migrare, si copia la sua immagine all'interno del nuovo host e si avvia tale VM. Questo approccio porta a tempi di disservizio molto lunghi, dato che le immagini delle VM sono potenzialmente molto pesanti e la banda di rete per il trasferimento può essere limitata;
 - **Live migration**: è l'approccio principalmente utilizzato, nel quale l'istanza della macchina virtuale rimane in esecuzione durante la sua migrazione.
 ![](Pasted%20image%2020240115231407.png)
@@ -378,3 +375,27 @@ In generale, i container engine non supportano nativamente la migrazione, dunque
 ### Orchestrazione di container
 ### Container nel cloud
 # Nuovi approcci di virtualizzazione
+Alcune tecnologie recenti, richiedono delle tecniche di virtualizzazione che abbiano minor overhead e minore superficie d'attacco, ancora di più rispetto ai container.
+- OS overhead: si intende l'overhead causato da tutti i servizi e tool che fanno parte di un sistema operativo tradizionale;
+- Superficie d'attacco: si riduce la superficie d'attacco creando delle immagini di VM che contengono solamente il codice necessario per eseguire una applicazione.
+## MicroVM
+Le microVM sono delle macchine virtuali leggere che vengono eseguite su un hypervisor piccolo e specializzato nell'esecuzione di tali VM, con lo scopo di ridurre il footprint sulla memoria e di migliorare la sicurezza del layer di virtualizzazione. Questa tecnologia è utilizzata da Amazon per AWS lambda, e permette di eseguire le applicazioni su queste microVM, che hanno tempi di startup e footprint bassissimi e permettono di scalare fino a migliaia di microVM sulla stessa macchina fisica.
+## Unikernels
+Si tratta di un sistema operativo specializzato, ridotto, leggero, con spazio di indirizzamento singolo, il cui kernel è incluso come libreria all'interno dell'applicazione (noto anche come sistema operativo a libreria). Risulta come una sorta di VM leggera specializzata nell'esecuzione di una singola applicazione eseguita direttamente dentro il kernel: l'app risulta dunque un singolo processo monolitico che gira interamente in kernel mode. L'applicazione viene creata compilando il linguaggio ad alto livello in una immagine di VM speciale che gira direttamente al di sopra dell'hypervisor. Lo scopo degli unikernels è quello di ottenere i benefici di isolamento dati da un'hypervisor senza però avere tutto l'overhead di un sistema operativo guest.
+Vantaggi (VM specializzata):
+- Leggera e con footprint in memoria minimale;
+- Veloce esecuzione dell'applicazione (non c'è context switching);
+- Avvio veloce, nell'ordine dei ms;
+- Sicuro, superficie d'attacco estremamente ridotta;
+Svantaggi:
+- Richiesto un certo effort per portare applicazioni in unikernel;
+- tool di debugging limitati;
+- Runtime supporta un singolo linguaggio;
+- Alcuni framework richiedono di scrivere l'applicazione da zero.
+Molti di questi svantaggi stanno sparendo con i framework recenti.
+## Performance degli approcci di virtualizzazione
+Alcuni studi hanno confrontato la virtualizzazione tramite hypervisor con le virtualizzazioni leggere. 
+Risultato: l'overhead introdotto dai container è impercettibile -> tempo di istanziazione veloce, footprint in memoria piccola e possibilità di istanziare moltissimi container su una singola macchina. Gli unici contro sono in termini di sicurezza
+container vantaggi rispetto unikernel: minore footprint in memoria, nessuna dipendenza con linguaggio di programmazione e supporto non nativo dell amigrazione;
+unikernel vantaggi rispetto container: minor tempo di avvio e dimensione dell'immagine ridotta.
+Le tecnologie di virtualizzazione leggera sono comunque necessarie nell'ambito dell'edge computing.

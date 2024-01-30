@@ -94,7 +94,7 @@ $$
 Sia una stella che il grafo completo rispettano questo bound.
 Si analizzano i due casi separati, a seconda del valore di $\alpha$:
 - Se $\alpha \geq 2$, allora $LB(m)$ raggiunge il minimo quando $m=n-1$ e quindi $$SC(G) \geq (\alpha -2)(n-1) + 2n(n-1)$$dove $(\alpha -2)(n-1) + 2n(n-1)$ è il costo sociale di un qualsiasi grafo a stella con $n$ nodi. Dunque se $\alpha \geq 2$, non si può fare di meglio di una stella.
-- Se $\alpha \leq 2$, allora per minimizzare $LB(m)$ risulta necessario massimizzare $m$. Dato che il massimo valore assumibile ad $m$ è proprio $m=n(n-1)/2$, il numero degli archi di un grafo completo ad $n$ nodi, si ha che $$SG(C) \geq LB \left( \frac{n(n-1)}{2}\right)$$dove $LB \left( n(n-1)/2 \right)$ è il costo sociale di un grafo completo con $n$ nodi. Dunque se $\alpha \geq 2$, non si può fare di meglio di un grafo completo.
+- Se $\alpha \leq 2$, allora per minimizzare $LB(m)$ risulta necessario massimizzare $m$. Dato che il massimo valore assumibile ad $m$ è proprio $m=n(n-1)/2$, il numero degli archi di un grafo completo ad $n$ nodi, si ha che $$SG(C) \geq LB \left( \frac{n(n-1)}{2}\right)$$dove $LB \left( n(n-1)/2 \right)$ è il costo sociale di un grafo completo con $n$ nodi. Dunque se $\alpha \leq 2$, non si può fare di meglio di un grafo completo.
 ## Reti ottime socialmente stabili
 Ci si chiede ora quando, per le due topologie prese in esame, i grafi appartenenti ad esse siano stabili. 
 Sia la stella che il grafo completo possono essere ottenuti come un equilibrio di Nash per certi valori di $\alpha$, mostrati nel seguente lemma.
@@ -191,7 +191,10 @@ $$
 ### Reti stabili e Non-cut edges
 Per dimostrare il secondo passo, si fa riferimento a due proposizioni, le quali forniscono una delimitazione al numero di non-cut edges che vengono comprati da un nodo in una rete stabile.
 #### Proposizione 1
-Sia $G$ una rete con diametro $d$ e sia $e=(u,v)$ un non-cut edge. Allora in $G-e$ ciascun nodo $w$ incrementa la propria distanza da $u$ di al più $2d$.
+Sia $G$ una rete con diametro $d$ e sia $e=(u,v)$ un non-cut edge. Allora in $G-e$ ciascun nodo $w$ incrementa la propria distanza da $u$ di al più $2d$, ossia
+$$
+dist_{G-e}(u,w) \leqslant dist_{G}(u,w) + 2d \quad \forall w \in V
+$$
 ##### Dimostrazione
 Si consideri il seguente albero radicato in $u$, ottenuto mediante BFS su $G$.
 ![03-agt_img04|center|500](03-agt_img04.png)
@@ -210,15 +213,15 @@ $$
 dist_{G-e}(u,w) \leq dist_G(u,w)+2d
 $$
 #### Proposizione 2
-Sia $G$ una rete stabile e sia $F$ l'insieme dei non-cut edges comprati da un nodo $u$. Allora
+Sia $G$ una rete stabile con diametro $d$ e sia $F$ l'insieme dei non-cut edges comprati da un nodo $u$. Allora
 $$
 |F| \leq \frac{(n-1)2d}{\alpha}
 $$
 ##### Dimostrazione
-Si consideri il seguente albero radicato in $u$, ottenuto mediante BFS su $G$.
+Si consideri il seguente albero radicato in $u$, ottenuto mediante *BFS* su $G$, diviso in parti come segue
 ![03-agt_img05|center|500](03-agt_img05.png)
-dove $k=|F|$, ed $n_i$ è il numero dei nodi nel sottoalbero radicato in $v_i$.
-Se $u$ rimuove l'arco $(u,v_i)$ risparmia $\alpha$, e facendo riferimento alla proposizione precedente si ha che la sua distanza dai nodi contenuti nel sottoalbero radicato in $v_i$ aumenta al più di $2d$ per ogni nodo. L'incremento totale nel sottoalbero radicato in $v_i$ è quindi $2dn_i$.
+dove $k=|F|$ e $n_i$ è il numero dei nodi nel sottoalbero radicato in $v_i$.
+Se $u$ rimuove l'arco $(u,v_i)$ risparmia $\alpha$, e facendo riferimento alla *proposizione 1* si ha che la sua distanza dai nodi contenuti nel sottoalbero radicato in $v_i$ aumenta al più di $2d$ per ogni nodo. L'incremento totale nel sottoalbero radicato in $v_i$ è quindi $2dn_i$.
 Essendo $G$ stabile, si ha che $\alpha \leq 2dn_i$. Estendendo il ragionamento per $i=1,\ldots,k$ e sommando per ogni $i$, si ha che
 $$
 k\alpha \leq \sum_{i=1}^k 2dn_i \leq 2d(n-1)
@@ -232,13 +235,10 @@ Si fornisce ora un lemma riguardante il costo sociale di una rete stabile.
 #### Lemma 2
 Il costo sociale di una qualsiasi rete stabile $G=(V,E)$ con diametro $d$ è al più $\mathcal{O}(d)$ volte il costo sociale ottimo.
 ##### Dimostrazione
-In qualsiasi soluzione stabile, in totale si hanno almeno $n-1$ archi. Se così non fosse, almeno un nodo sarebbe sconnesso, e l'acquisto di un arco verso tale nodo, o di un arco da parte di quel nodo, porterebbe ad un profilo di strategia migliore, rendendo quindi la precedente non stabile.
-
-Nel caso migliore, ogni coppia di nodi si trova a distanza $1$ tra essi. Si ha quindi il seguente lower bound
+Sia $OPT$ il costo della rete ottima. Tale rete deve essere connessa, dunque contiene almeno $n-1$ archi. Inoltre, nella rete ottima ogni coppia di nodi si deve trovare a distanza almeno 1. Vale quindi il seguente lower bound
 $$
 OPT \geq \alpha(n-1)+n(n-1)
 $$
-Dove $OPT$ è il costo della rete ottima.
 Il costo sociale della rete è invece dato da 
 $$
 SC(G) = \sum_{u,v \in V}dist_G(u,v) + \alpha \cdot |E|
@@ -265,9 +265,9 @@ $$
 ## Risultato finale
 Facendo riferimento quindi al lemma 1 ed al lemma 2, si dimostra il seguente teorema, che definisce una delimitazione superiore al prezzo dell'anarchia.
 ### Teorema (Upper bound PoA)
-Il prezzo dell'anarchia per il local connection game con parametro $\alpha$ è al più $\mathcal{O}(\sqrt{\alpha})$.
+Il prezzo dell'anarchia per il *local connection game* con parametro $\alpha$ è al più $\mathcal{O}(\sqrt{\alpha})$.
 #### Dimostrazione
-Sia $G$ una qualsiasi rete stabile. Dal lemma 1 segue che il diametro di $G$ è $\mathcal{O}(\sqrt{\alpha})$. Dal lemma 2 invece si ha che il costo sociale di $G$ è $\mathcal{O}(\sqrt{\alpha})$ volte quello ottimo. Allora, per definizione, si ha che 
+Sia $G$ una qualsiasi rete stabile. Dal **lemma 1** segue che il diametro $d$ di $G$ è $\mathcal{O}(\sqrt{\alpha})$. Dal **lemma 2** invece si ha che il costo sociale di $G$ è $\mathcal{O}(d)$ volte il costo della rete sociale ottima. Allora, per definizione, si ha che 
 $$
 \mathbf{PoA} = \mathcal{O}(\sqrt{\alpha})
 $$
@@ -296,4 +296,3 @@ Sia $i$ un giocatore e si consideri il grafo dell'istanza $I$ come se fosse il g
 - $(\impliedby)$: Dato un dominating set $U$ di dimensione $|U|\leq k$, se il giocatore $i$ si connette a tutti i nodi del dominating set paga al più $$\alpha \cdot k + 2(n-k)+k = \alpha k + 2n -k$$dove $\alpha \cdot k$ è il costo per la costruzione degli archi e $2(n-k)+k$ è il costo per le distanze.
 - $(\implies)$: Sia $S_i$ una strategia di costo $\leq \alpha k + 2n-k$. Se in $G(S_i)$ esiste un nodo $v$ che si trova ad una distanza $\geq 3$ dal giocatore $i$ (sia questo associato al nodo $x$), allora si modifica la strategia del giocatore $i$ aggiungendo l'arco $(x,v)$ ad $S_i$. Essendo che $\alpha < 2$, questa modifica non andrà ad aumentare il costo per $i$. Al termine di ciò, si ha che in $G(S_i)$ tutti i nodi distano da $i$ o di $1$ o di $2$. Sia quindi $U$ l'insieme dei nodi che distano $1$ da $x$. Allora $U$ è un dominating set, e inoltre$$
 COST_i(S) = \alpha \cdot |U| + 2n-|U| \leq \alpha \cdot k + 2n-k \iff |U| \leq k$$
-Avendo dimostrato entrambi i lati, la dimostrazione è conclusa.

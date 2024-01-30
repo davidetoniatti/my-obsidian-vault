@@ -161,9 +161,8 @@ $$
 	   x_j(j) = 0\\
 	   \\
 	   \frac{d}{dt}x_j(t) = \frac{p}{t} + \frac{(1-p)}{t}x_j(t)
-\end{cases}
+\end{cases} \quad \forall t \geqslant j
 $$    
-$\forall t \geq j$.
 Non è detto che questa approssimazione si avvicini alla legge reale.
 Si osserva infine che la seconda equazione del sistema è una *equazione differenziale*, cioè una equazione che lega una funzione alla sua derivata, del tipo $f'(x) = a \cdot f(x) + b$.
 ##### 3 - Risoluzione equazione differenziale
