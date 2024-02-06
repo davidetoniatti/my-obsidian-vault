@@ -139,14 +139,14 @@ Tale delimitazione viene ottenuta mediante due passaggi:
 2. Si usa il diametro per dare un bound al costo.
 ## Definizioni preliminari
 Prima di dimostrare l'upper bound al prezzo dell'anarchia, si danno le seguenti definizioni.
-```ad-lemma
+```ad-Definizione
 title: Definizione (Diametro)
 Il diametro di un grafo $G=(V,E)$ è la massima distanza tra due nodi in $V$
 $$
 \textnormal{max}_{u,v\in V} dist(u,v)
 $$
 ```
-```ad-lemma
+```ad-Definizione
 title: Definizione (Cut-edge)
 Sia $G=(V,E)$ un grafo. Un arco $e$ è definito cut edge di $G$ se il grafo $G-e=(V,E\backslash\{e\})$ risulta essere disconnesso.
 ```
@@ -175,17 +175,16 @@ Procedendo analogamente per i gli altri nodi, si conclude che
 Si hanno quindi $k$ vertici per i quali la loro distanza da $u$ risulta ridotta.
 Sia $r$ il risparmio complessivo, si ha quindi che 
 $$
-r \geq \sum_{i=0}^{k-1}(2i+1)=k^2
+r \geqslant \sum_{i=0}^{k-1}(2i+1)=k^2
 $$
-
-Essendo $G$ una rete stabile per ipotesi, si ha che $\alpha$, il costo per l'acquisto dell'arco $(u,v)$, deve essere maggiore del risparmio complessivo.
+Essendo $G$ una rete stabile per ipotesi, si ha che $\alpha$, il costo per l'acquisto dell'arco $(u,v)$, deve essere maggiore del risparmio complessivo $r\geqslant k^2$.
 Quindi
 $$
-\alpha \geq r \geq k^2 \iff k \leq \sqrt{\alpha}
+\alpha \geqslant r \geqslant k^2 \iff k \leqslant \sqrt{\alpha}
 $$
 E ciò implica che
 $$
-dist_G(u,v) \leq 2k+1 \leq 2\sqrt{\alpha}+1
+dist_G(u,v) \leqslant 2k+1 \leqslant 2\sqrt{\alpha}+1
 $$
 ## Passo 2: costo sociale di una rete stabile
 ### Reti stabili e Non-cut edges

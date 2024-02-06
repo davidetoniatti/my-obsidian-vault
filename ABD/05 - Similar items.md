@@ -5,7 +5,7 @@ Ad esempio:
 	- Per l'individuazione di duplicati, classificazione in base all'argomento
 2. Clienti che comprano una grande frazione di prodotti simili
 	- Prodotti con insiemi dei clienti simili 
-#3. Immagini con caratteristiche simili
+3. Immagini con caratteristiche simili
 ## Scene completion Problem
 Dato un insieme di immagini $\mathbf{I}$ di dimensione $N$ molto grande, ed un'immagine target $i_t$, si vuole trovare all'interno di tale insieme l'immagine $i\in \mathbf{I}$ più simile rispetto al target $i_t$.
 
@@ -30,34 +30,27 @@ Dati due data points $x_1$ ed $x_2$ si vuole quantificare quanto essi siano "dis
 Si vogliono quindi trovare tutte le coppie di punti $(x_i,x_j)$ che si trovano entro una data soglia di distanza $s$, ossia tali per cui $d(x_i,x_j) \leq s$.
 La soluzione banale, ossia quella di controllare tutte le possibili coppie, richiederebbe tempo $\mathcal{O}(N^2h)$, essendo $N$ il numero di data points ed $h$ la loro dimensione.
 Tale approccio, nonostante rispetti le delimitazioni polinomiali della trattabilità, risulta nella pratica proibitivo nel caso in cui il data set in input risulti essere di elevate dimensioni. Basti pensare ad un data set di un milione di oggetti, dove l'approccio banale richiederebbe l'analisi di mezzo trilione di coppie.
-
 Ciò può essere fatto in tempo $\mathcal{O}(Nh^{'})$ , con $h^{'} << h$ con alta confidenza.
-
 ## Trovare documenti simili
-Si studia il problema di trovare documenti simili all'interno di un data set di grandi dimensioni.
-Dato quindi un numero $N$ di documenti, nell'ordine di milioni o anche miliardi, si vogliono individuare le coppie di documenti simili.
-Per fare ciò, bisogna inizialmente chiarire il concetto di *similarità* tra documenti:
-l'aspetto di similarità tra documenti ricercato in questo problema è a livello di caratteri, e non di significato. La similarità testuale ha diversi utilizzi, molti dei quali permettono di individuare documenti duplicati o "quasi duplicati". Si osserva che, dati due documenti, controllare se questi siano esattamente duplicati risulta possibile controllando semplicemente i due documenti carattere per carattere, e se questi differiscono allora non sono uguali. Bisogna tener presente che, in molte applicazioni, i documenti non risultano essere identici, ma nonostante ciò, condividono una grande porzione del loro testo. Alcuni esempi più significativi sono
-- Plagio: Un'applicazione per testare la similarità testuale è quella dell'individuazione di documenti plagiati. Da un documento originale possono essere estratte solo singole parti, le quali possono venir utilizzate in un altro documento frutto di plagio. Potrebbero venir modificate in questo alcune parole, o l'ordine delle frasi nelle quali queste appaiono nel testo originale. Nonostante ciò, il documento frutto di questa operazione risulta contenere molto dell'originale. Nessun processo semplice di confronto tra documento carattere per carattere risulta essere in grado di identificare un plagio sofisticato.
-- Mirror pages: Le pagine web possono venir duplicati in un maggior numero di host, affinché il loro carico venga distribuito. Le pagine di questi siti *mirror* saranno simili, ma raramente identiche. Ad esempio, ognuna di esse può contenere informazioni specifiche associate con il particolare host che le fornisce in rete, e ciascuna di esse può contenere riferimenti ad altri siti mirror. E' importante individuare pagine simili di questo tipo, affinché i motori di ricerca producano miglior risultati evitando di mostrare due pagine che sono quasi identiche.
+Si studia il problema di trovare documenti simili all'interno di un data set di grandi dimensioni. Dato un numero $N$ di documenti, nell'ordine di milioni o anche miliardi, si vogliono individuare le coppie di documenti simili.
+Per fare ciò, bisogna chiarire il concetto di *similarità* tra documenti. L'aspetto di similarità tra documenti ricercato in questo problema è a *livello di caratteri*, e non di significato. La similarità testuale ha diversi utilizzi, molti dei quali permettono di individuare documenti duplicati o "quasi duplicati". Si osserva che, dati due documenti, controllare se questi siano esattamente duplicati risulta possibile controllando semplicemente i due documenti carattere per carattere, e se questi differiscono allora non sono uguali. Bisogna tener presente che, in molte applicazioni, i documenti non risultano essere identici, ma nonostante ciò, condividono una grande porzione del loro testo. Alcuni esempi più significativi sono
+- *Plagio*: Un'applicazione per testare la similarità testuale è quella dell'individuazione di documenti plagiati. Da un documento originale possono essere estratte solo singole parti, le quali possono venir utilizzate in un altro documento frutto di plagio. Potrebbero venir modificate in questo alcune parole, o l'ordine delle frasi nelle quali queste appaiono nel testo originale. Nonostante ciò, il documento frutto di questa operazione risulta contenere molto dell'originale. Nessun processo semplice di confronto tra documento carattere per carattere risulta essere in grado di identificare un plagio sofisticato.
+- *Mirror pages*: Le pagine web possono venir duplicati in un maggior numero di host, affinché il loro carico venga distribuito. Le pagine di questi siti *mirror* saranno simili, ma raramente identiche. Ad esempio, ognuna di esse può contenere informazioni specifiche associate con il particolare host che le fornisce in rete, e ciascuna di esse può contenere riferimenti ad altri siti mirror. E' importante individuare pagine simili di questo tipo, affinché i motori di ricerca producano miglior risultati evitando di mostrare due pagine che sono quasi identiche.
 
 Sono diverse le difficoltà tecniche che si possono incontrare al fine di risolvere questo problema, tra cui:
 - Come nel plagio, molte porzioni brevi di un documento possono apparire in ordine differente in un altro.
 - Come detto in precedenza, un data set di grandi dimensioni non permette il confronto tra tutte le possibili coppie di documenti.
 - I documento possono essere di un numero e di una dimensione così elevata che non risulta possibile rappresentarli nella memoria principale.
 
-Per individuare quindi le similarità tra documenti, bisogna definire il concetto di distanza tra essi. Per fare ciò si fa riferimento ad una particolare nozione di "similarità" insiemistica, che, dati due insiemi guarda la dimensione relativa della loro intersezione. 
-Questa particolare similarità prende il nome di *Jaccard similarity*.
-
+Per individuare le similarità tra documenti, bisogna definire il concetto di distanza tra essi. Per fare ciò si fa riferimento ad una particolare nozione di similarità insiemistica, che, dati due insiemi guarda la dimensione relativa della loro intersezione. Questa similarità prende il nome di ***Jaccard similarity***.
 ```ad-Definizione
 title: Definizione (Jaccard Similarity)
-Dati due insiemi $S$ e $T$, la loro *Jaccard similarity* è data dal rapporto tra la dimensione della loro intersezione e la dimensione della loro unione:
+Dati due insiemi $S$ e $T$, la loro ***Jaccard similarity*** è data dal rapporto tra la dimensione della loro intersezione e la dimensione della loro unione:
 $$
 \texttt{J.sim}(S,T) = \frac{|S \cap T|}{|S \cup T|}
 $$
 ```
-
-A partire da questo concetto di similarità, si definisce una particolare distanza tra due documenti.
+A partire da questo concetto di similarità, si definisce una distanza tra due documenti.
 ```ad-Definizione
 title: Definizione (Jaccard Distance)
 Dati due insiemi $S$ e $T$, la loro *Jaccard distance* è definita come 
@@ -65,17 +58,15 @@ $$
 d(S,T) = 1 - \texttt{J.sim}(S,T)
 $$
 ```
-
 Essendo tale misura applicabile ad insiemi di elementi, risulta necessario rappresentare i documenti, ossia stringhe di lunghezza finita, a livello insiemistico.
 Sia $U$ un'alfabeto. Un documento $Doc$ è una stringa di caratteri, ossia $Doc \in U^{*}$. Il metodo più efficace per rappresentare documenti come insiemi, con l'obiettivo di identificare documenti lessicalmente simili, consiste nel costruire dal documento un insieme di stringhe di lunghezza limitata che appaiono all'interno di esso. Così facendo, i documenti che condividono delle parti nella forma di frasi, anche se queste appaiono in ordine differente, avranno molti elementi in comune. Tale approccio prende il nome di *shingling*.
 
 Schematicamente, il processo di individuazione di documenti simili può essere descritto come segue:
 1. **Input**: Si ha un universo di documenti $Doc \in U^*$ di grandi dimensioni, dove $U$ è l'alfabeto.
 2. **Shingling**: Processo al fine di convertire documenti in insiemi di grandi dimensioni.
-3. **Min-Hashing**: Processo al fine di convertire insiemi di grandi dimensioni in *signatures* di dimensioni ridotte, permettendo di stimare le *J. similarity* dei relativi insiemi.
+3. **Min-Hashing**: Processo al fine di convertire insiemi di grandi dimensioni in *signatures* di dimensioni ridotte, che permettono di stimare le *J. similarity* dei relativi insiemi.
 4. **Locality-Sensitive Hashing**: Processo al fine di restringere il numero di confronti da effettuare per le coppie di documenti. Permette di concentrarsi su coppie di *signatures* provenienti probabilmente da documenti simili, evitando il costo quadratico dei confronti nel numero dei documenti.
 5. **Output**: Coppie candidate di documenti.
-
 Si studiano quindi i vari passi al fine della risoluzione del problema.
 ### Shingling
 Si vogliono rappresentare i documenti mediante dati ad alta dimensione.
@@ -87,25 +78,22 @@ Un $k-$shingle per un documento $D$ è una sequenza di $k$ tokens che appare all
 
 I *tokens* possono essere caratteri, parole o altro, a seconda dell'applicazione. 
 ```
+Si denota con $U$ l'universo di tutti i possibili tokens; si denota con $S$ la funzione che prende in input un documento e restituisce l'insieme dei suoi $k-$shingles per un dato $k$.
 
-Sia $U$ l'universo di tutti i possibili tokens.
-Sia $S$ la funzione che prende in input un documento e restituisce l'insieme dei suoi $k-$shingles per un dato $k$.
-
-Si fa un esempio: Sia $D$ il documento costituito dalla stringa $\texttt{abcdabd}$, sia $k=2$ e siano i tokens nel documento dei caratteri. Allora, per $D$, il suo insieme di $2-$shingles è $S(D) = \{\texttt{ab,bc,cd,da,bd}\}$.
+**Esempio**: Sia $D$ il documento costituito dalla stringa $\texttt{abcdabd}$, sia $k=2$ e siano i tokens nel documento i caratteri. Allora, per $D$, il suo insieme di $2-$shingles è $S(D) = \{\texttt{ab,bc,cd,da,bd}\}$.
 Si osserva che la sottostringa $\texttt{ab}$ appare due volte nel documento, ma solo una volta come shingle. E' possibile definire una variante dello shingling che produce dei multiset, che prendono il nome di *bag*. In questo caso, ogni shingle appare nel risultato tante volte quante appare all'interno del documento. Per l'esempio precedente, si ha che $S(D)=\{\texttt{ab,bc,cd,da,ab,bd}\}$.
 
-Ogni documento $D \in U^*$, dove $U$ è l'alfabeto di caratteri che costituiscono i documenti, viene rappresentato quindi come l'insieme dei $k-$shingles $C=S(D)$ *presenti al suo interno*.
-Equivalentemente, può essere visto come un lungo vettore binario $S(D) = C \in \{0,1\}^{U^k}$ avente una componente per ogni elemento dell'insieme $U^k$ di *tutti* i possibili $k$-shingle.
-Ogni singolo shingle definisce una dimensione (ossia una componente) del vettore $C$,
-(si ha quindi una dimensione per ciascun elemento (shingle) nell'universo $U^k$).
-Se l'$i-$esimo $k-$shingle dell'insieme ordinato $U^k$ appartiene al documento $D$, allora l'$i-$esima entrata di $C$ ha valore $1$, altrimenti ha valore $0$. Si fa presente come questi vettori risultino essere molto sparsi.
+Ogni documento $D_{i} \in U^*$, dove $U$ è l'alfabeto di caratteri che costituiscono i documenti, viene rappresentato quindi come l'insieme dei $k-$shingles $S_{i}=S(D_{i})$ *presenti al suo interno*.
+Equivalentemente, può essere visto come un lungo vettore binario $S(D_{i}) = C_{i} \in \{0,1\}^{U^k}$ avente una componente per ogni elemento dell'insieme $U^k$ di *tutti* i possibili $k$-shingle.
+Ogni singolo shingle definisce una dimensione (ossia una componente) del vettore $C_{i}$, (si ha quindi una dimensione per ciascun elemento (shingle) nell'universo $U^k$).
+Se l'$i-$esimo $k-$shingle dell'insieme ordinato $U^k$ appartiene al documento $D$, allora l'$i-$esima entrata di $C_{i}$ ha valore $1$, altrimenti ha valore $0$. Si fa presente come questi vettori risultino essere molto sparsi.
 
 Data quindi la rappresentazione di documenti mediante questi insiemi, si fa riferimento al concetto di *J. similarity* per individuarne le similarità testuali.
 E' possibile, dato un data set di documenti, dare un'interpretazione probabilistica della *J. sim.* Siano $D_1$ e $D_2$ due documenti, si ha che
 $$
-\texttt{J.sim}(D_1,D_2) = \frac{|C_1 \cap C_2|}{|C_1 \cup C_2|} = \mathbf{Pr} \left[ \frac{C_1 \cap C_2}{C_1 \cup C_2} \right]
+\texttt{J.sim}(D_1,D_2) = \frac{|S_1 \cap S_2|}{|S_1 \cup S_2|} = \mathbf{Pr} \left[ \frac{S_1 \cap S_2}{S_1 \cup S_2} \right]
 $$
-Dove $C_i = S(D_i)$ per $i=1,2$.
+Dove $S_i = S(D_i)$ per $i=1,2$.
 
 I documenti aventi parecchi $k-$shingles in comune hanno testo simile, anche se questi appaiono all'interno di essi in ordine differente.
 
@@ -117,14 +105,13 @@ In generale, si ha che:
 - $k=5$ risulta sufficiente per documenti brevi, come emails.
 - $k=10$ va bene per documenti di grande dimensione.
 ### Min-Hashing
-Gli insiemi di shingles sono di grande dimensione. Se si hanno milioni di documenti, potrebbe non risultare possibile memorizzare tutti gli shingle-sets nella memoria principale.
+Gli insiemi di shingles sono di grande dimensione. Se si hanno milioni di documenti, potrebbe non risultare possibile memorizzare tutti gli insiemi di shingles nella memoria principale.
 Si vogliono convertire quindi insiemi di grandi dimensioni in rappresentazioni molto più piccole, che prendono il nome di *firme* (signatures), preservandone la similarità.
 Risulta fondamentale perciò che, dal confronto delle firme di due insiemi, si possa stimare la Jaccard similarity di tali insiemi facendo riferimento solo ad esse. Non è possibile che le firme diano l'esatta similarità degli insiemi che rappresentano, ma le stime che forniscono sono vicine ad essa, e maggiore è la dimensione delle firme, più accurata è la stima.
 
 Per fare ciò, si usa la tecnica del **Min-Hashing**. 
 Si supponga di dover trovare documenti simili in un data set di dimensione $N=10^6$, e quindi di disporre di $10^6$ insiemi di $k-$shingles. Il Min-Hashing non permette di evitare i $\Theta(N^2)$ confronti tra le possibile coppie, ma rende ciascun confronto (dove ciascun confronto consiste nel calcolo della J. similarity), molto più efficiente. 
-Si fa presente come, siano $C_1$ e $C_2$ le rappresentazioni vettoriali ad alta dimensione di due documenti $D_1$ e $D_2$ per l'insieme di tutti i possibili $k-$shingles definiti su un'alfabeto $U$.
-Allora $C_1,C_2 \in \{0,1\}^k$ , e il confronto banale tra essi comporta un costo di $\Theta(|U|^k)$, che per un alfabeto di dimensione $|U|=27$ e $k=10$ risulta eccessivo.
+Siano $C_1$ e $C_2$ le rappresentazioni vettoriali ad alta dimensione di due documenti $D_1$ e $D_2$ per l'insieme di tutti i possibili $k-$shingles definiti su un'alfabeto $U$. Allora $C_1,C_2 \in \{0,1\}^k$ , e il confronto banale tra essi comporta un costo di $\Theta(|U|^k)$, che per un alfabeto di dimensione $|U|=27$ e $k=10$ risulta eccessivo.
 
 Prima di spiegare come sia possibile costruire piccole firme da grandi dimensioni, si fa presente che risulta utile visualizzare una collezione di insiemi mediante la loro *matrice caratteristica*. Le colonne della matrice corrispondono agli insiemi, e le righe corrispondono agli elementi dell'insieme universo dal quale vengono presi gli elementi costituenti gli insiemi stessi.
 Per essere più chiari, nel nostro scenario, sia $U$ l'alfabeto dei caratteri costituenti i documenti da prendere in analisi e sia $k$ il valore per il quale vengono definiti i $k-$shingles. Allora, la matrice caratteristica possederà una colonna per ogni insieme di $k-$shingle associato al relativo documento $S(D_1)=S_1,S(D_2)=S_2,\ldots,S(D_N)=S_N$, dove si fa presente che $S_i \subseteq U^k$ per ogni $i \in \{1,2,\ldots,N\}$, ed una riga per ogni elemento dell'insieme universo $U^k$. Nell'entrata $(r,C)$ di tale matrice è presente $1$ se l'elemento dell'universo nella riga $r$ appartiene all'insieme associato alla colonna $C$, $0$ altrimenti.  Ad esempio:
@@ -146,7 +133,7 @@ $$
 $$
 dove $|C_i| = \# \textnormal{ di entrate in } C_i \textnormal{ aventi valore } 1$.
 
-E' importante tenere a mente che la matrice caratteristica è una maniera utile per visualizzare i dati, ma non risulta un buon metodo per memorizzarli. Uno dei motivi principali è che queste matrici sono quasi sempre sparse (hanno molti più entrate a $0$ che $1$). Una rappresentazione di tale matrice per risparmiare spazio ottenibile memorizzando le posizioni nelle quali appaiono le entrate poste ad $1$.
+E' importante tenere a mente che la matrice caratteristica è una maniera utile per visualizzare i dati, ma non risulta un buon metodo per memorizzarli. Uno dei motivi principali è che queste matrici sono quasi sempre sparse (hanno molti più entrate a $0$ che $1$). Una rappresentazione di tale matrice per risparmiare spazio è ottenibile memorizzando le posizioni nelle quali appaiono le entrate poste ad $1$.
 
 Si è quindi data una rappresentazione dei documenti mediante sottoinsiemi di shingles, e tali sottoinsiemi sono stati rappresentati mediante colonne binarie di una matrice.
 Il prossimo obiettivo è quello di trovare colonne simili calcolando delle signatures per le colonne di dimensione ridotta.
@@ -168,8 +155,7 @@ Si deve trovare quindi una funzione $h(\cdot)$ tale per cui:
 - Se $\texttt{J.sim}(C_1,C_2)$ è alta, allora, con alta probabilità, $h(C_1) = h(C_2)$.
 - Se $\texttt{J.sim}(C_1,C_2)$ è bassa, allora, con alta probabilità, $h(C_1) \neq h(C_2)$.
 
-La scelta della funzione hash dipende dalla metrica di similarità adottata.
-Per la Jaccard Similarity, la funzione hash adatta prende il nome di MinHash.
+La scelta della funzione hash dipende dalla metrica di similarità adottata. Per la Jaccard Similarity, la funzione hash adatta prende il nome di MinHash.
 
 Le firme che si vogliono costruire per gli insiemi sono composte dal risultato di un gran numero di computazioni, ciascuna delle quali è un "minhash" della matrice caratteristica.
 Per eseguire il minhash di un insieme, rappresentato da una colonna della matrice caratteristica, bisogna scegliere una permutazione delle righe. Il valore di minhash di una colonna è il numero della prima riga, in ordine permutato, nella quale la colonna ha come entrata $1$.
@@ -232,7 +218,8 @@ $$
 
 E si dimostra il seguente lemma, la quale implica la dimostrazione del teorema.
 ```ad-Lemma
-Se $\pi$ è una permutazione uniforme, allora $\mathbf{E}\left[J_{\pi}(S_1,S_2)\right]=\texttt{J.sim}(S_1,S_2)$
+Se $\pi$ è una permutazione uniforme, allora 
+$$\mathbf{E}\left[J_{\pi}(S_1,S_2)\right]=\texttt{J.sim}(S_1,S_2)$$
 ```
 ```ad-Dimostrazione
 Siano $S_1$ ed $S_2$ due insiemi di shingles, e siano $C_1$ e $C_2$ le rispettive rappresentazioni mediante vettore binario ad alta dimensione.
@@ -284,7 +271,8 @@ $$
 
 Si pensi ancora ad una collezione di insiemi rappresentata dalla loro matrice caratteristica $M.$
 Nella pratica, si combinano parecchie (ad esempio $100$) funzioni hash scelte uniformly at random (ossia, permutazioni scelte casualmente), e quindi mutualmente indipendenti tra loro, per creare una firma per una colonna C della matrice. Questo approccio permette di ottenere maggior confidenza.
-Si supponga quindi di scegliere un numero $t>>1$ di permutazioni delle righe di $M$. Siano le funzioni di minhash determinate da queste permutazioni $h_{\pi 1},h_{\pi 2},\ldots, h_{\pi t}$. Dalla colonna $C$, rappresentante l'insieme $S$, si definisce la *minhash signature* di $S$ come il vettore $$SIG(C)=[h_{\pi 1}(C),h_{\pi 2}(C),\ldots, h_{\pi t}(C)]$$
+Si supponga quindi di scegliere un numero $t>>1$ di permutazioni delle righe di $M$. Siano le funzioni di minhash determinate da queste permutazioni $h_{\pi 1},h_{\pi 2},\ldots, h_{\pi t}$. Dalla colonna $C$, rappresentante l'insieme $S$, si definisce la *minhash signature* di $S$ come il vettore
+$$SIG(C)=[h_{\pi 1}(C),h_{\pi 2}(C),\ldots, h_{\pi t}(C)]$$
 Si rappresenta questo vettore come una colonna. Quindi, è possibile formare, a partire dalla matrice $M$, una *matrice di firme*, nella quale la $i-$esima colonna di $M$ è sostituita dalla minhash signature per l'insieme dell'$i-$esima colonna.
 La matrice di firme ha lo stesso numero di colonne di $M$ ma solamente $t$ righe. Anche se $M$ non è rappresentata esplicitamente, ma in una forma compressa adatta ad una matrice sparsa (ad esempio, tenendo traccia della posizione delle entrate poste ad $1$), è normale che la matrice delle firme risulti essere molto più piccola di $M$.
 L'aspetto fondamentale delle matrici di firme è dato dal fatto che risulta possibile utilizzare le loro colonne per stimare la Jaccard similarity degli insiemi ad esse corrispondenti. Dal teorema enunciato in precedenza, si ha che la probabilità che due colonne abbiano lo stesso valore in una data riga della matrice delle firme è uguale alla J. similarity degli insiemi corrispondenti a queste colonne. Inoltre, essendo le permutazioni sulle quali questi valori di minhashing si basano state scelte indipendentemente, si può pensare a ciascuna di queste righe della matrice di firme come un esperimento indipendente. Quindi, il valore atteso del numero di righe nelle quali due colonne assumono lo stesso valore è uguale alla Jaccard similarity dei corrispettivi insiemi. In particolar modo, si definisce il seguente concetto di similarità tra firme:
@@ -296,7 +284,6 @@ SignSim(C_1,C_2) = \frac{|\{j: h_{\pi j}(C_1) = h_{\pi j}(C_2)\}|}{t}
 $$
 Ossia la frazione delle min-hash signatures nelle quali $C_1$ e $C_2$ hanno lo stesso elemento
 ```
-
 Si fa presente che $\texttt{J.sim}(C_1,C_2) \neq SignSim(C_1,C_2)$, ma per la proprietà del Min Hash descritto nel teorema, si ha che $\texttt{J.sim}(C_1,C_2) \equiv \mathbf{E}_{\pi}\left[SignSim(C_1,C_2)\right]$, quindi, maggiore è $t$, ossia più minhashings si usano, maggiori saranno le righe nella matrice di firme, e minore sarà l'errore atteso nella stima della Jaccard similarity.
 Alla luce di quanto appena detto, si da il seguente corollario
 
@@ -331,8 +318,7 @@ Essendo $f$ una funzione casuale, $f(x)$ è una variabile aleatoria.
 
 Dalla definizione di data sketch, si osserva esplicitamente che l'output delle operazioni eseguite dalla procedura di min hashing rientra in questa categoria.
 
-Nella pratica, le permutazioni sono ottenute mediante utilizzo di funzioni hash.
-Questo perché, per la descrizione della procedura di minhashing, bisogna generare diverse permutazioni $\pi$ casuali ed indipendenti tra loro dell'insieme $U^k$. Ma eseguire anche una singola permutazione delle $U^k$ righe della matrice caratteristica risulta troppo costoso in termini di tempo. Ordinare mediante una funzione hash $h$ restituisce una permutazione $\pi$ (quasi) casuale.  
+Nella pratica, le permutazioni sono ottenute mediante utilizzo di funzioni hash. Questo perché, per la descrizione della procedura di minhashing, bisogna generare diverse permutazioni $\pi$ casuali ed indipendenti tra loro dell'insieme $U^k$. Ma eseguire anche una singola permutazione delle $U^k$ righe della matrice caratteristica risulta troppo costoso in termini di tempo. Ordinare mediante una funzione hash $h$ restituisce una permutazione $\pi$ (quasi) casuale.  
 Di conseguenza, è possibile simulare l'effetto di una permutazione casuale utilizzando una funzione hash casuale che mappa ogni indice di riga in tanti buckets quanti sono le righe.
 Si fa presente che una funzione hash $f:[m] \rightarrow [m]$ può mappare interi distinti nello stesso bucket, e lasciarne altri vuoti. E' possibile non tener conto di ciò finché $m$ è di grande dimensione e il numero di collisioni non è eccessivo. 
 La scelta della funzione casuale, per rendere bassa la probabilità di collisioni, può essere fatta facendo riferimento all'Universal hashing, ossia si scelgono $t$ funzioni della forma
@@ -379,8 +365,6 @@ $$
 $$
 dove $SIG(i,C)$ è l'$i-$esima entrata della colonna $C$ nella matrice di firme.
 ```
-
-
 Si spera che la maggior parte di coppie di documenti tra loro dissimili non vengano mai mappate, da nessuna delle funzioni hash usate dalla procedura, nello stesso bucket, e che quindi non vengano controllate.  Le coppie dissimili che vengono mappate nello stesso bucket prendono il nome di *falsi positivi*, e si vuole che queste siano una piccola frazione tra tutte le possibili coppie. 
 Si vuole inoltre che la maggior parte di coppie veramente simili vengano mappate nello stesso bucket per almeno una delle funzioni hash utilizzate. Le coppie per cui ciò non accade vengono chiamate *falsi negativi*, e anche per questi si vuole che siano una piccola frazione delle coppie veramente simili.
 

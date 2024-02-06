@@ -178,7 +178,7 @@ Per ogni variabile $x_i \in X$, si costruisce il seguente **gadget variabile**:
 3. Per il nodo $x_i$ si aggiungono dei vicini senza nome, tanti quante sono le clausole che contengono la variabile $x_i$ più uno;
 4. Per il nodo $w_i$ si aggiungono dei vicini senza nome, tanti quante sono le clausole che contengono la variabile $\lnot x_i$ più uno;
 ![Esempio Gadget Clausola|center|400](05-ar_img02.png)
-Si osserva che se $T$ e $F$ sono nella stessa comunità, allora tutti i nodi in figura sono in quella comunità. Invece, se $T$ e $F$ sono in due comunità distinte, allora anche $x_i$ e $w_i$ appartengono a due comunità distinte. Infatti, poiché $t_i$ e $f_i$ hanno entrambi grado 2, per il [lemma precedente](#Lemma) deve necessariamente essere vero che  $t_i, y_i $ fanno parte della stessa comunità di $T$ e $f_i, z_i$ fanno parte della stessa comunità di $F$.
+Si osserva che se $T$ e $F$ sono nella stessa comunità, allora tutti i nodi in figura sono in quella comunità. Invece, se $T$ e $F$ sono in due comunità distinte, allora anche $x_i$ e $w_i$ appartengono a due comunità distinte. Infatti, poiché $t_i$ e $f_i$ hanno entrambi grado 2, per il [lemma precedente](#Lemma) deve necessariamente essere vero che  $t_i, y_i$ fanno parte della stessa comunità di $T$ e $f_i, z_i$ fanno parte della stessa comunità di $F$.
 Poiché $y_i$ ha grado 3, allora almeno 1 tra $x_i$ e $w_i$ deve appartene alla comunità di $T$. Similmente per $z_i$, poiché ha grado 3 allora almeno uno tra $x_i$ e $w_i$ deve appartene alla comunità di $F$.
 Poiché $y_i$ e $z_i$ non sono collegati, allora o $x_i$ appartiene e $C$ e $w_i$ a $V-C$, oppure viceversa.
 Infine, collocati i nodi $x_i$ e $w_i$ nelle rispettive comunità, essi si porteranno appresso i rispettivi vicini senza nome.

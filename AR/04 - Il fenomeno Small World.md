@@ -303,7 +303,7 @@ Allora una volta entrati nella regione $R$, entrare in $R_2$ utilizzando gli arc
 Nel caso $q>1$ invece, gli archi random sono troppo corti, cioè è *difficile* usare archi random che coprano grandi distanze. Di conseguenza, la ricerca miope in questo caso riesce a fare poco meglio rispetto ad utilizzare solo archi dell'anello per raggiungere $t$.
 
 In conclusione, si osserva che in effetti è possibile dimostrare il seguente teorema
-```ad-theorem
+```ad-Teorema
 title: Teorema
 Sia $X$ la variabile aleatoria che indica la lunghezza del cammino trovato dalla ricerca miope su un anello di $n$ nodi.
 Comunque si sceglie un $q \neq 1$ esistono sempre due costanti $\alpha_q$ e $c_q$ tali che

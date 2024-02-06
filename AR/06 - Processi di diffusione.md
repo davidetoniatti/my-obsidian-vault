@@ -4,7 +4,6 @@ Molte delle iterazioni avvengono a livello locale piuttosto che globale; si è i
 ```ad-note
 Gli individui che possono influenzare il nostro comportamento sono quelli con i quali siamo in relazione.
 ```
-
 ## Il concetto di omofilia
 Il fenomeno della chiusura triadica è strettamente connesso al concetto di omofilia che si esplicita in due direzioni:
 - La tendenza di individui a connettersi con altri individui che gli assomigliano; ad esempio, un individuo tende a non stabilire relazioni con chi ha idee politiche opposte alle sue. Oppure, se un individuo ama il mare, diventerà amico con gente che incontra al mare (dunque, che ama il mare come lui). Dunque le ragioni di tale tendenza sono:
@@ -100,14 +99,8 @@ Sia $G=(V,E)$ un grafo e sia $V' \subseteq V$: si indica con $G-V'$ il grafo ott
 
 Valgono i seguenti teoremi.
 #### Teorema 1
-
-```ad-theorem
-title: Teorema
 Sia $G=(V,E)$ un grafo e siano $V_0 \subseteq V$ l'insieme di iniziatori e $q$ la soglia di adozione di $A$: se $V_0$ non genera una cascata completa allora $G-V_0$ contiene un cluster di densità $1-q$.
-```
-
-```ad-proof
-title: Dimostrazione
+##### Dimostrazione
 Se $V_0$ non genera una cascata completa, allora esistono nodi che non adottano $A$.
 Sia $t$ il passo tale che $V_t \neq \emptyset$ e $V_{t+1} = \emptyset$, ossia $t+1$ è il passo in cui $A$ non si diffonde più.
 Sia $V_A = \bigcup_{0 \leq i \leq t} V_i$ , cioè l'insieme di tutti e soli i nodi che adottano $A$. Poiché esistono nodi che non adottano $A$, vale $V-V_A \neq \emptyset$. Poiché i nodi in $V-V_A$ non adottano $A$, allora vale per ogni $v \in V-V_A$:
@@ -123,16 +116,9 @@ $$
 \frac{ |N(v) \cap (V-V_{A})| }{ |N(v)| } \geqslant 1-q
 $$
 ossia, $V-V_A$ è un cluster di densità $1 - q$ ed è contenuto in $G – V_0$.
-```
-
 #### Teorema 2
-
-```ad-theorem
-title: Teorema
 Sia $G=(V,E)$ un grafo e siano $V_0 \subseteq V$ l'insieme di iniziatori e $q$ la soglia di adozione di $A$: se $G-V_0$ contiene un cluster di densità maggiore di $1-q$ allora $V_0$ non genera una cascata completa.
-```
-
-```ad-proof
+##### Dimostrazione
 Se $G-V_0$ contiene un cluster di densità maggiore di  $1-q$, cioè, esiste $C \subseteq V - V_0$ tale che, per ogni $v \in C$,
 $$
 \frac{ |N(v) \cap C| }{ |N(v)| } > 1 - q
@@ -148,9 +134,7 @@ $$
 $$
 
 dunque un assurdo.
-```
-
-
+_____
 I teoremi appena dimostrati mettono in risalto il fatto che le innovazioni si diffondono con relativa facilità all'interno dei cluster; invece, incontrano difficoltà ad uscire dai cluster.
 Perciò, si può concludere che, mentre l'esperimento di Granovetter ha permesso di mettere in luce la forza dei weak ties, in quanto fonte di vantaggi informativi, lo studio dei processi di diffusione ne evidenzia la debolezza, in quanto ostacolo alla diffusione.
 
