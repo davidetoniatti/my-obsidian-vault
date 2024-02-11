@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ABD/05 - Similar items.md",
+                "file": "ABD/06 - Data streams.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ABD/05 - Similar items.md",
+                "file": "ABD/06 - Data streams.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ABD/05 - Similar items.md",
+                "file": "ABD/06 - Data streams.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ABD/05 - Similar items.md"
+                "file": "ABD/06 - Data streams.md"
               }
             }
           }
@@ -134,8 +134,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -150,39 +149,39 @@
   },
   "active": "d6313ceb3a7a7b95",
   "lastOpenFiles": [
-    "ABD/07 - Link analysis.md",
-    "ABD/06 - Data streams.md",
-    "ABD/05 - Similar items.md",
-    "ABD/04 - Hash function.md",
+    "AR/07 - Seguire il gregge.md",
+    "AR/06 - Processi di diffusione.md",
+    "AR/01 - Introduzione e grafi di Erdős-Rényi.md",
     "AR/02 - Questione di popolarità.md",
     "AR/03 - Grafi Geometrici aleatori e reti wireless.md",
     "AR/04 - Il fenomeno Small World.md",
     "AR/05 - Reti come grafi dalla struttura disomogenea.md",
-    "AR/07 - Seguire il gregge.md",
-    "AR/06 - Processi di diffusione.md",
-    "AR/01 - Introduzione e grafi di Erdős-Rényi.md",
+    "ABD/06 - Data streams.md",
+    "ABD/05 - Similar items.md",
+    "ABD/04 - Hash function.md",
+    "SDCC/mutua esclusione ed elezione.md",
+    "SDCC/microservizi.md",
+    "SDCC/kubernetes.md",
+    "SDCC/elezione.md",
+    "SDCC/consistenza.md",
+    "SDCC/08 - Docker.md",
+    "SDCC/01 - Introduzione ai Sistemi Distribuiti.md",
+    "CNS/notes.md",
     "ABD/02 - Richiami di probabilità.md",
-    "ABD/03 - Algoritmi probabilistici.md",
-    "AGT/03 - Local Connection Game.md",
+    "AGT/08 - PLS Completezza.md",
+    "AGT/07 - Meccanismi senza pagamenti e kidney exchange.md",
     "ABD/01 - Introduzione al Data Mining.md",
+    "ABD/03 - Algoritmi probabilistici.md",
+    "ABD/07 - Link analysis.md",
+    "AGT/03 - Local Connection Game.md",
+    "AGT/04 - Algorithmic Mechanism Design I.md",
     "ABD/attachments/BloomFilterAnalysis.png",
     "ABD/attachments/DataStreamManagementSystem.png",
     "ABD/attachments/Pasted image 20240103110920.png",
-    "ABD/Mining data stream.md",
     "ABD/attachments/MinhashAlg1.png",
     "ABD/attachments/MinhashAlg2.png",
     "ABD/attachments/charMatrix.png",
-    "ABD/04 - Contention resolution e hash tables.md",
-    "AGT/04 - Algorithmic Mechanism Design I.md",
-    "AGT/02 - Global Connection Game.md",
-    "ABD/02 - Variabile aleatorie, linearità del valore atteso, analisi del RandomQS.md",
-    "ABD/RandomQs2.excalidraw.md",
-    "ABD/Qs1.excalidraw.md",
-    "Excalidraw/Drawing 2024-01-30 22.28.01.excalidraw.md",
     "Excalidraw",
-    "ABD/01 - Introduzione agli algoritmi probabilistici.md",
-    "AGT/01 - Introduzione alla AGT.md",
-    "AGT/08 - PLS Completezza.md",
     "AGT.zip",
     "zizKgNdo",
     "AR.zip",

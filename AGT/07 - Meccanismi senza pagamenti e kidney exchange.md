@@ -24,7 +24,7 @@ Sia $N=\{ 1,2,3,4 \}$. Si supponga che ogni agente preferisce la casa dell'agent
 ![|center|500](07-agt_img02.png)
 ### Proprietà dell'algoritmo
 Si osserva che, per ogni agente, l'algoritmo non assegna una casa peggiore rispetto a quella iniziale. Infatti, ogni agente partecipa all'allocazione con la propria casa, dunque se per un agente $a_i$ le case rimanenti nell'allocazione a cui partecipa non sono migliori della propria, può puntare alla propria casa: si crea un ciclo (self-loop su $a_i$). Dunque ad ogni agente $a_i$ nel caso peggiore viene assegnata la propria casa.
-```ad-lemma
+```ad-Lemma
 Sia $N_k$ l'insieme degli agenti rimossi all'iterazione $k$ dell'algoritmo TTC, cioè gli agenti nei cicli individuati in tale iterazione.
 Ogni agente in $N_k$ riceve la casa preferita al di fuori di quelle già allocate agli agenti in $N_1 \cup \dots \cup N_{k-1}$. Inoltre, tale casa appartiene inizialmente ad un agente che viene servito all'iterazione $k$, cioè un agente in $N_k$.
 ```
@@ -42,11 +42,16 @@ Dunque $a_i$ non può far parte di nessun ciclo che coinvolge agenti in $N_1 \cu
 ### Una riallocazione ottimale
 Si osserva che il teorema precedente non è così sorprendente. Infatti, per esempio, anche il meccanismo che non rialloca mai le case è truthful.
 La vera caratteristica importante dell'algoritmo TTC è che, oltre a garantire la truthfulness, garantisce una allocazione delle case che è la migliore possibile, *ottimale*. Si chiarisce formalizzando questa proprietà.
-
+```ad-Definizione
+title: Definizione (Blocking Coalition)
 Data una qualsiasi allocazione delle case agli agenti, un sottoinsieme di agenti forma una **blocking coalition** per questa allocazione se possono scambiarsi le case originali (cioè quelle possedute inizialmente da ogni agente) in modo tale che *nessuno* di loro peggiora e *almeno uno* di loro migliora.
+```
 Una allocazione che presenta delle blocking coalition non è una allocazione *stabile*, perché gli agenti della coalizione possono scambiarsi le case iniziali per migliorare.
-
-Una **core allocation** è una allocazione senza nessuna blocking coalition: una core allocation è una allocazione *stabile*, cioè l'allocazione *ottimale*. Infatti, gli agenti non possono scambiarsi le case iniziali per migliorare.
+```ad-Definizione
+title: Definizione (Core Allocation)
+Una **core allocation** è una allocazione senza nessuna blocking coalition.
+```
+Una core allocation è una allocazione *stabile*, cioè l'allocazione *ottimale*: gli agenti non possono scambiarsi le case iniziali per migliorare.
 
 Dunque si può dimostrare il teorema seguente.
 #### Teorema

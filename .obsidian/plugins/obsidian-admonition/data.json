@@ -112,6 +112,17 @@
       "title": "Claim",
       "injectColor": true,
       "noTitle": false
+    },
+    "Corollario": {
+      "type": "Corollario",
+      "color": "219, 15, 15",
+      "icon": {
+        "name": "thermometer-quarter",
+        "type": "font-awesome"
+      },
+      "command": false,
+      "injectColor": true,
+      "noTitle": false
     }
   },
   "syntaxHighlight": false,

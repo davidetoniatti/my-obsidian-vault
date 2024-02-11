@@ -129,7 +129,7 @@ r_{j} \cdot \frac{\sqrt{ |S_{i}| }}{\sqrt{ |S_{j}| }}, \quad \text{altrimenti}
 \end{cases}
 $$
 #### Risultato di approssimazione
-```ad-lemma
+```ad-Lemma
 Sia $\text{OPT}$ la soluzione ottima per l’asta combinatorica, e sia $W$ la   soluzione calcolata dall’algoritmo $\sqrt{m}$-approssimante, allora nel caso peggiore il valore dell’ottimo è più grande di al più di un fattore $\sqrt{m}$.
 $$
 \sum_{i\in\text{OPT}} r_i \leqslant \sqrt{m}\sum_{i\in W} r_i

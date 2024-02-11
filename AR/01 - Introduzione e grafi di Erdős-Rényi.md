@@ -1,12 +1,9 @@
 # Introduzione
 ## Analisi di reti: obiettivo
-
 In questo corso, si parlerà di **reti**, nell'accezione del termine più ampia possibile: con rete si intende un insieme di entità interconnesse, fra le quali esistono dei legami.
 Nel corso le reti verranno analizzate rispetto a diversi punti di vista, come ad esempio le prestazioni, la struttura e il loro utilizzo, utilizzando tecniche prese in prestito da numerose discipline, tra cui la matematica, la sociologia e l'economia.
 Verrà inoltre riservata una certa attenzione a queste tecniche: ossia, gli argomenti trattati saranno spunto per studiare le tecniche utilizzate per analizzare le reti.
-
 ## Reti
-
 Genericamente parlando, una rete è uno schema di interconnessione fra un insieme di entità. In base al tipo di entità si parla di reti diverse: reti fisiche, reti sociali, reti di informazioni etc.
 Per il corso di AR, l'idea di rete si riduce a considerarle come un'ampia popolazione che reagisce alle azioni dei singoli.
 Si è interessati a studiare il comportamento aggregato di gruppi di individui:
@@ -14,12 +11,10 @@ Si è interessati a studiare il comportamento aggregato di gruppi di individui:
 - Come la presenza di legami modifica la struttura stessa della rete (stabilità, fenomeno rich get richer);
 - Come la struttura dell'insieme dei legami permette di desumere informazioni (web-search, sistemi di voto).
 ### Struttura di una rete
-
 In generale, risulta difficile rappresentare e studiare puntualmente reti di milioni di individui; si possono però analizzare proprietà "globali" di una rete di grandi dimensioni.
 Un esempio è lo studio di componenti giganti nella rete, ossia una componente connessa della rete che contiene una frazione degli individui; oppure la ricerca di porzioni densamente connesse all'interno di una componente connessa.
 Sempre come proprietà globale, si può studiare se la rete presenta una struttura di tipo centro/periferia, o si può studiare il ruolo dei nodi che costituiscono una porzione densamente connessa, suddividendoli in entità centrali / periferiche.
 #### Esempio: Componente Gigante (Leskovec e Hrovitz)
-
 In questo articolo, chiamato "Planetary-Scale Views on an Instant-Messaging Network", e presente al seguente [link](https://www.researchgate.net/publication/221023506_Planetary-Scale_Views_on_an_Instant-Messaging_Network/link/02e7e51d7c7c082404000000/download), Leskovec e Hrovitz hanno avuto accesso ai dati generati in un mese un sistema telefonico di comunicazione, sviluppato da Microsoft e chiamato ``Instant Messaging``.
 I dati sono stati utilizzati per costruire una rete sociale, in cui i nodi erano gli utenti e le connessioni erano i tentativi di comunicazioni tra un utente e l'altro.
 Si è scoperto, tra le altre cose, che all'interno del grafo c'era una componente fortemente connessa che conteneva un sacco di invidui. Su 240 milioni di utenti totali infatti, la componente scoperta ne conteneva 200 milioni.
@@ -35,7 +30,6 @@ Talvolta per comprendere altri fenomeni, si considera la struttura fisica della 
 Ad esempio, per comprendere il ruolo di una certa relazione all'interno di una data rete, si deve studiare precisamente la topologia di quella rete relazione per relazione, proprio come accade nello studio di fenomeni di diffusione.
 
 Dato che una rete è un insieme di individui e delle relazioni che intercorrono fra essi, viene modellata attraverso un **grafo**, e si utilizzeranno tutte le nozioni derivate dalla teoria dei grafi.
-
 # Grafi aleatori
 Idealmente, si vorrebbero studiare i fenomeni che avvengono all'interno delle reti utilizzando reti reali, che vengono attualmente utilizzate dalle persone o dai calcolatori.
 Per lo studio di fenomeni del tipo:
@@ -101,7 +95,6 @@ Sia denominato `good` l'insieme $A$ individuato dal lemma; osserviamo che questo
 
 Si dimostra ora il teorema.
 Per dimostrare il teorema, è sufficiente calcolare $P(X < n/2)$, ossia la probabilità che la massima componente connessa in $G_{n,p}$ contenga meno di $n/2$ nodi. In virtù dell'osservazione precedente vale
-
 $$
 \begin{align}
 P\left( X < \frac{n}{2} \right) &\leq P(\exists A \subseteq [n] : A\text{ è \texttt{good}})\\
@@ -109,29 +102,25 @@ P\left( X < \frac{n}{2} \right) &\leq P(\exists A \subseteq [n] : A\text{ è \te
 &\leq \sum_{\bigcup_{A \subseteq [n] \text{ e } \frac{n}{4} \leq |A| < \frac{3n}{4}}} P\left(\text{non ci sono archi fra }A \text{ e } [n]-A\right)
 \end{align}
 $$
-
 dato un grafo $G_{n,p}$, e un sottoinsieme $A$ dei suoi nodi: la probabilità che non ci sia un arco tra $A$ e $[n]-A$ è pari $1-p$; dato che il numero di archi possibili fra $A$ è $[n]-A$ è dato dalla cardinalità di $A$ per la cardinalità di $[n]-A$, vale
-
 $$
 P\left(\text{non ci sono archi fra }A \text{ e } [n]-A\right) = (1-p)^{|A|\cdot |[n]-A|}
 $$
-
 dato che $(1-p)<1$, il suo valore è massimo quando l'esponente $|A|\cdot |[n]-A|$  minimo, cioè quando $|A| = n/4$, dunque 
-
 $$
-P\left(\text{non ci sono archi fra }A \text{ e } [n]-A\right) = (1-p)^{|A|\cdot |[n]-A|} = (1-p)^{n/4 \cdot (n-n/4)} = (1-p)^{3n^2/16}
+\begin{align}
+P\left(\text{non ci sono archi fra }A \text{ e } [n]-A\right) &= (1-p)^{|A|\cdot |[n]-A|} \\
+&= (1-p)^{n/4 \cdot (n-n/4)} = (1-p)^{3n^2/16}
+\end{align}
 $$
 
 ricordando che $[n]$ contiene $2^n$ sottoinsiemi, vale
-
 $$
 \begin{align}
 P\left( X < \frac{n}{2} \right) &\leq 2^n(1-p)^{\frac{3n^2}{16}} \\
 \end{align}
 $$
-
 Applicando il lemma a destra della disequazione, si ottiene
-
 $$
 \begin{align}
 P\left( X < \frac{n}{2} \right) &< 2^n\left(1-\frac{\ln{64}}{n}\right)^{\frac{3n^2}{16}} \\
@@ -139,17 +128,12 @@ P\left( X < \frac{n}{2} \right) &< 2^n\left(1-\frac{\ln{64}}{n}\right)^{\frac{3n
 &= 2^n\left[\left(1 - \frac{\ln{64}}{n}\right)^{-\frac{n}{64}(-\ln{64})}\right]^{\frac{3n}{16}}
 \end{align}
 $$
-
 Poiché $\lim_{n \rightarrow \infty} \left(1 - \frac{\ln{64}}{n}\right)^{-\frac{n}{64}} = e$ , allora per $n$ sufficientemente grande vale
-
 $$ \left(1 - \frac{\ln{64}}{n}\right)^{-\frac{n}{64}} = e^{-\ln{64}} = 64^{-1} $$
-
 e dunque 
-
 $$
 P\left( X < \frac{n}{2} \right) < 2^n [64^{-1}]^{3n/16} = 2^n[2^{-6}]^{3n/16} = 2^n 2^{-18n/16} = 2^{-n/8}
 $$
-
 da cui segue il teorema.
 
 Il teorema appena dimostrato può essere generalizzato:
@@ -159,9 +143,7 @@ TEOREMA.
 	3. se $p(n-1)>1$ allora quasi sicuramente $G_{n,p}$ ha una componente connessa di circa $\Omega(n)$ nodi e tutte le altre componenti connesse hanno $O(\log{n})$ nodi.
 Dove con *quasi sicuramente* significa che, al tendere di $n$ all'infinito la probabilità dell'evento tende a $1$; in altre parole, è meno forte di *con alta probabilità* (non deve tendere per forza rispetto ad un polinomio).
 In conclusione, la presenza di componenti giganti dipende dal prodotto $p(n-1)$.
-
 ### Grado dei nodi
-
 Il prodotto $p(n-1)$ rappresenta il valore atteso del grado di un nodo di $G_{n,p}$. Per $i \in [n]$, sia $\delta_i$ la variabile aleatoria che esprime il grado del nodo $i$, vale
 $$
 E[\delta_i] = \sum_{j \in [n]-{i}} \left[1\cdot p+0\cdot(1-p)\right] = \sum_{j \in [n]-{i}} p = (n-1)p
@@ -179,45 +161,31 @@ Sia $i \in [n]$: la probabilità che il nodo $i$ abbia grado $k$ è la probabili
 - la probabilità che vi sua un arco fra $i$ e ciascuno dei nodi della $k$-upla è $p^k$;
 - la probabilità che **non** vi sia un arco fra $i$ e ciascuno dei nodi non contenuto nella $k$-upla è $(1-p)^{n-1-k}$;
 quindi 
-
 $$
 P(\delta_i = k) = {n-1 \choose k} p^k(1-p)^{n-k-1}
 $$
-
 sostituendo $p = \frac{\lambda}{k}$ ed esplicitando il coefficiente binomiale si ottiene
-
 $$
 P(\delta_i = k) = \frac{(n-1)\cdot(n-2)\cdot\dots\cdot(n-k)}{k!} \frac{\lambda^k}{n^k}\left(1-\frac{\lambda^k}{n^k}\right)^{n-k-1}
 $$
-
 poiché $(1-x)< e^{-x}$, allora 
-
 $$ \left(1-\frac{\lambda}{n}\right)^{n-k-1} < e^{\frac{-\lambda(n-k-1)}{n}} $$
-
 dunque si ottiene
-
 $$
 P(\delta_i = k) < \frac{(n-1)\cdot(n-2)\cdot\dots\cdot(n-k)}{k!} \frac{\lambda^k}{n^k}e^{\frac{-\lambda(n-k-1)}{n}}
 $$
-
 dato che $(n-1)\cdot(n-2)\cdot\dots\cdot(n-k) < n^k$, si ottiene
-
 $$
 P(\delta_i = k) < \frac{n^k}{k!} \frac{\lambda^k}{n^k}e^{\frac{-\lambda(n-k-1)}{n}}
 $$
-
 per $n$ sufficientemente grande, vale
-
 $$
 P(\delta_i = k) < \frac{\lambda^k}{k!} e^{-\lambda}
 $$
-
 utilizzando l'approssimazione di Stirling, si ottiene infine
-
 $$
 P(\delta_i = k) < \frac{(\lambda \cdot e)^k}{\sqrt{ 2\pi k } \cdot k^k } e^{-\lambda} = \frac{e^{-\lambda}}{\sqrt{ 2\pi k }} \left(\frac{\lambda \cdot e}{k}\right)^k
 $$
-
 dunque si conclude che la probabilità che un generico nodo abbia grado $k$ decresce molto velocemente al crescere di $k$; più precisamente, decresce come $k^{-k}$ ossia esponenzialmente in $k$.
 
 Calcoliamo infine quale sia la frazione del numero di nodi che hanno grado $k$. Indichiamo con $F_k$ la variabile aleatoria che esprime tale frazione e indichiamo con $\lambda_{i,k}$ la variabile aleatoria 

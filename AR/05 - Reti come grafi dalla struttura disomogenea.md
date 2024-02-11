@@ -50,12 +50,11 @@ Si supponga ora di lasciar evolvere la rete fintantoché non si raggiunga una co
 Formalmente, sia $G=(V,S \cup W)$: un nodo $u$ soddisfa la proprietà della **chiusura triadica forte (STCP)** se, per ogni coppia di archi forti incidenti su $u$, i loro estremi sono collegati da un arco: $u \in V$ soddisfa la **STCP** se
 $$ \forall (u,v) \in S,  \forall (u,z) \in S \left[ (v,z) \in S \cup W \right] $$
  Allora il grafo $G$ soddisfa la **STCP** se tutti i suoi nodi la soddisfano.
-```ad-theorem
+```ad-Teorema
 title: Teorema
 Sia $G=(V,S \cup W)$; se un nodo $u \in V$ soddisfa la STCP e se esistono due nodi distinti $x$ e $z$ tali che $(u,x) \in S$ e $(u,z)$ è un local bridge, allora $(u,z) \in W$.
 ```
-
-```ad-proof
+```ad-Dimostrazione
 title: Dimostrazione
 Poiché $(u,z)$ è un local bridge, vale $N(u) \cap N(z) = \emptyset$; se fosse $(u,z) \in S$, allora, poiché $(u,x) \in S$ e $u$ soddisfa la STCP, dovrebbe essere $(x,z) \in S \cup W$, ossia sarebbe $x \in N(u) \cap N(z)$, ossia $N(u) \cap N(z) \neq \emptyset$, che è una contraddizione.
 ```
@@ -66,7 +65,6 @@ In effetti, i weak ties dell'esperimento di Granovetter, in quanto portatori di 
 
 L'evoluzione di una rete sociale, con un graduale aumento delle chiusure triadiche, porterà a formare nella rete un **gruppo di nodi fortemente coeso**, cioè con un elevato grado di interconnessione fra i nodi che lo compongono. A questo gruppo coeso si da il nome di **cluster** o **comunità**.
 Per misurare il grado di coesione di un nodo $u$ all'interno di un gruppo di nodi è stato definito il **coefficiente di clustering** $c(u)$ come il rapporto fra il numero di relazioni fra vicini di $u$ rispetto a tutte le coppie possibili di vicini di $u$:
-
 $$ c(u) = \frac{ | \{ (x,y) \in E: x \in N(u) \land y \in N(u) \} | }{ \frac{ |N(u)| \cdot (|N(u)| - 1) }{2} } $$
 Informalmente, il coefficiente di clustering misura quanto un nodo è *ben inserito* all'interno della rete costituita dai suoi vicini:
 - un nodo con coefficiente di clustering basso è *male* inserito nel gruppo dei suoi amici, cioè si trova, in quel gruppo, in una posizione periferica;
