@@ -25,8 +25,7 @@ I tipici problemi riguardanti i flussi di dati sono:
 - Individuare elementi frequenti.
 # Pattern Matching
 Si studia ora il problema del **Pattern Matching**.
-Sia $x_i$ un elemento appartenente ad un certo alfabeto $\Sigma$. Il flusso è una stringa di lunghezza $m$ su $\Sigma$, formalmente, sia $x=x_1x_2\ldots x_m$ tale flusso, allora $x\in \Sigma^m$. 
-Si ricorda che $m$ è troppo grande affinché $x$ possa venir interamente rappresentato in memoria.
+Sia $x_i$ un elemento appartenente ad un certo alfabeto $\Sigma$. Il flusso è una stringa di lunghezza $m$ su $\Sigma$, formalmente, sia $x=x_1x_2\ldots x_m$ tale flusso, allora $x\in \Sigma^m$. Si ricorda che $m$ è troppo grande affinché $x$ possa venir interamente rappresentato in memoria.
 Si supponga che venga fornito un pattern $y = y_1y_2\ldots y_n \in \Sigma^n$. La lunghezza del pattern $n$ è tale che $n \ll m$, ma anch'essa può risultare abbastanza grande da non poter memorizzare totalmente il pattern all'interno di una memoria ad accesso veloce.  
 Si vuole sapere quante volte $y$ appare in $x$ come sua sottostringa, avente quindi forma $y=x_ix_{i+1}\ldots x_{i+n-1}$.
 
@@ -40,14 +39,14 @@ Si studia quindi la *Rabin hash function*, che risulta essere un data sketch val
 Senza perdita di generalità, sia $x$ una stringa di lunghezza $n$ sull'alfabeto $\Sigma = [0,\sigma -1]$. Le stringhe possono essere quindi viste come interi di $n$ cifre in base $\sigma >0$. Si osserva esplicitamente che:
 - Questo scenario può essere utilizzato per rappresentare sottoinsiemi di $[1,n]$ ponendo $\Sigma = \{0,1\}$.
 - Per ogni funzione $f$, se $bitsize(f(x))<bitsize(x)$, dove $bitsize(\cdot)$ è una funzione che restituisce il numero di bit che un oggetto occupa in memoria, allora devono necessariamente verificarsi collisioni, ossia deve esistere necessariamente una coppia $x\neq y$ tale per cui $f(x)=f(y)$.
-Una prima idea per risolvere il problema dell'identità (dati due elementi, verificare se questi sono uguali), può essere quella di utilizzare la funzione
+Una prima idea per risolvere il problema dell'identità, può essere quella di utilizzare come sketch la funzione
 $$
 \bar{h}(x) = ((a \cdot x + b) \textnormal{ mod } M) \textnormal{ mod }d
 $$
 vista in precedenza, dove $M$ è un numero primo e $d$ è la dimensione dell'hash table, con $d <<n$, considerando la stringa $x$ come un numero con $n$ cifre in base $|\Sigma|$. 
 Sfortunatamente, questo non risulta essere un buon approccio: essendo che, per definizione di tale funzione, risulti necessario che $M>x$  (dove si evidenzia che $x$ deve essere preso come valore e non come la sua lunghezza) per ogni input $x$ della funzione, bisognerebbe eseguire le operazioni di aritmetica modulare su interi con $n$ cifre per aggiornare lo sketch, e ciò richiederebbe uno spazio pari a $\Omega(n)$. Ciò non rispetterebbe quindi il punto $3$ nella definizione di data sketch.
 
-Si definisce quindi il Rabin's hashing, uno schema di hashing di stringhe che risolve il problema appena descritto. Si fa presente che tale schema non risulti essere universale, ma nonostante ciò, garantisce una bassa probabilità di collisione.
+Si definisce quindi il **Rabin's hashing**, uno schema di hashing di stringhe che risolve il problema appena descritto. Si fa presente che tale schema non risulti essere universale, ma nonostante ciò, garantisce una bassa probabilità di collisione.
 ```ad-Definizione
 title: Definizione (Funzione hash di Rabin):
 Si fissi $q > \sigma$ numero primo, e si scelga uniformly at random $z\in \mathbb{Z}_q = \{0,1,\ldots,q-1\}$. 
@@ -102,7 +101,6 @@ ___________
 $\mathbf{input}$: $q$ primo, $z$ u.a.r. in $[q]$, $x=<x[0],x[1],\ldots,x[n-1]>,y=<y[0],y[1],\ldots,y[n-1]> \in \Sigma^n$ 
 1. $k_{q,z}(x \cdot y) = \left( k_{q,z}(x) \cdot z^{|y|} + k_{q,z}(y)\right) \mod q$
 ________
-Si osserva che $\mathbf{space}(A_1(q,z,x,y)) = \mathcal{O}(\log q + \log |y| \cdot \log q)$.
 Dove $z^{|y|}$ può venir calcolato usando un algoritmo per l'esponenziazione modulare.
 
 La lunghezza della stringa $x \cdot y$ è pari a $|x|+|y|$ e il valore $z^{|x|+|y|} \mod q$ può essere calcolato in maniera efficiente come
@@ -129,7 +127,7 @@ $$
 \mathbf{Pr}\left[ k_{q,z}(x)-k_{q,z}(y) \equiv_q 0\right] = \mathbf{Pr}\left[ k_{q,z}(x-y) \equiv_q 0\right]
 $$
 Essendo $x \neq y$, allora $k_{q,z}(x,y)$ è un polinomio di grado al più $n$ in $\mathbb{Z}_q$, e non è il polinomio zero. 
-Si ricorda che ogni polinomio univariato diverso da zero di grado $n$ su un campo ha al più $n$ radici. Essendo $q$ primo, $\mathbb{Z}_q$ è un campo e quindi vi sono al più $n$ valori di $z$ tali per cui $k_{q,z}(x-y) \equiv_q 0$. Essendo che $z$ viene scelto uniformemente da $[q]$, la probabilità di prendere una radice è al più $n/q$.
+Si ricorda che ogni polinomio ad una variabile diverso da zero di grado $n$ su un campo ha al più $n$ radici. Essendo $q$ primo, $\mathbb{Z}_q$ è un campo e quindi vi sono al più $n$ valori di $z$ tali per cui $k_{q,z}(x-y) \equiv_q 0$. Essendo che $z$ viene scelto uniformemente da $[q]$, la probabilità di prendere una radice è al più $n/q$.
 ```
 ```ad-Corollario
 title: Corollario (Probabilità di errore)
@@ -156,20 +154,19 @@ Si fa presente che, se non vi sono collisioni tra il pattern e le $m-n+1 \leq m$
 L'algoritmo di Karp-Rabin risolve il problema del pattern matching nello streaming model utilizzando $\mathcal{O}(n)$ parole di memoria e con un delay di $\mathcal{O}(1)$. La soluzione corretta viene restituita con probabilità $1-m^{-c}$, per ogni costante $c \geq 1$ scelta al momento dell'inizializzazione.
 ```
 # Campionamento da un Data Stream
-Non potendo mantenere in memoria l'intero flusso, un approccio per lavorare con i dati ricevuti è quello di memorizzarne un campione.
-Si studia quindi il problema di estrarre campioni utili all'interno di uno stream di dati.
+Non potendo mantenere in memoria l'intero flusso, un approccio per lavorare con i dati ricevuti è quello di memorizzarne un campione. Si studia quindi il problema di estrarre campioni utili all'interno di uno stream di dati.
 In particolar modo, si prendono in considerazione i due seguenti problemi:
 1. Campionare una proporzione fissata di elementi nel flusso.
 2. Mantenere un campione casuale di grandezza fissata su uno stream potenzialmente infinito.
 ## Campionare una proporzione fissata di elementi nel flusso
-In questo problema, si vuole selezionare un sottoinsieme di elementi in un flusso, in maniera tale che si possano effettuare su di essi delle queries di interesse, e che le relative risposte risultino essere statisticamente rappresentative dell'intero flusso. 
+In questo problema, si vuole selezionare un sottoinsieme di elementi in un flusso, in maniera tale che si possano effettuare su di essi delle queries di interesse, e che le relative risposte risultino essere *statisticamente rappresentative* dell'intero flusso. 
 ### Esempio applicativo
 Lo scenario applicativo per lo studio del problema è il seguente:
 Un motore di ricerca riceve un flusso di queries, e vuole studiare il comportamento dell'utente tipico. Si assume che il flusso in input $U$ consiste di tuple della forma $(userID,query,time)$ eseguite dagli utenti. Informalmente, si vuole rispondere a queries come "Quanto spesso un utente esegue la stessa query nello stesso giorno?" o "Quale frazione delle tipiche query di un utente sono state ripetute nell'ultimo mese?". Si assume inoltre che si desideri memorizzare solo $1/10$ degli elementi dello stream.
 
 Il problema può essere formalizzato come segue:
 **Input:** Stream $U$ di tuple $(userID,query,time)$.
-**Task algoritmico:** Trovare un campione $S\subseteq U$ tale per cui, per il tipico utente $u$, e per ogni query $q$, approssimi bene, in valore atteso, la frazione delle $q-$*occorrenze* in $U$ effettuate da $u$.
+**Task algoritmico:** Trovare un campione $S\subseteq U$ tale per cui per il tipico utente $u$ e per ogni query $q$ approssimi bene, in valore atteso, la frazione delle $q-$*occorrenze* in $U$ effettuate da $u$.
 ```ad-Definizione
 title: Definizione ($q-$occorrenza)
 Dato un flusso $U$ di tuple aventi struttura $(userID,query,time)$, si definisce $q-$occorrenza una tupla in $U$ avente la componente $query = q$.
@@ -183,7 +180,7 @@ ___
 	2. **if** $z=0$ **then** Memorizza $(userID,query,time)$ in $S$
 	3. **else** scarta $(userID,query,time)$
 3. **for each** query $q$:
-	1. restituisci i valori medi delle frazioni delle $q$-occorrenze calcolate *solamente* su $S$.
+	1. restituisci i valori (medi) delle frazioni delle $q$-occorrenze calcolate *solamente* su $S$.
 ___
 Si osserva esplicitamente che l'associazione tra tuple e numeri casuali può essere effettuato mediante funzioni hash, in particolar modo da una funzione $h:U \longrightarrow [10]$, che mappa casualmente ogni elemento di $U$ in uno tra $10$ buckets. Gli elementi mappati nei buckets $1,2,\ldots,9$ vengono scartati, mentre gli elementi mappati in $0$ costituiranno il campione memorizzato per un utente.  
 
@@ -195,9 +192,8 @@ Ogni utente $u$, nell'intervallo di tempo di un mese, effettua $s+2d$ queries di
 - $d$ queries vengono eseguite, ciascuna di esse, due volte.
 - Nessuna query di ricerca viene effettuata più di due volte.
 Nel flusso $U$ sono presenti quindi $s+2d$ $q-$occorrenze per ogni utente.
-Se si dispone di un campione $S$ pari ad $1/10$ delle queries totali, ottenuto mediante l'algoritmo appena descritto, dove quindi $\mathbf{E}[|S|]=(1/10)\cdot |U|$, ci si aspetta di trovare in esso $s/10$ delle queries eseguite una singola volta. Delle $d$ queries effettuate due volte, ci si aspetta che solo $d/100$ appariranno due volte nel campione. Tale rapporto è dato da $d$ moltiplicato la probabilità che entrambe le occorrenze della query appaia nel campione:
-Sia $X$ la variabile aleatoria che conta il numero di queries, ripetute due volte all'interno del flusso di dati in ingresso, che appaiono entrambe le volte nel campione.
-Per ogni query $q$ che appare due volte nello stream si definisce la variabile aleatoria $X_q$ come segue:
+Se si dispone di un campione $S$ pari ad $1/10$ delle queries totali, ottenuto mediante l'algoritmo appena descritto, dove quindi $\mathbf{E}[|S|]=(1/10)\cdot |U|$, ci si aspetta di trovare in esso $s/10$ delle queries eseguite una singola volta.
+Delle $d$ queries effettuate due volte, ci si aspetta che solo $d/100$ appariranno due volte nel campione. Infatti, sia $X$ la variabile aleatoria che conta il numero di queries, ripetute due volte all'interno del flusso, che appaiono entrambe le volte nel campione. Per ogni query $q$ che appare due volte nello stream si definisce la variabile aleatoria $X_q$ come segue:
 $$
 \begin{equation*}
 X_q= 
@@ -213,23 +209,25 @@ Si ha quindi che
 $$
 X = \sum_{q}X_q
 $$
-Ricordando che, la probabilità che una tupla $(u,q,t)$ venga selezionata nel campione è proprio$$\mathbf{Pr}\left[h((u,q,t))=0\right] = \frac{1}{10}$$
+Ricordando che, la probabilità che una tupla $(u,q,t)$ venga selezionata nel campione è proprio
+$$
+\mathbf{Pr}\left[h((u,q,t))=0\right] = \frac{1}{10}
+$$
 e che tale selezione risulta essere indipendente per ogni tupla, si ha che
 $$
 \mathbf{E}[X_q] = 1 \cdot \frac{1}{10} \cdot \frac{1}{10} = \frac{1}{100}
 $$
-Sfruttando la linearità del valore atteso si ottiene quindi
+Per la linearità del valore atteso si ottiene quindi
 $$
 \mathbf{E}[X] = \mathbf{E}\left[\sum_qX_q\right]= \sum_q\mathbf{E}\left[X_q\right] = d \cdot \frac{1}{100} = \frac{d}{100}
 $$
-Delle queries che appaiono due volte nell'intero stream, ci si aspetta che $19d/100$ appaiano almeno una volta. Infatti, siano $(u,q,t_1)$ e $(u,q,t_2)$ due query duplicate. Siano $\mathcal{E}_1$ ed $\mathcal{E}_2$ gli eventi
+Inoltre, delle queries che appaiono due volte nell'intero stream, ci si aspetta che $19d/100$ appaiano almeno una volta. Infatti, siano $(u,q,t_1)$ e $(u,q,t_2)$ due query duplicate. Siano $\mathcal{E}_1$ ed $\mathcal{E}_2$ gli eventi *indipendenti*
 $$
 \mathcal{E}_1 = (u,q,t_1) \textnormal{ appare nel campione } S
 $$
 $$
 \mathcal{E}_2 = (u,q,t_2) \textnormal{ appare nel campione }S
 $$
-Tali eventi sono, ovviamente, indipendenti.
 La probabilità che $q$ appaia almeno una volta nel campione è:
 $$
 \mathbf{Pr}\left[(\mathcal{E}_1 \cap \mathcal{E}_2) \cup (\mathcal{E_1} \cap \mathcal{\bar{E}_2}) \cup (\mathcal{\bar{E}}_1 \cap \mathcal{E}_2)\right]
@@ -243,8 +241,7 @@ $$
 &= \frac{1}{100} + \frac{2\cdot9}{100} = \frac{19}{100}
 \end{align*}
 $$
-Sia $Y$ la variabile aleatoria che conta il numero di queries, ripetute due volte all'interno del flusso di dati in ingresso, che appaiono *almeno* una volta nel campione.
-Per ogni query $q$ che appare due volte nello stream si definisce la variabile aleatoria $Y_q$ come segue:
+Sia $Y$ la variabile aleatoria che conta il numero di queries, ripetute due volte all'interno del flusso di dati in ingresso, che appaiono *almeno* una volta nel campione. Per ogni query $q$ che appare due volte nello stream si definisce la variabile aleatoria $Y_q$ come segue:
 $$
 \begin{equation*}
 Y_q= 
@@ -281,10 +278,7 @@ Si ha che $\mathbf{E}[Z_q] = \mathbf{Pr}\left[ (\mathcal{E_1} \cap \mathcal{\bar
 $$
 \mathbf{E}[Z] = \sum_q\mathbf{E}[Z_q] = d \cdot \frac{18}{100}
 $$
-
-
 La risposta corretta alla query riguardante la frazione di ricerche ripetute è $d/(s+d)$. Nonostante ciò, la risposta ottenuta dal campione prodotto dall'algoritmo banale è $d/(10s+19d)$. Per derivare tale formula, si osserva che, delle queries contenute nel campione, ci si aspetta che solo $d/100$ appariranno ripetute due volte in esso, mentre $s/10 + 18d/100$ appariranno una singola volta. Si ha quindi che il numero atteso di elementi *distinti* in $S$ è pari a 
-
 $$
 \frac{s}{10} + \frac{d}{100} + \frac{18d}{100}
 $$
@@ -294,12 +288,10 @@ $$
 \mathbf{E}\left[|S| \right] = \frac{s}{10} + \frac{2d}{100} + \frac{18d}{100}
 		
 $$
-
 Quindi, la frazione di ricerche ripetute che compaiono due volte nel campione è data da dal numero di ricerche ripetute che ci si aspetta di avere nel campione, diviso il numero degli elementi distinti nel campione:
 $$
 \frac{\frac{d}{100}}{\frac{s}{10} + \frac{d}{100} + \frac{18d}{100}} = \frac{d}{10s+19d} 
 $$
-
 e per nessun valore positivo di $s$ e $d$, si può avere che $d/(s+d) = d/(10s+19d)$.
 ### Campionamento degli utenti
 Nello scenario appena descritto, il campione viene selezionato su *tutte* le queries effettuate da ogni singolo utente.
@@ -459,7 +451,7 @@ $$
 Essendo $i$ al più $N$, per fare ciò sono necessari $\log_2\log_2 N$ bits. Quindi, $\mathcal{O}(\log N + \log \log N)= \mathcal{O}(\log N)$ bits risultano sufficienti per rappresentare un bucket.
 #### Regole dei buckets
 Ci sono sei regole che devono essere eseguite quando si rappresenta uno stream mediante buckets:
-1. Ogni posizione all'interno della finestra contenente un $1$ deve trovarsi in un bucket: il primo bit alla destra di un bucket deve essere un bit asserito;
+1. Ogni posizione all'interno della finestra contenente un $1$ deve trovarsi in un bucket;
 2. I buckets **non si sovrappongono** nei timestamps, ossia, una posizione all'interno della finestra non può trovarsi in più di un bucket;
 3. Possono esistere solo **uno** o **due** buckets con la stessa dimensione;
 4. La size di ogni bucket *deve essere sempre* una **potenza di due**;
@@ -488,7 +480,7 @@ L'output dell'algoritmo $Y$ è quindi il seguente
 $$
 Y = \sum_{i=0}^{j-1} a_i 2^i\ + \ \frac{1}{2}\cdot 2^j   \geq \sum_{i=0}^{j-1} 2^i\ + \ 2^{j-1} \geq 2^j-1 + \ 2^{j-1}
 $$
-dove $a_i \in \{1,2\}$ è il numero di buckets aventi size $2^i$. 
+dove $a_i \in \{1,2\}$ è il numero di buckets aventi size $2^i$.
 Si vuole studiare quanto la risposta corretta $c$ sia lontana dalla stima effettuata. 
 Si possono verificare due possibili casi:
 1. La stima restituita dall'algoritmo è minore della risposta corretta, ossia $Y<c$. Nel caso peggiore, tutti gli $1$ di $b$ si trovano nel range della query, quindi la stima non prende in considerazione metà della dimensione di $b$, ossia $2^{j-1}$ bits aventi valore $1$. In questo caso, $c$ è almeno $2^j$, considerando tutti gli $1$ presenti in $b$. In realtà, è almeno $2^{j+1}-1$, essendovi almeno un bucket per ogni size $2^{j-1},2^{j-2},\ldots,1$, ossia$$c \geq \sum_{i=0}^{j-1}2^i + 2^j \geq 2^j-1 +2^j$$Quindi la stima effettuata è almeno il $50\%$ di $c$.
@@ -554,7 +546,7 @@ Approsimativamente $m/n=1/8$ dei bits sono impostati ad $1$, quindi circa $1/8$ 
 In realtà, meno di $1/8$ indirizzi non in $S$ superano la fase di filtraggio, essendo che più di un'indirizzo può essere mappato nello stesso bit.
 #### Analisi accurata
 Si fa quindi un analisi più accurata per il numero di falsi positivi, facendo riferimento al modello *balls into bins*. In questo problema si hanno $m$ sfere che vengono lanciate in $n$ cesti, dove il cesto per ogni sfera viene scelto indipendentemente e con distribuzione di probabilità uniforme.
-Sia quindi $|S|=m$ e $|B|=n$. La probabilità per un elemento $u\in U$ di venir mappato in un bucket pieno, ossia tale per cui $B[h(u)]=1$, è esattamente la frazione $R$ dei buckets già pieni in $B$. Per stimare $R$ si studia quindi un processo *balls into bins*.
+Sia quindi $|S|=m$ e $|B|=n$. La probabilità per un elemento $u\in U$ di venir mappato in un bucket pieno, ossia tale per cui $B[h(u)]=1$, è esattamente la frazione $\mathbf{Pr}[R]$ dei buckets già pieni in $B$. Per stimare $\mathbf{Pr}[R]$ si studia quindi un processo *balls into bins*.
 Per fare ciò, ci si chiede, nel caso in cui si lanciassero $m$ sfere in $n$ cesti equiprobabili, quale sia la *probabilità che un cesto ottenga almeno una sfera*.
 Per il nostro problema, il modello può essere formulato come segue:
 - Ai cesti corrispondo i buckets che vanno da $0$ ad $n-1$.
@@ -570,7 +562,7 @@ Quindi la frazione di $1$ (ossia di cesti pieni) in $B$ è uguale alla probabili
 
 Per risolvere il problema, si fa quindi riferimento ad una tecnica chiamata *Bloom filtering*
 ## Bloom filter
-Un bloom filter è una struttura dati che consiste in:
+Un **bloom filter** è una struttura dati che consiste in:
 1. Un array $B$ di $n$ bits, impostati inizialmente tutti a $0$.
 2. Una collezione di funzioni hash $h_1,h_2,\ldots,h_k$. Ciascuna funzione hash mappa i valori *chiave* in $n$ buckets, corrispondenti agli $n$ bit dell'array.
 3. Un insieme $S$ di $m$ valori chiave.
@@ -605,7 +597,7 @@ $$
 $$
 ### Sul numero di funzioni hash $k$
 Si vuole studiare ora cosa succede all'aumentare del numero di funzioni hash per questa procedura, ossia al crescere di $k$.
-Il valore ottimale per $k$, cioè quello che minimizza la probabilità di falsi negativi, è
+Il valore ottimale per $k$, cioè quello che minimizza la probabilità di falsi positivi, è
 $$k = (n/m) \ln(2)$$
 #### Esempio filtro mail
 Sia $m=1$ miliardo e $n=8$ miliardi.
@@ -615,7 +607,6 @@ Si ha che l'errore è:
 In generale, l'andamento della funzione che descrive la probabilità di falsi positivi all'aumentare delle funzioni hash può essere raffigurato come segue:
 ![center|700](BloomFilterAnalysis.png)
 Allora il valore che minimizza la probabilità di falsi negativi per questo esempio è $k= 8 \ln(2) = 5.54 \approx 6$, e l'errore per $k=6$ è $(1- e^{-1/6})^2 = 0.0235$.
-
 # Contare elementi distinti
 Si studia ora il problema di contare elementi distinti all'interno di un flusso. Come nei problemi precedenti, si fa riferimento a tecniche di hashing e algoritmi probabilistici per ottenere una soluzione approssimata che rispetti i vincoli sulla quantità di memoria utilizzata, fornendo quindi un buon trade-off tra spazio utilizzato e qualità della soluzione.
 ## Il problema
@@ -625,7 +616,7 @@ Formalmente:
 - Si vuole mantenere un conto $d$ del numero di elementi distinti visti all'interno del flusso, partendo dall'inizio del flusso sino all'ultimo istante, ossia sino all'ultimo elemento processato.
 ## Soluzione Naive
 L'approccio banale alla risoluzione del problema è quello di mantenere in memoria principale un insieme $S\subseteq U$ contenente tutti gli elementi visti nel flusso fino all'istante della sua analisi.
-Tale insieme può essere implementato in una struttura dati di ricerca efficiente, come una hash table o un albero di ricerca, in maniera tale che risulti possibile aggiungere velocemente nuovi elementi, e controllare se l'elemento appena arrivato nello stream sia stato già visto o meno. Fintantoché il numero di elementi distinti non risulta essere troppo grande, ossia $|S| \ll |U|$, allora questa soluzione richiede una quantità di spazio che rispetta la capacità della memoria principale. Ma, come per gli altri problemi, se il numero di elementi distinti è troppo grande, o se vi è un numero troppo elevato di flussi da processare simultaneamente, allora non risulta possibile memorizzare i dati necessari nella memoria principale.
+Tale insieme può essere implementato in una struttura dati di ricerca efficiente, comenegativi una hash table o un albero di ricerca, in maniera tale che risulti possibile aggiungere velocemente nuovi elementi, e controllare se l'elemento appena arrivato nello stream sia stato già visto o meno. Fintantoché il numero di elementi distinti non risulta essere troppo grande, ossia $|S| \ll |U|$, allora questa soluzione richiede una quantità di spazio che rispetta la capacità della memoria principale. Ma, come per gli altri problemi, se il numero di elementi distinti è troppo grande, o se vi è un numero troppo elevato di flussi da processare simultaneamente, allora non risulta possibile memorizzare i dati necessari nella memoria principale.
 Si osserva che l'obiettivo del problema è contare il numero $d$ di elementi distinti visti nel flusso, dunque la memorizzazione di $S$ non è propriamente l'obiettivo del problema, nonostante permetta di rispondere correttamente al quesito posto dal problema originale.
 
 Si fa riferimento ad un algoritmo probabilistico che permette di non memorizzare l'intero insieme $S$ e che garantisce una soluzione approssimata con bassa probabilità di errore.
@@ -752,7 +743,7 @@ Questo rende l'algoritmo di conteggio probabilistico pratico: si calcola semplic
 Infine, è stata mostrata una rifinitura dell'algoritmo di Flajolet Martin che garantisce un algoritmo probabilistico $(1-\varepsilon)-$approssimante per $d$, che utilizza spazio par a $\mathcal{O}(\varepsilon^{-2} \cdot \log(1/\varepsilon)) + 2 \log \log n$.
 # Calcolo dei momenti
 Si studia una generalizzazione del problema del conteggio di elementi distinti all'interno di uno stream. Questo problema riguarda la distribuzione delle *frequenze* di elementi distinti all'interno di un flusso.
-Si supponga che un flusso $I$ consista di elementi scelti da un'insieme universale $U=\{1,\ldots,N\}.$ Si assuma che l'insieme universale sia totalmente ordinato. Sia $m_i$ la frequenza dell'elemento $i$, ossia il numero delle occorrenze di tale elemento nel flusso $I$, per ogni $i \in U$. Si definisce il $k-$momento del flusso come la somma su tutti gli $i$ di $(m_i)^k$:
+Si supponga che un flusso $I$ consista di elementi scelti da un'insieme universale $U=\{1,\dots,N\}.$ Si assuma che l'insieme universale sia totalmente ordinato. Sia $m_i$ la frequenza dell'elemento $i$, ossia il numero delle occorrenze di tale elemento nel flusso $I$, per ogni $i \in U$. Si definisce il $k-$momento del flusso come la somma su tutti gli $i$ di $(m_i)^k$:
 $$
 \sum_{i \in U} (m_i)^k
 $$
@@ -776,7 +767,6 @@ A partire da tale procedura, si può stimare il $2-$momento da ogni variabile $X
 $$
 n(2X.val -1)
 $$
-
 Schematicamente, l'algoritmo si può rappresentare come segue, e viene applicato per un $X \in \mathcal{X}$:
 ___
 **Algoritmo AMS**
@@ -812,7 +802,7 @@ $$
 che è proprio la definizione di $2-$momento. 
 ## Momenti di alto ordine
 La stima per il $k-$momento, per $k >2$, si calcola eseguendo lo stesso algoritmo per il $2-$momento, cambiando però la maniera in cui si deriva la stima a partire da una variabile.
-Per $k=2$ si è utilizzata la formula $n(2v-1)$ per rendere un valore $v$, dove tale valore è il conteggio del numero di occorrenze di un particolare elemento del flusso $a$, in una stima del $2-$momento. Si è mostrato inoltre il motivo per cui questa formula funzione: la somma dei termini $2v-1$, per $v=1,\dots,m$ è uguale ad $m^2$, dove $m$ è il numero di volte in cui $a$ appare nel flusso. 
+Per $k=2$ si è utilizzata la formula $n(2v-1)$ per rendere il valore $m_{a}$, dove tale valore è il conteggio del numero di occorrenze di un particolare elemento del flusso $a$, una stima del $2-$momento. Si è mostrato inoltre il motivo per cui questa formula funzione: la somma dei termini $2v-1$, per $v=1,\dots,m$ è uguale ad $m^2$, dove $m$ è il numero di volte in cui $a$ appare nel flusso. 
 Si osserva che
 $$2v-1 = v^2 - (v-1)^2$$
 dunque se si vuole calcolare il $3-$momento, si sostituisce $2v-1$ con

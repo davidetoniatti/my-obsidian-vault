@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "d0bc0f79c61b4967",
+        "id": "9e8da11acd74d1fc",
         "type": "tabs",
         "children": [
           {
-            "id": "d6313ceb3a7a7b95",
+            "id": "7bdb81db9bf16a98",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ABD/06 - Data streams.md",
+                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ABD/06 - Data streams.md",
+                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ABD/06 - Data streams.md",
+                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ABD/06 - Data streams.md"
+                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md"
               }
             }
           }
@@ -147,18 +147,28 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "d6313ceb3a7a7b95",
+  "active": "7bdb81db9bf16a98",
   "lastOpenFiles": [
+    "ABD/05 - Similar items.md",
+    "ABD/06 - Data streams.md",
+    "ABD/07 - Link analysis.md",
+    "AR/05 - Reti come grafi dalla struttura disomogenea.md",
+    "hab.md",
+    "ABD/04 - Hash function.md",
+    "AR/03 - Grafi Geometrici aleatori e reti wireless.md",
+    "ABD/02 - Richiami di probabilità.md",
+    "ABD/03 - Algoritmi probabilistici.md",
+    "ABD/attachments/Pasted image 20240213154249.png",
+    "ABD/attachments/Pasted image 20240211195046.png",
+    "ABD/attachments/Pasted image 20240211195103.png",
+    "ABD/attachments/WebStructure.png",
+    "ABD/attachments/flowModel.png",
+    "ABD/01 - Introduzione al Data Mining.md",
     "AR/07 - Seguire il gregge.md",
     "AR/06 - Processi di diffusione.md",
     "AR/01 - Introduzione e grafi di Erdős-Rényi.md",
     "AR/02 - Questione di popolarità.md",
-    "AR/03 - Grafi Geometrici aleatori e reti wireless.md",
     "AR/04 - Il fenomeno Small World.md",
-    "AR/05 - Reti come grafi dalla struttura disomogenea.md",
-    "ABD/06 - Data streams.md",
-    "ABD/05 - Similar items.md",
-    "ABD/04 - Hash function.md",
     "SDCC/mutua esclusione ed elezione.md",
     "SDCC/microservizi.md",
     "SDCC/kubernetes.md",
@@ -167,29 +177,19 @@
     "SDCC/08 - Docker.md",
     "SDCC/01 - Introduzione ai Sistemi Distribuiti.md",
     "CNS/notes.md",
-    "ABD/02 - Richiami di probabilità.md",
     "AGT/08 - PLS Completezza.md",
     "AGT/07 - Meccanismi senza pagamenti e kidney exchange.md",
-    "ABD/01 - Introduzione al Data Mining.md",
-    "ABD/03 - Algoritmi probabilistici.md",
-    "ABD/07 - Link analysis.md",
     "AGT/03 - Local Connection Game.md",
-    "AGT/04 - Algorithmic Mechanism Design I.md",
     "ABD/attachments/BloomFilterAnalysis.png",
     "ABD/attachments/DataStreamManagementSystem.png",
     "ABD/attachments/Pasted image 20240103110920.png",
     "ABD/attachments/MinhashAlg1.png",
     "ABD/attachments/MinhashAlg2.png",
-    "ABD/attachments/charMatrix.png",
     "Excalidraw",
     "AGT.zip",
     "zizKgNdo",
     "AR.zip",
     "ziUCCASi",
-    "AGT/attachments/Pasted image 20240126124647.png",
-    "Pasted image 20231202234352.png",
-    "Pasted image 20231202234926.png",
-    "Pasted image 20231203123120.png",
     "ziUKrXKb",
     "schifezze",
     "AGT_andrea",

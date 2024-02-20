@@ -224,7 +224,7 @@ Si osserva che entrambi i metodi consentono di ottenere delle **partizioni nidif
 Si osserva infine che entrambi i metodi richiedono la scelta di un arco da rimuovere o aggiungere ad ogni passo: questo criterio di scelta è ciò che distingue i diversi metodi.
 ## Betwennes di un arco
 Un particolare criterio per rimuovere archi in un metodo partitio è basato sul concetto di **betwenness** di un arco. Tale concetto a sua volta si basa sulle proprietà di un arco di essere _bridge_ o _local bridge_.
-Per definizione, rimuovere un arco bridge disconnette due porzioni di grafo, mentre rimuovere un local bridge certamente peggiora la connettività tra due regioni del grafo: questi ponti connettono regioni che, senza tali archi, avrebberro difficoltà ad interagire.
+Per definizione, rimuovere un arco bridge disconnette due porzioni di grafo, mentre rimuovere un local bridge certamente peggiora la connettività tra due regioni del grafo: questi ponti connettono regioni che, senza tali archi, avrebbero difficoltà ad interagire.
 Inoltre, gli archi bridge e local brdige sono dei _weak ties_. Perciò l'idea si basa sul fatto che, rimuovendo tutti i weak ties da un grafo, rimangono solamente gruppi di nodi connessi da relazioni forti (_strong ties_), e tali gruppi rispecchiano il concetto intuitivo di comunità (ovvero gruppi di persone collegati da legami forti).
 Purtroppo però esistono casi in cui anche rimuovendo tutti i weak ties non avviene un partizionamento in comunità.
 ![Esempio weak ties|center||500](05-ar_img05.png)
@@ -257,9 +257,9 @@ La parte più complessa di questo metodo è il calcolo della betwenness.
 ## Calcolo della edge-betwenness
 Per ogni nodo $s \in V$, l'algoritmo per il calcolo della edge-betwenness esegue i seguenti tre passi:
 1. Calcolare il sottografo $T(s)$ dei cammini minimi uscenti da $s$ mediante una visita BFS;
-2. Mediante una visita top-down di $T(s)$, calcolare $\sigma_{st}$ per ogni $v \in V$;
+2. Mediante una visita top-down di $T(s)$, calcolare $\sigma_{sv}$ per ogni $v \in V$;
 3. mediante una visita bottom-up di $T(s)$, e usando quanto calcolato al punto precedente, calcolare per ogni $(u,v) \in T(s)$ tutte le edge-betwenness relative a cammini minimi che partono da $s$, cioè il valore $$ b_{s}(u,v) = \sum_{t \in V - \{ s \}} b_{st}(u,v) $$
-Dopo aver calcolato $b_s(u,v)$ per ogni $s \in V$, si possono ricavare i valore della edge-betwenness come segue
+Dopo aver calcolato $b_s(u,v)$ per ogni $s \in V$, si può ricavare il valore della edge-betwenness per $(u,v)$ come segue
 $$
 b(u,v) = \frac{1}{2} \sum_{s \in V}b_{s}(u,v)
 $$
@@ -273,8 +273,8 @@ Se un nodo $v$ si trova al livello $h$, allora certamente **tutti** i cammini mi
 Perciò, tutti gli archi $(u,v)$ con $u \in L_{h-1}$ e $v \in L_h$ faranno parte di $T(s)$.
 Dunque si calcola $T(s)$ nella seguente maniera:
 1. Inizialmente $L_0 = \lbrace s \rbrace$ e $T(s) = \emptyset$.
-2. Per ogni $h \geq 0$ calcolare $L_{h+1}$ come tutti quei nodi **fuori** $L_0 \cup L_1 \cup ... \cup L_h$ tali che hanno almeno un vicino in $v \in L_h$, ovvero come $$ L_{h+1} \equiv \lbrace v \in V \setminus (L_0 \cup L_1 \cup ... \cup L_h) | \exists u \in L_h : (u,v) \in E  \rbrace$$
-3. Calcolato $L_{h+1}$ si pone $T(s)$ come $$T(s) = T(s) \cup \lbrace (u,v) \in E | u \in L_h \land v \in L_{h+1} \rbrace$$ 
+2. Per ogni $h \geq 0$ calcolare $L_{h+1}$ come tutti quei nodi $v \in V$ **fuori** $L_0 \cup L_1 \cup ... \cup L_h$ tali che hanno almeno un vicino in $u \in L_h$, ovvero come $$ L_{h+1} \equiv \lbrace v \in V \setminus (L_0 \cup L_1 \cup ... \cup L_h) | \exists u \in L_h : (u,v) \in E  \rbrace$$
+3. Calcolato $L_{h+1}$ si pone $T(s)$ come $$T(s) = T(s) \cup \lbrace (u,v) \in E | u \in L_h \land v \in L_{h+1} \rbrace$$
 ![BFS|center|500](05-ar_img06.png)
 ### Fase 2: visita top-down
 Mediante una visita top-down di $T(s)$, si calcola per ogni $v \in V$ la quantità $\sigma_{sv}$, ovvero il numero di cammini minimi che vanno da $s$ a $v$.
@@ -294,7 +294,7 @@ $$
 Si devono calcolare per ogni $(u,v) \in T(s)$ tutte le edge-betwenness relative a cammini minimi che partono da $s$, cioè il valore $$ b_{s}(u,v) = \sum_{t \in V - \{ s \}} b_{st}(u,v) $$
 Sia $d$ il numero di livelli in $T(s)$.
 Si consideri un arco $(y,x) \in T(s)$ con $y \in L_{d-1}$ e $x \in L_d$. 
-Allora tutti gli shortest path che partono da $s$ e passano per l'arco $(y,x)$ sono tutti shortest path che terminano in $y$.
+Allora tutti gli shortest path che partono da $s$ e passano per l'arco $(y,x)$ sono tutti gli shortest path che terminano in $y$.
 Perciò il flusso che passa su $(y,x)$ rispetto a $s$ sarà pari al rapporto tra il numero di shortest path che vanno da $s$ a $y$ (ovvero $\sigma_{sy}$) e il numero complessivo di shortest path che vanno da $s$ ad $x$ (ovvero $\sigma_{sx}$).
 $$b_s(y,x) = \sum_{t \in V \setminus \lbrace s \rbrace} b_{st}(y,x) = b_{sx}(y,x) = \frac{\sigma_{sx}(y,x)}{\sigma_{sx}} = \frac{\sigma_{sy}}{\sigma_{sx}}$$
 Analogamente possiamo applicare questo ragionamento per tutti gli archi che collegano nodi dell'ultimo livello, come mostrato nella seguente [figura](#^94bfa8).

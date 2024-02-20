@@ -2,13 +2,13 @@
 ## Assiomi di probabilità
 Uno ***spazio di campionamento*** $\Omega$ è un insieme i quali elementi descrivono gli esiti di un esperimento di interesse.
 
-I sottoinsiemi di uno spazio di campionamento prendono il nome di ***eventi***. Si dice che un evento $A$ accade se l'esito di un esperimento è un elemento di $A$. 
+I sottoinsiemi di uno spazio di campionamento prendono il nome di ***eventi***. Si dice che un evento $A$ accade se l'esito di un esperimento è un elemento di $A$.
 
-Gli eventi possono essere combinati secondo le operazioni insiemistiche. 
+Gli eventi possono essere combinati secondo le operazioni insiemistiche.
 Sia $\Omega$ uno spazio di campionamento e siano $E_1 \subseteq \Omega,E_2 \subseteq \Omega$ due eventi. 
-L'evento $E_1 \cap E_2$ prende il nome di *intersezione* dei due eventi, ed accade se si verificano entrambi gli eventi $E_1$ ed $E_2$. 
+L'evento $E_1 \cap E_2$ prende il nome di *intersezione* dei due eventi, ed accade se si verificano entrambi gli eventi $E_1$ ed $E_2$.
 L'insieme $E_1 \cup E_2$  prende il nome di *unione* dei due eventi, ed accade se si verifica almeno uno dei due eventi $E_1$ ed $E_2$.
-L'insieme $E^c=\{\omega \in \Omega \ : \ \omega \notin E\}$ è il *complemento* dell'evento $E$, ed accade se e solo se l'evento $E$ non si verifica. Si ha che $\Omega^c = \{ \emptyset\}$. 
+L'insieme $E^c=\{\omega \in \Omega \ : \ \omega \notin E\}$ è il *complemento* dell'evento $E$, ed accade se e solo se l'evento $E$ non si verifica. Si ha che $\Omega^c = \{ \emptyset\}$.
 
 I due eventi $E_1$ ed $E_2$ si dicono *disgiunti* o *mutualmente esclusivi* se non hanno esiti in comune, ossia $E_1 \cap E_2  =  \emptyset$. 
 Si dice che l'evento $E_1$ *implica* l'evento $E_2$ se l'esito di $E_1$ è contenuto in $E_2$, ossia $E_1 \subset E_2$.
@@ -98,11 +98,9 @@ $$
 $$
 
 ```
-
 Si osserva esplicitamente come questo lemma differisca dalla seconda condizione della definizione di funzione di probabilità discreta, la quale richiede che gli eventi siano disgiunti due a due.
 
 A partire dai concetti appena enunciati, si può definire lo ***spazio di probabilità***:
-
 ```ad-Definizione
 title: Definizione (Spazio di probabilità):
 Uno spazio di probabilità ha tre componenti:
@@ -111,7 +109,6 @@ Uno spazio di probabilità ha tre componenti:
 3. Una funzione di probabilità $\mathbf{Pr} : \mathcal{F} \rightarrow \mathbb{R}$. 
 
 ```
-
 Un elemento di $\Omega$ è chiamato *evento semplice*. In uno spazio di probabilità discreto, la funzione di probabilità è definita unicamente dalle probabilità di eventi semplici, quindi $\mathbf{Pr} : \Omega \rightarrow [0,1]$.  
 ## Probabilità condizionata ed indipendenza
 L'occorrenza di un evento può andare a modificare la probabilità che si verifichi un evento successivo correlato ad esso. Tale probabilità prende il nome di ***probabilità condizionata***.
@@ -338,7 +335,6 @@ $$
 \mathbf{E}\left[X\right] = \sum_{i=1}^k \mathbf{Pr}\left[B_i\right]\mathbf{E}\left[X|B_i\right]
 $$
 ```
-
 La varianza misura di quanto il valore di una variabile aleatoria si discosta globalmente dal suo valore atteso.
 ```ad-Definizione
 title: Definizione (Varianza e deviazione standard)

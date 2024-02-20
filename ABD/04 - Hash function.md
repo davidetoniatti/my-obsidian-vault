@@ -27,7 +27,7 @@ La complessità temporale di queste operazioni è proporzionale al tempo necessa
 
 Allora l'**efficienza** del dizionario è **basata sulla scelta della funzione hash**. In particolare, si vuole definire una funzione hash $h$ che *distribuisca bene* gli elementi, ossia che renda *sufficientemente rara* la *presenza di collisioni*, per la quale nessuna entrata della tabella hash $H$ possa contenere troppi elementi. Per fare ciò risulta necessario un *approccio probabilistico* alla costruzione di tale funzione. 
 
-Ma prima, si mostra perché l'approccio deterministico non risulti essere buono nel caso in cui $|U| >> m$.  
+Ma prima, si mostra perché l'approccio deterministico non risulti essere buono nel caso in cui $|U| \gg m$.  
 ```ad-Proprieta
 Sia $|U|>m^2$. Allora, per ogni funzione hash deterministica $h$, esiste un insieme $S$ di dimensione $n$ tale per cui ogni suo elemento viene mappato nella stessa entrata di $H$.  
 ```
@@ -39,12 +39,11 @@ Allora $H[i]$ conterrà tutti gli elementi di $S$.
 ```
 Quindi, nel caso peggiore, tutti gli elementi di $U$ inseriti in $H$ apparterrebbero a $S=\{u\in U: h(u)=i\}$, e l'esecuzione delle varie operazioni richiederebbe tempo $\Theta(n)$.
 ### Hashing deterministico
-Sia $U$ l'insieme universo tale per cui $|U| = N >> m \approx n :=|S|$, e si rappresentino gli elementi $u$ di $U$ come interi in $\{0,1,...,N-1\}$.
+Sia $U$ l'insieme universo tale per cui $|U| = N \gg m \approx n :=|S|$, e si rappresentino gli elementi $u \in U$ come interi in $\{0,1,...,N-1\}$.
 Sia $p$ un numero primo tale che $m \leq p \leq 2m$.
 Sia $h$ una funzione tale per cui, $\forall u \in U$
 $$h(u) = u \ (\textnormal{mod } p)$$
-Allora la proprietà vista in precedenza rimane vera, ma gli elementi di $U$ risultano essere ben distribuiti.
-Tale approccio risulta buono per applicazioni "statiche".
+Allora la proprietà vista in precedenza rimane vera, ma gli elementi di $U$ risultano essere ben distribuiti. Tale approccio risulta buono per applicazioni "statiche".
 ### Hashing probabilistico
 Si usa ora la *probabilità* per la costruzione della funzione hash $h$.
 In generale, si vuole che tale funzione possegga le seguenti caratteristiche
@@ -62,7 +61,7 @@ $$h(u_i)=y_i$$
 dove $\forall i=1,...,N,y_i \in \{0,1,...,m-1\}$. 
 ```
 Data una famiglia $\mathcal{H}$, l'hashing probabilistico consiste nel estrarre una funzione hash $h \in H$ in modo uniforme e dunque mappare gli elementi usando la funzione $h$ appena estratta.
-L'analisi del caso atteso di questo algoritmo deve prendere in considerazione la struttura di $\mathcal{H}$ e il fatto che $h$ è stata scelta uniformemente da esso. Nel caso peggiore, sono necessari quindi almeno $\log_2|\mathcal{H}|$ bits per rappresentare e memorizzare $h$. Infatti se si usassero $t < \log_2|\mathcal{H}|$ bits per ogni $h \in \mathcal{H}$, allora si potrebbero distinguere solo $2^t < |\mathcal{H}|$ funzioni hash, i quali non sono sufficienti visto che, per via del fatto che la scelta della funzione hash avviene uniformly at random, una qualsiasi $h$ può essere scelta dall'insieme. 
+L'analisi del caso atteso di questo algoritmo deve prendere in considerazione la struttura di $\mathcal{H}$ e il fatto che $h$ è stata scelta uniformemente da esso. Nel caso peggiore, sono necessari almeno $\log_2|\mathcal{H}|$ bits per rappresentare e memorizzare $h$. Infatti se si usassero $t < \log_2|\mathcal{H}|$ bits per ogni $h \in \mathcal{H}$, allora si potrebbero distinguere solo $2^t < |\mathcal{H}|$ funzioni hash, i quali non sono sufficienti visto che, per via del fatto che la scelta della funzione hash avviene uniformly at random, una qualsiasi $h$ può essere scelta dall'insieme. 
 #### Un primo approccio
 Per ogni $u\in U$, si sceglie un valore $h(u)$ *uniformly at random* nell'insieme $\{0,1,...,m-1\}$, indipendentemente dalle scelte fatte per gli altri elementi dell'insieme universo, ossia, $\forall i \in \{0,1,...,m-1\},$ 
 $$\mathbf{Pr}[h(u)=i] = \frac{1}{m}$$
@@ -114,7 +113,6 @@ Si osserva che la famiglia $\mathcal{H}$ contenente tutte le possibili funzioni 
 
 Si vuole quindi individuare una famiglia di funzioni che rispetti le due proprietà precedentemente enunciate. Per fare ciò, si rende precisa la proprietà di base che caratterizza una classe di funzioni hash universale, e che motiva la scelta di funzioni appartenenti a queste classi.
 Si mostra come, sia $h$ una funzione selezionata casualmente da una famiglia di funzioni hash universale $\mathcal{H}$, allora per ogni insieme $S \subseteq U$ di $n$ elementi e per ogni $u\in S$, il numero atteso di elementi in $S$ che collidono con $u$ è costante per $m=\Theta(n)$.
-
 ```ad-Teorema
 Sia $\mathcal{H}$ una famiglia di funzioni hash universale. Sia $S \subseteq U$ un insieme di $n$ elementi, e sia $u\in S$. Sia $h$ una funzione scelta *uniformly at random* da $\mathcal{H}$ e sia $X$ la variabile aleatoria che conta il numero di elementi di $S$ mappati in $h(u)$, ossia 
 $$
@@ -167,7 +165,6 @@ Se  $|U|=N$, allora $r$ deve essere tale per cui $m^r \geq N$, perché a ciascun
 $$
 r \geq \frac{\log(N)}{\log(m)}
 $$
-
 Sia $\mathcal{A}$ l'insieme di tutti i vettori della forma $a=(a_1,...,a_r)$, dove $a_i \in [m]$ per $i=1,...,r$.
 Per ogni $a \in \mathcal{A}$ si definisce la funzione lineare
 $$
@@ -182,7 +179,6 @@ Quindi, essendo $m=\Theta(n)$ (si ricorda che $n\leq m \leq 2n$)
 $$
 |\mathcal{H}| = m^r = \Theta(n^r)
 $$
-
 Per implementare il dizionario usando questa famiglia, la procedura `MakeDictionary()` sceglie un vettore casuale $a=(a_1,a_2,...,a_r)$ da $\mathcal{A}$. Questo è possibile scegliendo ciascun $a_i$ uniformly at random da $\{0,1,...,m-1\}$, formando così $h_a$. Tale funzione ha una rappresentazione compatta, dato che è possibile calcolare $h_a(u)$ per ogni $u\in U$ scegliendo e memorizzando un vettore $a$ casuale con $r=\Theta(\log (N)/\log (m))$ cifre, ciascuna rappresentabile con $\log(m)$ bits. 
 Dunque il dizionario utilizza $h_a$ per implementare le operazioni di `Insert(u)`,`Delete(u)` e `Lookup(u)` nel modo descritto in precedenza. Si ricorda che queste operazioni vengono precedute dal calcolo della funzione hash, il quale è stato mostrato essere efficiente.
 
@@ -394,7 +390,7 @@ Usando la stessa argomentazione del lemma precedente, ed osservando che $a \neq 
 $$
 \mathbf{Pr}\left[\hat{X}_2 = i \wedge \hat{X}_1 = j\right] \leq \frac{1}{p(p-1)}.
 $$
-Mettendo tutto assieme si ha
+	Mettendo tutto assieme si ha
 $$
 \mathbf{Pr} \left[ \bar{h}(x_1)=\bar{h}(x_2)\right] \leq \sum_{i=0}^{p-1} \sum_{j \in W} \mathbf{Pr}\left[\hat{X}_2 = i \wedge \hat{X}_1 = j\right]
 $$
@@ -444,7 +440,7 @@ L'idea è quella di costruire una tabella a due livelli:
 
 La complessità spaziale è $$O\left(n+ \sum_{j=0}^{m-1}l_j^2 \right)$$Per ridurla a $O(n)$ bisogna aggiungere due passi intermedi:
 - Passo 1.5: Se $\sum_{j=0}^{m-1}l_j^2>cn$ dove $c$ è una costante scelta, riesegui il passo $1$.
-- Passo 2.5: Quando $h_{2,j}(u)=h_{2,j}(v)$ per ogni $u,v \in S$ tali per cui $u\neq v$ e $h_1(u)=h_1(v)$, ossia quando si verifica una collisione al secondo livello di hash, pesca una nuova funzione $h_{2,j}$ e rimappa tutti gli $l_j$ elementi in $H_j$. 
+- Passo 2.5: Quando $h_{2,j}(u)=h_{2,j}(v)$ per qualche $u,v \in S$ tali per cui $u\neq v$ e $h_1(u)=h_1(v)$, ossia quando si verifica una collisione al secondo livello di hash, pesca una nuova funzione $h_{2,j}$ e rimappa tutti gli $l_j$ elementi in $H_j$. 
 
 Questi due passi garantiscono che non si verifichino collisioni al secondo livello, e che la complessità spaziale sia di $O(n)$. Ciò garantisce che il tempo di ricerca di un elemento sia $O(1)$.
 Si osserva esplicitamente che risulta improbabile che si verifichino le condizioni espresse nel passo $2.5$, essendovi $\Theta(l_j^2)$ celle per mappare $l_j$ elementi.
@@ -463,7 +459,10 @@ Dove si osserva esplicitamente che, per l'universalità di $h_{2,j}$
 $$
 \mathbf{Pr}\left[h_{2,j}(u)=h_{2,j}(v)\right] \leq \frac{1}{l_j^2}
 $$
-Quindi, ogni prova è come un lancio di moneta (distr geom?) . Se l'esito è "testa", si passa allo step successivo. Si ha quindi che $\mathbf{E}\left[\textnormal{numero di prove} \right]\leq 2$ e $\textnormal{(numero di prove)}=O(\log n)$ con alta probabilità. Ogni prova richiede tempo $O(l_j)$, che, per un Chernoff bound (rivedere quale e fare la dim per esercizio), $l_j = O(\log n)$ con alta probabilità, quindi ogni prova richiede tempo $O(\log n)$. 
+Quindi, ogni prova è come un lancio di moneta. Se l'esito è *croce*, si passa allo step successivo. Si ha quindi che
+- $\mathbf{E}\left[\textnormal{numero di prove} \right]\leq 2$
+- numero di prove per ottenere *croce* (no collisione) è  $O(\log n)$ con alta probabilità.
+Ogni prova richiede tempo $O(l_j)$, che, per un Chernoff bound, $l_j = O(\log n)$ con alta probabilità, quindi ogni prova richiede tempo $O(\log n)$. 
 Dovendo compiere tale passo per ogni $j$, si ha che la complessità temporale totale è 
 $O(\log n)\cdot O(\log n) \cdot O(n)= O(n \log^2 n)$ con alta probabilità.
 
@@ -482,11 +481,9 @@ X_{u,v} =
 $$
 ```ad-Osservazione
 $$
-\sum_{j=0}^{m-1} l_j^2= \sum_{u\in S}\sum_{v \in S}X_{u,v}
+\sum_{u\in S}\sum_{v \in S}X_{u,v} = l_0 \cdot l_0 + l_1 \cdot l_1 + \dots + l_{m-1} \cdot l_{m-1} = \sum_{j=0}^{m-1} l_j^2 
 $$
-Questo perché -rivedere hash lucio+andy-
 ```
-
 Si ha quindi che 
 $$
 \begin{align*}
