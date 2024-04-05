@@ -35,7 +35,7 @@ Si nota che anche tale meccanismo non incentiva gli agenti a dire la verità. In
 ## Vickrey's Second Price Auction
 In questo meccanismo il quadro viene sempre attribuito all'agente $a_i$ che ha dichiarato l'offerta più alta $r_i = \max_{j=1,\dots,k}\{ r_{j} \}$. Il vincitore del quadro paga il quadro tanto quanto il secondo valore dichiarato più alto $R = \max_{j \neq i} \{r_j\}$, cioè quanto la seconda miglior offerta.
 Questo meccanismo funziona, cioè incentiva gli agenti a dire la verità. Infatti vale il seguente teorema.
-```ad-theorem
+```ad-Teorema
 title: Teorema
 Nell'asta di Vickrey, $r_i = t_i$ è una strategia dominante  per ogni giocatore $i$.
 ```
@@ -83,7 +83,7 @@ Se questo è vero in equilibrio di strategie dominanti, allora ogni agente $a_i$
 Il gioco indotto da un problema di mechanism design è il gioco in cui gli $n$ agenti sono i giocatori e la matrice dei payoff è implicitamente definita nelle funzioni di utilità.
 ## Meccanismi truthful
 Si può formalizzare la proprietà principale dell'asta di Vickrey, cioè che a tutti gli agenti conviene dire la verità, con le seguenti definizioni.
-```ad-lemma
+```ad-Definizione
 title: Definizione
 Un meccanismo $M = \langle g(r),p(r) \rangle$ è un'**implementazione con strategie dominanti** se esiste un vettore di tipi riportati $r^* = (r_1^*,\dots,r_n^*)$ tale che $f(t) = g(r^*)$ in equilibrio di strategie dominanti, cioè per ogni agente $a_i$  e per ogni vettore dei tipi riportati $r = (r_1,\dots,r_n)$ vale
 $$ u_{i}(t_{i},g(r_{-i},r_{i}^*)) \geqslant u_{i}(t_{i},g(r_{-i},r_{i})) $$

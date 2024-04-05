@@ -95,7 +95,7 @@ $$
 \mathcal{P}(\exists C : C = \emptyset) \leq \frac{5n}{\gamma^2_1 \ln{n}} \left(  1 - \frac{\gamma^2_1 \ln{n}}{5n} \right)^n
 $$
 Per concludere la dimostrazione, si utilizza il seguente lemma
-```ad-lemma
+```ad-Lemma
 Per ogni $x \in \mathbb{R}$ vale $1 - x \leqslant e^{-x}$. Inoltre, se $x \neq 0$ allora vale $1 - x < e^{-x}$.
 **Dimostrazione**: sia $G(x) = 1-x-e^{-x}$. La derivata prima di $G(x)$ vale
 $$ G'(x) = e^{-x}-1 $$

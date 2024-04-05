@@ -29,9 +29,9 @@ d_{G-e}(s,t) - (d_{G}(s,t)- r_{e}), \quad &e \in P_{G}(s,t) \\
 Dunque per calcolare il pagamento ad ogni arco $e \in P_G(s,t)$, è necessario calcolare il **cammino minimo di rimpiazzo** $P_{G-e}(s,t)$ nel grafo $G-e = (V, E \setminus \{e\},r_{-e})$, cioè il cammino minimo da $s$ a $t$ che non contiene l'arco $e$.
 #### Esempio
 Si consideri il seguente grafo
-![[agt_img02.png]]
+![[05-agt_img01.png]]
 Per calcolare il pagamento di $e \in P_G(s,t)$, si deve prima calcolare li **cammino minimo di rimpiazzo** per $e$
-![[agt_img03.png]]
+![[05-agt_img02.png]]
 Dunque vale
 $$P_{e} = d_{G-e}(s,t) - (d_{G}(s,t) - r_{e}) = 12 - (11 - 2) = 3$$
 ### Analisi della complessità
@@ -44,7 +44,7 @@ $$ \underbrace{O(n)}_{\text{nro di archi in }P_{G}(s,t)} \cdot \underbrace{O(m+n
 In realtà vale un risultato ancora migliore, in cui si dimostra che il problema è risolvibile in tempo $O(m+m\log{n})$.
 # Meccanismi One-Parameter (OP)
 Si definisce ora una seconda classe di meccanismi truthful, utilizzati per risolvere una categoria di problemi detta **one-parameter (OP)**.
-```ad-theorem
+```ad-Definizione
 title: Definizione
 Un problema è **one-parameter** se:
 1. L'informazione posseduta da ogni agente $a_i$ è un **singolo parametro** $t_i \in \mathbb{R}$;
@@ -54,7 +54,7 @@ Per questi problemi esiste una classe di meccanismi truthful detta **meccanismi 
 Si descrivono ora le caratteristiche dei meccanismi one-parameter.
 ## Meccanismo truthful se e solo se $g(\cdot)$ monotona
 Si introduce una definizione utile per dimostrare una condizione necessaria per la truthfulness di un meccanismo per un problema OP.
-```ad-theorem
+```ad-Definizione
 title: Definizione
 Un algoritmo $g(\cdot)$ per un problema OP di minimizzazione è **monotono** se per ogni agente $a_i$, il carico di lavoro $w_i(g(r_{-i},r_i))$ è **non crescente** rispetto a $r_i$ per tutti gli $r_{-i} = (r_1,\dots,r_{i-i},r_{i+i},\dots,r_n)$.
 ```
@@ -64,14 +64,14 @@ Una *condizione necessaria* affinché un meccanismo $M=\langle g(r), p(r) \rangl
 #### Dimostrazione
 Si suppone per assurdo che l'algoritmo $g(\cdot)$ non sia monotono e si mostra che nessuno schema di pagamento può rendere $M$ veritiero.
 Se $g(\cdot)$ non è monotono, esiste un agente $a_i$ e un vettore $r_{-i}$ tale che $w_i(g(r_{-i},r_i))$ è non *non crescente* rispetto a $r_i$. Graficamente,
-![[agt_img05.png]]
+![[05-agt_img03.png]]
 Si considerano i quattro casi seguenti:
 1. $t_i = x, r_i = x \implies v_i(t_i,o) = x \cdot w_i(g(r_{-i},x))$
 2. $t_i = y, r_i = y \implies v_i(t_i,o) = y \cdot w_i(g(r_{-i},y))$
 3. $t_i = x, r_i = y \implies v_i(t_i,o) = x \cdot w_i(g(r_{-i},y)) \implies a_i \text{ aumenta il suo costo di } A$
 4. $t_i = y, r_i = x \implies v_i(t_i,o) = y \cdot w_i(g(r_{-i},x)) \implies a_i \text{ ha un risparmio di } A+k$
 Dove $A$ e $k$ sono le due aree in figura:
-![[agt_img06.png]]
+![[05-agt_img04.png]]
 Sia $\Delta p = p_i(r_{-i},y) - p_i(r_{-i},x)$, se $M$ è veritiero deve essere:
 - $\Delta p \leqslant A$: altrimenti, quando $t_i = x$ all'agente $a_i$ converrebbe mentire e dichiarare $r_{i}=y$ in quanto l'aumento di pagamento ($> A$) supererebbe l'aumento di costo ($A$), dunque la sua utilità aumenta.
 - $\Delta p \geqslant A+k$: altrimenti, quando $t_i = y$ all'agente $a_i$ converrebbe mentire e dichiarare $r_{i}=x$ in quanto l'aumento di pagamento nel dichiarare $y$ non supererebbe il risparmio che si ottiene riportando $x$, dunque la sua utilità aumenta.
@@ -103,7 +103,7 @@ u_{i}(t_{i},g(r_{-i},t_{i})) &= p_{i}((r_{-i},t_{i})) - v_{i}(t_{i},g(r_{-i},t_{
 \end{align}
 $$
 Graficamente,
-![[agt_img07.png]]
+![[05-agt_img05.png]]
 Dunque se $a_i$ dichiara la verità, allora in utilità perde una quantità pari all'area azzurra nel grafico. Questo accade perché è stato posto $h_i(r_{-i})=0$.
 Dunque si mostra che se l'agente $a_i$ mente, cioè dichiara un valore $r_i \neq t_i$, allora in utilità perde una quantità maggiore all'area azzurra nella figura precedente, dunque ad $a_i$ conviene sempre dichiarare il tipo reale.
 Sia $x = r_i \neq t_{i}$. In questo caso, la valutazione è pari a
@@ -121,13 +121,13 @@ $$
 U &= u_{i}(t_{i},g(r_{-i},x))  \\
 &= p_{i}((r_{-i},x)) - v_{i}(t_{i},g(r_{-i},x)) \\
 &= \left(x \cdot w_{i}(g(r_{-i},x)) - \int_{0}^{x} w_{i}(g(r_{-i},z))  \, dz\right) - t_{i} \cdot w_{i}(g(r_{-i},x)) \\
-&= (x - t_{i}) \cdot w_{i}(g(r_{-i},x)) - \int_{0}^{t_{i}} w_{i}(g(r_{-i},z))  \, dz \\
+&= (x - t_{i}) \cdot w_{i}(g(r_{-i},x)) - \int_{0}^{x} w_{i}(g(r_{-i},z))  \, dz \\
 &= P-C
 \end{align}
 $$
 Allora l'agente $a_i$, se mente, dichiara o $x > t_i$ o $x < t_i$:
-- se $x > t_i$, graficamente vale, <br>![[agt_img08.png]] cioè l'area sottesa al grafico presa in considerazione è più grande di una quantità $G$. Dato che l'area considerata viene sottratta nel calcolo dell'utilità, si conclude che $a_i$ sta perdendo un'ulteriore quantità $G$ di utile, dunque non ha convenienza a mentire.
-- se $x < t_i$, graficamente vale, <br>![[agt_img11.png]] cioè l'area presa in considerazione è più grande di una quantità $H$. Come nel caso precedente, l'area viene sottratta nel calcolo dell'utilità. Si conclude che $a_i$ sta perdendo un'ulteriore quantità $H$ di utile, dunque non ha convenienza a mentire.
+- se $x > t_i$, graficamente vale, <br>![[05-agt_img06.png]] cioè l'area sottesa al grafico presa in considerazione è più grande di una quantità $G$. Dato che l'area considerata viene sottratta nel calcolo dell'utilità, si conclude che $a_i$ sta perdendo un'ulteriore quantità $G$ di utile, dunque non ha convenienza a mentire.
+- se $x < t_i$, graficamente vale, <br>![[05-agt_img09.png]] cioè l'area presa in considerazione è più grande di una quantità $H$. Come nel caso precedente, l'area viene sottratta nel calcolo dell'utilità. Si conclude che $a_i$ sta perdendo un'ulteriore quantità $H$ di utile, dunque non ha convenienza a mentire.
 Allora in entrambi i casi, l'agente $a_i$ non ha convenienza a mentire, cioè a dichiarare un tipo diverso da $t_i$.
  $$\tag*{$\blacksquare$}$$
 ### Sulla funzione $h_i(r_{-i})$
@@ -159,7 +159,7 @@ $E(T)$ indica gli archi di $G$ che sono presenti nell'albero ricoprente $T$
 ```
 Per classificare il problema come utilitario o meno, è necessario definire la funzione di valutazione: si osserva che fissato un albero (outcome) $T \in \mathcal{F}$, la funzione di valutazione dipende da come vengono trasmessi i messaggi nella rete $T$.
 Si suppone di utilizzare un protocollo **multicast**, nel quale una sola copia del messaggio viene spedita su ogni arco: eventualmente, il messaggio viene duplicato dai nodi che devono ritrasmettere il messaggio su più archi incidenti a loro.
-![[agt_img09.png]]
+![[05-agt_img07.png]]
 Fissato un outcome $T \in \mathcal{F}$, la funzione di **valutazione** dell'agente associato all'arco $e$ $a_e$ è definita come
 $$
 v_{e}(t_{e},T) = \begin{cases}
@@ -188,7 +188,7 @@ Un meccanismo one-parameter per l'SPT non utilitario è il meccanismo $M_{\text{
 - $g(r)$ algoritmo che dato il grafo e le dichiarazioni, calcola uno Shortest Path Tree $S_G(s)$ del grafo $G=(V,E,r)$ pesato con i pesi riportati $r$ utilizzando l'**algoritmo di Dijkstra**.
 - Il pagamento per ogni agente $a_e$ che controlla l'arco $e \in E$ è dato da $$p_{e}(r) = r_{e} \cdot w_{e}(g(r)) + \int_{r_{e}}^{\infty} w_{e}(g(r_{-e},z)) \, dz$$ così da garantire la **partecipazione volontaria**.
 Si osserva che il meccanismo $M_{\text{SPT}}$ è **truthful**, in quanto l'algoritmo di Dijkstra è monotono. Fissato $r_{-e}$ il carico di lavoro per un agente $a_e$ ha sempre la forma
-![[agt_img10.png]]
+![[05-agt_img08.png]]
 dove il valore $\theta_e$ per cui il carico di lavoro passa da uno a zero è detta **soglia**: se $a_e$ dichiara al più $\theta_e$, allora l'arco $e$ è selezionato; se $a_e$ dichiara più di $\theta_e$, allora l'arco $e$ non è selezionato.
 Questo valore di soglia è fondamentale nel calcolo dei pagamenti, infatti
 - Se $e$ non viene selezionato, cioè $e \not\in E(T)$ ,allora $$p_{e}(r) = r_{e} \cdot w_{e}(g(r)) + \int_{r_{e}}^{\infty} w_{e}(g(r_{-e},z)) \, dz = 0+0=0$$
@@ -202,7 +202,7 @@ quindi il valore soglia per l'arco $e$ è tale che
 $$
 d_{G}(s,u) + \theta_{e} = d_{G-e}(s,v) \iff \theta_{e} = d_{G-e}(s,v) - d_{G}(s,u)
 $$
-![](Pasted%20image%2020240126124647.png)
+![](05-agt_img10.png)
 ### Una soluzione banale: risultati di complessità
 Una soluzione banale per il problema dello SPT non cooperativo consiste nel calcolare $S_G(s)$ utilizzando l'algoritmo di Dijkstra sul grafo con i pesi riportati, per poi calcolare, per ogni $e = (u,v)$, $d_{G-e}(s,v)$ applicando Dijkstra al grafo $G-e$ in modo tale da calcolare il pagamento per ogni $a_{e}$.
 La complessità di tale soluzione è pari a
@@ -210,20 +210,20 @@ $$
 \underbrace{O(n)}_{\text{nro di archi in }P_{G}(s,t)} \cdot \underbrace{O(m+n\log{n})}_{\text{Calcolo $d_{G-e}(s,v)$ fissato $e \in S_{G}(s)$}} = O(nm+n^2\log{n}) 
 $$
 Infine, vale il seguente teorema.
-```ad-theorem
+```ad-Teorema
 title: Teorema
 $M_{\text{SPT}}$ è calcolabile in tempo $O(m+n\log{n})$.
 ```
 ## Caso speciale dei problemi OP: Binary Demand
-Il problema dello SPT non cooperativo appena affrontato appartiene ad una classe particolare di problemi one-parameter, nota con il nome di problemi **binary demand (BD)**.
-Un problema è BD se
+Il problema dello **SPT** non cooperativo appena affrontato appartiene ad una classe particolare di problemi one-parameter, nota con il nome di problemi **binary demand (BD)**.
+Un problema è **BD** se
 1. L'informazione posseduta da ogni agente $a_i$ è un **singolo parametro** $t_i \in \mathcal{R}$;
 2. La **valutazione** di $a_i$ ha la forma $$v_{i}(t_{i},o) = t_{i} \cdot w_{i}(o)$$ dove $w_i(o) \in \{0,1\}$ è il **carico di lavoro** per $a_i$ nell'outcome $o$. Quando $w_i(o)=1$ diremo che l'agente $a_i$ è **selezionato** nell'outcome $o$.
-Si osserva che per problemi BD, l'algoritmo $g(\cdot)$ deve avere la caratteristica di monotonia vista nel meccanismo per il problema SPT, ossia
-```ad-theorem
+Si osserva che per problemi **BD**, l'algoritmo $g(\cdot)$ deve avere la caratteristica di monotonia vista nel meccanismo per il problema **SPT**, ossia
+```ad-Definizione
 title: Definizione
 Un algoritmo $g(\cdot)$ per un problema BD di minimizzazione è **monotono** se per ogni agente $a_i$ e per tutti gli $r_{-i}=(r_1,\dots,r_{i-1},r_{i+1},\dots,r_n)$ la funzione $w_i(g(r_{-i},r_i))$ è della forma
-![[agt_img10.png|500|center]]
+![[05-agt_img08.png|500|center]]
 Dove $\theta_i(r_{-i}) \in \mathcal{R}\cup\{+\infty\}$ è detto **valore soglia** e il **pagamento** per l'agente $a_i$ diventa
 $$p_i(r) = \theta_i(r_{-i})$$
 ```

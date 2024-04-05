@@ -7,7 +7,6 @@ La gestione dei flussi risulta di fondamentale importanza quando l'*input rate*,
 # Stream Model
 Si studia il modello volto al processo di flussi di dati.
 Facendo un analogia con un sistema per la gestione di database, si può vedere un processore di flusso come una sorta di sistema di gestione di dati.
-![[DataStreamManagementSystem.png]]
 Un numero arbitrario di flussi può entrare nel sistema. 
 Gli elementi di un flusso possono essere visti come delle tuple.
 Ogni flusso fornisce elementi al sistema seguendo la propria *schedule* personale, ossia, non devono necessariamente avere la stessa velocità di trasmissione o gli stessi tipi di dati degli altri flussi. Inoltre, l'intervallo di tempo che passa nella trasmissione di elementi contenuti all'interno di un flusso non deve necessariamente essere uniforme. La proprietà principale che distingue il processo di flussi di dati, rispetto al processo di dati contenuti all'interno di un database, è data dal fatto che la velocità di arrivo degli elementi del flusso non è sotto il controllo del sistema che li elabora.
@@ -32,19 +31,19 @@ Si vuole sapere quante volte $y$ appare in $x$ come sua sottostringa, avente qui
 Per risolvere il problema del pattern matching in maniera efficiente su un Data Stream, risulta necessario utilizzare un data sketch adeguato.
 A tal fine, si definisce una misura di similarità: dati due elementi $\hat{x},\hat{y}\in \Sigma^*$, si vuole sapere se $\hat{x}=\hat{y}$. Tale misura prende il nome di *identità*.  Si vuole quindi uno sketch $f(\cdot)$ tale per cui, si ha con alta probabilità che $f(\hat{x})=f(\hat{y})$ se e solo se $\hat{x}=\hat{y}$. Ci si riferisce a tale proprietà, nella trattazione di questo problema, con il termine *string identity*.
 ```ad-Osservazione
-Ricordando la definizione di data sketch, la proprietà $4$ che esso deve avere per il problema PM è la proprio la *String Identity*.
+Ricordando la definizione di data sketch, la proprietà 4 che esso deve avere per il problema *Pattern Matching* è la proprio la *String Identity*.
 ```
 ## Rabin Hash function
-Si studia quindi la *Rabin hash function*, che risulta essere un data sketch valido per il problema pattern matching.
-Senza perdita di generalità, sia $x$ una stringa di lunghezza $n$ sull'alfabeto $\Sigma = [0,\sigma -1]$. Le stringhe possono essere quindi viste come interi di $n$ cifre in base $\sigma >0$. Si osserva esplicitamente che:
+Si studia quindi la ***Rabin hash function***, che risulta essere un data sketch valido per il problema pattern matching.
+Senza perdita di generalità, sia $x$ una stringa di lunghezza $n$ sull'alfabeto $\Sigma = [0,\sigma -1]$. Le stringhe possono essere viste come interi di $n$ cifre in base $\sigma >0$. Si osserva esplicitamente che:
 - Questo scenario può essere utilizzato per rappresentare sottoinsiemi di $[1,n]$ ponendo $\Sigma = \{0,1\}$.
 - Per ogni funzione $f$, se $bitsize(f(x))<bitsize(x)$, dove $bitsize(\cdot)$ è una funzione che restituisce il numero di bit che un oggetto occupa in memoria, allora devono necessariamente verificarsi collisioni, ossia deve esistere necessariamente una coppia $x\neq y$ tale per cui $f(x)=f(y)$.
 Una prima idea per risolvere il problema dell'identità, può essere quella di utilizzare come sketch la funzione
 $$
-\bar{h}(x) = ((a \cdot x + b) \textnormal{ mod } M) \textnormal{ mod }d
+h_{a,b}(x) = ((a \cdot x + b) \mod{p}) \mod{h}
 $$
-vista in precedenza, dove $M$ è un numero primo e $d$ è la dimensione dell'hash table, con $d <<n$, considerando la stringa $x$ come un numero con $n$ cifre in base $|\Sigma|$. 
-Sfortunatamente, questo non risulta essere un buon approccio: essendo che, per definizione di tale funzione, risulti necessario che $M>x$  (dove si evidenzia che $x$ deve essere preso come valore e non come la sua lunghezza) per ogni input $x$ della funzione, bisognerebbe eseguire le operazioni di aritmetica modulare su interi con $n$ cifre per aggiornare lo sketch, e ciò richiederebbe uno spazio pari a $\Omega(n)$. Ciò non rispetterebbe quindi il punto $3$ nella definizione di data sketch.
+vista in precedenza, dove $p$ è un numero primo e $h$ è la dimensione dell'hash table, con $h \ll n$, considerando la stringa $x$ come un numero con $n$ cifre in base $|\Sigma|$. 
+Sfortunatamente, questo non risulta essere un buon approccio: essendo che, per definizione di tale funzione, risulti necessario che $p>x$  (dove si evidenzia che $x$ deve essere preso come valore e non come la sua lunghezza) per ogni input $x$ della funzione, bisognerebbe eseguire le operazioni di aritmetica modulare su interi con $n$ cifre per aggiornare lo sketch, e ciò richiederebbe uno spazio pari a $\Omega(n)$. Ciò non rispetterebbe quindi il punto $3$ nella definizione di data sketch.
 
 Si definisce quindi il **Rabin's hashing**, uno schema di hashing di stringhe che risolve il problema appena descritto. Si fa presente che tale schema non risulti essere universale, ma nonostante ciò, garantisce una bassa probabilità di collisione.
 ```ad-Definizione
@@ -195,7 +194,6 @@ Nel flusso $U$ sono presenti quindi $s+2d$ $q-$occorrenze per ogni utente.
 Se si dispone di un campione $S$ pari ad $1/10$ delle queries totali, ottenuto mediante l'algoritmo appena descritto, dove quindi $\mathbf{E}[|S|]=(1/10)\cdot |U|$, ci si aspetta di trovare in esso $s/10$ delle queries eseguite una singola volta.
 Delle $d$ queries effettuate due volte, ci si aspetta che solo $d/100$ appariranno due volte nel campione. Infatti, sia $X$ la variabile aleatoria che conta il numero di queries, ripetute due volte all'interno del flusso, che appaiono entrambe le volte nel campione. Per ogni query $q$ che appare due volte nello stream si definisce la variabile aleatoria $X_q$ come segue:
 $$
-\begin{equation*}
 X_q= 
   \left\{ 
     \begin{aligned}
@@ -203,7 +201,6 @@ X_q=
       &\ 0 \ \ \  \textnormal{ altrimenti}  
     \end{aligned}
   \right.
-\end{equation*}
 $$
 Si ha quindi che 
 $$
@@ -243,7 +240,6 @@ $$
 $$
 Sia $Y$ la variabile aleatoria che conta il numero di queries, ripetute due volte all'interno del flusso di dati in ingresso, che appaiono *almeno* una volta nel campione. Per ogni query $q$ che appare due volte nello stream si definisce la variabile aleatoria $Y_q$ come segue:
 $$
-\begin{equation*}
 Y_q= 
   \left\{ 
     \begin{aligned}
@@ -251,7 +247,6 @@ Y_q=
       &\ 0 \ \ \  \textnormal{ altrimenti}  
     \end{aligned}
   \right.
-\end{equation*}
 $$
 Si ha che $\mathbf{E}[Y_q] = \mathbf{Pr}[Y_q = 1] =  \mathbf{Pr}\left[(\mathcal{E}_1 \cap \mathcal{E}_2) \cup (\mathcal{E_1} \cap \mathcal{\bar{E}_2}) \cup (\mathcal{\bar{E}}_1 \cap \mathcal{E}_2)\right]$, e che $Y = \sum_q Y_q$.
 Quindi
@@ -264,7 +259,6 @@ $$
 $$
 Sia $Z$ la variabile aleatoria che conta il numero di queries, ripetute due volte all'interno del flusso di dati in ingresso, che appaiono esattamente una volta nel campione, e sia $Z_q$ la variabile aleatoria definita per ogni $q$ che appare due volte nello stream come segue:
 $$
-\begin{equation*}
 Z_q= 
   \left\{ 
     \begin{aligned}
@@ -272,7 +266,6 @@ Z_q=
       &\ 0 \ \ \  \textnormal{ altrimenti}  
     \end{aligned}
   \right.
-\end{equation*}
 $$
 Si ha che $\mathbf{E}[Z_q] = \mathbf{Pr}\left[ (\mathcal{E_1} \cap \mathcal{\bar{E}_2}) \cup (\mathcal{\bar{E}}_1 \cap \mathcal{E}_2)\right]$ e che $Z = \sum_q Z_q$, e quindi 
 $$
@@ -328,7 +321,6 @@ Ossia,  l'output dell'algoritmo $\mathbf{AVG}_{V\in S}\left(X_S(V,q)\right)$ ten
 Si evidenzia che la dimensione attesa di $S$ è $1/10$ dello stream in input $U$ di *tutti* gli oggetti.
 Infatti, sia $C_j$ la variabile aleatoria definita come segue:
 $$
-\begin{equation*}
 C_j= 
   \left\{ 
     \begin{aligned}
@@ -336,7 +328,6 @@ C_j=
       &\ 0 \ \ \  \textnormal{ altrimenti}  
     \end{aligned}
   \right.
-\end{equation*}
 $$
 dove $h:I \longrightarrow [10]$ è la funzione hash che mappa ogni utente in uno tra $10$ buckets, e se  $h(j)=0$ allora l'utente $j$ viene selezionato per la creazione di $S$.
 Sia $x_j$ il numero di elementi dell'utente $j$ nell'intero stream $U$. Allora
@@ -482,9 +473,6 @@ Y = \sum_{i=0}^{j-1} a_i 2^i\ + \ \frac{1}{2}\cdot 2^j   \geq \sum_{i=0}^{j-1} 2
 $$
 dove $a_i \in \{1,2\}$ è il numero di buckets aventi size $2^i$.
 Si vuole studiare quanto la risposta corretta $c$ sia lontana dalla stima effettuata. 
-Si possono verificare due possibili casi:
-1. La stima restituita dall'algoritmo è minore della risposta corretta, ossia $Y<c$. Nel caso peggiore, tutti gli $1$ di $b$ si trovano nel range della query, quindi la stima non prende in considerazione metà della dimensione di $b$, ossia $2^{j-1}$ bits aventi valore $1$. In questo caso, $c$ è almeno $2^j$, considerando tutti gli $1$ presenti in $b$. In realtà, è almeno $2^{j+1}-1$, essendovi almeno un bucket per ogni size $2^{j-1},2^{j-2},\ldots,1$, ossia$$c \geq \sum_{i=0}^{j-1}2^i + 2^j \geq 2^j-1 +2^j$$Quindi la stima effettuata è almeno il $50\%$ di $c$.
-2. La stima restituita dall'algoritmo è maggiore della risposta corretta, ossia $Y>c$. Nel caso peggiore, solo il bit più a destra del bucket $b$ si trova nel range della query. Nel caso in cui si avesse un singolo bucket per ciascuna delle size minori della size di $b$, si ha che$$c = \sum_{i=0}^{j-1}2^i + 1 = 2^j$$e quindi $$c \geq 2^j$$e la stima fatta è $$2^{j-1} + \sum_{i=0}^{j-1}2^i = 2^j + 2^{j-1} - 1$$che risulta essere non più grande del $50\%$ di $c$.
 ### Ridurre l'errore di approssimazione
 Si tratta questo argomento informalmente.
 L'idea chiave è quella di mantenere, invece di $1$ o $2$ buckets per ciascuna size, $b-1$ o $b$ buckets con $b>0$, eccetto per il bucket avente size maggiore, per il quale si può avere un qualsiasi numero tra $1$ ed $r$ di questi. Cosi facendo, l'errore è al più $\mathcal{O}(1/r)$.
@@ -662,7 +650,6 @@ $$
 ### Analisi dell'algoritmo
 Si vuole dimostrare ora la correttezza dell'algoritmo. Si ricorda che $\mathbf{Pr}\left[r(i) \geq l\right] = 1/2^l$. Sia $X_l$ la variabile aleatoria definita come segue:
 $$
-\begin{equation*}
 X_l= 
   \left\{ 
     \begin{aligned}
@@ -670,7 +657,6 @@ X_l=
       &\ 0 \ \ \  \textnormal{ altrimenti}  
     \end{aligned}
   \right.
-\end{equation*}
 $$
 
 Allora si ha che 

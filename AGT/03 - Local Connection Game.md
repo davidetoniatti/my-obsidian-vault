@@ -54,12 +54,12 @@ Cosi facendo si potrà dare una delimitazione alla perdita di efficienza della r
 Si vuole studiare la struttura di una soluzione ottimale in funzione di $\alpha$. Si ricorda che una rete è ottimale se minimizza il costo sociale $SC(G)$.
 
 Si definiscono due tipologie di grafi.
-```ad-lemma
+```ad-Definizione
 title: Definizione (Grafo completo):
 Un grafo $G=(V,E)$ si dice completo se $\forall u,v \in V$ tali per cui $u\neq v$, $(u,v) \in E$.
 ![03-agt_img01|center|500](03-agt_img01.png) 
 ```
-```ad-lemma
+```ad-Definizione
 title: Definizione (Stella)
 Un grafo semplice $G=(V,E)$ con $|V|=n$ si dice stella di ordine $n$ se gode delle seguenti proprietà:
 - Esiste un solo $u \in V$ tale per cui $d(u)=n-1$, dove $d(u)$ è il grado del nodo $u$.
@@ -272,12 +272,12 @@ $$
 $$
 # La Best Response è NP-Hard
 Si mostra ora il seguente teorema riguardante la complessità del calcolo della best response di un dato giocatore:
-```ad-theorem
+```ad-Teorema
 title: Teorema
 E' NP-hard, date le strategie degli altri agenti, calcolare la best response di un dato giocatore.
 ```
 Il seguente teorema viene dimostrato mediante una riduzione polinomiale dal problema Dominating Set. 
-```ad-lemma
+```ad-Definizione
 title: Definizione (Dominating Set)
 Sia $G=(V,E)$ un grafo non orientato e sia $U\subseteq V$. $U$ è un insieme dominante per $G$ se ogni nodo in $V-U$ ha un vicino in $U$. 
 Formalmente, $\forall v \in V-U$, $\exists u \in U$ tale che $(u,v) \in E$.

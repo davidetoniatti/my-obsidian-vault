@@ -1,0 +1,9 @@
+{
+  "refCommand": "cref",
+  "defaultToEquation": false,
+  "additionalMathEnvironments": [],
+  "generateLabels": true,
+  "compressNewlines": false,
+  "imagePathSettings": 1,
+  "numberedSections": true
+}

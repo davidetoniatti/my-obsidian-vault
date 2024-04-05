@@ -38,12 +38,12 @@ dunque il problema è un **problema utilitario**, ed è possibile applicare il *
 ### Vuoi calcolare l'outcome ottimo? Col cazzo
 Si osserva che per poter applicare questo meccanismo è necessario calcolare, dato il vettore $r$ dei tipi riportati, la soluzione ottima $g(r)$.
 Questo risulta però essere un problema computazinalmente difficile, come mostra il seguente risultato.
-```ad-theorem
+```ad-Teorema
 title: Teorema 1
 Approssimare Combinatorial Auction con un fattore migliore di $m^{1/2-\epsilon}$ è un problema NP-hard per ogni $\epsilon > 0$
 ```
 per dimostrare il teorema si effettua una **riduzione** a partire dal problema **maximum indipendent set**, per il quale vale il seguente risultato di impossibilità.
-```ad-theorem
+```ad-Teorema
 title: Teorema 2 (J. Hastod, 2002)
 Approssimare il problema IS con un fattore migliore di $n^{1-\epsilon}$ è un problema NP-hard per ogni $\epsilon > 0$
 ```
@@ -76,11 +76,11 @@ Anche se il meccanismo VCG non è calcolabile in tempo polinomiale, notiamo che 
 \end{cases}$$ cioè pari ad $1$ quando l'agente è selezionato in $W$.
 
 Dato che bisogna progettare un algoritmo *monotono* per applicare il meccanismo OP e il problema alla base dell'asta combinatoria è un problema di *massimizzazione*, si introduce la seguente definizione di algoritmo monotono.
-```ad-theorem
+```ad-Definizione
 title: Definizione
 Un algoritmo $g()$ per un problema Binary Demand di massimizzazione è **monotono** se per ogni agente $a_i$ e per ogni scelta fissata degli altri giocatori $r_{-i} = (r_1,\dots,r_{i-1},r_{i+1},\dots,r_{n})$, il *carico di lavoro* $w_i(g(r_{-i},r_i))$ è della forma
 
-![[agt_img01.png|center|500]]
+![[06-agt_img01.png|center|500]]
 
 dove $\theta_i(r_{-i}) \in \mathbb{R}\cup\{+\infty\}$ è detto **valore di soglia**
 ```
@@ -90,14 +90,12 @@ L'obiettivo ora è quello di definire un meccanismo tale che:
 - Sia $g(\cdot)$  che $p(\cdot)$ sono **calcolabili** in tempo polinomiale.
 ### Un algoritmo greedy $\sqrt{m}$-apx
 Si definisce il seguente algoritmo *greedy* $g(\cdot)$ approssimante per calcolare l'outcome.
-![[agt_img04.png]]
+![[06-agt_img02.png]]
 L'algoritmo calcola una soluzione ammissibile, dato che un agente $i$ è inserito nella soluzione se e soltanto se nessuno degli elementi del suo bundle è già stato assegnato a un qualche altro agente. Inoltre si vede facilmente che l'algoritmo calcola la soluzione in tempo polinomiale: l'operazione dominante è l'ordinamento dei valori riportati.
 
 Dunque si deve dimostrare che l'algoritmo è appena descritto sia *monotono* e sia in grado di calcolare effettivamente una soluzione *$\sqrt{m}$-approssimante*. Inoltre, si deve mostrare che è possibile calcolare per ogni $a_i$ il pagamento $p_i$, equivalente al valore della soglia $\theta_{i}(r_{-i})$, in tempo polinomiale.
 #### Lemma: l'algoritmo è monotono
-```ad-lemma
-L'algoritmo $g(\cdot)$ è monotono.
-```
+L'algoritmo $g(\cdot)$ è **monotono**.
 ##### Dimostrazione
 Si deve dimostrare che, fissato un qualsiasi agente $a_i$ che viene selezionato da $g(\cdot)$ , $a_i$ viene comunque selezionato quando si aumenta il suo tipo riportato. Ma questo è vero per come funziona l'algoritmo, in quanto per come vengono ordinati i valori riportati
 $$
@@ -106,7 +104,7 @@ $$
 se si aumenta il valore $r_i$, l'agente $a_i$  si può muovere solo a sinistra nell'ordinamento: viene selezionato ancora più velocemente di prima.
  $$\tag*{$\blacksquare$}$$
 #### Calcolare i pagamenti
-Dato che il problema è di tipo One Parameter Binary Demand, il pagamento per l'agente $a_i$ selezionato dall'algoritmo equivale al valore della soglia $\theta_{i}(r_{-i})$ che determina il valore riportato per cui $a_i$ viene inserito tra i vincitori.
+Dato che il problema è di tipo *One Parameter Binary Demand*, il pagamento per l'agente $a_i$ selezionato dall'algoritmo equivale al valore della soglia $\theta_{i}(r_{-i})$ che determina il valore riportato per cui $a_i$ viene inserito tra i vincitori.
 
 Per calcolare il pagamento $p_i$ dell'agente $a_i$, si consideri l'ordinamento dell'algoritmo senza $i$
 $$
@@ -172,9 +170,9 @@ dunque per ogni $i \in W$ vale
 $$
 \sum_{j \in \text{OPT}_{i}} r_{j} \leqslant \sum_{j \in \text{OPT}_{i}} r_{i} \cdot \frac{\sqrt{ |S_{j}| }}{\sqrt{ |S_{i}| }} =  \frac{r_{i}}{ \sqrt{ |S_{i}| }} \cdot \sum_{j \in \text{OPT}_{i}}\sqrt{ |S_{j}| }
 $$
-A questo punto si utilizza la disugualianza di Cauchy-Schwarz:
+A questo punto si utilizza la *disugualianza di Cauchy-Schwarz*:
 ```ad-info
-La disugualianza di Cauchy-Schwarz dice che dati due vettori $x = (x_1,\dots,x_n)$ e $y = (y_1,\dots,y_n)$, vale che
+La **disugualianza di Cauchy-Schwarz** dice che dati due vettori $x = (x_1,\dots,x_n)$ e $y = (y_1,\dots,y_n)$, vale che
 $$
 \sum_{j=1}^n x_j y_j \leqslant \left( \sum_{j=1}^n x_j^2 \right)^{\frac{1}{2}} \cdot \left( \sum_{j=1}^n y_j^2 \right)^{\frac{1}{2}}
 $$

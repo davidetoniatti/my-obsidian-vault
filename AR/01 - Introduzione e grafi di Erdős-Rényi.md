@@ -62,16 +62,14 @@ In generale, $G_{n,p}$ conterrà mediamente tanti più archi quanto più $p$ si 
 Una componente gigante in un grafo è una componente connessa che contiene una frazione del numero dei nodi. Molte reti reali contengono una componente gigante, come ad esempio nelle reti sociali o nella rete del Web. Ci si chiede se il modello di Erdős-Rényi riesce a rappresentare questa caratteristica tipica di molte reti reali, ossia se esistono valori di $p$ per i quali $G_{n,p}$ contiene componenti giganti.
 
 Si dimostra ora che se $p > \frac{\ln{64}}{n}$ allora con alta probabilità il grafo $G_{n,p}$ contiene una componente connessa costituita da almeno metà dei suoi nodi. Formalmente, si definisce $X$ come la variabile aleatoria corrispondente al numero di nodi nella più grande componente connessa di $G_{n,p}$ ; dunque si dimostra il teorema seguente.
-```ad-theorem
+```ad-Teorema
 title: Teorema
 se $p > \frac{\ln{64}}{n}$, allora $P( X \geq \frac{n}{2}) \geq 1-2^{-n/8}$
 
 ```
 Per dimostrare il teorema, si dimostra in primis il lemma seguente.
-```ad-lemma
+```ad-Lemma
 se $X < n/2$ allora esiste un insieme $A \subset [n]$ tale che $n/4 \leq |A| < 3n/4$ e non esistono archi fra i nodi in $A$ e i nodi in $[n]-A$.
-
-
 ```
 Dimostrazione.
 Siano $C_1,C_2,\dots,C_k$ tutte le componenti connesse di $G_{n,p}$ e si assuma che siano ordinate per cardinalità non decrescente, ossia $|C_1| \leq |C_2| \leq \dots \leq |C_k|$.

@@ -10,15 +10,12 @@ Il fenomeno della chiusura triadica è strettamente connesso al concetto di omof
 	- **Selezione**: si tende ad essere amici a chi ci somiglia;
 	- **Opportunità**: se si ama il mare, difficilmente si incontreranno amanti della montagna.
 -  La tendenza di individui nel diventare *simili* agli individui con i quali stanno in relazione: ad assumere i loro stessi gusti, adeguarsi ai loro comportamenti e a diventare a amici dei loro amici. La motivazione soggiacente a questa tendenza è l'esigenza di ridurre a tensione sociale, ma c'è anche una motivazione assolutamente razionale: se si vedono gli individui con cui si ha una relazione utilizzare un certo prodotto, allora si tenderà ad acquistare quel prodotto, sia perché si assume essere una buona idea dato che c'è fiducia in tali individui, sia per mantenere la similitudine con questi individui, dunque per non indebolire la relazione con loro.
-
 ## Processi di diffusione
 Il processo di diffusione delle innovazioni è stato studiato in sociologia già a partire dalla metà del secolo scorso da [Ryan e Gross (1943)](https://www.proquest.com/openview/7de2b2276a089fe888071663de12b6a0/), osservando i processi di adozione di nuovi semi ibridi di mais da parte di un gruppo di agricoltori dell'Iowa: la maggior parte degli agricoltori iniziava a usare i nuovi semi solo dopo aver osservato che un certo numero di vicini li stava utilizzando.
 
 Si vuole modellare il processo di diffusione in una rete, dunque è necessario stabilire le regole in base alle quali un nodo decide di cambiare. Si definisce un modello di decisioni **individuali**, ossia non vi è coalizzazione di gruppi di nodi per prendere collettivamente la stessa decisione, nel quale le scelte dei nodi sono guidate da **motivazione di puro interesse personale**, cioè la spinta a cambiare è tanto maggiore quanto maggiore è il vantaggio che si prevede che deriverà dal cambiamento.
 Si assume che nella rete sia stabilizzato un certo stato delle cose $B$, cioè tutti gli individui della rete hanno un prodotto/opinione/comportamento denominato con $B$. Ad un certo istante, nella rete alcuni individui cambiano il loro stato in $A$. Allora, <u>assumendo che chi è nello stato A non torni mai in B</u> in quale casi un individuo decide di cambiare il proprio stato da $B$ a $A$?
-
 ### Modello del processo di diffusione
-
 Il modellamento del processo di diffusione individuale basato sul vantaggio personale avviene mediante un *Network Coordination Game*. Sia $(u,v)$ un arco della rete, si assume che il beneficio reciproco di adottare $A$ o $B$ sia il seguente:
 - se $u$ e $v$ adottano entrambi $A$ allora entrambi hanno un beneficio pari ad $a$;
 - se $u$ e $v$ adottano entrambi $B$ allora entrambi hanno un beneficio pari ad $b$;
@@ -56,7 +53,6 @@ Quando $a = b$ occorrono almeno la metà dei vicini nello stato $A$ per indurre 
 Infine, quando $a$ è molto più piccolo di $b$, occorrono molti vicini nello stato $A$ per indurre un nodo a cambiare stato, e questo accade quando lo stato $A$ è peggiore dello stato $B$, e quindi è faticoso/rischioso/costoso adottare $A$.
 
 ### Game e configurazione di equilibrio
-
 Con configurazioni di equilibrio si intendono quelle configurazioni del network coordination game definito in cui nessun nodo cambia il proprio stato da $B$ ad $A$.
 Si osserva che esistono almeno due configurazioni di equilibrio:
 - quando $A$ non è stato introdotto nella rete, cosicché tutti nodi sono nello stato $B$;
@@ -74,7 +70,6 @@ In questo esempio, lo stato $A$ viene forzato all'inizio sui nodi $v$ e $w$; in 
 2. se $a = 4$, $b = 2$, ossia $q = 1/3$, in questo caso dopo aver raggiunto tutti i nodi dell'esagono, $A$ è adottato dai nodi 2, 11 e 14; poi da 1, 3, 12, 13, 17 e infine da 15 e 16; tutti i nodi adottano $A$.
 
 ### Diffusioni e cascate complete
-
 Dai due esempio si possono trarre una serie di conclusioni:
 - non sempre tutti i nodi si adeguano all'innovazione;
 - se questo accade, è possibile aumentare il beneficio derivante dall'adozione di $A$ per indurre tutti i nodi ad adottarlo, ad esempio abbassando il costo dell'acquisizione di $A$.
@@ -85,7 +80,6 @@ Una volta che $A$ viene introdotto nella rete, inizia un processo di diffusione 
 Viene generata una **cascata completa** se ad un certo passo $t$ tutti i nodi hanno adottato $A$, ossia se esiste un $t \geq 0$ tale che $\bigcup_{0 \leq i \leq t} V_i = V$.
 
 ### Cascate e cluster
-
 Dagli esempi svolti, si nota che l'innovazione ha difficoltà ad uscire da gruppi coesi di nodi.
 Si definisce **cluster di densità** $p$ un sottoinsieme di nodi $V' \subseteq V$ tale che la frazione di vicini che ogni suo nodo ha in $V'$ è almeno $p$.
 $$
@@ -152,7 +146,6 @@ Con $V_0$  *piccolo* si intende che $|V_0| \ll |V|$ .
 Per studiare questo problema, si consideri la seguente ipotesi di lavoro.
 $G$ è un grafo infinito, ossia contiene un numero **infinito** di nodi e l'insieme $V_0$ degli iniziatori può essere un qualsiasi insieme finito di nodi di $G$.
 Dunque dato un grafo infinito, qual è la soglia di adozione massima $q_{max}$ in $G$ affinché esista un insieme finito $V_0$ di iniziatori di un nuovo stato $A$ che generi una cascata completa.  
-
 #### Esempio: $G$ è una catena infinita
 Se $|V_0| = 1$, ossia, $V_0$ contiene un solo nodo, allora occorre $q = 1/2$ per generare una cascata completa
 ![[AR/attachments/06-img03.png|center]]
@@ -188,17 +181,14 @@ ossia, se esistono topologie nelle quali innovazioni di qualità mediocre soppia
 
 #### Teorema
 Poiché la soglia di adozione massima è una caratteristica della rete, indicheremo come $q_G$ **la soglia di adozione massima di un grafo** $G$.
-
-```ad-theorem
+```ad-Teorema
 title: Teorema
 Per ogni grafo infinito $G=(V,E)$ i cui nodi hanno grado finito, vale
 $$
 q_G \leqslant \frac{1}{2}
 $$
 ```
-
-```ad-proof
-title: Dimostrazione
+##### Dimostrazione
 Si supponga per assurdo che esista un insieme finito di iniziatori $V_0$ che, con soglia di adozione $q > 1/2$, generi una cascata completa nel grafo $G$.
 Sia $V_t$ l'insieme dei nodi che adottano $A$ al passo $t$ e sia, per ogni $t \geqslant 0, S_t = \bigcup_{0 \leqslant i \leqslant t} V_i$ l'insieme dei nodi che, al passo $t$, sono nello stato $A$.
 
@@ -262,15 +252,11 @@ $$
 &< |I_t|
 \end{align}
 $$ 
-
 Dunque è stato dimostrato che, per ogni $t \geqslant 0, |I_t| > |I_{t+1}|$ oppure $I_t = I_{t+1}$.
 Poiché $V_0$ è un insieme finito e i nodi di $G$ hanno grado finito, allora l'interfaccia iniziale ha dimensione finita, ossia $|I_0| = k$ per qualche $k \in \mathbb{N}$.
 Allora l'eventualità $I_t \neq I_{t+1}$ non può verificarsi per più di $k$ passi, perché ogni volta che $I_t \neq I_{t+1}$ è anche $|I_t| > |I_{t+1}|$ e la dimensione dell'interfaccia non può essere minore di zero (neanche uguale a zero in tempo finito su un grafo infinito).
 Allora, esiste $T$ tale che, per ogni $t \geqslant T, I_t = I_{t+1}$; ossia, dal passo $T$ la diffusione si interrompe.
 Ma in un grafo infinito una cascata completa può verificarsi solo in seguito a un processo di diffusione infinito, allora $V_0$ non genera una cascata completa.
-```
-
-
 ### Nodi eterogenei
 Il modello di diffusione considerato fino ad ora è un modello uniforme, cioè tutti i nodi associano lo stesso beneficio reciproco nell'adottare $A$ o $B$ che è, rispettivamente $a$ o $b$.
 Tuttavia, questo modello è poco realistico: ciascun individuo nella rete ha un proprio beneficio nell'adottare $A$ o $B$, che può dipendere, ad esempio, dalle sue capacità di adattarsi al nuovo stato.
@@ -296,17 +282,12 @@ $$
 ```
 
 Infatti
-
-```ad-theorem
+```ad-Teorema
 title: Teorema
 Sia $G=(V,E)$ un grafo. Nel modello a nodi eterogenei, l’insieme di iniziatori $v_0 \subseteq V$ non genera una cascata completa se e solo se $G – V_0$ contiene un blocking cluster.
 ```
-
-```ad-proof
-title: Dimostrazione
+##### Dimostrazione
 ESERCIZIO.
-```
-
 ## Azione collettiva
 Si vuole ora mostrare come modellare mediante processi di diffusione situazioni nelle quali è richiesto che un'azione abbia luogo *collettivamente*. Si supponga di voler organizzare una protesta contro un regime dittatoriale. Ciascun individuo decide di aderire alla protesta solo se sa con certezza che un numero sufficientemente elevato di individui aderirà alla protesta. Poiché l'ambientazione è quella di una dittatura, la libertà di stampa è ostacolata e, in generale, le comunicazioni sono rese difficoltose.
 ### Modello
@@ -333,11 +314,9 @@ Poiché il grafo è perfettamente simmetrico, nessuno aderisce alla protesta anc
 ![[AR/attachments/06-img13.png|center|400]]
 
 In questo esempio invece, $u, v, x$ si vedono l’un l’altro, così, $u$ sa che $v$ e $x$, per partecipare, hanno bisogno che altri due partecipino, ma $u$ sa anche che anche $v$ e $x$ sanno esattamente le stesse cose che sa egli stesso e, poiché si fidano uno dell’altro, partecipano tutti e tre, senza aver bisogno di conoscere altro della rete, ossia indipendentemente da $y$.
-
 ### Conclusioni
 In assenza di comunicazioni adeguate che abbiano luogo nella rete, l'azione collettiva si verifica difficilmente, ed ecco perché i regimi dittatoriali tendono a favorire *l’ignoranza pluralistica* che permette di concludere erroneamente che pochi individui abbiano una certa opinione, come accadeva nell’esempio 2.
 Invece, l’esempio 3 permette di osservare l’importanza di disporre di una base di conoscenza comune, cioè l'importanza dei mezzi di diffusione delle informazioni, permettendo che tutti siano coscienti del fatto che un certo messaggio è conosciuto da tutti.
-
 ## Diffusione in presenza di compatibilità
 Non è infrequente che due stat $A$ e $B$ possano coesistere, dunque ora si studieranno i processi di diffusione in presenza di compatibilità, cioè quando un nodo può essere nello stato $A$, nello stato $B$ o nello stato $AB$ nel modello *nodi omogenei*, cioè i benefici del trovarsi in un certo stato, dipendono soltanto dallo stato e sono gli stessi per tutti i nodi.
 Naturalmente, un nodo adotta lo stato misto $AB$ ogniqualvolta ne trae beneficio, ma non può adottarlo sempre, perché adottare sia $A$ che $B$ ha un costo maggiore. In ogni caso, mentre i benefici ottenuti dall'adottare $AB$ sono proporzionali al numeri di vicini nel grafo, ossia si guadagna per ogni vicino che adotta $A$ e per ogni vicino che adotta $B$, il costo di adozione di $AB$ viene pagato una sola volta.

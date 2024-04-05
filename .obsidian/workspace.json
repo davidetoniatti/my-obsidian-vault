@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "9e8da11acd74d1fc",
+        "id": "f77453dfba9e85dc",
         "type": "tabs",
         "children": [
           {
-            "id": "7bdb81db9bf16a98",
+            "id": "fe6fd10d6d715653",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md",
+                "file": "ADRC/08 - Graph Coloring Distribuito.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md",
+                "file": "ADRC/08 - Graph Coloring Distribuito.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md",
+                "file": "ADRC/08 - Graph Coloring Distribuito.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md"
+                "file": "ADRC/08 - Graph Coloring Distribuito.md"
               }
             }
           }
@@ -134,7 +134,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -147,54 +148,54 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "7bdb81db9bf16a98",
+  "active": "fe6fd10d6d715653",
   "lastOpenFiles": [
-    "ABD/05 - Similar items.md",
-    "ABD/06 - Data streams.md",
-    "ABD/07 - Link analysis.md",
-    "AR/05 - Reti come grafi dalla struttura disomogenea.md",
-    "hab.md",
-    "ABD/04 - Hash function.md",
-    "AR/03 - Grafi Geometrici aleatori e reti wireless.md",
+    "ADRC/10 - Leader Election Unlabeled Ring.md",
+    "ADRC/09 - Maximal Independent Set Distribuito.md",
+    "PCD/1 - Consenso distribuito.md",
+    "SDCC/07 - Virtualizzazione.md",
+    "SDCC/04 - Sistemi distribuiti auto-adattativi.md",
+    "SDCC/03 - Architetture dei sistemi distribuiti.md",
+    "ADRC/07 - Leader Election.md",
+    "ADRC/08 - Graph Coloring Distribuito.md",
+    "ADRC/03 - Problema Wake-up.md",
+    "ADRC/04 - Spanning Tree construction.md",
+    "ADRC/05 - Depth First Traversal.md",
+    "ADRC/06 - Saturazione.md",
+    "ADRC/01 - Ambienti distribuiti.md",
+    "AR/08 - Sistemi di voto.md",
+    "AR/09 - Web Search.md",
+    "AGT/08 - PLS-completezza.md",
+    "ADRC/02 - Problema Broadcast.md",
+    "AGT/06 - Algorithmic Mechanism Design III.md",
+    "AGT/05 - Algorithmic Mechanism Design II.md",
+    "AGT/04 - Algorithmic Mechanism Design I.md",
+    "ADRC.zip",
+    "ziUeKQ0c",
+    "ADRC/attachments/adrc_ex1.png",
+    "ADRC/attachments/adrc_ex2.png",
+    "ADRC/attachments/adrc_img01.png",
+    "ADRC/attachments/adrc_img02.png",
+    "ADRC/attachments/adrc_img03.png",
+    "ADRC/attachments/adrc_img04.png",
+    "ADRC/attachments/adrc_img05.png",
+    "ADRC/attachments/adrc_img06.png",
+    "ADRC/attachments/adrc_img07.png",
+    "ADRC/attachments/adrc_img08.png",
     "ABD/02 - Richiami di probabilità.md",
-    "ABD/03 - Algoritmi probabilistici.md",
-    "ABD/attachments/Pasted image 20240213154249.png",
-    "ABD/attachments/Pasted image 20240211195046.png",
-    "ABD/attachments/Pasted image 20240211195103.png",
-    "ABD/attachments/WebStructure.png",
-    "ABD/attachments/flowModel.png",
     "ABD/01 - Introduzione al Data Mining.md",
-    "AR/07 - Seguire il gregge.md",
-    "AR/06 - Processi di diffusione.md",
-    "AR/01 - Introduzione e grafi di Erdős-Rényi.md",
-    "AR/02 - Questione di popolarità.md",
-    "AR/04 - Il fenomeno Small World.md",
-    "SDCC/mutua esclusione ed elezione.md",
-    "SDCC/microservizi.md",
-    "SDCC/kubernetes.md",
-    "SDCC/elezione.md",
-    "SDCC/consistenza.md",
-    "SDCC/08 - Docker.md",
-    "SDCC/01 - Introduzione ai Sistemi Distribuiti.md",
-    "CNS/notes.md",
-    "AGT/08 - PLS Completezza.md",
-    "AGT/07 - Meccanismi senza pagamenti e kidney exchange.md",
-    "AGT/03 - Local Connection Game.md",
-    "ABD/attachments/BloomFilterAnalysis.png",
-    "ABD/attachments/DataStreamManagementSystem.png",
-    "ABD/attachments/Pasted image 20240103110920.png",
-    "ABD/attachments/MinhashAlg1.png",
-    "ABD/attachments/MinhashAlg2.png",
-    "Excalidraw",
+    "ABD/07 - Link analysis.md",
+    "ABD/06 - Data streams.md",
+    "ABD/05 - Similar items.md",
+    "ABD/04 - Hash function.md",
+    "Senza nome.canvas",
+    "ADRC/attachments",
+    "ADRC",
+    "PCD",
     "AGT.zip",
+    "zifsqmxy",
+    "Excalidraw",
     "zizKgNdo",
-    "AR.zip",
-    "ziUCCASi",
-    "ziUKrXKb",
-    "schifezze",
-    "AGT_andrea",
-    "ABD/attachments",
-    "agt.zip",
-    "Senza nome.canvas"
+    "AR.zip"
   ]
 }

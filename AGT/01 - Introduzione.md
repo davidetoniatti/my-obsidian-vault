@@ -73,7 +73,7 @@ Si osserva esplicitamente che se si fosse definita, per ogni giocatore $a_{i}$, 
 ## Equilibrio di strategia dominante
 I due esempi visti in precedenza hanno una particolare proprietà: in ciascuno di questi giochi, ogni giocatore ha un'unica strategia migliore, indipendentemente dalle strategie adottate dagli altri giocatori. Si dice che un gioco ha una *strategia dominante* se possiede questa proprietà.
 Più formalmente, per un vettore di strategia $s \in S$  sia $s_i$ la strategia giocata dal giocatore $a_i$ e sia $s_{-i}$ il vettore di dimensione $n-1$ delle strategie giocate da tutti i restanti giocatori. Si ha quindi che $u_i(s)=u_i(s_i,s_{-i})$.
-```ad-lemma
+```ad-Definizione
 title: Definizione
 Un **equilibrio con strategia dominante** è un vettore di strategia $s^{*}=(s_1^*,s_2^*,\ldots,s_n^*)$ tale per cui $s_i^*$ è una **strategia dominante** per ogni $i$, ossia, per ogni possibile profilo di strategia alternativo $s=(s_1,s_2,\ldots,s_i,\ldots,s_n)$ si ha che:
 - Se $p_i$ è un'utilità, allora $p_i(s_i^*,s_{-i}) \geq p_i(s_i,s_{-i})$
@@ -105,7 +105,7 @@ p_i(s_{i1},s_{-i}) = p_i(s_{i2},s_{-i})
 $$
 ## Equilibrio di Nash
 Raramente i giochi possiedono equilibri con strategie dominanti. Si definisce ora un concetto di soluzione meno stringente e più applicabile.
-```ad-lemma
+```ad-Definizione
 title: Definizione
 Un **equilibrio di Nash** è un vettore di strategia $s^{*}=(s_1^*,s_2^*,\ldots,s_n^*)$ tale per cui per ogni $i$, $s_i^*$ è la miglior risposta a $s_{-i}^*$, ossia, per ogni possibile strategia alternativa $s_i$ del giocatore $i$ si ha che:
 - Se $p_i$ è un'utilità, allora $p_i(s_i^*,s_{-i}^*)\geq p_i(s_i,s_{-i}^*)$
@@ -181,7 +181,7 @@ L'esito di un gioco si dice *ottimale* se ottimizza la funzione di scelta social
 In sintesi, per valutare la qualità di un equilibrio sono necessarie misure per poter dire quanto questo sia buono rispetto alla strategia che garantisce il payoff ottimale.
 ### Prezzo dell'anarchia (Price of Anarchy)
 Il prezzo dell'anarchia è la misura di inefficienza di equilibri più popolare, la quale risolve il problema della presenza di molteplici equilibri adottando un approccio worst-case. Tale misura è definita come il rapporto tra il peggior valore assumibile dalla funzione di scelta sociale per un equilibrio del gioco e il valore di un esito ottimale. Formalmente.
-```ad-lemma
+```ad-Definizione
 title: Definizione (Prezzo dell'Anarchia)
 Dato un gioco $G$ ed una funzione di scelta sociale $\mathcal{C}$, sia $S$ l'insieme di tutti gli equilibri di Nash. Se il payoff rappresenta un costo (rispettivamente, un'utilità) per un giocatore, sia $\mathbf{OPT}$ l'esito di $G$ che minimizza (rispettivamente, massimizza) $\mathcal{C}$. Allora, il Prezzo dell'Anarchia di $G$ rispetto a $C$ è 
 $$
@@ -192,7 +192,7 @@ Si vogliono identificare giochi dove il prezzo dell'anarchia è vicino ad $1$. I
 Si osserva esplicitamente che un gioco con molteplici equilibri ha un grande prezzo dell'anarchia anche se solo uno dei suoi equilibri è altamente inefficiente.
 ### Prezzo della stabilità (Price of Stability)
 Il prezzo della stabilità è una misura di inefficienza designata a distinguere tra giochi dove *tutti* gli equilibri sono inefficienti e quelli per cui *alcuni* equilibri sono inefficienti. In particolar modo, il prezzo della stabilità di un gioco è il rapporto tra il miglior valore assumibile dalla funzione di scelta sociale per un equilibrio del gioco e il valore di un esito ottimale. Formalmente:
-```ad-lemma
+```ad-Definizione
 title: Definizione (Prezzo della Stabilità)
 Dato un gioco $G$ ed una funzione di scelta sociale $\mathcal{C}$, sia $S$ l'insieme di tutti gli equilibri di Nash. Se il payoff rappresenta un costo (rispettivamente, un'utilità) per un giocatore, sia $\mathbf{OPT}$ l'esito di $G$ che minimizza (rispettivamente, massimizza) $\mathcal{C}$. Allora, il Prezzo della stabilità di $G$ rispetto a $C$ è 
 $$
@@ -241,7 +241,7 @@ f_e = \sum_{P \in \mathcal{P}:e\in P}f_P
 $$
 denota l'ammontare di traffico che usa il cammino contenente l'arco $e$.
 Essendo che ci si aspetta che il traffico egoista abbia come obiettivo quello di minimizzare il suo costo, si ha la seguente definizione:
-```ad-lemma
+```ad-Definizione
 title: Definizione (Flusso di equilibrio non atomico)
 Sia $f$ un flusso ammissibile per l'istanza nonatomica $(G,r,c)$. Il flusso $f$ è un flusso di equilibrio se, per ogni prodotto $i \in \{1,2,\ldots,k\}$ e ogni coppia $P,\hat{P} \in \mathcal{P}_i$ di cammini $s_i-t_i$ con $f_P >0$,
 $$
@@ -280,7 +280,7 @@ Si supponga che, per diminuire il costo pagato dal traffico, si costruisca un ar
 ![01-agt_img08|center|500](01-agt_img08.png)
 Il prezzo dell'anarchia nella seconda rete (e anche della stabilità, essendovi un unico equilibrio di Nash) è quindi di $4/3$, lo stesso visto nell'esempio di Pigou.
 Questa non è una coincidenza, infatti
-```ad-theorem
+```ad-Teorema
 title: Teorema
 Il Prezzo dell'Anarchia del Selfish Routing Game con funzione di latenza lineare, ossia della forma $ax+b$, è al più $4/3$.
 ```

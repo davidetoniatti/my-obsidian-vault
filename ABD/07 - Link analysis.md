@@ -1,6 +1,5 @@
-# Link analysis 
 Si vogliono studiare problemi di Data Mining su reti sociali di enormi dimensioni. Un esempio di queste reti è il Web, il quale può essere modellato come un grafo diretto, dove le pagine corrispondo ai nodi, e vi è un arco diretto dalla pagina $p_1$ alla pagina $p_2$ se vi sono uno o più link all'interno di $p_1$ che indirizzano a $p_2$.
-## Indicizzazione delle pagine
+# Indicizzazione delle pagine
 Informalmente, il **PageRank** è un algoritmo utilizzato dai motori di ricerca che permette di *valutare l'importanza di pagine Web* in maniera tale che tale parametro non venga manomesso facilmente.
 Per entrare nei dettagli di tale funzionalità, ed individuare la motivazione del suo utilizzo, risulta necessario fornire un background su come operano i motori di ricerca.
 In generale, il loro obiettivo è quello di, dato un insieme $S$ di parole, trovare le pagine Web più rilevanti per $S.$
@@ -22,7 +21,7 @@ Queste due tecniche combinate fanno si che il motore di ricerca non possa venir 
 Le motivazioni per cui la simulazione di navigatori Web casuali permetta di approssimare l'importanza di una pagina sono le seguenti:
 - Gli utenti del Web tendono ad inserire link diretti verso pagine che reputano di interesse, piuttosto che pagine inutili.
 - Il comportamento di un navigatore casuale indica quali pagine saranno probabilmente visitate dagli utenti. E' più probabile che questi visitino pagine utili o di interesse piuttosto che pagine non rilevanti.
-## PageRank
+# PageRank
 Formalmente, il **PageRank** è una funzione che assegna un numero reale a ciascuna pagina nel Web nota. 
 Maggiore è il PageRank di una pagina, maggiore sarà la sua **importanza**. Non esiste un algoritmo fissato per l'assegnazione del PageRank: diverse varianti dell'idea di base portano a valutazioni diverse per la stessa pagina.
 
@@ -33,7 +32,7 @@ L'idea alla base dell'algoritmo per il calcolo del **PageRank** è quella che, u
 Si danno due formulazioni equivalenti del PageRank:
 - Modellazione algebrica
 - Modellazione probabilistica
-### Modellazione algebrica del PageRank
+## Modellazione algebrica del PageRank
 Il **PageRank** può essere considerato come un **metodo iterativo** basato sull'analisi dei link entranti in una pagina, ossia, i soli link entranti in essa concorrono a determinarne il rank.
 L'idea è quella di considerare quindi i link come dei voti. Maggiore è il numero di link entranti in una pagina, maggiore è la sua importanza.
 Informalmente, il **rank** di una pagina è un indice che esprime la sua rilevanza ai fini della ricerca.
@@ -74,7 +73,7 @@ $$
 r_y = \frac{2}{5}, \ \ r_a = \frac{2}{5}, \ \ r_m=\frac{1}{5}
 $$
 Il metodo dell'eliminazione Gaussiana per la risoluzione di sistemi lineari funziona per piccoli esempi, ma risulta necessario un metodo migliore per grafi di grande dimensione. Questo perché il metodo dell'eliminazione Gaussiana impiega tempo cubico nel numero di equazione.
-#### Metodo più figo
+### Metodo più figo
 Si definisce una matrice di adiacenza $M$ di dimensione $n \times n$, dove $n$ è il numero di pagine Web, come segue. Si indicano con $j$ le righe e con $i$ le colonne di $M$.
 Sia $i$ una pagina avente $d_i$ link uscenti. Allora
 $$
@@ -170,7 +169,7 @@ Le equazioni di flusso possono essere quindi scritte come
 $$
 r = Mr
 $$
-#### Schema iterativo: Power Iteration
+### Schema iterativo: Power Iteration
 Si definisce quindi uno schema iterativo detto **Power Iteration** per individuare $r$, ossia l'autovettore dominante.
 Si considera un Web graph con $n$ nodi, dove i nodi sono le pagine e gli archi gli hyperlinks. Inoltre, si impone che tale grafo sia fortemente connesso. L'algoritmo opera come segue:
 ___
@@ -234,7 +233,7 @@ M^k r^0 \approx \lambda_1^kc_1\mathbf{x}_1, \ \ c_1 \neq 0
 $$
 migliore all'aumentare di $k.$ 
 ```
-#### $M$ è diagonalizzabile
+### $M$ è diagonalizzabile
 Bisogna ora mostrare che $M$ sia **diagonalizzabile**.
 Per fare ciò, si osserva che se una matrice stocastica è **irriducibile** ed ammette un unico autovalore dominante uguale ad $1$, allora la matrice è **diagonalizzabile**.
 Una matrice si dice **irriducibile** se il suo grafo associato è **fortemente connesso**. Il grafo associato ad una matrice $A$ $n \times n$ è un grafo orientato con $n$ nodi, dove esiste un arco $i \rightarrow j$ se e solo se $A_{ij} \neq 0.$ 
@@ -251,7 +250,7 @@ di conseguenza il grafo associato ha un arco $j \rightarrow i$ se e solo se $i \
 Essendo il web Graph fortemente connesso, lo è anche il grafo associato alla matrice. Per vedere meglio questa cosa, si ricorda che un grafo fortemente connesso ha un ciclo che attraversa tutti i suoi nodi. Se si invertono le direzioni degli archi, allora si ha tale ciclo attraversabile inversamente. Di conseguenza, $M$ è diagonalizzabile.
 
 Si ricorda inoltre che una matrice $n \times n$ è diagonalizzabile se e solo se possiede $n$ autovettori linearmente indipendenti.
-### Modellazione probabilistica del PageRank
+## Modellazione probabilistica del PageRank
 Si studia ora il PageRank facendo riferimento alla teoria delle **catene di Markov**.
 Si supponga che un navigatore aleatorio si trovi, in un certo istante, su una pagina associata ad un nodo avente $k$ archi uscenti, corrispondenti a dei link verso altre pagine. Allora, all'istante successivo, tale navigatore si troverà su ciascuna di queste pagine raggiungibili attraversando i link con probabilità $1/k,$ ossia, segue un link uscente dal nodo in cui si trova scelto u.a.r.
 
@@ -332,7 +331,7 @@ Lo stato $\mathbf{p}_{t+1}=\mathbf{p}_{t}$ si raggiunge se si verificano due con
 
 La distribuzione stazionaria viene raggiunta quando il prodotto della distribuzione $\mathbf{p}$ con la matrice $M$ non cambia la distribuzione, ossia, $\mathbf{p}$ è un **autovettore** di $M.$
 Anche in questo caso, essendo $M$ *stocastica*, $\mathbf{p}$ è l'autovettore dominante, ossia il suo autovalore associato è il più grande tra tutti gli autovalori. Inoltre, sempre per via del fatto che tale matrice è stocastica, l'autovalore associato all'autovettore principale è uguale ad $1$. Il vettore $r$ soddisfa $r= Mr,$ quindi $r$ è una distribuzione stazionaria per la passeggiata aleatoria.
-#### Esistenza e unicità distribuzione stazionaria
+### Esistenza e unicità distribuzione stazionaria
 Si è detto che se esiste una sola distribuzione di probabilità stazionaria, si ha che
 $$
 \pi = \lim_{k \rightarrow \infty}\mathbf{P}^k x
@@ -387,7 +386,7 @@ dove $\pi$ è l'unica distribuzione stazionaria della catena e $x$ è una distri
 - Il teorema è vero **indipendentemente** dalla distribuzione iniziale.
 - La distribuzione stazionaria di una catena di Markov ergodica può essere quindi approssimata efficientemente, moltiplicando iterativamente un vettore con la matrice della catena (Power Method).
 ```
-### Si ok ma tanto il grafo del web non è fortemente connesso
+## Si ok ma tanto il grafo del web non è fortemente connesso
 Le analisi per il calcolo del PageRank fatte sino ad ora si sono basate sull'ipotesi che il grafo del Web fosse fortemente connesso. Nella realtà dei fatti, il grafo del web presenta la struttura in figura.
 ![[WebStructure.png]]
 Ed è descritta dalle seguenti componenti:
@@ -403,7 +402,7 @@ Bisogna quindi modificare il PageRank affinché si prevengano queste anomalie. I
 - I **vicoli ciechi (dead ends)**, ossia pagine non aventi link uscenti. I navigatori che raggiungono tali pagine spariscono, e il risultato è che nel vettore di distribuzione stazionaria nessuna pagina che raggiunge un vicolo cieco può avere un PageRank. In particolar modo, la passeggiata aleatoria non può proseguire e si ha una "fuori uscita" di importanza.
 - **Trappole di ragno (spider traps)**, gruppi di pagine aventi tutti archi uscenti che permettono di navigare tale porzione del grafo, ma che non escono mai da tale componente. Ciò comporta che le passeggiate aleatorie si "blocchino" all'interno di tali trappole, ossia, che i navigatori aleatori possono solamente viaggiare sugli stati della catena associati a tali pagine, le quasi assorbiranno poi tutta l'importanza.
 Entrambi questi problemi possono essere risolti da un metodo chiamato *teleports*, o teletrasporto, per il quale si assume che un navigatore aleatorio abbia una probabilità finita di abbandonare il grafo del Web ad ogni passo del processo e, a risposta di ciò, che un nuovo agente inizi una passeggiata aleatoria partendo da un nodo casuale. 
-#### Evitare vicoli ciechi e trappole di ragno 
+### Evitare vicoli ciechi e trappole di ragno 
 Per evitare i problemi appena definiti, si può modificare il calcolo del PageRank dando ad ogni navigatore aleatorio una piccola probabilità di teletrasportarsi in una pagina casuale, piuttosto che seguire un link dalla loro pagina uscente. Il passo iterativo, dove si calcola un nuovo vettore $\mathbf{r'}$ che stima del PageRank calcolato a partire dal PageRank corrente $\mathbf{r}$ e la matrice di transizione $M$ è 
 $$
 \mathbf{r'} = \beta M \mathbf{r} + \left[\frac{1- \beta}{n}\right]_{n}
@@ -454,10 +453,10 @@ Dunque si analizza il costo di una iterazione del Power method.
 - scrivere $\mathbf{r}_n$ su disco;
 dunque ogni iterazione del Power method costa
 $$|\mathbf{r}_{n}|+|\mathbf{r}_{o}|+|M| = 2|\mathbf{r}| + |M|$$
-## Topic page rank
+# Topic page rank
 Tra i diversi miglioramenti che si possono fare al PageRank, si studia il **topic-specific page rank**, con lo scopo di valutare le pagine web non solo in base alla loro popolarità, ma anche in base a quanto sono vicine a un particolare argomento, ad esempio "sport" o "storia". Il meccanismo per applicare questa valutazione consiste nel modificare il comportamento dei random surfer, favorendo lo spostamento su pagine che trattano un particolare argomento.
 Questo meccanismo permette al motore di ricerca di rispondere alle query in base agli interessi dell'utente. Ad esempio, spesso interessi diversi vengono espressi utilizzando lo stesso termine in una query. Per esempio, la query "jaguar" potrebbe fare riferimento all'animale, all'automobile o a una versione del sistema operativo MAC. Se il motore di ricerca può dedurre che l'utente è interessato alle automobili, ad esempio, può fare un lavoro migliore nel restituire pagine rilevanti all'utente.
-### Biased Random Walk
+## Biased Random Walk
 Per il problema dei punti ciechi e spider-trap, la soluzione è rendere il random walker in grado di teletrasportarsi su una qualsiasi pagina in modo equiprobabile, con una bassa probabilità $(1-\beta)$ ad ogni step della sua passeggiata.
 Per implementare il *topic-sensitive page rank*, si utilizza la stessa tecnica del teletrasporto applicata però ad un *insieme specifico di pagine* rilevanti per un certo topic. Dunque il random walker con probabilità $(1-\beta)$ si teletrasporta su una pagina appartenente ad uno specifico sottoinsieme di pagine $S$ detto **teleport set**. Si osserva che $S$ contiene solamente delle pagine che sono rilevanti rispetto ad uno specifico topic, dunque il vettore risultate $r_S$ del PageRank con teleport set $S$ sarà differente da un qualsiasi altro vettore risultante $r_{S'}$ per un differente teleport set $S'$.
 In particolare, si modifica la parte del teleporting nella formulazione del page rank per renderlo topic specific nel modo seguente.
@@ -478,16 +477,16 @@ Il terzo passo è probabilmente il più complicato, e sono stati proposti divers
 1. Consentire all'utente di selezionare un argomento da un menu;
 2. Inferire l'argomento/i dalle parole che appaiono nelle pagine web recentemente cercate dall'utente, o dalle query recenti emesse dall'utente;
 3. Inferire l'argomento/i dalle informazioni sull'utente, ad esempio i loro segnalibri o i loro interessi dichiarati su Facebook.
-## Combattere il Web Spam: TrustRank
-### Le pagine Spam
+# Combattere il Web Spam: TrustRank
+## Le pagine Spam
 Con **spamming**, si intende un qualsiasi tentativo intenzionale mirato a migliorare il posizionamento di una pagina web nei risultati dei motori di ricerca, senza essere in linea con il vero valore della pagina stessa. Tutte le pagine web che sono il risultato dello spamming sono dette pagine **spam**. Approssimativamente, il 15% delle pagine web sono spam.
-### Tecniche di spamming
-#### Term spam
+## Tecniche di spamming
+### Term spam
 Le tecniche di spam prima dell'introduzione del PageRank consistevano nel cosidetto **term spam**, cioè inserire nelle pagine termini che non sono in linea con il topic della pagina in modo da far apparire la pagina anche in query di ricerca che riguardano topic differenti da quelli trattati dalla pagina stessa. In questo modo, la pagina viene potenzialmente visitata da più utenti, anche quelli che non sono direttamente interessati. Questa tecnica era efficace rispetto ai primi motori di ricerca, che indicizzavano le pagine rispetto alle parole contenute all'interno di esse e rispondevano alle query di ricerca, cioè una lista di parole, con la lista delle pagine che contenevano tali parole.
 Con l'introduzione del PageRank questa tecnica perde di efficacia. Infatti, il PageRank misura l'*importanza* di una pagina in base al numero e all'importanza delle pagine web che puntano a tale pagina. Intuitivamente, con il PageRank una pagina viene valutata in base a cosa dicono gli altri della pagina, e non in base al contenuto.
-#### Link spam
+### Link spam
 Quando è diventato evidente che il PageRank rendeva inefficace il term spam, gli spammer hanno cominciato a utilizzare metodi progettati per ingannare l'algoritmo del PageRank facendo sovrastimare il ranking di determinate pagine. Le tecniche per aumentare artificialmente il PageRank di una pagina sono collettivamente chiamate *link spam* e consistono nel creare strutture di link che aumentano il PageRank di una particolare pagina.
-#### Spam Farm
+### Spam Farm
 Un'insieme di pagine il cui scopo è aumentare il PageRank di una determinata pagina o pagine è detta **spam farm**. La figura sotto mostra una semplice struttura di una spam farm. 
 ![](Pasted%20image%2020240213154249.png)
 Dal punto di vista dello spammer, il Web è diviso in tre parti:
@@ -498,7 +497,7 @@ La spam farm consiste:
 - Nelle pagine detenute dallo spammer, organizzate come si vede a destra in figura;
 - Un insieme di link dalle pagine accessibili alle pagine dello spammer. Senza questi link dall'esterno, la spam farm sarebbe inutile, poiché non verrebbe nemmeno indicizzata da un tipico motore di ricerca.
 Si osserva che nonostante possa sembrare sorprendente che si possano influenzare delle pagine senza possederle, in realtà ad oggi molti siti permettono (e invitano) la pubblicazioni di commenti sul sito. Sfruttando questo fatto, per esempio, uno spammer può ottenere il maggior flusso di PageRank verso le proprie pagine pubblicando molti commenti del tipo "Sono d'accordo. Si prega di vedere il mio articolo su [www.mySpamFarm.com](http://www.mySpamFarm.com)."
-##### Analisi di una Spam Farm
+#### Analisi di una Spam Farm
 Nella spam farm è presente una pagina **target** $t$; lo spammer ha l'obiettivo di **massimizzare** il valore del PageRank di $t$. Inoltre, ci sono un gran numero $m$ di **pagine di supporto**, che accumulano una porzione del PageRank che viene distribuita equamente a tutte le pagine (la frazione $1 - \beta$ del PageRank). Le pagine di supporto impediscono anche che il PageRank di $t$ venga perso, per quanto possibile, poiché una parte verrà tassata ad ogni round. Si noti che $t$ ha un link verso ogni pagina di supporto, e ogni pagina di supporto ha un solo link verso $t$.
 
 Supponiamo che il PageRank venga calcolato utilizzando un parametro di tassazione $\beta$, cioè la frazione del PageRank di una pagina che viene distribuita ai suoi successori al turno successivo, cioè le pagine a cui punta. Sia $n$ il numero totale di pagine sul Web. Alcune di esse costituiscono una *spam farm* della forma suggerita in figura, con una pagina target $t$ e $m$ pagine di supporto. Sia $x$ la quantità di PageRank contribuita dalle pagine accessibili a $t$. Quindi, $x$ è la somma, su tutte le pagine accessibili $p$ che hanno un link verso $t$, del PageRank di $p$ moltiplicato per $\beta$, diviso per il numero di pagine a cui punta $p$. Infine, sia $y$ il PageRank sconosciuto di $t$.
@@ -523,13 +522,13 @@ $$
 dove $c =\frac{\beta(1-\beta)}{(1-\beta^2)} = \frac{\beta}{(1+\beta)}$ .
 Scegliendo $\beta = 0.85$, si ottiene $1/(1 − \beta^2 ) = 3.6$, e $c = \frac{\beta}{1-\beta^2} = 0.46$.
 Ciò significa che la struttura ha amplificato la contribuzione esterna del PageRank del 360%, e ha ottenuto anche una quantità di PageRank che rappresenta il 46% della frazione del Web presente nella spam farm., ossia $\frac{m}{n}$.
-### Combattere il Link Spam
+## Combattere il Link Spam
 È diventato essenziale per i motori di ricerca individuare ed eliminare il link spam, proprio come era necessario eliminare il term spam.
 Ci sono due approcci per il link spam. Uno è cercare strutture come la spam farm in figura, dove una pagina linka a un numero molto grande di pagine, ognuna delle quali linka nuovamente ad essa. I motori di ricerca dunque cercano tali strutture ed eliminano quelle pagine dal loro indice. Questo fa sì che gli spammer sviluppino diverse strutture che hanno essenzialmente lo stesso effetto di catturare il PageRank per una pagina o pagine target. Non c'è essenzialmente fine alle possibili variazioni della struttura della farm spam in figura, quindi questa guerra tra gli spammer e i motori di ricerca probabilmente continuerà per molto tempo.
 Tuttavia, esiste un altro approccio che si basa sulla modifica della definizione di PageRank per *abbassare* automaticamente il rank delle pagine spam. Considereremo due definizioni differenti:
 - **TrustRank**: una variazione del topic-specific PageRank, dove il *teleport set* è costituito da pagine **trusted**; ad esempio, pagine con un dominio universitario o governativo. Cosi facendo, il teleport non è più uniforme su tutte le pagine, ma è biased su queste pagine fidate.
 - **Spam Mass**: un calcolo che identifica le pagine che probabilmente sono spam e consente al motore di ricerca di eliminare tali pagine o di abbassarne fortemente il loro PageRank.
-#### TrustRank
+### TrustRank
 **TrustRank** è un topic-specific PageRank dove il topic è un insieme di pagine ritenute *affidabili* (non spam). L'idea è che mentre una pagina di spam potrebbe facilmente essere creata per collegarsi a una pagina affidabile, è *improbabile* che una pagina affidabile si collega a una pagina di spam.
 Per definire l'insieme delle pagine affidabili, si può ad esempio creare automaticamente un sample di pagine web (cioè un insieme di pagine) e passare questo insieme ad un operatore umano in grado di identificare le pagine affidabili e scartare le pagine spam: è un lavoraccio, quindi il sample di partenza deve essere il più piccolo possibile.
 Dato l'insieme delle pagine affidabili, si esegue un topic-specific PageRank impostando come teleport set questo insieme di pagine affidabili: questo permette di propagare la fiducia attraverso i link alle diverse pagine, dando ad ognuna di esse un *valore di fiducia* compreso tra 0 e 1.
@@ -550,6 +549,6 @@ Si fanno due considerazioni importanti sull'insieme delle pagine candidate ad es
 Per scegliere buoni insiemi di possibili pagine affidabili, ci sono due approcci principali:
 1. supponendo di voler scegliere $k$ pagine, si prendono le prime $k$ pagine date dal PageRank tradizionale: l'idea è che le pagine spam, per quanto possano salire nel ranking, non raggiungeranno posizioni molto alte nel ranking;
 2. scegliere le pagine appartenenti a domini affidabili e controllati: ad esempio pagine con dominio .edu, .gov, .mil.
-#### Spam Mass
+### Spam Mass
 L'idea dietro lo **spam mass** è quella di misurare per ogni pagina la frazione del suo PageRank che proviene dallo spam. Tale misura si ottiene calcolando sia il PageRank ordinario che il TrustRank basato su un insieme di pagine affidabili. Si supponga che la pagina $p$ abbia un PageRank $r$ e un TrustRank $t$. Allora la *spam mass* di $p$ è $\frac{r - t}{r}$. Una *spam mass* negativa o poco positiva indica che $p$ probabilmente non è una pagina di spam, mentre una *spam mass* vicina a 1 suggerisce che la pagina probabilmente è spam.
 Dunque è possibile eliminare le pagine con una *spam mass* elevata dall'indice delle pagine Web utilizzato da un motore di ricerca, eliminando così una grande quantità di link spam senza dover identificare particolari strutture utilizzate dagli spammer.

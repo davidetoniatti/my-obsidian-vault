@@ -1,45 +1,48 @@
-# Richiami di probabilità e statistica
-## Assiomi di probabilità
-Uno ***spazio di campionamento*** $\Omega$ è un insieme i quali elementi descrivono gli esiti di un esperimento di interesse.
-
-I sottoinsiemi di uno spazio di campionamento prendono il nome di ***eventi***. Si dice che un evento $A$ accade se l'esito di un esperimento è un elemento di $A$.
-
-Gli eventi possono essere combinati secondo le operazioni insiemistiche.
-Sia $\Omega$ uno spazio di campionamento e siano $E_1 \subseteq \Omega,E_2 \subseteq \Omega$ due eventi. 
-L'evento $E_1 \cap E_2$ prende il nome di *intersezione* dei due eventi, ed accade se si verificano entrambi gli eventi $E_1$ ed $E_2$.
-L'insieme $E_1 \cup E_2$  prende il nome di *unione* dei due eventi, ed accade se si verifica almeno uno dei due eventi $E_1$ ed $E_2$.
-L'insieme $E^c=\{\omega \in \Omega \ : \ \omega \notin E\}$ è il *complemento* dell'evento $E$, ed accade se e solo se l'evento $E$ non si verifica. Si ha che $\Omega^c = \{ \emptyset\}$.
-
-I due eventi $E_1$ ed $E_2$ si dicono *disgiunti* o *mutualmente esclusivi* se non hanno esiti in comune, ossia $E_1 \cap E_2  =  \emptyset$. 
-Si dice che l'evento $E_1$ *implica* l'evento $E_2$ se l'esito di $E_1$ è contenuto in $E_2$, ossia $E_1 \subset E_2$.
-
-Essendo insiemi, gli eventi sono soggetti alle proprietà insiemistiche.
-```ad-Proprieta
-title: Leggi di DeMorgan
-
-Per ogni coppia di eventi $E_1$ ed $E_2$ si ha che
-$$
-(E_1 \cup E_2)^c = E_1^c \cap E_2^c \ \ \ \textnormal{e} \ \ \ (E_1 \cap E_2)^c = E_1^c \cup E_2^c 
-$$
-```
-Si vuole esprimere quanto sia probabile il verificarsi di un evento. Per fare ciò, si definisce una ***funzione di probabilità***. In questo corso si farà sempre riferimento a spazi di probabilità *discreti*, ossia dove lo spazio di campionamento $\Omega$ risulta essere finito o numerabile.
+# Assiomi di probabilità
+Si definisce cos'è uno **spazio di probabilità**.
 ```ad-Definizione
-title: Definizione (Funzione di probabilità discreta):
-Una *funzione di probabilità (discreta)* è una funzione $\mathbf{Pr}:\Omega \rightarrow [0,1]$ che soddisfa le seguenti condizioni:
-1. $\mathbf{Pr}(\Omega)=1$,
-2. Per ogni sequenza finita o numerabile di eventi mutualmente disgiunti due a due $E_1,E_2,E_3, . . .$ si ha che
+title: Definizione (Spazio di probabilità):
+Uno spazio di probabilità è una tripla $(\Omega,\mathcal{F},\mathbf{Pr})$ tale che:
+1. $\Omega$ è uno **spazio di campionamento** o **degli eventi**, ossia un insieme di elementi che descrivono gli esiti di un esperimento di interesse (fenomeno aleatorio).
+2. $\mathcal{F}$ è una famiglia di sottoinsiemi di $\Omega$ che rappresenta tutti i possibili **eventi**, dunque per ogni insieme $E\in \mathcal{F}$, detto *evento* si ha $E \subseteq \Omega$.
+3. Una **misura di probabilità** $\mathbf{Pr} : \mathcal{F} \rightarrow \mathbb{R}$. 
+```
+Gli eventi possono essere combinati secondo le operazioni insiemistiche. Sia $\Omega$ uno spazio di campionamento e siano $E_1 \subseteq \Omega,E_2 \subseteq \Omega$ due eventi:
+- L'evento $E_1 \cap E_2$ prende il nome di *intersezione* dei due eventi, ed accade se si verificano entrambi gli eventi $E_1$ ed $E_2$;
+- L'insieme $E_1 \cup E_2$  prende il nome di *unione* dei due eventi, ed accade se si verifica almeno uno dei due eventi $E_1$ ed $E_2$.
+- L'insieme $E^c=\Omega \setminus E$ è il *complemento* dell'evento $E$, ed accade se e solo se l'evento $E$ non si verifica. Si ha che $\Omega^c = \{ \emptyset\}$;
+- I due eventi $E_1$ ed $E_2$ si dicono *disgiunti* o *mutualmente esclusivi* se non hanno esiti in comune, ossia $E_1 \cap E_2  =  \emptyset$;
+- Si dice che l'evento $E_1$ *implica* l'evento $E_2$ se l'esito di $E_1$ è contenuto in $E_2$, ossia $E_1 \subset E_2$.
+
+In questo corso si farà sempre riferimento a spazi di probabilità *discreti*, ossia dove lo spazio di campionamento $\Omega$ risulta essere finito o numerabile.
+```ad-Definizione
+title: Definizione (Misura di probabilità discreta):
+Una *misura di probabilità (discreta)* è una funzione $\mathbf{Pr}:\Omega \rightarrow \mathbb{R}$ che soddisfa le seguenti condizioni:
+1. Per ogni $E \in \mathcal{F}$ vale che $0 \leqslant \mathbf{Pr}(E) \leqslant 1$; 
+2. $\mathbf{Pr}(\Omega)=1$;
+3. Per ogni sequenza (finita o infinita) di eventi disgiunti due a due $E_1,E_2,E_3,\dots$ si ha che
 $$
 \mathbf{Pr}\Bigl( \bigcup_{i\geq 1} E_i \Bigl) = \sum_{i\geq 1}\mathbf{Pr}(E_i)
 $$
 ```
+Un elemento di $\Omega$ è chiamato *evento semplice*. In uno spazio di probabilità discreto, la funzione di probabilità è definita unicamente dalle probabilità di eventi semplici, quindi $\mathbf{Pr} : \Omega \rightarrow [0,1]$.  
+Dalla definizione di misura di probabilità discreta, ne consegue che:
+- l'evento vuoto $\{\emptyset\} \in \mathcal{F}$ e vale $\mathbf{Pr}(\emptyset)=0$;
+- Se l'evento $E_1$ implica l'evento $E_2$, allora vale $\mathbf{Pr}(E_{1}) \leqslant \mathbf{Pr}(E_{2})$;
+- Sia $E^c$ l'evento complementare di $E$, allora vale $\mathbf{Pr}(E^c) = 1 - \mathbf{Pr}(E)$;
+- Per ogni $E_1,E_2 \in \mathcal{F}$ vale $\mathbf{Pr}(E)=\mathbf{Pr}(E\cap F)+\mathbf{Pr}(E\cap F^c)$.
 ```ad-Osservazione
 Siano $E_1$ ed $E_2$ due eventi disgiunti, allora
 $$
 E_1 \cap E_2 = \emptyset\ \Rightarrow\ \mathbf{Pr}(E_1 \cap E_2) = 0
 $$
 ```
+
 Siano $E_1$ ed $E_2$ due eventi *non* disgiunti. 
-Si ha che $$E_1 = (E_1 \cap E_2) \cup (E_1 \cap E_2^c)$$
+Si ha che
+$$
+E_1 = (E_1 \cap E_2) \cup (E_1 \cap E_2^c)
+$$
 A partire da ciò, si ottiene quindi la seguente uguaglianza:
 $$
 \mathbf{Pr}(E_1) \ = \ \mathbf{Pr}(E_1 \cap E_2)\ +\ \mathbf{Pr}(E_1 \cap E_2^c)
@@ -49,7 +52,6 @@ Applicando lo stesso ragionamento per l'evento $E_1 \cup E_2$ si ha che
 $$
 (E_1 \cup E_2) = ((E_1\cup E_2) \cap E_2)\ \cup\  ((E_1\cup E_2) \cap E_2^c)
 $$
-
 Osservando che  
 $$
 (E_1\cup E_2) \cap E_2\ = E_2
@@ -64,7 +66,7 @@ $$
 
 E, ponendo $\mathbf{Pr}(E_1 \cap E_2^c)\ = \mathbf{Pr}(E_1) \ - \ \mathbf{Pr}(E_1 \cap E_2)$ dalla ($2$) si ottiene il seguente lemma
 ```ad-Lemma
-Siano $E_1$ ed $E_2$ due eventi, allora
+Siano $E_1$ ed $E_2$ due eventi di $\mathcal{F}$, allora
 $$
 \mathbf{Pr}(E_1 \cup E_2) = \mathbf{Pr}(E_1) +\mathbf{Pr}(E_2) \ - \ \mathbf{Pr}(E_1 \cap E_2)
 $$
@@ -85,11 +87,8 @@ $$
  $$ \cdots + (-1)^{l+1} \sum_{i_1 <i_2 <...<i_l}\mathbf{Pr}\Bigl( \bigcap_{r=1}^{l} {E_i}_r \Bigl) + \cdots \ .
 $$
 ```
-Inoltre, essendo che, dato un evento $E \subseteq \Omega$ vale $E \cup E^c = \Omega$, si ha che
-$$
-\mathbf{Pr}(E) = 1\ -\ \mathbf{Pr}(E^c) 
-$$
-Una conseguenza della definizione di funzione di probabilità discreta prende il nome di ***union bound***:
+
+Una conseguenza della definizione di funzione di probabilità discreta prende il nome di ***union bound***.
 ```ad-Lemma
 title: Lemma (Union bound):
 Per ogni sequenza finita o numerabile di eventi $E_1,E_2,E_3,...$
@@ -99,23 +98,11 @@ $$
 
 ```
 Si osserva esplicitamente come questo lemma differisca dalla seconda condizione della definizione di funzione di probabilità discreta, la quale richiede che gli eventi siano disgiunti due a due.
-
-A partire dai concetti appena enunciati, si può definire lo ***spazio di probabilità***:
-```ad-Definizione
-title: Definizione (Spazio di probabilità):
-Uno spazio di probabilità ha tre componenti:
-1. Uno spazio di campionamento $\Omega$, ossia l'insieme di tutti i possibili esiti del processo aleatorio modellato dallo spazio di probabilità.
-2. Una famiglia di insiemi $\mathcal{F}$ che rappresenta tutti i possibili eventi, dove per ogni insieme $E\in \mathcal{F}$, detto *evento* si ha $E \subseteq \Omega$.
-3. Una funzione di probabilità $\mathbf{Pr} : \mathcal{F} \rightarrow \mathbb{R}$. 
-
-```
-Un elemento di $\Omega$ è chiamato *evento semplice*. In uno spazio di probabilità discreto, la funzione di probabilità è definita unicamente dalle probabilità di eventi semplici, quindi $\mathbf{Pr} : \Omega \rightarrow [0,1]$.  
-## Probabilità condizionata ed indipendenza
+# Probabilità condizionata ed indipendenza
 L'occorrenza di un evento può andare a modificare la probabilità che si verifichi un evento successivo correlato ad esso. Tale probabilità prende il nome di ***probabilità condizionata***.
 ```ad-Definizione
 title: Definizione (Probabilità condizionata):
-Siano $E_1$ ed $E_2$ due eventi.
-La probabilità condizionata di $E_1$ dato $E_2$ è
+Siano $E_1$ ed $E_2$ due eventi di $\mathcal{F}$. La probabilità condizionata di $E_1$ dato $E_2$ è
 $$
 \mathbf{Pr}(E_1 | E_2) = \frac{\mathbf{Pr}(E_1 \cap E_2)}{\mathbf{Pr}(E_2)}
 $$
@@ -197,7 +184,14 @@ $$
 ```
 A partire dalla definizione di eventi indipendenti si possono effettuare diverse osservazioni.
 
-Essendo $$\mathbf{Pr}(E_1^c|E_2)=1-\mathbf{Pr}(E_1|E_2)$$ $$\mathbf{Pr}(E_1^c) = 1-\mathbf{Pr}(E_1)$$  si ha che 
+Essendo 
+$$
+\mathbf{Pr}(E_1^c|E_2)=1-\mathbf{Pr}(E_1|E_2)
+$$ 
+$$
+\mathbf{Pr}(E_1^c) = 1-\mathbf{Pr}(E_1)
+$$
+si ha che 
 $$
 E_1 \textnormal{ è indipendente da } E_2 \iff E_1^c \textnormal{ è indipendente da } E_2
 $$
@@ -254,7 +248,7 @@ $$
 
 Ciò risulta vero anche sostituendo un numero arbitrario di eventi $E_1,...,E_m$ con il rispettivo complemento all'intero della formula.
 ```
-## Variabili aleatorie discrete
+# Variabili aleatorie discrete
 Quando si studia un evento probabilistico, si è spesso interessati a dei valori associati agli eventi, piuttosto che agli eventi stessi. Una qualsiasi funzione dallo spazio di campionamento ai numeri reali prende il nome di ***variabile aleatoria***.
 ```ad-Definizione
 title: Definizione (Variabile aleatoria):
@@ -378,19 +372,16 @@ $$
 Var\left[\sum_{i=1}^n X_i  \right] = \sum_{i=1}^n  Var\left[X_i\right]
 $$
 ```
-## Distribuzioni di probabilità
-### Distribuzione binomiale
+# Distribuzioni di probabilità
+## Distribuzione binomiale
 Si supponga di eseguire un esperimento avente successo con probabilità $p$ e fallimento con probabilità $1-p$. Sia $Y$ una variabile aleatoria tale che
 $$
-\begin{equation*}
-Y= 
-  \left\{ 
+Y= \left\{ 
     \begin{aligned}
       &\ 1 \ \ \ \ \textnormal{se l'esperimento ha successo} \\
       &\ 0 \ \ \  \textnormal{ altrimenti}  
     \end{aligned}
   \right.
-\end{equation*}
 $$
 La variabile $Y$ prende il nome di variabile aleatoria *binomiale binaria*, o variabile aleatoria *Bernoulliana*. Si osserva che, per una variabile aleatoria binaria si ha che 
 
@@ -433,12 +424,15 @@ $$
 $$
 Dove:
 - in $(1)$ si è posto $k=j-1$ 
-- in $(2)$ si è fatto riferimento al teorema binomiale: $$(x+y)^n = \sum_{k=0}^{n}\binom{n}{k}\ x^k\ y^{n-k}$$ con $x=p$ e $y=1-p$ .
+- in $(2)$ si è fatto riferimento al teorema binomiale:
+$$
+(x+y)^n = \sum_{k=0}^{n}\binom{n}{k}\ x^k\ y^{n-k}
+$$
+con $x=p$ e $y=1-p$ .
 
 Si fa presente ora come, sfruttando la linearità del valore atteso, quest'ultimo può essere calcolato in maniera molto più semplice.
 Se $X$~Bin$(n,p)$, allora $X=\textnormal{" \# successi in } n \textnormal{ prove"}$, dove ogni prova ha probabilità $p$ di avere successo. Si definisce, per $i=1,...,n$
 $$
-\begin{equation*}
 X= 
   \left\{ 
     \begin{aligned}
@@ -446,7 +440,6 @@ X=
       &\ 0 \ \ \  \textnormal{ altrimenti}  
     \end{aligned}
   \right.
-\end{equation*}
 $$
 Allora $\mathbf{E}[X_i] = p \cdot 1 + 0\cdot (1-p) = p  = \mathbf{Pr}(X_i = 1)$ .
 Inoltre, si ha che $X= \sum_{i=1}^n X_i$, allora, per la linearità del valore atteso
@@ -456,7 +449,7 @@ $$
 $$
 La varianza di una variabile aleatoria binomiale $X$ con parametri $n$ e $p$ può essere determinata calcolando $\mathbf{E}\left[X^2\right]$ come segue
 $$
-\begin{aligned}
+\begin{align}
 \mathbf{E}\left[X^2\right]= & \sum_{j=0}^n\left(\begin{array}{l}
 n \\
 j
@@ -466,7 +459,7 @@ j
 = & n(n-1) p^2 \sum_{j=2}^n \frac{(n-2) !}{(n-j) !(j-2) !} p^{j-2}(1-p)^{n-j} \\
 & +n p \sum_{j=1}^n \frac{(n-1) !}{(n-j) !(j-1) !} p^{j-1}(1-p)^{n-j} \\
 = & n(n-1) p^2+n p .
-\end{aligned}
+\end{align}
 $$
 Dove le sommatorie sono state semplificate facendo riferimento al teorema binomiale: $(x+y)^n = \sum_{k=0}^n \binom{n}{k}x^{n-k}y^k = \sum_{k=0}^n \binom{n}{k}x^{k}y^{n-k} .$  Si conclude che
 $$
@@ -482,7 +475,7 @@ $$
 \mathbf{E}\left[(Y-\mathbf{E}[Y])^2\right]=p(1-p)^2+(1-p)(-p)^2=p-p^2=p(1-p) .
 $$
 E per la linearità della varianza, si ha che la varianza di $X$ è quindi $n p(1-p)$.
-### Distribuzione geometrica
+## Distribuzione geometrica
 Si supponga di lanciare una moneta sino a quando esce testa. La distribuzione del numero di lanci è un esempio di distribuzione geometrica. In generale, si ha una distribuzione geometrica quando si eseguono una sequenza di eventi indipendenti sino al primo successo, dove ogni prova ha successo con probabilità $p$.
 ```ad-Definizione
 title: Definizione (Distribuzione geometrica)
@@ -525,25 +518,22 @@ $$
 =&\ \frac{1}{1-(1-p)} = \frac{1}{p}
 \end{align}
 $$
-## Discostamento dal valore atteso
+# Discostamento dal valore atteso
 Si presentano delle tecniche per stimare il discostamento di una variabile aleatoria dal suo valore atteso, ossia la probabilità che una variabile aleatoria assuma valori lontani dal suo valore atteso. Questi bounds forniscono una stima della probabilità di insuccesso di un algoritmo, e permettono di stabilire bounds con alta probabilità sul running time.
-### Disuguaglianza di Markov
+## Disuguaglianza di Markov
 Sia $X$ una variabile aleatoria che assume *solo* valori non negativi. Allora, $\forall a > 0$ vale
 $$
 \mathbf{Pr}\left[X \geq a\right] \leq \frac{\mathbf{E}\left[X\right]}{a}
 $$
-#### Dimostrazione
+### Dimostrazione
 Per $a>0$, sia
 $$
-\begin{equation*}
-I= 
-  \left\{ 
+I=\left\{ 
     \begin{aligned}
       &\ 1 \ \ \ \textnormal{se }\ X \geq a \\
       &\ 0 \ \ \  \textnormal{altrimenti }\   
     \end{aligned}
   \right.
-\end{equation*}
 $$
 Si osserva che, essendo $X \geq 0$, vale 
 $$
@@ -557,10 +547,10 @@ Facendo riferimento alla disuguaglianza precedente, si ha
 $$
 \mathbf{Pr}\left[X \geq a\right] = \mathbf{E}\left[I\right] \leq \mathbf{E}\left[\frac{X}{a}\right] = \frac{\mathbf{E}\left[X\right]}{a}
 $$
-### Disuguaglianza di Chebyshev
+## Disuguaglianza di Chebyshev
 Per ogni $a>0$
 $$
 \mathbf{Pr}\left[|X-\mathbf{E}\left[X\right]| \geq a \right] \leq \frac{Var\left[X\right]}{a^2}
 $$
-#### Dimostrazione
+### Dimostrazione
 #TODO 

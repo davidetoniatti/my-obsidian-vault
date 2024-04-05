@@ -15,7 +15,7 @@ Questo risultato però non rispecchia pienamente la realtà; infatti, sono stati
 Si consideri il grafo dato dalle informazioni nel *web*: si modella come un *grafo diretto* in cui ogni nodo è una pagina e un arco $(a,b)$ diretto nel grafo indica che la pagina $a$ contiene un hyperlink alla pagine $b$.
 In uno studio in cui si analizza la distribuzione degli archi entranti, o *gradi*, dei nodi nel grafo del web, è stato osservato che la frazione di pagine web che ha grado entrante $k$ è proporzionale a $k^{-c}$ per qualche costante $c$, invece che a $k^{-k}$.
 Una funzione che decresce in tale modo, cioè come l'inverso di un polinomio, è chiamata **power law**.
-```ad-theorem
+```ad-Definizione
 title: Definizione
 Siano $C>0$ e $\alpha >1$ due costanti. Una **funzione potenza** (o **power law**) è una funzione proporzionale a
 $$
@@ -98,7 +98,8 @@ Ha senso calcolare $P((i,j)\in E)$ per $i > 1$, dato che il nodo $1$ non ha arch
 Dato che ogni nodo $i>2$ ha esattamente un arco uscente, deve valere necessariamente che
 $$
     \mathcal{P}(\exists j < i : (i,j) \in E ) = 1
-$$ Infatti
+$$
+Infatti
 $$
 \mathcal{P}(\exists j < i : (i,j) \in E ) = \sum_{1 \leq j < i} \mathcal{P}( (i,j) \in E )
 $$

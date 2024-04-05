@@ -1,10 +1,7 @@
-La teoria dei giochi fornisce una struttura per modellare come individui indipendenti ed egoisti possano generare una rete affinché vengano ottimizzati i costi e la qualità delle operazioni che questi devono sostenere su di essa. Questi modelli facilitano a loro volta uno studio quantitativo del trade-off tra efficienza e stabilità nella formazione di reti.
-
-In particolar modo, possono essere utilizzati per modellare:
+La teoria dei giochi fornisce una struttura per modellare come individui indipendenti ed egoisti possano generare una rete affinché vengano ottimizzati i costi e la qualità delle operazioni che questi devono sostenere su di essa. Questi modelli facilitano a loro volta uno studio quantitativo del trade-off tra efficienza e stabilità nella formazione di reti. In particolar modo, possono essere utilizzati per modellare:
 - Formazioni di reti sociali.
 - Come sottoreti si connettono in reti di computer.
 - Formazione di reti che connettono i partecipanti tra loro per lo scambio di files.
-
 In generale, i **network formation games** modellano maniere distinte nelle quali agenti egoisti possono creare e valutare una rete. Si studiano due modelli:
 - **Global Connection Game**;
 - **Local Connection Game**.
@@ -59,7 +56,7 @@ Per fare ciò, si cerca di dare una delimitazione al *prezzo dell'anarchia* e al
 - La versione ripetuta del gioco *converge* sempre ad una rete *stabile*.
 
 Si definiscono quindi le misure di inefficienza per un grafo $G$ per il Global connection Game.
-```ad-lemma
+```ad-Definizione
 title: Definizione
 Sia $G=(V,E)$ un grafo diretto. Sia $S_G^*$ l'ottimo sociale per $G$ nel Global Connection Game.
 Si definisce il prezzo dell'anarchia del Global connection Game per il grafo $G$ come
@@ -72,7 +69,7 @@ $$
 $$
 ```
 Tali misure vogliono essere delimitate nel caso peggiore, si definiscono quindi *PoA* e *PoS* per il Global connection game.
-```ad-lemma
+```ad-Definizione
 title: Definizione
 Il prezzo dell'anarchia del Global Connection Game è definito come
 $$
@@ -155,19 +152,19 @@ Nell'esito ottimale, ogni giocatore $i$ sceglie il cammino $s_i \rightarrow v \r
 ## Upper bound e metodo della funzione potenziale
 Nelle dimostrazioni dei bound precedenti, è stato dato per vero che ogni istanza del global connection game ammette un equilibrio di Nash. 
 Dunque, si dimostreranno i seguenti teoremi.
-```ad-theorem
+```ad-Teorema
 title: Teorema
 Ogni istanza del *GCG* ha un equilibrio di Nash puro, che può essere ottenuto giocando in modo ripetuto con la better response dynamics.
 ```
 Una **dinamica di best response** è un processo di gioco iterativo nel quale, ad ogni passo, i giocatori selezionano una strategia che risulta essere una best response rispetto alle strategie scelte da tutti gli altri giocatori al passo precedente.
-```ad-theorem
+```ad-Teorema
 title: Teorema
 Il prezzo della stabilità nel *GCG* con $k$ giocatori è al più $\mathcal{H}_k$, il $k-$esimo numero armonico.
 ```
 Per dimostrare i due teoremi si utilizza il **metodo della funzione potenziale**; in particolare, verranno utilizzati due risultati validi per una classe di giochi detta **giochi potenziali**.
 ### Metodo della funzione potenziale
 Il **metodo della funzione potenziale** è una tecnica che permette di dare una delimitazione sul prezzo della stabilità di un gioco utilizzando una funzione potenziale.
-```ad-lemma
+```ad-Definizione
 title: Definizione (Funzione potenziale esatta)
 Per ogni gioco finito, una funzione potenziale esatta $\Phi$ è una funzione che mappa ogni vettore di strategia $S$ in valori reali e che soddisfa la seguenti condizione:
 $\forall S=(S_1,\ldots,S_k),S_i^{'} \neq S_i$, sia $S^{'}=(S_{-i},S_{i}^{'})$, allora
@@ -272,7 +269,7 @@ $$
 $$
 # Determinare il costo di un equilibrio di Nash
 Si vuole studiare ora quanto sia difficile, data un'istanza di un global connection game ed un valore $C$, determinare se il gioco possiede un equilibrio di Nash di costo al più $C$.
-```ad-theorem
+```ad-Teorema
 title: Teorema
 Data un'istanza di un Global Connection Game ed un valore $C$, è $\mathbf{NP}-$completo determinare se il gioco a un equilibrio di Nash di costo al più $C$.
 ```

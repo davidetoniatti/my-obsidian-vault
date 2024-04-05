@@ -2,11 +2,13 @@
   "accentColor": "",
   "baseFontSize": 22,
   "enabledCssSnippets": [
+    "latex",
     "justify",
     "images"
   ],
   "monospaceFontFamily": "Fira Code",
   "textFontFamily": "SF Pro Text",
   "theme": "obsidian",
-  "cssTheme": "Tokyo Night Storm"
+  "cssTheme": "Tokyo Night Storm",
+  "interfaceFontFamily": "SF Pro Rounded"
 }

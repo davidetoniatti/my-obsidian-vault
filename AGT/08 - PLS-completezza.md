@@ -71,7 +71,7 @@ Si osserva che nella dimostrazione si è usato il fatto che ogni istanza di cong
 
 Ci si restringe quindi ad una sottoclasse di $FNP$, nota come $TFNP$, *total functional NP*. I problemi in $TFNP$ sono quei problemi in $FNP$ tali per cui ogni istanza ha almeno un witness.
 Per tale classe, si ha il seguente risultato
-```ad-theorem
+```ad-Teorema
 title: Teorema
 Se un problema in $TFNP$ è $FNP-$completo, allora $NP=coNP$.
 ```
@@ -147,7 +147,7 @@ Per fare ciò, si fa riferimento alle riduzioni polinomiali. Formalmente, una ri
 La definizione di una riduzione assicura che, se risulta possibile risolvere in tempo polinomiale il problema $L_2$ allora, combinando le soluzioni mediante l'utilizzo degli algoritmi $A_1$ ed $A_2$, può essere risolto $L_1$ in tempo polinomiale.
 
 Si da ora la definizione di completezza per la classe $PLS$
-```ad-lemma
+```ad-Definizione
 title: Definizione (Problema $PLS$-completo)
 Un problema $L$ è $PLS$-completo se $L \in PLS$ ed ogni problema in $PLS$ è riducibile ad esso, ossia, $\forall L^{'}\in PLS$
 $$
@@ -156,19 +156,15 @@ $$
 ```
 Per definizione quindi, esiste un algoritmo polinomiale per risolvere un problema $PLS$-completo se e solo se ogni problema in $PLS$ può essere risolto in tempo polinomiale.
 Un problema $PLS$-completo è un singolo problema di ricerca locale che, simultaneamente, codifica ogni problema di ricerca locale.
-
-```ad-theorem
+```ad-Teorema
 title: Teorema
 Calcolare un massimo locale per un'istanza di maximum cut con pesi degli archi generici non negativi è un problema $PLS$-completo.
 ```
-
 Indipendentemente dal fatto che ogni problema in $PLS$ possa o non possa essere risolto in tempo polinomiale, la dimostrazione del teorema appena enunciato implica che l'algoritmo di ricerca locale per max cut richieda tempo esponenziale nel caso peggiore.
-
-```ad-theorem
+```ad-Teorema
 title: Teorema
 Calcolare un massimo locale per un'istanza di maximum cut con pesi degli archi generici non negativi usando la ricerca locale può richiedere un numero esponenziale in $|V|$ di iterazioni, indipendentemente da come venga scelta una mossa locale in ogni iterazione.
 ```
-
 Si osserva che ogni istanza di un problema $PLS$ ha almeno un testimone, questo perché per definizione, la ricerca locale si deve per forza fermare ad un ottimo locale. $PLS$ è allora sottoinsieme di $TFNP$, e quindi nessuno dei problemi appartenenti ad esso, come il calcolo di un equilibrio di Nash puro di un congestion game, può essere $FNP-$completo, a meno che $NP=coNP$. 
 
 Inoltre, si osserva che al contrario di $TFNP$, i problemi in questa classe possiedono una ragione generica per l'appartenenza ad essa, ossia che sono risolvibili mediante una procedura di ricerca locale.
@@ -245,7 +241,7 @@ Si ricorda che il teorema di Nash garantisce che un equilibrio di Nash misto per
 Non si conosce un algoritmo polinomiale per il problema MNE.
 Si vuole mostrare che il problema risulti completo per una classe di complessità adatta, tenendo a mente che non si può dimostrare la $TFNP-$completezza per un dato problema appartenente a tale classe.
 Essendo MNE un problema in $TFNP$ ed essendo $TFNP \subseteq FNP$, si ha che MNE$\in TNF$. Ma, come conseguenza del teorema ($4.2$) si ha il seguente risultato:
-```ad-theorem
+```ad-Teorema
 title: Teorema
 Calcolare un equilibrio di Nash misto di un bimatrix game non è $FNP$-completo a meno che $NP=coNP$.
 ```
@@ -260,7 +256,7 @@ I problemi in $PPAD$, come i problemi $PLS$, sono risolvibili mediante una proce
 La differenza essenziale tra $PLS$ e $PPAD$ è data dalla struttura dei rispettivi grafi con i quali si possono modellare i relativi problemi appartenenti a tali classi. Il grafo corrispondente ad un problema in $PLS$ è diretto e aciclico, mentre il grafo corrispondente ad un problema in $PPAD$ è diretto con tutti i nodi avente grado entrante e grado uscente al più $1$. Inoltre, per definizione, il grafo corrispondente ad un problema in $PPAD$ possiede un nodo sorgente canonico, ossia un vertice senza archi entranti. Attraversare gli archi di tale grafo partendo dal nodo sorgente non può produrre un ciclo, essendo che ogni vertice ha grado entrante al più $1$, e il nodo sorgente canonico non ha archi entranti. Si ha quindi un nodo pozzo raggiungibile dal nodo sorgente canonico. Diversamente da un problema in $PLS$, non vi è una funzione obiettivo, ed un grafo diretto associato ad un problema in $PPAD$ può possedere cicli. I witnesses per un problema in $PPAD$ sono, per definizione, tutte le soluzioni che corrispondono ad un nodo pozzo o ad un nodo sorgente diverso da quello canonico.
 Quindi la ragione generica di appartenenza di un problema a questa classe è data dal fatto che questo può essere risolto seguendo un cammino diretto dal nodo sorgente al nodo pozzo nel grafo che lo modella.
 ![08-agt_img02|center|500](08-agt_img02.png)
-```ad-theorem
+```ad-Teorema
 title: Teorema
 Calcolare un equilibrio di Nash misto per un bimatrix game è $PPAD-$completo.
 ```

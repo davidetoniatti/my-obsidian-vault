@@ -18,7 +18,8 @@ $$\forall  u,v \in S, \ u\neq v : h(u) \neq h(v)$$
 Per tale scenario, l'operazione di ricerca di un elemento $u$ consiste nel controllare l'array in posizione $H[h(u)]$, la quale o è vuota o contiene $u$.
 
 In generale, possono esservi elementi $u,v\in S$ con $u\neq v$ tali per cui $h(u)=h(v)$. Quando ciò accade, si dice che tali elementi *collidono*, essendo mappati nella stessa entrata in $H$.
-Per gestire le collisioni, si assume che ogni posizione $H[i]$ della tabella hash memorizzi una lista concatenata di tutti gli elementi $u \in S$ tali per cui $h(u)=i$. 
+Per gestire le collisioni, si assume che ogni posizione $H[i]$ della tabella hash memorizzi una lista concatenata di tutti gli elementi $u \in S$ tali per cui $h(u)=i$.
+![](Pasted%20image%2020240225191254.png)
 Le operazioni descritte in precedenza per il dizionario su un elemento $u\in U$ prevedono quindi il calcolo di $h(u)$ precedentemente alla loro esecuzione. In particolar modo
 - `Insert(u)`: Calcola $h(u)$ e inserisci $u$ nella lista in $H[h(u)]$.
 - `Lookup(u)`: Calcola $h(u)$ e scandisci la lista in posizione $H[h(u)]$ per vedere se $u$ è presente in essa.
@@ -186,67 +187,32 @@ Per mostrare che tale implementazione del dizionario risulti essere efficiente, 
 ```ad-Teorema
 La classe di funzioni hash $\mathcal{H}=\{h_a:a\in \mathcal{A}\}$ è universale: per ogni coppia di elementi distinti $x$ e $y$ di $U$, la probabilità che $h_a(x) = h_a(y)$ per un $a \in A$ scelto casualmente è al più $1/m$.
 ```
-Per la dimostrazione, si utilizza il lemma seguente.
-```ad-Lemma
-Sia $p$ un numero primo e sia $z \neq 0$ (mod $p$). Per ogni intero $\alpha,\beta$
-$$
-\alpha z = \beta z \textnormal{ (mod } p) \implies \alpha = \beta \textnormal{ (mod } p)
-$$
-```
-```ad-Dimostrazione
-Sia $\alpha z = \beta z \textnormal{ (mod } p)$. Allora
-$$
-z(\alpha -\beta) = 0 \textnormal{ (mod }p)
-$$
-Ossia, $z(\alpha -\beta)$ è divisibile per $p$. Ma per ipotesi $z \neq 0 \textnormal{ (mod }p)$, quindi $z$ non è divisibile per $p$. Essendo $p$ un primo, quindi, deve essere necessariamente che $\alpha -\beta$ risulti essere divisibile per $p$. Dunque
-$$
-\alpha -\beta= 0 \textnormal{ (mod }p) \implies \alpha = \beta \textnormal{ (mod }p)
-$$
-```
-
-Si dimostra che la classe $\mathcal{H}$ è universale
 ```ad-Dimostrazione
 Siano $x=(x_1,x_2,...,x_r)$ e $y=(y_1,y_2,...,y_r)$ due elementi distinti in $U$, allora esiste un indice $j$ tale per cui $x_j \neq y_j$.
 Sia $a \in \mathcal{A}$ un vettore scelto casualmente nella seguente maniera: fissate tutte le coordinate $a_i$ con $i\neq j$, scegli la coordinata $a_j$ casualmente.
 Si mostra quindi come, indipendentemente dalla scelte di tutte le altre coordinate $a_i$, la probabilità che $h_a(x)=h_a(y)$, considerando la scelta finale di $a_j$, sia esattamente $1/m$. Da ciò seguirà che la probabilità di $h_a(x)=h_a(y)$ per la scelta casuale di tutto il vettore $a$ dovrà necessariamente essere anch'essa $1/m$.
 
-Ciò è chiaro intuitivamente: se la probabilità è $1/m$ indipendentemente dalla scelta di tutti gli altri $a_i$, allora sarà $1/m$ in generale. 
-Si da una dimostrazione diretta usando la probabilità condizionata:
-
-Sia $\mathcal{E}$ l'evento
-$$
-h_a(x) = h_a(y)
-$$
-
-e sia $\mathcal{F}_b$ l'evento 
-$$
-\textnormal{Tutte le coordinate }a_i\ (\textnormal{per }i\neq j)\textnormal{ ricevono una sequenza di valori }b.
-$$
-Si vuole mostrare che $\mathbf{Pr}\bigr[\mathcal{E}\ |\ \mathcal{F}_b\bigr] = 1/m$ per ogni $m$. Da ciò seguirà che 
-$$
-\mathbf{Pr}\bigr[\mathcal{E}\bigr] = \sum_b \mathbf{Pr}\bigr[\mathcal{E}\ |\ \mathcal{F}_b\bigr]\cdot \mathbf{Pr}\bigr[ \mathcal{F}_b\bigr] = (1/m)\sum_b \mathbf{Pr}\bigr[\mathcal{F}_b\bigr] = 1/m
-$$
-
 Si assuma quindi che tutti i valori per le coordinate $a_i$ (eccetto $a_j$) siano state scelte arbitrariamente, e si consideri la probabilità di selezionare un $a_j$ tale per cui $h_a(x)=h_a(y)$. Riordinando i termini, si osserva che
 $$
 h_a(x) = h_a(y) \iff a_j\underbrace{(y_j - x_j)}_z \equiv_m \underbrace{\sum_{i\neq j}a_i(x_i-y_i)}_{\alpha}
 $$
-Bisogna mostrare che esiste esattamente un solo valore $0\leq a_j <m$ che soddisfa $a_j z \equiv_m \alpha$. Cosi facendo, essendo $a_j$ scelto uniformly at random da $\mathbb{Z}_m$, allora la probabilità di scegliere tale valore per $a_j$ è esattamente $1/m$.
-Si supponga quindi che esistano due valori che soddisfino l'equazione vista in precedenza, siano essi $a_j$ ed $a_j^{'}$, ossia
+Bisogna mostrare che esiste esattamente un solo valore $0\leq a_j <m$ che soddisfa $a_j z \equiv_m \alpha$. Siccome $m$ è un numero primo e 
 $$
-\begin{align}
-a_j z &\equiv_m \alpha  \\
-a_j^{'} z &\equiv_m \alpha
-\end{align}
+z=y_j-x_j \neq 0
 $$
-Dunque si avrebbe che $a_j z \equiv_m a_j^{'} z$, e per il lemma enunciato in precedenza, si avrebbe $a_j \equiv_m a_j^{'}$. Ma essendo per ipotesi $a_j,a_j^{'} <m$, allora $a_j$ ed $a_j^{'}$ sono esattamente lo stesso numero. Da ciò segue che esiste un singolo $a_j$ in $\mathbb{Z}_m$ che soddisfa $a_jz\equiv_m\alpha$.
-
-Questo vuol dire che la probabilità di scegliere $a_j$ tale per cui $h_a(x)=h_a(y)$ è $1/m$, indipendentemente dalla scelta delle altre coordinate $a_i$ in $a$. Quindi la probabilità che $x$ e $y$ collidano è $1/m$, e ciò dimostra che $\mathcal{H}$ è una classe di funzioni hash universale.
+allora $z$ ammette un *unico* inverso moltiplicativo $z^{-1}$. Quindi vale
+$$
+a_j \equiv_m z^{-1} \alpha
+$$
+ed essendo $z^{-1}$ unico, allora esiste una sola scelta di $a_j$ che soddisfa $a_j \equiv_m z^{-1}\alpha$, dunque
+$$
+\mathbf{Pr}[h_a(x) = h_a(y)] = \mathbf{Pr}[a_j \equiv_m z^{-1} \alpha] = \frac{1}{m}
+$$
 ```
 ```ad-Osservazione
 Si vuole mostrare esplicitamente che 
 $$
-h_a(x) = h_a(y) \iff a_j(y_j - x_j) = \sum_{i\neq j}a_i(x_i-y_i) \textnormal{ mod }p
+h_a(x) = h_a(y) \iff a_j(y_j - x_j) \equiv_m \sum_{i\neq j}a_i(x_i-y_i)
 $$
 
 Si ricorda per definizione che 
@@ -390,7 +356,7 @@ Usando la stessa argomentazione del lemma precedente, ed osservando che $a \neq 
 $$
 \mathbf{Pr}\left[\hat{X}_2 = i \wedge \hat{X}_1 = j\right] \leq \frac{1}{p(p-1)}.
 $$
-	Mettendo tutto assieme si ha
+Mettendo tutto assieme si ha
 $$
 \mathbf{Pr} \left[ \bar{h}(x_1)=\bar{h}(x_2)\right] \leq \sum_{i=0}^{p-1} \sum_{j \in W} \mathbf{Pr}\left[\hat{X}_2 = i \wedge \hat{X}_1 = j\right]
 $$
@@ -433,26 +399,29 @@ Double/Halving technique:
 Si considera il problema del dizionario statico: 
 Dato un insieme $S$ di $n$ elementi (o chiavi) da un universo $U$ di dimensione $N$, si vuole costruire una struttura dati di dimensione $O(n)$ che supporti le operazioni di ricerca (dato $x \in U$, sapere se $x \in S$) in tempo costante. Si vuole un tempo di costruzione atteso per tale struttura dati che sia polinomiale con alta probabilità.
 
-L'idea è quella di costruire una tabella a due livelli:
-
-- Passo 1: Pesca uniformly at random una funzione hash $h_1:U\longrightarrow[m]$ da una famiglia di funzioni hash universale per $m=\Theta(n)$ (ad esempio $m$ numero primo vicino ad $n$). Esegui l'hashing su tutti gli elementi di $S$ usando $h_1$, ossia costruisci un'array $H$ di liste concatenate e inserisci ogni $x\in S$ in posizione $H[h_1(x)]$.
-- Passo 2: Per ogni $j\in [m]$, sia $l_j$ il numero di elementi in posizione $j$ in $H$. $$ l_j = |\{i\ |\ h(x_i)\ =\ j \ \}|$$Pesca uniformly at random una funzione hash $h_{2,j}:U \longrightarrow [m_j]$ da una famiglia di funzioni hash universale per $l_j^2 \leq m_j \leq O(l_j^2)$ (ad esempio $m_j$ numero primo vicino ad esso). Sostituisci la lista concatenata in posizione $j$ con una tabella hash $H_j$ di dimensione $m_j$,  mappando gli elementi in posizione $j$ di tale lista in $H_j$ utilizzando $h_{2,j}$.
-
-La complessità spaziale è $$O\left(n+ \sum_{j=0}^{m-1}l_j^2 \right)$$Per ridurla a $O(n)$ bisogna aggiungere due passi intermedi:
-- Passo 1.5: Se $\sum_{j=0}^{m-1}l_j^2>cn$ dove $c$ è una costante scelta, riesegui il passo $1$.
-- Passo 2.5: Quando $h_{2,j}(u)=h_{2,j}(v)$ per qualche $u,v \in S$ tali per cui $u\neq v$ e $h_1(u)=h_1(v)$, ossia quando si verifica una collisione al secondo livello di hash, pesca una nuova funzione $h_{2,j}$ e rimappa tutti gli $l_j$ elementi in $H_j$. 
-
+L'idea è quella di costruire una tabella a **due livelli**.
+![](Pasted%20image%2020240225191341.png)
+L'algoritmo per la creazione della tabella è il seguente
+- **Passo 1**: Pesca uniformly at random una funzione hash $h_1:U\longrightarrow[m]$ da una famiglia di funzioni hash universale per $m=\Theta(n)$ (ad esempio $m$ numero primo vicino ad $n$). Esegui l'hashing su tutti gli elementi di $S$ usando $h_1$, ossia costruisci un'array $H$ di liste concatenate e inserisci ogni $x\in S$ in posizione $H[h_1(x)]$.
+- **Passo 2**: Per ogni $j\in [m]$, sia $l_j$ il numero di elementi in posizione $j$ in $H$. $$ l_j = |\{i\ |\ h(x_i)\ =\ j \ \}|$$Pesca uniformly at random una funzione hash $h_{2,j}:U \longrightarrow [m_j]$ da una famiglia di funzioni hash universale per $l_j^2 \leq m_j \leq O(l_j^2)$ (ad esempio $m_j$ numero primo vicino ad esso). Sostituisci la lista concatenata in posizione $j$ con una tabella hash $H_j$ di dimensione $m_j$,  mappando gli elementi in posizione $j$ di tale lista in $H_j$ utilizzando $h_{2,j}$.
+La complessità spaziale è
+$$
+O\left(n+ \sum_{j=0}^{m-1}l_j^2 \right)
+$$
+Per ridurla a $O(n)$ bisogna aggiungere due passi intermedi:
+- **Passo 1.5**: Se $\sum_{j=0}^{m-1}l_j^2>cn$ dove $c$ è una costante scelta, riesegui il passo 1.
+- **Passo 2.5**: Quando $h_{2,j}(u)=h_{2,j}(v)$ per qualche $u,v \in S$ tali per cui $u\neq v$ e $h_1(u)=h_1(v)$, ossia quando si verifica una collisione al secondo livello di hash, pesca una nuova funzione $h_{2,j}$ e rimappa tutti gli $l_j$ elementi in $H_j$. 
 Questi due passi garantiscono che non si verifichino collisioni al secondo livello, e che la complessità spaziale sia di $O(n)$. Ciò garantisce che il tempo di ricerca di un elemento sia $O(1)$.
-Si osserva esplicitamente che risulta improbabile che si verifichino le condizioni espresse nel passo $2.5$, essendovi $\Theta(l_j^2)$ celle per mappare $l_j$ elementi.
-
-Si studia ora il tempo di costruzione della struttura dati impiegato dall'algoritmo.
-Ricordando che il calcolo di una delle funzioni hash universali viste in precedenza richiede tempo costante, si ha che i passi $(1)$ e $(2)$ richiedono tempo $O(n)$.
-Per il passo $(2.5)$ si ha che
+Si osserva esplicitamente che risulta improbabile che si verifichino le condizioni espresse nel passo **2.5**, essendovi $\Theta(l_j^2)$ celle per mappare $l_j$ elementi.
+#### Analisi building time
+Ricordando che il calcolo di una delle funzioni hash universali viste in precedenza richiede tempo costante, si ha che i passi **1** e **2** richiedono tempo $O(n)$.
+##### Step 2.5
+Per il passo **2.5** si ha che
 $$
 \begin{align*}
 \mathbf{Pr}_{h_{2,j}}\left[h_{2,j}(u)=h_{2,j}(v), \textnormal{ per }u\neq v\right] &\leq \sum_{u,v\in S, u\neq v} \mathbf{Pr}\left[h_{2,j}(u)=h_{2,j}(v)\right]  \\
 \\
-&\leq \binom{l_j}{2} \cdot \frac{1}{l_j^2} < \frac{1}{2}
+&\leq \underbrace{\frac{l_j(l_{j} - 1)}{2}}_{\text{tutte le possibili coppie in cella $j$}} \cdot \frac{1}{l_j^2} < \frac{1}{2}
 \end{align*}
 $$
 Dove si osserva esplicitamente che, per l'universalità di $h_{2,j}$
@@ -462,11 +431,14 @@ $$
 Quindi, ogni prova è come un lancio di moneta. Se l'esito è *croce*, si passa allo step successivo. Si ha quindi che
 - $\mathbf{E}\left[\textnormal{numero di prove} \right]\leq 2$
 - numero di prove per ottenere *croce* (no collisione) è  $O(\log n)$ con alta probabilità.
-Ogni prova richiede tempo $O(l_j)$, che, per un Chernoff bound, $l_j = O(\log n)$ con alta probabilità, quindi ogni prova richiede tempo $O(\log n)$. 
+Ogni prova richiede tempo $O(l_j)$, dove $l_j = O(\log n)$ con alta probabilità (per Chernoff Bound); quindi ogni prova richiede tempo $O(\log n)$ con alta probabilità.
 Dovendo compiere tale passo per ogni $j$, si ha che la complessità temporale totale è 
-$O(\log n)\cdot O(\log n) \cdot O(n)= O(n \log^2 n)$ con alta probabilità.
-
-Per il passo $(1.5)$, si vuole mostrare che $\mathbf{E}\left[\sum_{j=0}^{m-1} l_j^2\right]= \Theta(n)$, applicando poi la disuguaglianza di Markov.
+$$
+O(\log n)\cdot O(\log n) \cdot O(n)= O(n \log^2 n)
+$$
+con alta probabilità.
+##### Step 1.5
+Per il passo **1.5**, si vuole mostrare che $\mathbf{E}\left[\sum_{j=0}^{m-1} l_j^2\right]= \Theta(n)$, applicando poi la disuguaglianza di Markov.
 Si definisce quindi la variabile aleatoria
 $$
 \begin{equation*}
@@ -511,4 +483,4 @@ $$
 $$
 Scegliendo un $c$ adatto, ad esempio $c\geq 4$.
 Si ha quindi che $\mathbf{E}\left[\textnormal{numero di prove} \right]\leq 2$ e $\textnormal{(numero di prove)}=O(\log n)$ con alta probabilità. 
-Da ciò, si ha che il passo $(1)$ ed il passo $(1.5)$ combinati richiedono tempo atteso $O(n \log n)$ con alta probabilità.
+Da ciò, si ha che il passo **1** ed il passo **1.5** combinati richiedono tempo atteso $O(n \log n)$ con alta probabilità.
