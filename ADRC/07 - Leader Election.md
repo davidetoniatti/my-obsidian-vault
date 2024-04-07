@@ -88,11 +88,11 @@ Nel protocollo *as far as it can* e nel protocollo *all the way* gli $id$ viaggi
 Un'idea è quella di **controllare** la trasmissione di un $id$ ad una distanza **limitata** e di avere dei **feedback** per bloccarne o estenderne la trasmissione a distanze maggiori.
 
 Più precisamente, un nodo attivo $x$ esegue il protocollo in **stage**, dove nello stage $i$ il nodo $x$ inoltra a destra e a sinistra la sua etichetta $id(x)$ fino a una distanza massima di $2^{i-1}$ salti.
-![](Pasted%20image%2020240327163856.png)
+![](adrc_img24.png)
 Quando un nodo $y$ riceve $id(x)$ la inoltra al nodo successivo solo se $id(y) > id(x)$; in questo caso, certamente $y$ non sarà mai eletto leader, dunque $y$ passa in uno stato $\text{defeated}$, nel quale $y$ potrà solamente inoltrare messaggi inviati da altri nodi.
 Se $id(x)$ arriva a distanza $2^{i-1}$ allora verrà rispedito indietro al mittente con un messaggio di *feedback*. Se $x$ riceve il feedback da entrambi i lati, allora tutti i nodi a distanza $2^{i-1}$ da lui hanno etichette maggiori, dunque deve inoltrare $id(x)$ a distanza maggiore. In tale caso, si dice che il nodo $x$ è *sopravvissuto* allo stage $i$ e parteciperà allo stage $i+1$.
 Se $id(x)$ non riceve il feedback da uno o tutti e due i lati, allora esiste almeno un nodo $z$ entro $2^{i-1}$ salti che ha etichetta minore $id(z)<id(x)$: allora ad un certo punto il nodo $x$ passerà in stato $\text{defeated}$ per colpa di $id(z)$.
-![](Pasted%20image%2020240327164621.png)
+![](adrc_img25.png)
 Infine, quando un nodo $x^*$ riceve da un lato il messaggio inviato dall'altro lato, allora $x^*$ potrà affermare di essere il leader. A questo punto $x^*$ invia una notifica in broadcast a tutti gli altri nodi, che passeranno dallo stato $\text{defeated}$ allo stato $\text{follower}$.
 
 Riassumendo:
@@ -134,7 +134,7 @@ Si osserva che un nodo $x$ supera lo stage $i-1$ quando $id(x)$ è minore di $2^
 $$
 n_{i} \leqslant \frac{n}{2^{i-1}+1}
 $$
-![](Pasted%20image%2020240328164046.png)
+![](adrc_img27.png)
 
 Sia $i>1$; si considerano i messaggi inviati nello stage $i$. Nel caso peggiore, la situazione è la seguente:
 - **Messaggi** ***"forth"***: i messaggi di tipo *forth* inviati nello stage $i$ percorrono una distanza di $2^{i-1}$ salti in entrambe le direzioni. Dato che superano lo stage $i$  $n_{i+1}$ candidati, allora vengono inviati al più $n_{i+1}\cdot2\cdot2^{i-1}$ messaggi di tipo *forth*;

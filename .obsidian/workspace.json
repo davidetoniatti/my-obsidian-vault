@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "f77453dfba9e85dc",
+        "id": "5961a2f1bfab6926",
         "type": "tabs",
         "children": [
           {
-            "id": "fe6fd10d6d715653",
+            "id": "f0e1829914928dbd",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ADRC/08 - Graph Coloring Distribuito.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ADRC/08 - Graph Coloring Distribuito.md",
+                "file": "root.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +98,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ADRC/08 - Graph Coloring Distribuito.md",
+                "file": "root.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +121,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ADRC/08 - Graph Coloring Distribuito.md"
+                "file": "root.md"
               }
             }
           }
@@ -148,25 +144,31 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "fe6fd10d6d715653",
+  "active": "d510a73e3142c4df",
   "lastOpenFiles": [
     "ADRC/10 - Leader Election Unlabeled Ring.md",
+    "ADRC/08 - Graph Coloring Distribuito.md",
+    "ADRC/01 - Ambienti distribuiti.md",
+    "ADRC/02 - Problema Broadcast.md",
+    "ADRC/03 - Problema Wake-up.md",
+    "ADRC/04 - Spanning Tree construction.md",
+    "ADRC/07 - Leader Election.md",
+    "ADRC/05 - Depth First Traversal.md",
+    "ADRC/06 - Saturazione.md",
+    "ADRC/attachments/adrc_img23.png",
+    "ADRC/attachments/adrc_img31.png",
     "ADRC/09 - Maximal Independent Set Distribuito.md",
+    "o.md",
+    "omdo.md",
+    "ADRC/attachments/adrc_img30.png",
+    "ADRC/attachments/adrc_img29.png",
     "PCD/1 - Consenso distribuito.md",
     "SDCC/07 - Virtualizzazione.md",
     "SDCC/04 - Sistemi distribuiti auto-adattativi.md",
     "SDCC/03 - Architetture dei sistemi distribuiti.md",
-    "ADRC/07 - Leader Election.md",
-    "ADRC/08 - Graph Coloring Distribuito.md",
-    "ADRC/03 - Problema Wake-up.md",
-    "ADRC/04 - Spanning Tree construction.md",
-    "ADRC/05 - Depth First Traversal.md",
-    "ADRC/06 - Saturazione.md",
-    "ADRC/01 - Ambienti distribuiti.md",
     "AR/08 - Sistemi di voto.md",
     "AR/09 - Web Search.md",
     "AGT/08 - PLS-completezza.md",
-    "ADRC/02 - Problema Broadcast.md",
     "AGT/06 - Algorithmic Mechanism Design III.md",
     "AGT/05 - Algorithmic Mechanism Design II.md",
     "AGT/04 - Algorithmic Mechanism Design I.md",
@@ -178,16 +180,9 @@
     "ADRC/attachments/adrc_img02.png",
     "ADRC/attachments/adrc_img03.png",
     "ADRC/attachments/adrc_img04.png",
-    "ADRC/attachments/adrc_img05.png",
-    "ADRC/attachments/adrc_img06.png",
-    "ADRC/attachments/adrc_img07.png",
-    "ADRC/attachments/adrc_img08.png",
     "ABD/02 - Richiami di probabilità.md",
     "ABD/01 - Introduzione al Data Mining.md",
     "ABD/07 - Link analysis.md",
-    "ABD/06 - Data streams.md",
-    "ABD/05 - Similar items.md",
-    "ABD/04 - Hash function.md",
     "Senza nome.canvas",
     "ADRC/attachments",
     "ADRC",
