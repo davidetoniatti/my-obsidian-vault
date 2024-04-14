@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "5961a2f1bfab6926",
+        "id": "5d0c77db16e8500d",
         "type": "tabs",
         "children": [
           {
-            "id": "c29c941c981b23f1",
+            "id": "e0c1cc8835498b3e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ADRC/10 - Leader Election Unlabeled Ring.md",
+                "file": "ADRC/07 - Leader Election.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ADRC/10 - Leader Election Unlabeled Ring.md",
+                "file": "ADRC/07 - Leader Election.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ADRC/10 - Leader Election Unlabeled Ring.md",
+                "file": "ADRC/07 - Leader Election.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ADRC/10 - Leader Election Unlabeled Ring.md"
+                "file": "ADRC/07 - Leader Election.md"
               }
             }
           }
@@ -148,32 +148,35 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "c29c941c981b23f1",
+  "active": "e0c1cc8835498b3e",
   "lastOpenFiles": [
-    "ADRC/08 - Graph Coloring Distribuito.md",
-    "ADRC/09 - Maximal Independent Set Distribuito.md",
-    "ADRC/10 - Leader Election Unlabeled Ring.md",
     "ADRC/06 - Saturazione.md",
     "ADRC/05 - Depth First Traversal.md",
     "ADRC/04 - Spanning Tree construction.md",
     "ADRC/03 - Problema Wake-up.md",
+    "ADRC/02 - Problema Broadcast2.md",
     "ADRC/02 - Problema Broadcast.md",
-    "ADRC/01 - Ambienti distribuiti2.md",
+    "ADRC/09 - Maximal Independent Set Distribuito.md",
+    "ADRC/attachments/CorrectnessFlood.png",
+    "ADRC/attachments/BroadcastLowerBound.png",
+    "ADRC/attachments/adrc_img29.png",
+    "ADRC/attachments/adrc_img31.png",
+    "ADRC/attachments/adrc_img28.png",
+    "ADRC/attachments/adrc_img30.png",
+    "ADRC/attachments/adrc_img32.png",
+    "ADRC/attachments/adrc_img33.png",
+    "ADRC/attachments/adrc_img34.png",
+    "ADRC/attachments/adrc_img35.png",
+    "ADRC/08 - Graph Coloring Distribuito.md",
+    "ADRC/10 - Leader Election Unlabeled Ring.md",
     "ADRC/07 - Leader Election.md",
+    "ADRC/01 - Ambienti distribuiti2.md",
     "ADRC/01 - Ambienti distribuiti.md",
-    "ADRC/attachments/Pasted image 20240413180924.png",
-    "ADRC/attachments/Pasted image 20240413173937.png",
-    "ADRC/attachments/Pasted image 20240413164155.png",
     "PCD/pcd parte 2.md",
     "ABD/07 - Link analysis.md",
-    "ADRC/attachments/Pasted image 20240408172838.png",
     "cose da fare.md",
-    "ADRC/attachments/adrc_img23.png",
-    "ADRC/attachments/adrc_img31.png",
     "o.md",
     "omdo.md",
-    "ADRC/attachments/adrc_img30.png",
-    "ADRC/attachments/adrc_img29.png",
     "PCD/1 - Consenso distribuito.md",
     "SDCC/07 - Virtualizzazione.md",
     "SDCC/04 - Sistemi distribuiti auto-adattativi.md",
@@ -183,11 +186,8 @@
     "AGT/08 - PLS-completezza.md",
     "AGT/06 - Algorithmic Mechanism Design III.md",
     "AGT/05 - Algorithmic Mechanism Design II.md",
-    "AGT/04 - Algorithmic Mechanism Design I.md",
     "ADRC.zip",
     "ziUeKQ0c",
-    "ADRC/attachments/adrc_ex1.png",
-    "ADRC/attachments/adrc_ex2.png",
     "Senza nome.canvas",
     "ADRC/attachments",
     "ADRC",
