@@ -8,11 +8,15 @@
         "type": "tabs",
         "children": [
           {
-            "id": "f0e1829914928dbd",
+            "id": "c29c941c981b23f1",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "ADRC/10 - Leader Election Unlabeled Ring.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "root.md",
+                "file": "ADRC/10 - Leader Election Unlabeled Ring.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -98,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "root.md",
+                "file": "ADRC/10 - Leader Election Unlabeled Ring.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -121,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "root.md"
+                "file": "ADRC/10 - Leader Election Unlabeled Ring.md"
               }
             }
           }
@@ -144,20 +148,28 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "d510a73e3142c4df",
+  "active": "c29c941c981b23f1",
   "lastOpenFiles": [
-    "ADRC/10 - Leader Election Unlabeled Ring.md",
     "ADRC/08 - Graph Coloring Distribuito.md",
-    "ADRC/01 - Ambienti distribuiti.md",
-    "ADRC/02 - Problema Broadcast.md",
-    "ADRC/03 - Problema Wake-up.md",
-    "ADRC/04 - Spanning Tree construction.md",
-    "ADRC/07 - Leader Election.md",
-    "ADRC/05 - Depth First Traversal.md",
+    "ADRC/09 - Maximal Independent Set Distribuito.md",
+    "ADRC/10 - Leader Election Unlabeled Ring.md",
     "ADRC/06 - Saturazione.md",
+    "ADRC/05 - Depth First Traversal.md",
+    "ADRC/04 - Spanning Tree construction.md",
+    "ADRC/03 - Problema Wake-up.md",
+    "ADRC/02 - Problema Broadcast.md",
+    "ADRC/01 - Ambienti distribuiti2.md",
+    "ADRC/07 - Leader Election.md",
+    "ADRC/01 - Ambienti distribuiti.md",
+    "ADRC/attachments/Pasted image 20240413180924.png",
+    "ADRC/attachments/Pasted image 20240413173937.png",
+    "ADRC/attachments/Pasted image 20240413164155.png",
+    "PCD/pcd parte 2.md",
+    "ABD/07 - Link analysis.md",
+    "ADRC/attachments/Pasted image 20240408172838.png",
+    "cose da fare.md",
     "ADRC/attachments/adrc_img23.png",
     "ADRC/attachments/adrc_img31.png",
-    "ADRC/09 - Maximal Independent Set Distribuito.md",
     "o.md",
     "omdo.md",
     "ADRC/attachments/adrc_img30.png",
@@ -176,13 +188,6 @@
     "ziUeKQ0c",
     "ADRC/attachments/adrc_ex1.png",
     "ADRC/attachments/adrc_ex2.png",
-    "ADRC/attachments/adrc_img01.png",
-    "ADRC/attachments/adrc_img02.png",
-    "ADRC/attachments/adrc_img03.png",
-    "ADRC/attachments/adrc_img04.png",
-    "ABD/02 - Richiami di probabilità.md",
-    "ABD/01 - Introduzione al Data Mining.md",
-    "ABD/07 - Link analysis.md",
     "Senza nome.canvas",
     "ADRC/attachments",
     "ADRC",

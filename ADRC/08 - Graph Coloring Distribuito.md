@@ -12,7 +12,7 @@ Restringendo il problema al caso in cui il grafo è $\Delta$-regolare, l'obietti
 Formalmente, il problema è dato dalla tripla $P = \langle P_{init}, P_{final}, R \rangle$ dove
 - $P_{init}$: una colorazione iniziale dei nodi $C_{init}: V \to [a]$ tale che $a > \Delta+1$ e tale che $v$ conosce il suo colore; questo per ogni nodo $v \in V$;
 - $P_{final}$: una colorazione dei nodi $C_{final}:V\to [\Delta+1]$ tale che ogni nodo $v \in V$ conosca il suo colore finale $C_{final}(v)$;
-- $R = \mathcal{LOCAL}\text{ model}$;
+- $R = \mathcal{LOCAL}\text{ model restriction}$, cioè le restrizioni definite per tale modello;
 Si riportano ora le caratteristiche del modello distribuito nel quale si risolve il problema, il modello $\mathcal{LOCAL}$.
 ## $\mathcal{LOCAL}$ model
 In questo modello del calcolo distribuito, la rete di comunicazione è modellata come un grafo non diretto e non pesato $G=(V,E)$ con $n$ nodi. La rete è statica, dunque la topologia non cambia. Ogni nodo viene identificato da un $id$ univoco e inizialmente ogni nodo $v$ possiede come sola conoscenza il valore di $id(v)$. Ogni nodo può comunicare con i suoi vicini inviando e ricevendo messaggi, di dimensione illimitata, in modo del tutto **sincrono**. Nello specifico, il protocollo inizia simultaneamente su tutti i nodi e procede per round **discreti** e **sincroni**. Ad ogni round un nodo può eseguire una serie, potenzialmente illimitata, di computazioni e inviare messaggi. In particolare, ogni nodo può inviare messaggi distinti a vicini distinti e tutti i messaggi inviati in un certo round vengono ricevuti entro la fine del round. Infine, la complessità del protocollo è data dal numero di round necessari per terminare il protocollo.

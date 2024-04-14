@@ -33,7 +33,7 @@ Si fanno le seguenti assunzioni o *restrizioni* rispetto al sistema in cui si ri
 - **Connettività**, cioè $G$ è connesso. Si osserva che questa restrizione è necessaria: se $G$ è disconnesso, allora alcune entità non possono ricevere l'informazione, dunque il problema del broadcasting sarebbe irrisolvibile;
 - **Unique initiator**, cioè solo un'entità può avviare la propagazione del messaggio.
 ## Protocollo Flooding
-Una prima idea per risolvere il problema è la seguente: se un'entità riceve un messaggio, allora lo inoltra ai suoi vicino. Intuitivamente questa idea farà convergere il sistema verso la configurazione finale, cioè porterà al completamento del task perché il grafo è connesso e si lavora sotto l'ipotesi dell'affidabilità totale.
+Una prima idea per risolvere il problema è la seguente: se un'entità riceve un messaggio, allora lo inoltra ai suoi vicini. Intuitivamente questa idea farà convergere il sistema verso la configurazione finale, cioè porterà al completamento del task perché il grafo è connesso e si lavora sotto l'ipotesi dell'affidabilità totale.
 ![](adrc_img06.png)
 Si definisce `INITIATOR` lo stato nel quale si trova l'unico nodo detentore del messaggio da propagare e che deve far iniziare il protocollo; inoltre si definisce lo stato `SLEEPING` nel quale si trovano tutti gli altri nodi in attesa di ricevere il messaggio. Allora si può descrivere il protocollo eseguito da ogni entità $x$ del sistema nel modo seguente:
 ```python

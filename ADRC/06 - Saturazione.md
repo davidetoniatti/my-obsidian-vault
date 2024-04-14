@@ -115,3 +115,4 @@ $$
 $$
 dove $k$ indica il numero di iniziatori.
 ## Calcolo dei centri
+#TODO 

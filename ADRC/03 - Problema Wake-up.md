@@ -23,7 +23,7 @@ if state == "ASLEEP":
 		send("wake-up!") to N() - sender
 		state = "AWAKE"
 ```
-Si osserva che il protocollo WFLOOD è molto simile al protocollo FLOODING studiato nella lezione precedente. In particolare si osserva che il problema del broadcast è un caso speciale del problema del wake-up, nel quale è presente un solo nodo svegli. In altri termini, il problema del wake-up è come il problema broadcast in cui però possono esserci più nodi che posseggono l'informazione da condividere con gli altri nodi.
+Il protocollo WFLOOD è molto simile al protocollo FLOODING studiato nella lezione precedente. In particolare si osserva che il problema del broadcast è un caso speciale del problema del wake-up, nel quale è presente un solo nodo svegli. In altri termini, il problema del wake-up è come il problema broadcast in cui però possono esserci più nodi che posseggono l'informazione da condividere con gli altri nodi.
 ## Correttezza
 La correttezza del WFLOOD segue direttamente dalla correttezza del FLOODING per il broadcast.
 ## Complessità

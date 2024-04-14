@@ -209,6 +209,6 @@ Si consideri la seguente situazione completamente simmetrica in cui c'è un tria
 Si ricorda che presi dei nodi in uno stesso _stato interno_ $\sigma(v,t)$, allora essi da quel momento in poi si comporteranno alla stessa maniera, dato che non sono in grado di distinguere una loro _identità_ all'interno della rete.  
 Allora non si arriverà **mai** in uno stato in cui un nodo è padre e gli altri due figli, in quanto questo implicherebbe che uno dei nodi si è comportato in maniera differente dagli altri due.
 ___
-Per risolvere questo problema è necessario risolvere un'altro problema: il problema della **leader election**. Eletto un leader tra tutti i nodi initiator, esso potrà eseguire uno dei protocolli di costruzione di spanning tree a singola sorgente già noti.  
+Per risolvere questo problema è necessario risolvere un'altro problema: quello della **leader election**. Eletto un leader tra tutti i nodi initiator, esso potrà eseguire uno dei protocolli di costruzione di spanning tree a singola sorgente già noti.  
 
 Si vedrà che il problema della leader election può essere risolto in maniera deterministica solamente se i nodi sono **univocamente identificati** in maniera globale.  
