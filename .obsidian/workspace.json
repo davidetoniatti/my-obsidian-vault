@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "5d0c77db16e8500d",
+        "id": "961a0633b6ced5b4",
         "type": "tabs",
         "children": [
           {
-            "id": "e0c1cc8835498b3e",
+            "id": "9e57c247eda8f81b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ADRC/07 - Leader Election.md",
+                "file": "ADRC/05 - Depth First Traversal.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ADRC/07 - Leader Election.md",
+                "file": "ADRC/05 - Depth First Traversal.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ADRC/07 - Leader Election.md",
+                "file": "ADRC/05 - Depth First Traversal.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ADRC/07 - Leader Election.md"
+                "file": "ADRC/05 - Depth First Traversal.md"
               }
             }
           }
@@ -148,44 +148,81 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "e0c1cc8835498b3e",
+  "floating": {
+    "id": "b30b77b20236e794",
+    "type": "floating",
+    "children": [
+      {
+        "id": "3c335ce188b7d012",
+        "type": "window",
+        "children": [
+          {
+            "id": "0ccfca7f14541172",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "f9b4a7a8d3fd104d",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "ADRC/06 - Saturazione.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 0,
+        "y": 0,
+        "width": 1704,
+        "height": 1390,
+        "maximize": true,
+        "zoom": 2
+      }
+    ]
+  },
+  "active": "9e57c247eda8f81b",
   "lastOpenFiles": [
+    "ADRC/06 - Saturazione2.md",
     "ADRC/06 - Saturazione.md",
+    "ADRC/12 - Modello GOSSIP.md",
+    "ADRC/05 - Depth First Traversal2.md",
+    "ADRC/04 - Spanning Tree construction2.md",
+    "ADRC/03 - Problema Wake-up2.md",
+    "ADRC/attachments/Pasted image 20240328164415.png",
+    "ADRC/attachments/Pasted image 20240328164046.png",
+    "ADRC/attachments/Pasted image 20240327165430.png",
+    "ADRC/attachments/Pasted image 20240327164621.png",
+    "ADRC/attachments/Pasted image 20240327163856.png",
+    "ADRC/attachments/minFindProof.png",
+    "ADRC/attachments/EccentricityOne.png",
+    "ADRC/attachments/Eccentricity3.png",
+    "ADRC/attachments/Eccentricity2.png",
+    "ADRC/attachments/DFSImprovement.png",
+    "ADRC/11 - Averaging e Distributed Community Detection.md",
+    "ADRC/09 - Maximal Independent Set Distribuito.md",
+    "ADRC/08 - Graph Coloring Distribuito.md",
+    "ADRC/07 - Leader Election.md",
+    "ADRC/10 - Leader Election Unlabeled Ring.md",
+    "PCD/pcd parte 2.md",
+    "PCD/1 - Consenso distribuito.md",
     "ADRC/05 - Depth First Traversal.md",
     "ADRC/04 - Spanning Tree construction.md",
     "ADRC/03 - Problema Wake-up.md",
+    "AR/05 - Reti come grafi dalla struttura disomogenea.md",
+    "AR/06 - Processi di diffusione.md",
+    "AR/07 - Seguire il gregge.md",
     "ADRC/02 - Problema Broadcast2.md",
     "ADRC/02 - Problema Broadcast.md",
-    "ADRC/09 - Maximal Independent Set Distribuito.md",
-    "ADRC/attachments/CorrectnessFlood.png",
-    "ADRC/attachments/BroadcastLowerBound.png",
-    "ADRC/attachments/adrc_img29.png",
-    "ADRC/attachments/adrc_img31.png",
-    "ADRC/attachments/adrc_img28.png",
-    "ADRC/attachments/adrc_img30.png",
-    "ADRC/attachments/adrc_img32.png",
-    "ADRC/attachments/adrc_img33.png",
-    "ADRC/attachments/adrc_img34.png",
-    "ADRC/attachments/adrc_img35.png",
-    "ADRC/08 - Graph Coloring Distribuito.md",
-    "ADRC/10 - Leader Election Unlabeled Ring.md",
-    "ADRC/07 - Leader Election.md",
     "ADRC/01 - Ambienti distribuiti2.md",
     "ADRC/01 - Ambienti distribuiti.md",
-    "PCD/pcd parte 2.md",
     "ABD/07 - Link analysis.md",
     "cose da fare.md",
     "o.md",
-    "omdo.md",
-    "PCD/1 - Consenso distribuito.md",
-    "SDCC/07 - Virtualizzazione.md",
-    "SDCC/04 - Sistemi distribuiti auto-adattativi.md",
-    "SDCC/03 - Architetture dei sistemi distribuiti.md",
-    "AR/08 - Sistemi di voto.md",
-    "AR/09 - Web Search.md",
-    "AGT/08 - PLS-completezza.md",
-    "AGT/06 - Algorithmic Mechanism Design III.md",
-    "AGT/05 - Algorithmic Mechanism Design II.md",
     "ADRC.zip",
     "ziUeKQ0c",
     "Senza nome.canvas",
