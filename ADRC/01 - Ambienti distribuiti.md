@@ -8,7 +8,7 @@ Un ambiente distribuito è composto da **entità** (o **agenti**, **nodi**). Ogn
 - **Cambiare il valore dei registri**, infatti ogni nodo ha dei **registri** usati per eseguire le operazioni e/o mantenere uno **stato** (generalmente viene utilizzato un **registro di stato** apposito).
 ### Stato di un entità
 Ogni entità ha uno **stato** interno, il quale rappresenta un'informazione *necessaria* per il corretto funzionamento di un protocollo distribuito.
-Formalmente, ogni nodo ha un insieme finito di stati possibili $\Sigma$ **sempre definito a priori** e in ogni istante un'entità deve trovarsi in uno dei suoi possibili stati.
+Formalmente, ogni nodo ha un insieme finito di stati possibili $\Sigma$ **sempre definito a priori** dal protocollo e in ogni istante un'entità deve trovarsi in uno dei suoi possibili stati.
 Ad esempio, un insieme di stati può essere il seguente
 $$
 \{ \text{idle}, \text{computing}, \text{waiting}, \dots \}
@@ -58,7 +58,7 @@ $$
 In questo caso, per specificare il comportamento collettivo del sistema, risulta sufficiente specificare il comportamento di una singola entità.
 Si osserva che è possibile trasformare ogni sistema asimmetrico in un sistema simmetrico.
 Questo significa che se le entità in un sistema eseguono azioni differenti, a seconda del proprio ruolo, in risposta alla stessa coppia stato-evento, è sempre possibile scrivere un nuovo insieme di regole, uguale per tutti, che li farà comportare come nella variante asimmetrica.
-Si consideri il seguente esempio: nel sistema esistono due tipologie di entità: *server* e *client*, che hanno insieme di regole differenti. In particolare, per ogni coppia $(s,e) \in \Sigma \times \hat{E}$, i nodi client hanno la regola
+Si consideri il seguente esempio. Nel sistema esistono due tipologie di entità: *server* e *client*, che hanno insieme di regole differenti. In particolare, per ogni coppia $(s,e) \in \Sigma \times \hat{E}$, i nodi client hanno la regola
 $$
 (s,e) \mapsto a_{\text{client}} \in A_{\text{client}}
 $$
@@ -71,11 +71,11 @@ Allora è possibile fondere i comportamenti dei due tipi di entità creando un u
 $$
 (s,e) \mapsto \{\text{if role = client then } a_{\text{client}} \text{ else } a_{\text{server}} \}
 $$
-Se la coppia $(s,e)$ non costituisce nessuna regole in per il client (analogo server) allora nel nuovo insieme di regole l'azione associata a tale coppia avrà $a_{\text{client}} = \text{nil}$ (analogamente, $a_{\text{server}} = \text{nil}$).
+Se la coppia $(s,e)$ non costituisce nessuna regola per il client (analogo server) allora nel nuovo insieme di regole l'azione associata a tale coppia avrà $a_{\text{client}} = \text{nil}$ (analogamente, $a_{\text{server}} = \text{nil}$).
 ## Comunicazione
 Le entità della rete distribuita possono e devono interagire tra di loro. Ciò avviene tramite *scambio di messaggi* (o *message passing*), dove un messaggio è inteso essere una **sequenza finita di bit**.
 I messaggio viaggiano su una *rete di comunicazione* che può essere modellata per mezzo di un **grafo diretto** $G=(V,E),$ dove $\mathcal{E}=V,$ che specifica, per ogni nodo, le entità con cui questo può comunicare.
-![](adrc_img01.png)
+![|center](adrc_img01.png)
 Si osserva che i nodi della rete non hanno una visione *globale* della rete, cioè non conoscono la topologia del grafo, bensì hanno solo una visione **locale**. Formalmente, ogni nodo $x$ vede solamente due gruppi di porte logiche: le porte dalle quali arrivano i messaggi in entrata e le porte dalle quali vengono mandati i messaggi in uscita:
 - $N_{\text{out}}(x) \subset V$: insieme dei vicini *uscenti* dell'entità $x \in V$;
 - $N_{\text{in}}(x) \subset V$: insieme dei vicini *entranti* dell'entità $x \in V$;
@@ -83,11 +83,10 @@ In particolare, il *vicinato* di un nodo $x$ è l'insieme
 $$
 N(x)= N_{\text{out}}(x) \cup N_{\text{in}}(x)
 $$
-Dunque, un nodo $x$ può inviare i messaggi solamente ai suoi vicini uscenti in $N_{\text{out}}(x),$ 
-![](adrc_img02.png)
+Dunque, un nodo $x$ può inviare i messaggi solamente ai suoi vicini uscenti in $N_{\text{out}}(x)$ 
+![|center](adrc_img02.png)
 e ricevere messaggi dai suoi vicini entranti in $N_{\text{in}}(x)$
-![](adrc_img03.png)
-
+![|center](adrc_img03.png)
 I messaggi ricevuti da un nodo vengono processati nell'ordine di arrivo, che non necessariamente coincide con l'ordine in cui questi sono stati spediti dagli altri agenti in rete. Se più di un messaggio viene ricevuto nello stesso istante, questi verranno processati in ordine arbitrario. Le entità ed i canali di comunicazione possono subire guasti.
 ## Assiomi della comunicazione
 Ogni argomento verrà trattato sotto i seguenti assiomi riguardo la comunicazione.
@@ -103,7 +102,7 @@ In particolar modo:
 - Un'entità è sempre in grado di distinguere quale dei suoi vicini gli ha inviato un messaggio;
 In altre parole, ogni entità $x$ ha una funzione locale iniettiva $\lambda_x : E_x \rightarrow L,$ dove $E_x := \{(u,v) \in E\ | \  u = x \lor v = x\}$ è l'insieme degli archi incidenti ad $x,$ ed $L$ un insieme di etichette (ad esempio stringhe, interi), che permette quindi tale agente di assegnare un'etichetta a ciascun arco ad esso incidente. 
 Si osserva esplicitamente che, per ogni arco orientato $(x,y),$ esistono due etichette: $\lambda_x(x,y)$ locale al nodo $x,$ e $\lambda_y(x,y),$ locale al nodo $y$.
-![](adrc_img05.png)
+![|center](adrc_img05.png)
 Si evidenzia che, dato un arco $(x,y),$ l'etichettatura $\lambda_x(x,y)$ è locale ad $x,$ e non necessariamente coincide con l'etichetta che assegna $y$ a tale arco. Ossia, in generale, vale:
 $$\lambda_x(x,y) \neq \lambda_y(x,y)$$
 Inoltre, in generale, si ha 
@@ -121,8 +120,7 @@ Questa restrizione assume che le connessioni nella rete sono *bidirezionali,* os
 $$
 \forall x \in V, N_{\text{out}}(x) = N_{\text{in}}(x) = N(x) \land \forall y \in N(x), \lambda_{x}(x,y) = \lambda_{x}(y,x)
 $$
-![](adrc_img04.png)
-
+![|center](adrc_img04.png)
 dunque ogni nodo è in grado di distinguere gli estremi degli archi. Tale restrizione implica la possibilità di modellare la rete come un grafo non diretto. 
 ### Restrizioni sulla disponibilità
 1. **Delivery garantita**. Ogni messaggio che viene inviato viene ricevuto correttamente, cioè non ci sono corruzioni di messaggi. Sotto questa restrizione, i protocolli non devono tenere conto di omissioni o corruzioni dei messaggi durante la trasmissione.

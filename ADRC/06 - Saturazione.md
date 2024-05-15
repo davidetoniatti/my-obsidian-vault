@@ -1,14 +1,14 @@
 Si introduce la tecnica della **saturazione**, che permette la risoluzione di svariati problemi in un ambiente distribuito con una topologia ad albero.
 # Tecnica della saturazione
-Per applicare questa tecnica, si consideri una rete distribuita con una topologia ad albero e sia tale informazione, riguardante la struttura topologica, nota a tutti i nodi della rete. In particolar modo, ogni nodo sa se è una foglia oppure un nodo interno. La tecnica della saturazione consiste nell'identificare una singola coppia di nodi adiacenti all'interno della rete. Tale coppia di nodi sarà in grado di far iniziare altre computazioni, a seconda del problema che si vuole risolvere. In altri termini, la tecnica della saturazione permette di *eleggere* un arco della rete: questa tecnica prende anche il nome di *link election*. Si osserva che non c'è nessuna garanzia su quale arco venga eletto: questa tecnica garantisce l'elezione di uno tra i possibili archi, ma non garantisce che sia proprio uno specifico arco ad essere eletto.
+Per applicare questa tecnica, si consideri una rete distribuita con una topologia ad albero e sia tale informazione, riguardante la struttura topologica, **nota** a tutti i nodi della rete. In particolar modo, ogni nodo sa se è una foglia oppure un nodo interno. La tecnica della saturazione consiste nell'identificare una singola coppia di nodi adiacenti all'interno della rete. Tale coppia di nodi sarà in grado di far iniziare altre computazioni, a seconda del problema che si vuole risolvere. In altri termini, la tecnica della saturazione permette di *eleggere* un arco della rete: questa tecnica prende anche il nome di *link election*. Si osserva che non c'è nessuna garanzia su quale arco venga eletto: questa tecnica garantisce l'elezione di uno tra i possibili archi, ma non garantisce che sia proprio uno specifico arco ad essere eletto.
 
 Tipicamente la tecnica della saturazione è usata per risolvere problemi distribuiti di varia natura. In particolare, la saturazione è inserita all'interno di un processo più grande, che può essere diviso nelle seguenti tre fasi:
 - **Fase di Attivazione**, nella quale i nodi iniziatori attivano i restanti nodi della rete utilizzando un protocollo di WAKE-UP;
 - **Fase di Saturazione**, nella quale a partire dalle foglie si identifica un'unica coppia di nodi adiacenti, anche detti *nodi saturati*;
 - **Fase di Risoluzione**, nella quale la coppia di nodi saturati danno inizio ad una o più computazioni necessarie alla risoluzione di uno specifico problema di interesse.
 
-Essendo che la natura della terza fase dipende dall'applicazione, si formalizzano le prime due fasi del processo appena descritto, definendo la tripla $P = \langle P_{init}, P_{final}, R \rangle$ dove, sia $V$ l'insieme delle entità che costituisce la rete e $W \subseteq V$ tale che $W \neq \emptyset$ l'insieme degli initiator,
--  $P_{init} = \forall x \in V, \text{status}(x) = \begin{cases} \text{awake} \quad&x \in W \\ \text{asleep} &x \in V \setminus W \end{cases}$ 
+Essendo che la natura della terza fase dipende dall'applicazione, si formalizzano le prime due fasi del processo appena descritto, definendo la tripla $P = \langle P_{init}, P_{final}, R \rangle$ dove, sia $V$ l'insieme delle entità che costituisce la rete e $W \subseteq V$ tale che $W \neq \emptyset$ l'insieme degli iniziatori,
+-  $P_{init} = \forall x \in V, \text{status}(x) = \begin{cases} \text{awake (active?)} \quad&x \in W \\ \text{asleep} &x \in V \setminus W \end{cases}$ 
 - $P_{final}$: $\exists x,y \in V: [(x,y) \in E \wedge \text{status}(x) =\text{status}(y) = \text{saturated}] \wedge \forall z \in V, z\neq y, z\neq x: [\text{status}(z) =\text{active} ],$ ossia, tutti i nodi tranne due sono ACTIVE, i due nodi restanti sono SATURATED e adiacenti.
 - $R_{saturation} = \begin{cases} \text{Total Reliability (TR)} \\ \text{Bidirectional Link (BL)} \\ \text{Connectivity (CN)} \\ \text{Knowledge of the Topology (KT)} \\ \text{Ordered Messages (MO)}\end{cases}$
 
@@ -17,14 +17,15 @@ Dove $P_{init}$ è un predicato che definisce l'insieme di possibili configurazi
 Il protocollo fa uso degli stati seguenti
 - $S = \{ \text{available, active, processing, saturated} \}$
 - $S_{init} = \{ \text{available} \}$;
-Inizialmente, tutti i nodi si trovano nello stato $\text{available}.$ Tale stato rappresenta come un nodo sia disponibile ad iniziare l'esecuzione di una computazione. Non è detto però che un nodo $\text{available}$ sia effettivamente sveglio (ossia in uno stato di attivazione): se un nodo nello stato $\text{available}$ riceve un impulso spontaneo dall'esterno, allora questo si sveglia, entrando nello stato $\text{active},$ e invia un messaggio di wake-up ai suoi vicini, svolgendo il ruolo di initiator. Se un agente in stato $\text{available}$ riceve un messaggio di wake-up da suo vicino, allora passa nello stati $\text{active}$ ed invia un messaggio di wake-up a tutti i suoi vicini eccetto il sender. In particolar modo, quindi, ad alto livello, tra i nodi $\text{available}$ possono distinguersi i nodi $\text{awake}$ ed i nodi $\text{asleep}$ nella *configurazione iniziale.*   
-Idealmente, per la definizione del problema, si vuole che l'insieme di stati terminali sia $S_{term} = \{ \text{active, saturated} \},$ ma, come detto in precedenza, la tecnica della saturazione è una componente di un processo suddiviso in tre fasi, delle quali si analizzano ora le prime due, essendo l'ultima dipendente dall'applicazione specifica. Di conseguenza si definisce un protocollo "plug-in", ossia tale per cui, nella sua esecuzione, non tutte le entità entreranno prima o poi in uno stato terminale. Per trasformare il protocollo FULL-SATURATION in un protocollo completo, devono essere eseguite altre azioni (ossia quelle della fase di risoluzione) in maniera tale che, in un tempo finito, tutte le entità entrino in uno stato terminale. Di conseguenza si indica con $S_{final} = \{ \text{active, saturated} \}$ l'insieme di stati finali, ossia quegli stati in cui si trovano gli agenti al completamento del task distribuito.
+Inizialmente, tutti i nodi si trovano nello stato $\text{available}.$ Tale stato rappresenta come un nodo sia disponibile ad iniziare l'esecuzione di una computazione. Non è detto però che un nodo $\text{available}$ sia effettivamente sveglio (ossia in uno stato di attivazione): se un nodo nello stato $\text{available}$ riceve un impulso spontaneo dall'esterno, allora questo si sveglia, entrando nello stato $\text{active},$ e invia un messaggio di wake-up ai suoi vicini, svolgendo il ruolo di initiator. Se un agente in stato $\text{available}$ riceve un messaggio di wake-up da suo vicino, allora passa nello stati $\text{active}$ ed invia un messaggio di wake-up a tutti i suoi vicini eccetto il sender. In particolar modo, quindi, ad alto livello, tra i nodi $\text{available}$ possono distinguersi i nodi $\text{awake (active?)}$ ed i nodi $\text{asleep}$ nella *configurazione iniziale.*   
+Idealmente, per la definizione del problema, si vuole che l'insieme di stati terminali sia $S_{term} = \{ \text{active, saturated} \},$ ma, come detto in precedenza, la tecnica della saturazione è una componente di un processo suddiviso in tre fasi, delle quali si analizzano ora le prime due, essendo l'ultima dipendente dall'applicazione specifica. Di conseguenza si definisce un protocollo "plug-in", ossia tale per cui, nella sua esecuzione, non tutte le entità entreranno prima o poi in uno stato terminale. Per trasformare il protocollo FULL-SATURATION in un protocollo completo, devono essere eseguite altre azioni (ossia quelle della fase di risoluzione) in maniera tale che, in un tempo finito, tutte le entità entrino in uno stato terminale. Di conseguenza si indica con $S_{final} = \{ \text{processing, saturated} \}$ l'insieme di stati finali, ossia quegli stati in cui si trovano gli agenti al completamento del task distribuito.
+(approfondire un po meglio sta questionez)
 
 La fase di attivazione è una fase di wake-up: ogni iniziatore invia un messaggio di attivazione a tutti i suoi vicini ed entra nello stato $\text{active};$ Ogni nodo non iniziatore, alla ricezione di un messaggio di attivazione da parte di un vicino, entra nello stato $\text{active}$ ed invia un messaggio di wake-up ad ogni suo altro vicino. I nodi attivi ignorano ogni altro messaggio di attivazione.
 In tempo finito, tutti i nodi diventano attivi, incluse le foglie. Saranno proprio quest'ultime ad iniziare la seconda fase della computazione.
-Ogni foglia attiva inizia la fase di *saturazione* inviando un messaggio $M$ al proprio unico vicino, al quale ci si riferisce come "padre" della foglia, ed entra nello stato di processing. Si osserva esplicitamente che, per la definizione delle restrizioni, in tempo finito i messaggi $M$ giungeranno ai nodi interni.
-Un nodo interno attende fino a quando riceve i messaggi $M$ da tutti i suoi vicini *eccetto uno,* invia poi $M$ a tale nodo, il quale diventerà suo "padre", ed entra poi nello stato di processing.
-Se un nodo $x$ nello stato di processing riceve un messaggio $M$ proveniente dal suo nodo padre, allora tale nodo $x$ diventa saturato.
+Ogni foglia attiva inizia la fase di *saturazione* inviando un messaggio $M$ al proprio unico vicino, al quale ci si riferisce come *parent* della foglia, ed entra nello stato $\text{processing}$. Si osserva esplicitamente che, per la definizione delle restrizioni, in tempo finito i messaggi $M$ giungeranno ai nodi interni.
+Un nodo interno attende fino a quando riceve i messaggi $M$ da tutti i suoi vicini *eccetto uno,* invia poi $M$ a tale nodo, il quale diventerà suo "padre", ed entra poi nello stato di $\text{processing}$.
+Se un nodo $x$ nello stato di $\text{processing}$ riceve un messaggio $M$ proveniente dal suo nodo padre, allora tale nodo $x$ diventa saturato.
 ```ad-note
 Il task distribuito può essere completato anche se il protocollo non termina.
 Si guardi il primo protocollo per la risoluzione del broadcasting. 
@@ -68,16 +69,15 @@ if state == "ACTIVE":
 	
 if state == "PROCESSING":
   receiving(M):
-	  PROCESS_MESSAGE
-	  RESOLVE
-  
+    PROCESS_MESSAGE
+	RESOLVE
 
 if state == "SATURATED":
     None
 ```
 Si osserva che nel protocollo il concetto di *parent* è utilizzato in due modi differenti
-- Nello stato available, si intende il padre di un nodo foglia, ovvero l'unico nodo adiacente al nodo foglia;
-- Nello stato active, il parent di un nodo $x$ rappresenta l'unico nodo adiacente che ancora non ha inviato il messaggio $M$ al nodo $x$.
+- Nello stato $\text{available}$, si intende il padre di un nodo foglia, ovvero l'unico nodo adiacente al nodo foglia;
+- Nello stato $\text{active}$, il parent di un nodo $x$ rappresenta l'unico nodo adiacente che ancora non ha inviato il messaggio $M$ al nodo $x$.
 Si definiscono le procedure utilizzate nel protocollo
 ```python
 Procedure INITIALIZE:
@@ -95,22 +95,23 @@ Procedure RESOLVE:
 ```
 Questi metodi possono venir "sovrascritti" a seconda dello scenario applicativo.
 ### Correttezza
-Per mostrare la correttezza del protocollo, si deve il argomentare il fatto che esattamente due nodi passano dallo stato processing allo stato saturated, e che questi due nodi sono adiacenti.
+Per mostrare la correttezza del protocollo, si deve il argomentare il fatto che esattamente due nodi passano dallo stato $\text{processing}$ allo stato $\text{saturated}$, e che questi due nodi sono **adiacenti**.
 
 Si osserva che
-- Un nodo invia un messaggio $M$ solo al suo parent.
-- Un nodo passa nello stato di processing solo dopo che ha mandato il messaggio $M$ al suo parent;
-- Un nodo passa nello stato saturated solo dopo che, trovandosi nello stato di processing, riceve il messaggio $M$ dal suo parent.
+- Un nodo invia un messaggio $M$ solo al suo *parent*;
+- Un nodo passa nello stato di $\text{processing}$ solo dopo che ha mandato il messaggio $M$ al suo parent;
+- Un nodo passa nello stato $\text{saturated}$ solo dopo che, trovandosi nello stato di $\text{processing}$, riceve il messaggio $M$ dal suo parent.
 
-Sia quindi $x$ un nodo arbitrario e si consideri il percorso fatto dai messaggi $M$ a partire da $x$
+Sia quindi $x$ un nodo arbitrario e si consideri il percorso fatto dai messaggi $M$ a partire da $x$.
 ![](adrc_sat1.png)
-Dato che non ci sono cicli, ad un certo punto del cammino si incontra un nodo $s_1$ che si trova nello stato saturated, in quanto ha ricevuto dal suo parent, il nodo $s_2$, il messaggio $M$. Essendo che $s_2$ ha inviato un messaggio $M$ ad $s_1$, allora $s_2$ si è dovuto trovare necessariamente nello stato processing e deve aver considerato $s_1$ come suo parent. Quindi, quando il messaggio $M$ spedito da $s_1$ arriva ad $s_2$, anche quest'ultimo agente entra nello stato saturated . Dunque il protocollo trova sempre almeno due nodi adiacenti saturati.
+Dato che non ci sono cicli, ad un certo punto del cammino si incontra un nodo $s_1$ che si trova nello stato $\text{saturated}$, in quanto ha ricevuto dal suo parent, il nodo $s_2$, il messaggio $M$. Essendo che $s_2$ ha inviato un messaggio $M$ ad $s_1$, allora $s_2$ si è dovuto trovare necessariamente nello stato $\text{processing}$ e deve aver considerato $s_1$ come suo parent. Quindi, quando il messaggio $M$ spedito da $s_1$ arriva ad $s_2$, anche quest'ultimo agente entra nello stato $\text{saturated}$. Dunque il protocollo trova sempre almeno due nodi adiacenti saturati.
 
-Si dimostra ora che i nodi saturati sono esattamente due. Si assuma per assurdo che tre nodi entrino nello stato saturated, siano questi $x,y,z$. Data la topologia ad albero, due di questi nodi non sono adiacenti. Si consideri il cammino tra questi nodi non adiacenti, siano essi $x$ e $z$.
+Si dimostra ora che i nodi saturati sono **esattamente due**. Si assuma per assurdo che tre nodi entrino nello stato $\text{saturated}$, siano questi $x,y,z$. Data la topologia ad albero, due di questi nodi non sono adiacenti. Si consideri il cammino tra questi nodi non adiacenti, siano essi $x$ e $z$.
 ![](adrc_sat2.png)
 Allora per definizione del protocollo, $x$ e $z$ diventano saturati quando ricevono il messaggio $M$. Se i due nodi non sono adiacenti, deve esistere un nodo $w$ nel cammino che invia due messaggi $M$: uno verso $z$ e uno verso $x$. Ma per definizione del protocollo, $w$ non può inviare $M$ a due archi.
 In conclusione, si osserva che in ogni caso la scelta di quali nodi vengono saturati dal protocollo dipende dal ritardo dei messaggio. Questi implica che potenzialmente ogni coppia di nodi adiacenti può essere la coppia saturata.
 ### Complessità
+#### Message Complexity
 Per quanto riguarda la message complexity, vale che:
 - Nella fase di **attivazione**, vale la complessità del protocollo WAKE-UP e dato che in un albero $m = n-1$, allora vengono spediti $n+k-2$ messaggi, dove $k$ indica il numero di iniziatori;
 - Nella fase di **saturazione** vengono inviati $n$ messaggi;
@@ -118,6 +119,7 @@ Allora in totale la message complexity del protocollo è pari a
 $$
 M[\text{Saturation}] = 2n+k-2
 $$
+#### Time Complexity
 Per quanto riguarda la time complexity, si ricorda che valgono le solite ipotesi di synchronized clocks e unitary comunication delay. Sia $I \subseteq V$ l'insieme degli iniziatori e $L \subseteq V$ l'insieme delle foglie. Sia $t(x)$ il ritardo temporale necessario affinché, dall'istante $t=0$ in cui inizia l'esecuzione dell'algoritmo, il nodo $x$ entri nello stato *attivo.* Per diventare saturo, il nodo $s$ deve aver aspettato sino a quando tutte le foglie sono diventate *attive,* e i messaggi $M$ provenienti da esse lo hanno raggiunto, ossia, deve aver aspettato $\max\{t(l) + d(l,s): l \in L\}$.
 Un nodo non-iniziatore $x$, per esser diventato attivo, deve aver aspettato che un messaggio di attivazione lo abbia raggiunto. Un iniziatore, invece, non richiede tempo di attesa aggiuntivo, quindi $t(x) = \min \{d(x,y)+t(y): y \in I\}$.
 Il ritardo totale dall'inizio dell'esecuzione del protocollo, sino a quando $s$ diventa saturo, è quindi
@@ -301,17 +303,12 @@ In termini di _message complexity_ il calcolo di $r(x)$ richiede $2(n-1)$ messag
 ### Protocollo 2 (con <u>saturazione</u>)
 Questo protocollo utilizza la saturazione per eleggere un particolare arco $(s_1,s_2)$, graficamente
 ![[EccentricityOne.png]]
-
 dove $h_1,h_2$ sono rispettivamente le altezze dei sottoalberi $T_1,T_2,$ radicati rispettivamente in $s_1$ ed $s_2$. Queste altezze possono essere calcolate direttamente durante il processo di saturazione.
 Con tali informazioni, i nodi $s_1$ ed $s_2$ sono in grado di calcolare la loro eccentricità. Infatti,
 - $r(s_{1}) = \max \{ h_{1}+1,h_{2}+2 \}$;
 - $r(s_{2}) = \max \{ h_{2}+1,h_{1}+2 \}$;
 Una volta calcolati $r(s_1)$ e $r(s_2)$ i nodi che si trovano a distanza $1$ da $s_1$ e $s_2$ sono in grado di calcolare a loro volta la loro eccentricità.
-
 ![[Eccentricity2.png]]
-
-
-
 In particolar modo, per far si che i nodi saturi possano calcolare la loro eccentricità, è sufficiente includere nel messaggio $M$ inviato da un nodo $x$ ad un nodo $y$ la massima distanza tra $x$ ed i nodi in $T[x-y]$ incrementata di uno. In tale maniera, ogni nodo saturo $s$ conoscerà la massima distanza tra ogni suo vicino $y$ e i nodi in $T[y-s],$ e può quindi determinare la sua eccentricità.
 Si vuole che però *tutti* i nodi, e quindi non solo quelli saturi, determinino la propria eccentricità.
 Si consideri un'entità $u.$ Questa invia un messaggio $M$ al padre $v$ dopo aver ricevuto un messaggio dello stesso tipo da ogni altro vicino $y_i.$ Per ogni $i,$ il messaggio inviato da $y_i$ ad $u$ contiene la massima distanza tra $u$ e i nodi in $T[y_i - u],$ in formule, $\max \{d(u,z): z \in T[y_i-u]\}.$ 

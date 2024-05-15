@@ -1,4 +1,4 @@
-In [07 - Leader Election](07%20-%20Leader%20Election.md) è stato mostrato che non è possibile risolvere *deterministicamente* il problema della Leader Election senza l'assunzione che tutti i nodi abbiano un **identificativo univoco**. In questa sezione, si studia un protocollo **probabilistico** che risolve tale problema in un sistema nel quale i nodi sono completamente **anonimi**.
+In [07 - Leader Election](07%20-%20Leader%20Election.md) è stato mostrato che non è possibile risolvere *deterministicamente* il problema della Leader Election senza l'assunzione che tutti i nodi abbiano un identificativo univoco. In questa sezione, si studia un protocollo **probabilistico** che risolve tale problema in un sistema nel quale i nodi sono completamente **anonimi**.
 # Leader election unlabeled ring
 Sia $G=(V,E)$ una rete con $n$ nodi **anonimi**, dunque non identificati in modo univoco, dove $n$ è noto globalmente a tutti i nodi. Inoltre, ogni nodo sa di far parte di una rete con topologia ad anello. Infine, ogni nodo $v \in V$ ha accesso ad una fonte *privata* e *indipendente* di casualità, denotata con $s(v)$.
 Sotto tali assunzioni e sotto le assunzioni standard $R$, è possibile definire un protocollo probabilistico che risolve il problema della leader election.
@@ -34,7 +34,7 @@ $$
 $$
 sommando tale espressione al variare di $k$ per $k>1$ si ottiene la probabilità dell'evento
 $$
-\mathcal{B}_i = \text{almeno due palle (nodi) cascano (assumono) nel secchio (l'$id$) $i$}
+\mathcal{B}_i = \text{almeno due palle (nodi) finiscono (assumono) nel secchio (l'$id$) $i$}
 $$
 cioè l'evento in cui il secchio (l'$id$) $i$ porta al fallimento del protocollo. Si limita ora tale probabilità
 $$

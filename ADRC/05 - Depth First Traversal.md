@@ -1,9 +1,9 @@
-A differenza del problema del broadcast in cui si deve condividere un'informazione con tutti i nodi della rete, si consideri la situazione in cui c'è una risorsa da distribuire in modo *mutualmene esclusivo* tra i nodi. In particolare esiste una sola copia della risorsa e in un qualunque istante temporale esiste un solo nodo che la possiede.
+A differenza del problema del broadcast in cui si deve condividere un'informazione con tutti i nodi della rete, si consideri la situazione in cui c'è una risorsa da distribuire in modo *mutualmente esclusivo* tra i nodi. In particolare esiste una sola copia della risorsa e in un qualunque istante temporale esiste un solo nodo che la possiede.
 In particolare si studia una strategia di condivisione nota come **depth first traversal**. L'idea alla base prevede che ogni nodo cerca di inoltrare il token ai suoi vicini fino a quando tutti i nodi a lui adiacenti hanno già ricevuto il token. Quando un nodo non può inoltrare il token in "avanti", lo rimanda "indietro" al nodo che glielo ha inoltrato precedentemente.
 # Il problema
 Formalmente, il problema è definito dalla seguente tripla $P = \langle P_{init}, P_{final}, R \rangle$ dove
 - $P_{init}$: solo l'initiator ha il token;
-- $P_{final}$: tutti i nodi hanno ricevuto il token seguendo l'ordine di una DFS.
+- $P_{final}$: tutti i nodi hanno ricevuto il token seguendo l'ordine di una DFS;
 - $R_{dfs} = \begin{cases} \text{Total Reliability (TR)} \\ \text{Bidirectional Link (BL)} \\ \text{Connectivity (CN)} \\ \text{Unique Initiator (UI)}\end{cases}$
 # Protocollo BACK
 Il protocollo più semplice che risolve il problema DFT è il seguente:
@@ -51,7 +51,7 @@ Procedure VISIT
 		send("T") to next
 		state = "VISITED"
 	else:
-		if not(state == "INITIATOR" ):
+		if not(state == "INITIATOR"):
 			send("Return") to entry
 		state = "DONE"
 ```
@@ -121,7 +121,7 @@ Nonostante queste modifiche, la correttezza del protocollo rimane invariata, ma 
 Come nel protocollo precedente, i messaggi "corretti" contenenti il token e i messaggi di RETURN hanno un peso sulla message complexity di $2(n-1),$ e i messaggi VISITED, come prima, sono $2m-n+1$ in totale.
 Si considerino ora i messaggi inviati "erroneamente": ogni "errore" costa un messaggio. Il numero di errori può essere molto grande. Infatti, ritardi di trasmissione sfavorevoli possono far si che questi si verificano su ogni back-edge. Su ciascun back edge, possono verificarsi al più due errori, uno in ciascuna direzione. In altre parole, possono esservi al più $2(m-(n-1))$ messaggi che trasmettono inutilmente (e quindi "incorrettamente") il token. Sommando il tutto si ottiene che 
 $$
-M(\text{Back++}) \leq 4m -n+1
+M(\text{Back++}) \leqslant 4m -n+1
 $$
 
 Si consideri ora il tempo. Rispetto al caso precedente, si ha un miglioramento dovuto al fatto che i messaggi di ACK non vengono più inviati, risparmiando $n$ unità di tempo.

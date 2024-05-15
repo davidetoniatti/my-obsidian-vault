@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "961a0633b6ced5b4",
+        "id": "d94c9cf3c4e4d6f4",
         "type": "tabs",
         "children": [
           {
-            "id": "9e57c247eda8f81b",
+            "id": "bf443bbe78e19a22",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ADRC/05 - Depth First Traversal.md",
+                "file": "ADRC/13 - Expanders.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ADRC/05 - Depth First Traversal.md",
+                "file": "ADRC/13 - Expanders.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ADRC/05 - Depth First Traversal.md",
+                "file": "ADRC/13 - Expanders.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ADRC/05 - Depth First Traversal.md"
+                "file": "ADRC/13 - Expanders.md"
               }
             }
           }
@@ -148,91 +148,53 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "floating": {
-    "id": "b30b77b20236e794",
-    "type": "floating",
-    "children": [
-      {
-        "id": "3c335ce188b7d012",
-        "type": "window",
-        "children": [
-          {
-            "id": "0ccfca7f14541172",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "f9b4a7a8d3fd104d",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "ADRC/06 - Saturazione.md",
-                    "mode": "source",
-                    "source": false
-                  }
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "vertical",
-        "x": 0,
-        "y": 0,
-        "width": 1704,
-        "height": 1390,
-        "maximize": true,
-        "zoom": 2
-      }
-    ]
-  },
-  "active": "9e57c247eda8f81b",
+  "active": "bf443bbe78e19a22",
   "lastOpenFiles": [
-    "ADRC/06 - Saturazione2.md",
-    "ADRC/06 - Saturazione.md",
     "ADRC/12 - Modello GOSSIP.md",
-    "ADRC/05 - Depth First Traversal2.md",
-    "ADRC/04 - Spanning Tree construction2.md",
-    "ADRC/03 - Problema Wake-up2.md",
-    "ADRC/attachments/Pasted image 20240328164415.png",
-    "ADRC/attachments/Pasted image 20240328164046.png",
-    "ADRC/attachments/Pasted image 20240327165430.png",
-    "ADRC/attachments/Pasted image 20240327164621.png",
-    "ADRC/attachments/Pasted image 20240327163856.png",
-    "ADRC/attachments/minFindProof.png",
-    "ADRC/attachments/EccentricityOne.png",
-    "ADRC/attachments/Eccentricity3.png",
-    "ADRC/attachments/Eccentricity2.png",
-    "ADRC/attachments/DFSImprovement.png",
-    "ADRC/11 - Averaging e Distributed Community Detection.md",
-    "ADRC/09 - Maximal Independent Set Distribuito.md",
-    "ADRC/08 - Graph Coloring Distribuito.md",
-    "ADRC/07 - Leader Election.md",
-    "ADRC/10 - Leader Election Unlabeled Ring.md",
-    "PCD/pcd parte 2.md",
-    "PCD/1 - Consenso distribuito.md",
+    "ADRC/attachments/Pasted image 20240512200440.png",
+    "ADRC/attachments/expanders03.png",
+    "ADRC/13 - Expanders.md",
+    "ADRC/attachments/expanders01.png",
+    "ADRC/attachments/expanders02.png",
+    "ADRC/15 - Radio Network.md",
+    "ADRC/attachments/RadioNEZWORKDUE.png",
+    "ADRC/attachments/radioNetworkUNO.png",
+    "ADRC/attachments/RadioNetwork4.png",
+    "ADRC/attachments/RadioNetwork3.png",
+    "ADRC/14 - Majority Consensus.md",
+    "ADRC/12 - Modello GOSSIP2.md",
     "ADRC/05 - Depth First Traversal.md",
-    "ADRC/04 - Spanning Tree construction.md",
+    "ADRC/07 - Leader Election.md",
+    "ADRC/11 - Distributed_Average_Finding_&_Distributed_Community_Detection.md",
+    "ADRC/11_Distributed_Average_Finding_&_Distributed_Community_Detection.md",
+    "Senza nome.md",
+    "ADRC/10 - Leader Election Unlabeled Ring.md",
     "ADRC/03 - Problema Wake-up.md",
-    "AR/05 - Reti come grafi dalla struttura disomogenea.md",
-    "AR/06 - Processi di diffusione.md",
-    "AR/07 - Seguire il gregge.md",
-    "ADRC/02 - Problema Broadcast2.md",
     "ADRC/02 - Problema Broadcast.md",
-    "ADRC/01 - Ambienti distribuiti2.md",
-    "ADRC/01 - Ambienti distribuiti.md",
+    "ADRC/04 - Spanning Tree construction.md",
+    "ADRC/06 - Saturazione.md",
+    "ADRC/08 - Graph Coloring Distribuito.md",
+    "ADRC/09 - Maximal Independent Set Distribuito.md",
+    "ADRC/11 - Averaging e Distributed Community Detection.md",
+    "attachments/Pasted image 20240511145854.png",
+    "attachments",
     "ABD/07 - Link analysis.md",
+    "SDCC/06 - Comunicazione nei sistemi distribuiti parte 2.md",
+    "SDCC/05 - Comunicazione nei sistemi distribuiti.md",
+    "ABD/06 - Data streams.md",
+    "ADRC/01 - Ambienti distribuiti.md",
     "cose da fare.md",
-    "o.md",
+    "07 - Leader Election2.md",
+    "ADRC/attachments/WorstCaseAsFar.png",
     "ADRC.zip",
     "ziUeKQ0c",
     "Senza nome.canvas",
     "ADRC/attachments",
     "ADRC",
-    "PCD",
+    "SDCC/PCD",
     "AGT.zip",
     "zifsqmxy",
     "Excalidraw",
-    "zizKgNdo",
-    "AR.zip"
+    "zizKgNdo"
   ]
 }

@@ -2,7 +2,6 @@
   "accentColor": "",
   "baseFontSize": 22,
   "enabledCssSnippets": [
-    "latex",
     "justify",
     "images"
   ],

@@ -10,7 +10,7 @@ Durante l'esecuzione del protocollo, le entità assumono i seguenti stati:
 - $S = \{ \text{awake, asleep} \}$
 - $S_{init} = \{ \text{awake,asleep} \}$
 - $S_{term} = \{ \text{awake} \}$
-il protocollo è descritto dal seguente pseudocodice
+il protocollo è il seguente
 ```python
 if state == "AWAKE":
     spontaneously:
@@ -23,10 +23,10 @@ if state == "ASLEEP":
 		send("wake-up!") to N() - sender
 		state = "AWAKE"
 ```
-Si osserva che il protocollo WFLOOD è molto simile al protocollo FLOODING studiato nella lezione precedente. In particolare si osserva che il problema del broadcast è un caso particolare del problema del wake-up, nel quale è presente, nella configurazione iniziale, un solo nodo sveglio. In altri termini, il problema del wake-up è come il problema broadcast in cui però possono esserci più nodi che posseggono l'informazione da condividere con gli altri nodi.
+Si osserva che il protocollo WFLOOD è molto simile al protocollo FLOODING studiato nella sezione precedente. In particolare si osserva che il problema del broadcast è un caso particolare del problema del wake-up, nel quale è presente, nella configurazione iniziale, un solo nodo sveglio. In altri termini, il problema del wake-up è come il problema broadcast in cui però possono esserci più nodi che posseggono l'informazione da condividere con gli altri nodi.
 ## Correttezza
 La correttezza del WFLOOD segue direttamente dalla correttezza del FLOODING per il broadcast. Si da una dimostrazione esplicita, analoga a quella per il flooding.
-
+### Dimostrazione
 Sia $\{L_0,L_1,\ldots L_h\}$ una partizione a livelli di $V$ , dove
 $$
 L_0 = W
@@ -39,18 +39,18 @@ $$
 \bigcup_{i=0}^h L_i = V \ \wedge \ L_i \cap L_j = \emptyset \ \forall i\neq j
 $$
 $L_d$ è quindi l'insieme contenente tutti i nodi $y$ tali per cui $\exists x \in L_0: d(x,y)=d \wedge x = \operatorname*{argmin}_{s \in W}d(s,y).$
-Si dimostra per induzione su $d$ che esiste un tempo $t_d$ tale che tutti i nodi in $L_d$ hanno ricevuto almeno una volta un messaggio di wake-up, ovvero che lo stato dei nodi appartenenti ad $L_d$ al tempo $t_d$ sia `awake`.
-Per $d=0$ è banale in quanto $L_0 = W$. Si considera come caso base $d=1$. Per definizione del protocollo, in un certo istante finito gli agenti in $W$ inviano in maniera spontanea il messaggio a tutti i nodi in $N = \cup_{v \in W} N(v)$ e per definizione di $L_d$, vale $L_1 \equiv N$. Per l'assunzione dell'**affidabilità totale**, non ci saranno fallimenti durante la trasmissione, quindi per $d=1$ esiste un istante $t_1 \in \mathbb{R}^+$ entro il quale tutti i nodi in $L_1$ risulteranno nello stato `awake`.
-Sia l'ipotesi vera fino ad un certo $d-1$: si dimostra che l'ipotesi è vera anche per $d$. Formalmente, si mostra quindi che 
+Si dimostra per induzione su $d$ che esiste un tempo $t_d$ tale che tutti i nodi in $L_d$ hanno ricevuto almeno una volta un messaggio di wake-up, ovvero che lo stato dei nodi appartenenti ad $L_d$ al tempo $t_d$ sia $\text{awake}$.
+Per $d=0$ è banale in quanto $L_0 = W$. Si considera come caso base $d=1$. Per definizione del protocollo, in un certo istante finito gli agenti in $W$ inviano in maniera spontanea il messaggio a tutti i nodi in $N = \cup_{v \in W} N(v)$ e per definizione di $L_d$, vale $L_1 \equiv N$. Per l'assunzione dell'**affidabilità totale**, non ci saranno fallimenti durante la trasmissione, quindi per $d=1$ esiste un istante $t_1 \in \mathbb{R}^+$ entro il quale tutti i nodi in $L_1$ risulteranno nello stato $\text{awake}$.
+Sia l'ipotesi vera fino ad un certo $d-1$: si dimostra che l'ipotesi è vera anche per $d$. Formalmente, si mostra che 
 $$
 \forall x \in L_{d}, \ \exists t_{d} \in \mathbb{R}^+ : \text{status}(x) = \text{awake}
 $$
-Si consideri un qualsiasi nodo $x \in L_d$ che non si trovi già nello stato `awake`. Per definizione, esiste un nodo $y \in L_{d-1}$ tale che $(y,x) \in E$ (questo fatto è vero per le ipotesi di *connessione* e *link bidirezionali*). Se $y \in W$ , allora $x \in L_1$ e l'ipotesi vale per il passo base. Se $y \notin W$, allora certamente $y$ avrà ricevuto il messaggio mentre era nello stato `asleep` per l'ipotesi induttiva. Per definizione del protocollo $y$ avrà inviato il messaggio al suo vicinato $N(y)$, di cui $x$ fa parte. Per l'**affidabilità totale**, il messaggio arriva in tempo finito e non corrotto al nodo $x$. Infine per l'ipotesi di **connettività** di $G,$ si ha che 
+Si consideri un qualsiasi nodo $x \in L_d$ che non si trovi già nello stato $\text{awake}$. Per definizione, esiste un nodo $y \in L_{d-1}$ tale che $(y,x) \in E$ (questo fatto è vero per le ipotesi di *connessione* e *link bidirezionali*). Se $y \in W$ , allora $x \in L_1$ e l'ipotesi vale per il passo base. Se $y \notin W$, allora certamente $y$ avrà ricevuto il messaggio mentre era nello stato $\text{asleep}$ per l'ipotesi induttiva. Per definizione del protocollo $y$ avrà inviato il messaggio al suo vicinato $N(y)$, di cui $x$ fa parte. Per l'**affidabilità totale**, il messaggio arriva in tempo finito e non corrotto al nodo $x$. Infine per l'ipotesi di **connettività** di $G,$ si ha che 
 $$
 \forall v \in V, \exists k \in \mathbb{N}, k \leqslant diam(G) : v \in L_{k}
-$$ Ciò implica che ogni nodo della rete termina nello stato `awake.`
+$$ Ciò implica che ogni nodo della rete termina nello stato $\text{awake}$.
 ## Complessità
-Si analizza ora la message e la ideal time complexity. Sia $k$ il numero di nodi inizialmente nello stato AWAKE, cioè $|W|=k$.
+Si analizza ora la message e la ideal time complexity. Sia $k$ il numero di nodi inizialmente nello stato $\text{awake}$, cioè $|W|=k$.
 ### Message Complexity
 Ogni nodo in $W$ invia un messaggio a tutti i suoi vicini, mentre ogni nodo in $V\setminus W$ invia un messaggio a tutti i suoi vicini eccetto il vicino che lo ha fatto svegliare. Dunque il numero di messaggi totali inviati è pari a
 $$
@@ -78,8 +78,6 @@ $$
 T(\text{Broadcast}/{R_{bcast}}) = T(\text{Wake-up}/R) 
 $$
 essendo che i due casi coincidono.
-
-
 # WFLOOD in un albero
 Si supponga di eseguire il protocollo WFLOOD su una rete ad albero $T$. Essendo $T$ un albero, vale che $m=n-1$. Sostituendo alla formula calcolata in precedenza, si ottiene che la message complexity di WFLOOD su $T$ è pari a
 $$
@@ -92,14 +90,11 @@ M(\text{WFLOOD/Tree}) = n+n-2 = 2(n-1)
 $$
 mentre il caso migliore lo si ottiene per $k=1,$ dove la message complexity per wake up su un albero coincide con la message complexity per broadcast su un albero:
 $$
-
 M(\text{WFLOOD/Tree}) =  n+1-2 = n-1
 $$
-
 La crescita della message complexity è quindi lineare nella dimensione dell'insieme degli initiator: aumenta al crescere di $|W|.$ 
 # Lower bound per cliques
-
-L'utilizzo del protocollo WFlood su un grafo completo richiede uno scambio di messaggi di ordine $\mathcal{O}(n^2):$
+L'utilizzo del protocollo WFlood su un grafo completo richiede uno scambio di messaggi di ordine $O(n^2)$:
 $$
 M(\text{WFLOOD/Clique}) =  2m -n +k = 2 \frac{n(n-1)}{2} -n + k = n(n-1)-n + k = \mathcal{O}(n^2)
 $$
@@ -119,12 +114,11 @@ Sotto le restrizioni $R \cup K \cup ID$ vale che
 $$
 M(\text{Wake-up}) \geq \frac{n \log n}{2} = \Omega(n \log n)
 $$
-Per fare ciò, si costruisce un caso "sfavorevole" in termini di scambio di messaggi, ma possibile, che un qualsiasi protocollo che risolve il problema può incontrare, e si mostra che, in tale caso, verranno scambiati un numero di messaggi di ordine $\mathcal{O}(n \log n).$ Tale lower bound vale anche se è presente un message ordering. Per semplicità, si assume che $n$ sia una potenza di $2;$ il risultato vale anche senza quest'ultima assunzione.
-Per costruire un caso "sfavorevole" per un protocollo arbitrario $A$ che risolve il problema, si fa riferimento alla tecnica dell'adversarial strategy:
-si assume che un avversario possa influenzare lo scenario esecutivo del protocollo, affinché gli agenti, i quali rispettano le procedure definite in tale protocollo, utilizzino il maggior numero di messaggi possibile. L'avversario può effettuare le seguenti imposizioni:
-1. Decide i valori iniziali delle entità (tra i quali le etichette, che però per definizione delle restrizioni devono essere distinte)
-2. Decide quale entita inizia spontaneamente l'esecuzione di $A,$ e quando.
-3. Decide quando un messaggio trasmesso arriva a destinazione (ovviamente in tempo finito)
+Per fare ciò, si costruisce un caso *"sfavorevole"* in termini di scambio di messaggi, ma possibile, che un qualsiasi protocollo che risolve il problema può incontrare, e si mostra che, in tale caso, verranno scambiati un numero di messaggi di ordine $\mathcal{O}(n \log n)$. Tale lower bound vale anche se è presente un message ordering. Per semplicità, si assume che $n$ sia una potenza di $2;$ il risultato vale anche senza quest'ultima assunzione.
+Per costruire un caso "sfavorevole" per un protocollo arbitrario $A$ che risolve il problema, si fa riferimento alla tecnica dell'**adversarial strategy**: si assume che un avversario possa influenzare lo scenario esecutivo del protocollo, affinché gli agenti, i quali rispettano le procedure definite in tale protocollo, utilizzino il maggior numero di messaggi possibile. L'avversario può effettuare le seguenti imposizioni:
+1. Decide i valori iniziali delle entità (tra i quali le etichette, che però per definizione delle restrizioni devono essere distinte);
+2. Decide quale entità inizia spontaneamente l'esecuzione di $A,$ e quando;
+3. Decide quando un messaggio trasmesso arriva a destinazione (ovviamente in tempo finito);
 4. Decide la corrispondenza tra links ed etichette: siano $e_1,e_2,\ldots,e_k$ gli archi incidenti ad $x,$ e siano $l_1,l_2,\ldots,l_k$ i corrispettivi numeri di porta che $x$ usa per tali archi. Quando $x$ invia un messaggio al numero di porta $l$, ed $l$ non è stata ancora assegnata come etichetta a nessun link, l'avversario deciderà a quale tra i link non ancora utilizzati (ossia tali per cui nessun messaggio è stato inviato o ricevuto tramite essi) verrà assegnata l'etichetta $l.$
 
 ```ad-note
@@ -132,16 +126,16 @@ Quando si invia un messaggio da un agente a più di una porta, tale azione corri
 
 Qualsiasi azione decisa dall'avversario può verificarsi in un'esecuzione reale del protocollo.
 
-Due insiemi di entità $X \subseteq V$ e $Y \subseteq V$ tali che $X \cap Y = \emptyset$ si dicono connessi al tempo $t$ se almeno un messaggio è stato scambiato tra un'entità di $X$ ed un'entità di $Y.$
+Due insiemi di entità $X \subseteq V$ e $Y \subseteq V$ tali che $X \cap Y = \emptyset$ si dicono connessi al tempo $t$ se almeno un messaggio è stato scambiato tra un'entità di $X$ ed un'entità di $Y$.
 ```
 
-Si mostra quindi come un avversario può creare un "bad-case" per il protocollo $A:$
+Si mostra quindi come un avversario può creare un "bad-case" per il protocollo $A$:
 
-1. Inizialmente, l'avversario sveglierà una singola entità $s,$ alla quale ci si riferirà come *seed,* che inizierà l'esecuzione del protocollo. Quando $s$ decide di inviare un messaggio al numero di porta $l,$ l'avversario sveglierà un'altra entità $y$ ed assegnerà l'etichetta $l$ all'arco da $s$ ad $y,$ ossia, pone $\lambda_s(s,y) = l.$ Ritarderà poi la trasmissione del messaggio sul link sino al momento in cui $y$ decide di inviare un messaggio su un numero di porta $l'.$ L'avversario assegnerà poi l'etichetta $l$ sul link da $y$ ad $s,$ ossia $\lambda_y(y,s)=l'$ e fa si che i due messaggi inviati giungano alle proprie destinazioni simultaneamente. Così facendo, ogni messaggio raggiungerà un nodo sveglio, e le due entità risulteranno connesse. Da questo punto in poi, l'avversario agirà in maniera simile: si assicurerò sempre che i messaggi vengano inviati a nodi già svegli, e che l'insieme di nodi svegli risultino essere connessi.
+1. Inizialmente, l'avversario sveglierà una singola entità $s,$ alla quale ci si riferirà come *seed,* che inizierà l'esecuzione del protocollo. Quando $s$ decide di inviare un messaggio al numero di porta $l,$ l'avversario sveglierà un'altra entità $y$ ed assegnerà l'etichetta $l$ all'arco da $s$ ad $y,$ ossia, pone $\lambda_s(s,y) = l$. Ritarderà poi la trasmissione del messaggio sul link sino al momento in cui $y$ decide di inviare un messaggio su un numero di porta $l'$. L'avversario assegnerà poi l'etichetta $l$ sul link da $y$ ad $s,$ ossia $\lambda_y(y,s)=l'$ e fa si che i due messaggi inviati giungano alle proprie destinazioni simultaneamente. Così facendo, ogni messaggio raggiungerà un nodo sveglio, e le due entità risulteranno connesse. Da questo punto in poi, l'avversario agirà in maniera simile: si assicurerò sempre che i messaggi vengano inviati a nodi già svegli, e che l'insieme di nodi svegli risultino essere connessi.
 2. Si consideri un'entità $x$ che esegue l'invio di un messaggio ad una label $a$ ancora non assegnata:
 	- Se $x$ ha un arco incidente non ancora utilizzato che lo collega ad un nodo sveglio, l'avversario assegnerà $a$ a tale link. In altre parole, l'avversario cercherà sempre di fare in modo che le entità sveglie inviino messaggi ad altre entità sveglie.
 	- Se tutti i link tra $x$ e i nodi svegli sono stati utilizzati, allora l'avversario creerà un altro insieme di nodi svegli, e connetterà i due insiemi:
-		1. Siano $x_0,x_1,\ldots,x_{k-1} \in X$ i nodi già svegli, ordinati secondo il loro tempo di wake-up (quindi $x_0 = s$ è il seed, e $x_1=y$ è il nodo risvegliato durante il primo scambio di messaggi). L'avversario eseguirà la seguente funzione: sceglie $k$ nodi inattivi $z_0,z_1,\ldots,z_{k-1} \in Z$ e stabilisce una corrispondenza logica tra $x_j$ e $z_j:$ assegna i valori iniziali alle nuove entità $z_0,z_1,\ldots,z_{k-1}$, ancora inattive, in maniera tale che l'ordinamento tra tali entità sia lo stesso delle corrispettive entità della sequenza $x_0,x_1,\ldots,x_{k-1}.$ Sveglia poi le nuove entità, forzandole ad avere la stessa esecuzione (ossia stesso scheduling e stessi ritardi) delle corrispettive entità precedentemente sveglie (quindi, $z_0$ verrà svegliato per primo, il suo primo messaggio verrà inviato a $z_1,$ il quale a sua volta verrà svegliato prima dell'arrivo di tale messaggio ed invierà un messaggio a $z_0,$ e i ritardi dei messaggi coinvolti in questa operazione verranno scelti dall'avversario in maniera tale che questi raggiungano la propria destinazione nello stesso istante, e cosi via... ).
+		1. Siano $x_0,x_1,\ldots,x_{k-1} \in X$ i nodi già svegli, ordinati secondo il loro tempo di wake-up (quindi $x_0 = s$ è il seed, e $x_1=y$ è il nodo risvegliato durante il primo scambio di messaggi). L'avversario eseguirà la seguente funzione: sceglie $k$ nodi inattivi $z_0,z_1,\ldots,z_{k-1} \in Z$ e stabilisce una corrispondenza logica tra $x_j$ e $z_j:$ assegna i valori iniziali alle nuove entità $z_0,z_1,\ldots,z_{k-1}$, ancora inattive, in maniera tale che l'ordinamento tra tali entità sia lo stesso delle corrispettive entità della sequenza $x_0,x_1,\ldots,x_{k-1}.$ Sveglia poi le nuove entità, forzandole ad avere la stessa esecuzione (ossia stesso scheduling e stessi ritardi) delle corrispettive entità precedentemente sveglie (quindi, $z_0$ verrà svegliato per primo, il suo primo messaggio verrà inviato a $z_1,$ il quale a sua volta verrà svegliato prima dell'arrivo di tale messaggio ed invierà un messaggio a $z_0,$ e i ritardi dei messaggi coinvolti in questa operazione verranno scelti dall'avversario in maniera tale che questi raggiungano la propria destinazione nello stesso istante, e cosi via...).
 		2. L'avversario assegnerà poi la label $a$ al link che collega $x$ alla sua corrispondente entità $z$ nel nuovo insieme $Z$; Il messaggio rimarrà in transito in tale link sino a quando $z$ dovrà trasmettere un messaggio su un link non ancora utilizzato, sia questo etichettato con $b$, ma tutti gli archi che lo collegano con il suo insieme di entità già sveglie $Z$ risultano essere stati già utilizzati.
 		3. Quando accade ciò, l'avversario assegnerà la label $b$ al link da $z$ ad $x,$ e farà in modo che i due messaggi tra $x$ e $z$ arrivino e vengano processati.
 

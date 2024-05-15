@@ -2,24 +2,24 @@ Uno **spanning tree**, o **albero ricoprente**, $T$ di un grafo $G = (V,E)$ è u
 Come per il protocollo di broadcasting, è spesso utile riuscire a calcolare uno spanning tree su una rete in modo distribuito. La motivazione principale riguarda le operazioni di broadcasting, che fatte su una sottorete risultano più efficienti. In particolare, costruendo uno spanning tree la singola operazione di broadcast fatta sull'albero costa $n-1$ invece di $O(m)$ sulla rete originale;
 # Spanning Tree construction problem
 Lo **Spanning Tree Construction** problem consiste nel costruire, mediante una procedura distribuita, un qualsiasi *spanning tree* $T$ (non necessariamente il minimo), data una rete $G$.
-Sia $\text{tree-neig}(x) \subseteq N(x),$ dove ovviamente $x \in V.$
+Sia $\text{tree-neig}(x) \subseteq N(x),$ dove $x \in V.$
 Il problema è formalizzato dalla tripla $P=\langle P_{init}, P_{final}, R \rangle$, dove
- - $P_{init} = \forall x \in V: \text{tree-neig}(x) = \{  \} \ \wedge \exists! x \in V: \text{status}(x) = \text{initiator} \wedge \forall y \neq x: \text{status}(y) = \text{idle}$ ;
+ - $P_{init} = \forall x \in V: \text{tree-neig}(x) = \{  \} \ \wedge \exists! x \in V: \text{status}(x) = \text{initiator} \wedge \forall y \neq x: \text{status}(y) = \text{idle};$
  - $P_{final} =  \bigcup_{x \in V} \text{tree-neig}(x)$ forma uno spanning tree della rete $G$: tutti i nodi $x \in V$ hanno nell'insieme $\text{tree-neig}(x)$ tutti e soli i nodi vicini nello spanning tree ottenuto dal protocollo: $$ \text{tree-neig}(x) = \{y \in N(x) : (x,y) \in E^{'} \} $$ e $\forall x \in V: \text{status}(x) = \text{done}.$
  
 - $R_{stcp} = \begin{cases} \text{Total Reliability (TR)} \\ \text{Bidirectional Link (BL)} \\ \text{Connectivity (CN)} \\ \text{Unique Initiator (UI)}\end{cases}$
 
-A differenza di algoritmi centralizzati, come l'algoritmo di Kruskal per la costruzione del minimo spanning tree, nel mondo distribuito la conoscenza dello spanning tree che viene costruito è divisa tra i vari nodi della rete. Ogni nodo quindi conosce solamente la parte locale di $T$ a lui adiacente, e non esiste nessun nodo che ha una visione globale dello spanning tree costruito.
+A differenza di algoritmi centralizzati, come l'algoritmo di Kruskal per la costruzione del minimo spanning tree, nel mondo distribuito la conoscenza dello spanning tree che viene costruito è *divisa* tra i vari nodi della rete. Ogni nodo quindi conosce solamente la parte *locale* di $T$ a lui adiacente, e non esiste nessun nodo che ha una visione globale dello spanning tree costruito.
 # Single Source Shout Protocol
 Sia $x$ un generico nodo all'interno del sistema. Allora tale nodo deve decidere chi saranno i suoi vicini nell'albero ricoprente. Per fare ciò, chiede ai propri vicini se appartengono già allo spanning tree che si sta costruendo, e in base alla risposta il nodo agisce di conseguenza. Sia $y$ un nodo vicino ad $x$, formalmente $y \in N(x)$, allora
 - se $y$ appartiene già allo spanning tree allora si scarta;
 - se $y$ ancora non appartiene allo spanning tree allora $x$ propone ad $y$ di diventare un suo nodo *figlio*.
 In generale, per via dei ritardi di trasmissione, un nodo può ricevere molteplici richieste di diventare nodo figlio. In questo caso, risponde con YES alla prima proposta ricevuta e NOU a tutte le altre.
-In particolare, quando il nodo $x$ diventa figlio di un nodo $y$ nello spanning tree, invia in broadcast a tutti i suoi vicini, eccetto il nodo padre, la proposta di diventare nodo figlio. Inoltre ogni nodo alla ricezione di ogni richiesta deve rispondere con YES o NOU. Dunque il protocollo **Shout** risulta essere un broadcast con dei messaggi di acknowledgement.
+In particolare, quando il nodo $y$ diventa figlio di un nodo $x$ nello spanning tree, invia in broadcast a tutti i suoi vicini, eccetto il nodo padre, la proposta di diventare nodo figlio. Inoltre ogni nodo alla ricezione di ogni richiesta deve rispondere con YES o NOU. Dunque il protocollo **Shout** risulta essere un broadcast con dei messaggi di acknowledgement.
 
 casi sorgente e nodo x.
 ![](adrc_img15.png)
-
+![](Pasted%20image%2020240512200440.png)
 Si definisce l'insieme degli stati del processo come segue
 $$
 S = \{ \text{init, idle, active, done} \}
@@ -71,12 +71,12 @@ if state == "DONE":
 
 La rete costituita da tutti gli agenti in $V$ e dagli archi attraverso i quali è passato un messaggio $Y$ andranno a formare un albero ricoprente di $G.$
 ## Terminazione
-Il protocollo SHOUT è molto simile al protocollo FLOOD, con l'aggiunta di messaggi di _feedback_ $Y$ e $N$. Dato che siamo sotto l'assunzione che di connectivity e total reliability, allora certamente ogni nodo $x$ (eccetto la sorgente) riceverà, entro un tempo finito, almeno una richiesta $Q$ di diventare figlio. Perciò ogni nodo nello stato $\text{idle}$ passerà allo stato $\text{active}$, con il proprio contatore pari a 1. Per ogni richiesta ricevuta tutti i nodi risponderanno $Y$ o $N$. Dato che prima di entrare nello stato $\text{done}$ un nodo deve ricevere una risposta da tutti i vicini, e dato che per costruzione tutti gli agenti rispondono a tutte le richieste ricevute e inoltre, sempre per la total reliability, i messaggi inviati giungeranno alla propria destinazione entro un tempo finito, allora prima o poi tutti i nodi passeranno dallo stato $\text{active}$ allo stato $\text{done}$, terminando localmente il proprio task: il protocollo termina quindi anche globalmente.
+Il protocollo SHOUT è molto simile al protocollo FLOOD, con l'aggiunta di messaggi di _feedback_ $Y$ e $N$. Dato che siamo sotto l'assunzione di **connectivity** e **total reliability**, allora certamente ogni nodo $x$ (eccetto la sorgente) riceverà, entro un tempo finito, almeno una richiesta $Q$ di diventare figlio. Perciò ogni nodo nello stato $\text{idle}$ passerà allo stato $\text{active}$, con il proprio contatore pari a 1. Per ogni richiesta ricevuta tutti i nodi risponderanno $Y$ o $N$. Dato che prima di entrare nello stato $\text{done}$ un nodo deve ricevere una risposta da tutti i vicini, e dato che per costruzione tutti gli agenti rispondono a tutte le richieste ricevute e inoltre, sempre per la total reliability, i messaggi inviati giungeranno alla propria destinazione entro un tempo finito, allora prima o poi tutti i nodi passeranno dallo stato $\text{active}$ allo stato $\text{done}$, terminando localmente il proprio task: il protocollo termina quindi anche globalmente.
 ## Correttezza
 Si dimostra che la rete formata dall'unione di tutti gli insiemi 
 $\text{tree-neig}(x)$ è uno *spanning tree* per $G$.
 ### Coerenza
-Per prima cosa si dimostra la **coerenza** degli insiemi $\text{tree-neig}(x)$: per ogni nodo $x$, se $x$ ha come vicino $y$ nello spanning tree, cioè $y \in \text{tree-neig}(x)$, allora anche $x$ deve essere vicino di $y$ nello spanning tree, cioè $x \in \text{tree-neig}(y)$.
+Per prima cosa si dimostra la **coerenza** degli insiemi $\text{tree-neig}(x)$: per ogni nodo $x$, se $x$ ha come vicino $y$ nello spanning tree, cioè $y \in \text{tree-neig}(x)$, allora anche $y$ deve avere come vicino $x$ nello spanning tree, cioè $x \in \text{tree-neig}(y)$.
 Si vuole mostrare quindi che, dati $x,y \in V:$
 $$
 y \in \text{tree-neig}(x) \iff x \in \text{tree-neig}(y)
@@ -92,7 +92,7 @@ Iterando questo processo fino alla sorgente $s$, si ottiene proprio un cammino c
 Coerenza e connessione implicano che la sottorete cosi costruita ricopre $G,$ ossia, che $\bigcup_{x \in V} \text{tree-neig}(x) = V$ e $\forall x,y \in V, \exists p(x,y) \subseteq E$ tale che $\forall (u,v) \in p(x,y)$ è passato un messaggio $Y.$   
 ### Aciclicità
 Infine si dimostra che l'unione dei tree-neighbour formano una rete **aciclica**. Questo si può inferire dal fatto che ogni nodo, eccetto la sorgente, invia **una sola** risposta $Y$.
-Si assuma che il grafo $T$ indotto dalla relazione di parentela che caratterizza il protocollo contenga un ciclo diretto $x_0,x_1,\ldots,x_{k-1},$ ossia, $x_i$ è padre di $x_{i+1}$ in $T.$ Questo ciclo non può contenere l'initiator $s,$ perché non invia nessun messaggio $Y.$ Per la dimostrazione della connettività, in $T$ deve esistere un cammino da $s$ verso ogni altro nodo, inclusi quelli nel ciclo. Ciò implica che in $T$ vi sarà un nodo $y$ non presente nel ciclo ($y \neq x_i\ \forall i=0,\ldots,k-1$), il quale risulterà connesso ad un nodo $x_i$ nel ciclo. Questo vuol dire che $x_i$ ha inviato un messaggio $Y$ ad $y,$ ma essendo $x_i$ un nodo nel ciclo, allora, $x_{i}$ deve aver mandato un messaggio $Y$ ad $x_{i-1}.$ Ma questo è impossibile perché un entità non invia più di un messaggio $Y,$ assurdo.
+Si assuma che il grafo $T$ indotto dalla relazione di parentela che caratterizza il protocollo contenga un ciclo diretto $x_0,x_1,\ldots,x_{k-1},$ ossia, $x_i$ è padre di $x_{i+1}$ in $T.$ Questo ciclo non può contenere l'initiator $s,$ perché non invia nessun messaggio $Y.$ Per la dimostrazione della connettività, in $T$ deve esistere un cammino da $s$ verso ogni altro nodo, inclusi quelli nel ciclo, composto da archi sui quali sono passati messaggi $Y$. Ciò implica che in $T$ vi sarà un nodo $y$ non presente nel ciclo ($y \neq x_i\ \forall i=0,\ldots,k-1$), il quale risulterà vicino ad un nodo $x_i$ nel ciclo per mezzo di un arco su cui è passato un messaggio $Y$. Questo vuol dire che $x_i$ ha inviato un messaggio $Y$ ad $y,$ ma essendo $x_i$ un nodo nel ciclo, allora, $x_{i}$ deve aver mandato un messaggio $Y$ ad $x_{i-1}.$ Ma questo è impossibile perché un entità non invia più di un messaggio $Y,$ assurdo.
 
 In conclusione, avendo mostrato che il protocollo identifica una sottorete $T$ che ricopre $G,$ la quale risulta essere connessa e aciclica, allora $T$ è un albero ricoprente di $G.$
 ## Message Complexity
@@ -175,12 +175,12 @@ $$
 M(\text{SHOUT+}) = 2(n-1) + 2(m-(n-1)) = 2m
 $$
 # Terminazione globale nel protocollo SHOUT+
-Si osserva che per come sono stati definiti i protocolli SHOUT e SHOUT+, si ottiene una *terminazione locale*, ovvero ogni nodo sa quando il proprio compito è terminato, ma nessun nodo è in grado di stabilire a quale istante $t$ l'intero spanning tree è costruito, cioè a quale istante $t$ tutti i nodi si trovano nello stato `DONE` (si ricorda che $t$ esiste finito).
+Si osserva che per come sono stati definiti i protocolli SHOUT e SHOUT+, si ottiene una *terminazione locale*, ovvero ogni nodo sa quando il proprio compito è terminato, ma nessun nodo è in grado di stabilire a quale istante $t$ l'intero spanning tree è costruito, cioè a quale istante $t$ tutti i nodi si trovano nello stato $\text{done}$ (si ricorda che $t$ esiste finito).
 Tramite una modifica del protocollo è possibile ottenere la **terminazione globale**, in cui ogni nodo sa esattamente quando il protocollo è terminato e quando lo spanning tree è stato costruito.
 
 L'idea è quella di far partire una operazione di *accumulation* bottom-up, a partire quindi dalle foglie, che si sparge verso l'alto nello spanning tree costruito per arrivare infine alla sorgente $s$. In particolare, si aggiunge un nuovo messaggio $S$ al protocollo, il quale viene condiviso nel modo seguente:
 - I nodi *foglia* inviano $S$ al proprio padre;
-- Un nodo non foglia invia la proprio padre il messaggio $S$ solo dopo aver ricevuto $S$ da tutti i propri figli;
+- Un nodo non foglia invia al proprio padre il messaggio $S$ solo dopo aver ricevuto $S$ da tutti i propri figli;
 Si osserva che i nodi *foglia* sanno di esserlo, in quanto sono quei nodi che hanno l'insieme $|\text{tree-neig}(x)| = 1$, cioè con solo un nodo, mentre i nodi interni sanno il numero di figli, perché mantengono a loro volta la variabile $\text{tree-neig}(x),$ e, per costruzione di tale insieme, il numero di figli di un nodo intero $x$ è pari a $|\text{tree-neig}(x)|-1.$
 ![](adrc_spt1.png)
 Quando la sorgente $s$ riceve il messaggio $S$ da ogni figlio, allora sa che lo spanning tree è stato costruito e può iniziare una operazione di broadcast per informare tutti i nodi che l'albero ricoprente è stato finalizzato.
