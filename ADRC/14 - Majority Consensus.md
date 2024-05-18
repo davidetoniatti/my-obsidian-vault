@@ -167,14 +167,14 @@ Si osserva che la funzione
 $$
 f(a) = a^2(3n-2a)= n^2 \mathbf{E}[X_{t+1}|X_{t}=a]
 $$
-è sempre crescente per ogni $0 < a < n$ (è na retta co segno positivo grazie ar cazzo, la derivata è $3a^2$ che è sempre maggiore di zero quindi cresce sempre sta cojona). Da ciò segue che, per ogni $a\leqslant \frac{n}{2}-s$, si ottiene
+è sempre crescente per ogni $0 < a < n$ ($f'(a) = 6a(n-a) >0$, in quanto è prodotto di due quantità maggiori di zero $\forall 0<a<n$). Da ciò segue che, per ogni $a\leqslant \frac{n}{2}-s$, si ottiene
 $$
 \begin{align}
 \mathbf{E}[X_{t+1}|X_{t}=a] &= \left( \frac{a}{n} \right)^2(3n-2a) \\
 &= \left( \frac{1}{n^2} \right) a^2(3n-2a) \\
 &\leqslant \left( \frac{1}{n^2} \right)\left( \frac{n}{2}-s \right)^2 \left( 3n-2\left( \frac{n}{2}-s \right) \right) \\
 &= \left( \frac{1}{n^2} \right)\left( \frac{n}{2}-s \right)^2 \left(2n+2s\right) \\
-&= \left( \frac{1}{n^2} \right) \left( \frac{n^2}{4}-s^2+ns \right)(2n+2s) \\
+&= \left( \frac{1}{n^2} \right) \left( \frac{n^2}{4}+s^2-ns \right)(2n+2s) \\
 &= \frac{n}{2}-\frac{3}{2}s +\frac{2s^3}{n^2} \\
 &= \frac{n}{2}-\frac{3}{2}s +s\left( \frac{2s^2}{n^2} \right) \\
 &\leqslant \frac{n}{2} - \frac{5}{4}s
@@ -208,7 +208,7 @@ dunque si ottiene che, per ogni $a\leqslant s \leqslant \frac{n}{4}$,
 $$
 \begin{align}
 &\mathbf{Pr}\left( X_{t+1} \geqslant \left( \frac{n}{2}- \frac{5}{4}s \right) + \frac{1}{8}s | X_{t} = a \right)  = \\
-&\mathbf{Pr}\left( X_{t+1} \geqslant\frac{n}{2}-\frac{9}{8}s | X_{t} = a \right) \leqslant e^{\frac{-2s^2}{64}} = e^{\frac{-s^2}{32}}
+&\mathbf{Pr}\left( X_{t+1} \geqslant\frac{n}{2}-\frac{9}{8}s | X_{t} = a \right) \leqslant e^{\frac{-2s^2}{64n}} = e^{\frac{-s^2}{32n}}
 \end{align}
 $$
 Dato che si assume che $s \geqslant c \sqrt{ n\log{n} }$ per qualche costante $c >0$ sufficientemente grande, ne segue che
@@ -216,7 +216,7 @@ $$
 \mathbf{Pr}\left( X_{t+1} \geqslant\frac{n}{2}-\frac{9}{8}s | X_{t} = a \right) \leqslant \frac{1}{n^{\Theta(1)}}
 $$
 e quindi si ottiene che $X_{t+1} \leq \frac{n}{2}-\frac{9}{8}s$ con alta probabilità.
-Si osserva che si è appena dimostrato che finché il bias è contento nell'intervallo $c\sqrt{ n\log{n} } \leqslant s \leqslant \frac{n}{4}$, il bias incrementa in modo **esponenziale** con alta probabilità. Infatti, se $X_{t+1} = a_{t+1} \leqslant \frac{n}{2}-\frac{9}{8}s_{t}$, allora
+Si osserva che si è appena dimostrato che finché il bias è contenuto nell'intervallo $c\sqrt{ n\log{n} } \leqslant s \leqslant \frac{n}{4}$, il bias incrementa in modo **esponenziale** con alta probabilità. Infatti, se $X_{t+1} = a_{t+1} \leqslant \frac{n}{2}-\frac{9}{8}s_{t}$, allora
 $$
 s_{t+1} = \frac{n}{2} - a_{t+1} \geqslant \frac{n}{2}-\frac{n}{2}+\frac{9}{8}s_{t} = \frac{9}{8}s_{t}
 $$

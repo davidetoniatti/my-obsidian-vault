@@ -109,7 +109,10 @@ T(\text{BACK+}) = 2(n-1) + 2n = 4n-2
 $$
 il che risulta essere asintoticamente ottimale.
 # Ulteriori modifiche
-Ci si chiede se si può ulteriormente ridurre il numero di messaggi trasmessi durante l'esecuzione del protocollo. In particolar modo, si osserva che non si può fare a meno di inviare i messaggi contenenti il token ed il messaggio di return affinché un generico protocollo porti a termine il task distribuito, e che i messaggi VISITED fanno si che un agente possa eventualmente diminuire il numero di vicini a cui inoltrare il token. Il target di quest'analisi saranno quindi i messaggi di acknowledgment. 
+Ci si chiede se si può ulteriormente ridurre il numero di messaggi trasmessi durante l'esecuzione del protocollo. In particolare, si osserva che:
+- non si può fare a meno di inviare i messaggi contenenti il token ed il messaggio di return affinché un generico protocollo porti a termine il task distribuito;
+- i messaggi VISITED fanno si che un agente possa eventualmente diminuire il numero di vicini a cui inoltrare il token.
+Il target di quest'analisi saranno quindi i messaggi di *acknowledgment*. 
 
 Ci si chiede quindi cosa succederebbe se non venissero mandati i messaggi di ACK. Si consideri un'entità $x,$ che notifica i nodi nel suo vicinato la ricezione del token mediante un messaggio VISITED. Se non si usassero più i messaggi di ACK, $x$ procederebbe immediatamente inoltrando il token ad uno dei suoi vicini. Si assuma che, dopo una quantità di tempo finito, il token raggiunga, per la prima volta, un vicino $z$ di $x.$ E' possibile che il messaggio VISITED inviato da $x$ verso $z$ non sia ancora giunto a destinazione, per via dei ritardi di comunicazione.
 In tal caso, $z$ non sarebbe a conoscenza del fatto che $x$ è stato già visitato, ed invierebbe quindi il messaggio contenente il token ad esso. Ossia, si manderebbe nuovamente un messaggio contenente il token su un back-edge, rimuovendo il miglioramento ottenuto con il protocollo BACK+ rispetto al protocollo originale BACK. 

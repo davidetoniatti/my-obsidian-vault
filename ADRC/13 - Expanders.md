@@ -51,7 +51,7 @@ $$
 ![|center](expanders01.png)
 Allora $\tau$ indica la distanza entro la quale almeno la metà dei nodi del grafo sono distanti da $s$. Usando la relazione ricorsiva, si ottiene che
 $$
-|I_{\tau}| \geqslant (1+\alpha)^{\tau-1} = \frac{n}{2} \iff \tau = \log_{1+\alpha}\left( \frac{n}{2} \right) +1
+|I_{\tau}| \geqslant (1+\alpha)^{\tau-1} > \frac{n}{2} \iff \tau = \log_{1+\alpha}\left( \frac{n}{2} \right) +1
 $$
 dunque il numero di nodi a distanza $\tau \in O(\log n)$ da $s$ sono almeno $\frac{n}{2}$.
 Si consideri ora un qualsiasi altro nodo $w \in V \setminus I_{\tau}$, cioè un nodo $w$ che si trova a distanza maggiore di $\tau$ da $s$. Ripetendo la visita in ampiezza partendo da $w$ e sempre per il fatto che $G$ è un $\alpha$-expander, si ottiene che i nodi a distanza $\tau' \in O(\log n)$ da $w$ sono almeno $n/2$. Dato che entrambe le visite (quella da $s$ e quella da $w$) raggiungono <u>almeno</u> la metà dei nodi, allora i due alberi costruiti dalle BFS devono necessariamente condividere almeno un nodo. 

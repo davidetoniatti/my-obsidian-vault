@@ -53,7 +53,7 @@ Si osserva esplicitamente che, per come definito, questo protocollo non termina.
 ### Correttezza
 Nel protocollo $RR$ sotto le precedenti assunzioni, tutti i nodi a distanza $k$ (distanza nel numero di hops e non euclidea) dalla sorgente $s$ verranno informati entro $k$ fasi.
 
-La dimostrazione di questo teorema varrà fatta per _induzione_ sulla distanza $k$.  
+La dimostrazione di questo teorema verrà fatta per _induzione_ sulla distanza $k$.  
 
 Il passo base è abbastanza semplice, in quanto nella prima fase il primo nodo a trasmettere sarà la sorgente $s$ nel time slot $id(s):$ essendo $s$ il primo nodo a trasmettere, ed essendo che in tale time-slot è l'unico nodo che parla, tutti i vicini di $s$ nel grafo delle comunicazioni, ossia i nodi a distanza $1$ da $s,$ per via del modello radio network, ricevono correttamente il messaggio.   
 

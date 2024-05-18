@@ -8,7 +8,7 @@ Tipicamente la tecnica della saturazione è usata per risolvere problemi distrib
 - **Fase di Risoluzione**, nella quale la coppia di nodi saturati danno inizio ad una o più computazioni necessarie alla risoluzione di uno specifico problema di interesse.
 
 Essendo che la natura della terza fase dipende dall'applicazione, si formalizzano le prime due fasi del processo appena descritto, definendo la tripla $P = \langle P_{init}, P_{final}, R \rangle$ dove, sia $V$ l'insieme delle entità che costituisce la rete e $W \subseteq V$ tale che $W \neq \emptyset$ l'insieme degli iniziatori,
--  $P_{init} = \forall x \in V, \text{status}(x) = \begin{cases} \text{awake (active?)} \quad&x \in W \\ \text{asleep} &x \in V \setminus W \end{cases}$ 
+-  $P_{init} = \text{tutti i nodi sono AVAILABLE};$ 
 - $P_{final}$: $\exists x,y \in V: [(x,y) \in E \wedge \text{status}(x) =\text{status}(y) = \text{saturated}] \wedge \forall z \in V, z\neq y, z\neq x: [\text{status}(z) =\text{active} ],$ ossia, tutti i nodi tranne due sono ACTIVE, i due nodi restanti sono SATURATED e adiacenti.
 - $R_{saturation} = \begin{cases} \text{Total Reliability (TR)} \\ \text{Bidirectional Link (BL)} \\ \text{Connectivity (CN)} \\ \text{Knowledge of the Topology (KT)} \\ \text{Ordered Messages (MO)}\end{cases}$
 
