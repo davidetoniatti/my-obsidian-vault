@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "35e7ba16de4511c2",
+        "id": "f50c0815b133dd36",
         "type": "tabs",
         "children": [
           {
-            "id": "edcdf88c1872104c",
+            "id": "ed41359e09d8104b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ADRC/09 - Maximal Independent Set Distribuito.md",
+                "file": "ADRC/03 - Problema Wake-up.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ADRC/09 - Maximal Independent Set Distribuito.md",
+                "file": "ADRC/03 - Problema Wake-up.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ADRC/09 - Maximal Independent Set Distribuito.md",
+                "file": "ADRC/03 - Problema Wake-up.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ADRC/09 - Maximal Independent Set Distribuito.md"
+                "file": "ADRC/03 - Problema Wake-up.md"
               }
             }
           }
@@ -148,22 +148,23 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "edcdf88c1872104c",
+  "active": "ed41359e09d8104b",
   "lastOpenFiles": [
+    "ADRC/02 - Problema Broadcast.md",
+    "ADRC/03 - Problema Wake-up.md",
+    "ADRC/13 - Expanders.md",
+    "ADRC/15 - Radio Network.md",
+    "ADRC/14 - Majority Consensus.md",
+    "ADRC/12 - Modello GOSSIP.md",
     "ADRC/08 - Graph Coloring Distribuito.md",
-    "ADRC/07 - Leader Election.md",
     "ADRC/10 - Leader Election Unlabeled Ring.md",
     "ADRC/11 - Distributed_Average_Finding_&_Distributed_Community_Detection.md",
+    "ADRC/09 - Maximal Independent Set Distribuito.md",
+    "ADRC/07 - Leader Election.md",
     "ADRC/06 - Saturazione.md",
     "ADRC/05 - Depth First Traversal.md",
     "AR/04 - Il fenomeno Small World.md",
     "ADRC/04 - Spanning Tree construction.md",
-    "ADRC/03 - Problema Wake-up.md",
-    "ADRC/02 - Problema Broadcast.md",
-    "ADRC/14 - Majority Consensus.md",
-    "ADRC/13 - Expanders.md",
-    "ADRC/15 - Radio Network.md",
-    "ADRC/12 - Modello GOSSIP.md",
     "ADRC/attachments/Pasted image 20240512200440.png",
     "ADRC/attachments/expanders03.png",
     "ADRC/attachments/expanders01.png",
@@ -175,7 +176,6 @@
     "ADRC/12 - Modello GOSSIP2.md",
     "ADRC/11_Distributed_Average_Finding_&_Distributed_Community_Detection.md",
     "Senza nome.md",
-    "ADRC/09 - Maximal Independent Set Distribuito.md",
     "ADRC/11 - Averaging e Distributed Community Detection.md",
     "attachments/Pasted image 20240511145854.png",
     "attachments",

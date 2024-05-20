@@ -2,7 +2,7 @@ La motivation di questo topic è: esistono modelli di grafo diversi da una cliqu
 Grafi di questo tipo devono avere un **diametro** piccolo e una buona connettività tra i nodi.
 # Expanders e loro proprietà
 ```ad-Definizione
-title: Definizione (node-exapnsion)
+title: Definizione (node-expansion)
 Dato un grafo $G=(V,E)$ $\Delta$-regolare con $V=[n]$, per ogni sottoinsieme di nodi $S \subset V$ la node-expansion di $S$ è definita come $|N(S)|$ dove
 $$
 N(S) := \{w \in V \setminus S: (v,w) \in E \land v \in S \}
@@ -27,11 +27,11 @@ Se esiste una costante assoluta $\alpha > 0$ tale che per un valore abbastanza g
 #### Dimostrazione
 Si consideri un qualsiasi grafo della famiglia $G=G_n = (V_n,E_n)$.
 Per la dimostrazione, si effettua una visita in ampiezza a partire da un qualsiasi nodo sorgente $s \in V$ al fine di calcolare le varie distanza $d_G(s,v), v \in V$. Si definiscono i seguenti insiemi:
-- $L_{t} := \{ v \in V: d_{G}(s,t) = t \},\ \forall t = 0,1,\dots,n-1;$
+- $L_{t} := \{ v \in V: d_{G}(s,v) = t \},\ \forall t = 0,1,\dots,n-1;$
 - $L_0 := \{ s \} = I_{0};$
 - $I_{t} := I_{t-1} \cup L_{t}, \ \forall t = 0,1,\dots,n-1.$
 dunque $L_t$ è l'insieme dei nodi nel livello $t \geqslant 0$ dell'albero BFS risultante dalla visita e $I_t$ è l'insieme di tutti i nodi che appartengono ad un livello al più $t$. 
-Si osserva che $L_1 = N(s) \geqslant \alpha$ in quanto $|N(s)|$ è un intero. Inoltre, per costruzione, $N(I_{t-1}) = L_t$ e dunque $|I_{t}| = |I_{t-1}| + |L_{t}|$. Dato che $G$ è un $\alpha$-expander, si ottiene che se $|I_{t-1}| \leqslant \frac{n}{2}$, allora vale
+Si osserva che $L_1 = N(s)$, dunque $|L_{1}| \geqslant \alpha$ in quanto $|N(s)|$ è un intero. Inoltre, per costruzione, $N(I_{t-1}) = L_t$ e dunque $|I_{t}| = |I_{t-1}| + |L_{t}|$. Dato che $G$ è un $\alpha$-expander, si ottiene che se $|I_{t-1}| \leqslant \frac{n}{2}$, allora vale
 $$
 |I_{t}| = |I_{t-1}|+|L_{t}| = |I_{t-1}|+|N(I_{t-1})| \geqslant |I_{t-1}|+\alpha|I_{t-1}| = (1+\alpha)|I_{t-1}|
 $$
@@ -51,7 +51,7 @@ $$
 ![|center](expanders01.png)
 Allora $\tau$ indica la distanza entro la quale almeno la metà dei nodi del grafo sono distanti da $s$. Usando la relazione ricorsiva, si ottiene che
 $$
-|I_{\tau}| \geqslant (1+\alpha)^{\tau-1} > \frac{n}{2} \iff \tau = \log_{1+\alpha}\left( \frac{n}{2} \right) +1
+|I_{\tau}| \geqslant (1+\alpha)^{\tau-1} = \frac{n}{2} +1 \iff \tau = \log_{1+\alpha}\left( \frac{n}{2} \right)
 $$
 dunque il numero di nodi a distanza $\tau \in O(\log n)$ da $s$ sono almeno $\frac{n}{2}$.
 Si consideri ora un qualsiasi altro nodo $w \in V \setminus I_{\tau}$, cioè un nodo $w$ che si trova a distanza maggiore di $\tau$ da $s$. Ripetendo la visita in ampiezza partendo da $w$ e sempre per il fatto che $G$ è un $\alpha$-expander, si ottiene che i nodi a distanza $\tau' \in O(\log n)$ da $w$ sono almeno $n/2$. Dato che entrambe le visite (quella da $s$ e quella da $w$) raggiungono <u>almeno</u> la metà dei nodi, allora i due alberi costruiti dalle BFS devono necessariamente condividere almeno un nodo. 
@@ -66,10 +66,7 @@ Il grafo aleatori e statico generato dal seguente protocollo randomizzato
 
 è un $\Theta(1)$-expander con alta probabilità, per ogni $d\geqslant 3$.
 #### Dimostrazione
-Si consideri un qualsiasi grafo aleatorio generato dal protocollo $G=(V,E)$ e sua $S\subset V$ un sottoinsieme dei nodi con $|S|=s$. Sia $T\subseteq V \setminus S$ un sottoinsieme di nodi arbitrario disgiunto da $S$ e tale che $|T| = \frac{1}{10}s$. In tale modello vale che per ogni coppia $u,v \in V$
-$$
-\mathbf{Pr}((u,v) \in E) = \frac{1}{n-1} 
-$$
+Si consideri un qualsiasi grafo aleatorio generato dal protocollo $G=(V,E)$ e sua $S\subset V$ un sottoinsieme dei nodi con $|S|=s$. Sia $T\subseteq V \setminus S$ un sottoinsieme di nodi arbitrario disgiunto da $S$ e tale che $|T| = \frac{1}{10}s$. In tale modello 
 Sia $\mathcal{E}$ l'evento "tutti gli archi che partono da nodi in $S$ finiscono in nodi in $S \cup T$". Vale che
 $$
 \mathbf{Pr}(\mathcal{E})  = \left( \frac{|S|}{n-1} \right)^{d \cdot |S \cup T|} = \left( \frac{|S\cup T|}{n-1} \right)^{d|S|} = \left( \frac{\frac{11}{10}s}{n-1} \right)^{ds}

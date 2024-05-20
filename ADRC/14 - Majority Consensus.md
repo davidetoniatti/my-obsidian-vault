@@ -7,7 +7,7 @@ Formalmente, sia $G=([n],E)$ un grafo di $n$ nodi, sia $C=\{ 0,1 \}$ un insieme 
 
 Si definiscono le seguenti quantità:
 - $a(\mathbf{x}_t) = a_{t}$ come il numero di nodi nella configurazione $\mathbf{x}_{t}$ che hanno colore $0$;
-- $b(\mathbf{x}_t) = b_{t}$ come il numero di nodi nella configurazione $\mathbf{x}_{t}$che hanno colore $1$;
+- $b(\mathbf{x}_t) = b_{t}$ come il numero di nodi nella configurazione $\mathbf{x}_{t}$ che hanno colore $1$;
 - Assumendo che nella generica configurazione $\mathbf{x}_{t}$ la maggioranza ha colore $1$, si definisce il *bias* $s_t$ come $$b(\mathbf{x}_{t}) = b_{t} = \frac{n}{2} +s_{t} \implies s_{t} = b_{t} - \frac{n}{2}$$
 D'ora in poi si farà riferimento semplicemente ad $s$ come al *bias* che dipende dal contesto corrente $\mathbf{x}_{t}$ (se ben chiaro). Si osserva che il *bias* $s$ assume valori tra $0$ e $\frac{n}{2}$. In particolare, se $s=0$ allora la metà dei nodi assume un colore e l'altra metà assume l'altro colore, mentre se $s=n/2$ allora tutti i nodi hanno lo stesso colore.
 
@@ -187,7 +187,7 @@ $$
 e dato che $\frac{11}{8} > \frac{5}{4}$, si ottiene che
 $$
 \begin{align}
-\frac{n}{2}+\frac{3}{2}s -s\left( \frac{2s^2}{n^2} \right) &\leqslant \frac{n}{2}+\frac{3}{2}s - \frac{1}{8}s \\
+\frac{n}{2}-\frac{3}{2}s +s\left( \frac{2s^2}{n^2} \right) &\leqslant \frac{n}{2}-\frac{3}{2}s + \frac{1}{8}s \\
 &\leqslant \frac{n}{2}- \frac{11}{8}s \\
 &\leqslant \frac{n}{2}- \frac{5}{4}s
 \end{align}
@@ -232,9 +232,9 @@ $$
 $$
 si osserva che
 $$
-\operatorname{Pr}\left[\mathcal{E}_{t+1} \mid \bigcap_{i=1}^{t} \mathcal{E}_i\right]=1-n^{-\alpha}
+\mathbf{Pr} \left[\mathcal{E}_{t+1} \mid \bigcap_{i=1}^{t} \mathcal{E}_i\right]=1-n^{-\alpha}
 $$
-per qualche costante $\alpha$. Infatti, assumendo che $n / 2-(9 / 8)^2 \geq n / 4$, se vale $\mathcal{E}_{t+1}$ allora si ottiene con alta probabilità
+per qualche costante $\alpha$. Infatti, assumendo che $n / 2-(9 / 8)^t \geq n / 4$, se vale $\mathcal{E}_{t}$ allora si ottiene con alta probabilità
 $$
 \begin{aligned}
 X_{t+1} & \leqslant \frac{n}{2}-\frac{9}{8} s \\

@@ -65,7 +65,7 @@ I nodi, durante l'esecuzione del protocollo, possono trovarsi in due stati: $\te
 ## Analisi time complexity
 Il protocollo **BP** termina globalmente in $\Theta(\log{n})$ round con alta probabilità.
 ### Dimostrazione
-Sia $t\geqslant 1$ un round fissato. Sia $Y_v$, per ogni nodo $v \in V \setminus \{ s \}$, la variabile aleatoria binaria
+Sia $t\geqslant 1$ un round fissato. Sia $Y_v$, per ogni nodo $v \in V \setminus I_{t}$, la variabile aleatoria binaria
 $$
 Y_{v}= 
   \left\{ 
