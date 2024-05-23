@@ -1,5 +1,5 @@
 # Il modello Radio Network
-Una **radio network** è un insieme di _dispositivi_ collocati in uno **spazio euclideo**, ognuno dei quali è dotato di un trasmettitore _radio_ (o _wireless_). Ogni nodo $v$ della rete ha **raggio di trasmissione** $r(v)>0$ fissato, entro il quale può trasmettere il suo segnale. Un qualsiasi nodo $w$ per ricevere un messaggio da $v$ deve trovarsi ad una _distanza_ minore o uguale del raggio di trasmissione $r(v):$
+Una **radio network** è un insieme di _dispositivi_ collocati in uno **spazio euclideo**, ognuno dei quali è dotato di un trasmettitore _radio_. Ogni nodo $v$ della rete ha **raggio di trasmissione** $r(v)>0$ fissato, entro il quale può trasmettere il suo segnale. Un qualsiasi nodo $w$ per ricevere un messaggio da $v$ deve trovarsi ad una _distanza_ minore o uguale del raggio di trasmissione $r(v):$
 $$
 \| v-w\| \leq r(v)
 $$
@@ -32,13 +32,13 @@ Si osserva quindi che un protocollo completa il broadcasting *correttamente* par
 Si vogliono quindi evitare le collisioni di messaggi.
 ## Protocollo Round-Robin (RR)
 Siano i nodi univocamente identificati da un valore nell'intervallo in $[0,n-1]$. Si assume che ogni nodo conosce la propria etichetta (nota: ciascun nodo non conosce i propri vicini), e che tutti i nodi conoscano una **buona approssimazione** di $n$. Per semplicità, sia il valore esatto di $n$ noto a tutti i nodi.  
-Il protocollo è scandito in **fasi** con durata complessiva di $n$ time slots ciascuno. In particolare, la fase $j$ del protocollo coinvolge i time slots che vanno da $t=jn$ a $t^{'}=(j+1)n-1.$
+Il protocollo è scandito in **fasi** con durata complessiva di $n$ time slots ciascuno. In particolare, la fase $k$ del protocollo coinvolge i time slots che vanno da $kn$ a $(k+1)n-1$.
 Ogni nodo con etichetta $i$ trasmette, nel caso in cui conosca il messaggio, solamente al time slot $i$-esimo di ogni fase. Formalmente per ogni $k≥0$, il nodo $i$ può trasmettere solo nei time slots $kn+i$. Si osserva che è possibile definire una scansione temporale delle azioni da svolgere grazie all'assunzione di sincronismo del sistema.  
 Questo protocollo garantisce la non possibilità di una situazione d'interferenza, in quanto, in ogni time slot, può trasmettere un solo nodo.
 Il protocollo è descritto formalmente dal seguente pseudocodice.
 ```python
-for phase j = 0,1,2,...:
-	for time = jn,jn+1,...,(j+1)n-1:
+for phase k = 0,1,2,...:
+	for time = kn,kn+1,...,(k+1)n-1:
 		sia x il nodo tale che id(x) = time (mod n): 
 			x invia msg (se informato)
 ```
@@ -51,14 +51,17 @@ Si dimostra per _induzione_ sulla distanza $k$.
 Nella prima fase, il primo nodo a trasmettere sarà la sorgente $s$ nel time slot $id(s)$; inoltre, in tale time-slot $s$ è l'unico nodo che trasmette. Allora tutti i vicini di $s$ nel grafo delle comunicazioni, ossia i nodi a distanza $1$ da $s,$ per via del modello radio network, ricevono correttamente il messaggio.
 ##### Passo induttivo
 Sia per ipotesi induttiva vero che ogni nodo nell'insieme $L_k$ (ovvero i nodi a distanza esattamente $k$ dalla sorgente) viene informato entro la fine della fase $k$, per ogni $k>0$. Si dimostra che l'ipotesi è vera per $k+1$. 
-Sia $w \in L_{k+1}$. Per definizione di $L_{k+1}$, esiste almeno un nodo in $v \in L_k$ tale che esiste l'arco diretto $(v,w)$. Per ipotesi induttiva, entro la fine della fase $k$ il nodo $v$ è informato. Allora, se $v$ ha ricevuto il messaggio in un time slot $kn+i<kn+id(v)$, $v$ può trasmettere durante la fase $k$ stessa al tempo $kn+id(v)$; altrimenti, se ha ricevuto il messaggio a un time slot $kn+i>kn+id(v)$, $v$ può trasmettere certamente nella fase $k+1$, più precisamente al time slot $(k+1)n+id(v)$. In ogni caso, per definizione del protocollo `RR`, il nodo $v$ sarà l'unico che in quel momento trasmette il messaggio a $w$. Perciò $w$ riceve almeno una volta il messaggio senza alcuna interferenza entro il termine della fase $k+1$, e questo vale per ogni $w \in L_{k+1}.$  
+Sia $w \in L_{k+1}$. Per definizione di $L_{k+1}$, esiste almeno un nodo in $v \in L_k$ tale che esiste l'arco diretto $(v,w)$. Per ipotesi induttiva, entro la fine della fase $k$ il nodo $v$ è informato. Allora, se $v$ ha ricevuto il messaggio in un time slot $kn+i<kn+id(v)$, $v$ può trasmettere durante la fase $k$ stessa al tempo $kn+id(v)$; altrimenti, se ha ricevuto il messaggio a un time slot $kn+i>kn+id(v)$, $v$ può trasmettere certamente nella fase $k+1$, più precisamente al time slot $(k+1)n+id(v)$. In ogni caso, per definizione del protocollo $\text{RR}$, il nodo $v$ sarà l'unico che in quel momento trasmette il messaggio a $w$. Perciò $w$ riceve almeno una volta il messaggio senza alcuna interferenza entro il termine della fase $k+1$, e questo vale per ogni $w \in L_{k+1}.$  
 
 Infine, per ipotesi di connettività di $G$, vale che per ogni nodo $x \in V$ esiste un intero $h$ tale che $x \in L_h.$
 ### Terminazione e time complexity
-Sia $D$ l'eccentricità della sorgente $s$, ovvero il più lungo dei cammini minimi che partono da $s$. Sicuramente in $D$ fasi tutti i nodi della rete verranno informati grazie al protocollo `RR`. Ma nessun nodo conosce $D.$ Però è noto che in una rete connessa di $n$ nodi il diametro è al più $n−1.$ Perciò, dato che ogni nodo conosce il valore $n$, ed essendovi un clock condiviso, ognuno può stabilire che entro al più $n−1$ fasi tutti i nodi saranno informati, e quindi potranno _terminare_ l'esecuzione del protocollo.
+Sia $D$ l'eccentricità della sorgente $s$, ovvero il più lungo dei cammini minimi che partono da $s$. Sicuramente in $D$ fasi tutti i nodi della rete verranno informati grazie al protocollo $\text{RR}$. Ma nessun nodo conosce $D.$ Però è noto che in una rete connessa di $n$ nodi il diametro è al più $n−1.$ Perciò, dato che ogni nodo conosce il valore $n$, ed essendovi un clock condiviso, ognuno può stabilire che entro al più $n−1$ fasi tutti i nodi saranno informati, e quindi potranno _terminare_ l'esecuzione del protocollo.
 
-Vale quindi il seguente teorema:
-Sia la rete $G$ con $n$ nodi e sorgente $s$ di eccentricità $D$. Sotto le precedenti assunzioni il protocollo `RR` **completerà** il suo task in esattamente $nD∈O(n^2)$ time slots e tutti i nodi **termineranno** l'esecuzione del protocollo in $O(n^2)$ time slots.
+Vale quindi il seguente teorema.
+```ad-Teorema
+title: Teorema
+Sia la rete $G$ con $n$ nodi e sorgente $s$ di eccentricità $D$. Sotto le precedenti assunzioni il protocollo $\text{RR}$ **completa** il task in esattamente $nD \in O(n^2)$ time slots e tutti i nodi **termineranno** l'esecuzione del protocollo in $O(n^2)$ time slots.
+```
 
 Si osserva esplicitamente che $D$ non è noto, ma se lo fosse, si potrebbe terminare l'esecuzione in tempo $nD.$
 Inoltre, si fa presente che, per come è stato definito il protocollo, sia $i<n$ la fase in cui un nodo $v$ viene informato, allora questo sicuramente trasmetterà nelle fasi $i+1,\ldots,n$ successive (anche nella $i-$esima se viene informato prima del time slot ad esso assegnato).
@@ -76,13 +79,13 @@ $$
 M[RR] = |E|
 $$
 ## Generalizzazione del problema
-Fin ora valeva l'assunzione che tutti i nodi hanno una conoscenza di $n$, oppure una sua _buona approssimazione_. Per esempio, se tutti i nodi hanno come approssimazione di $n$ un valore del tipo $3.5n$, l'efficienza del protocollo `RR` in termini asintotici non cambia.  
+Fin ora valeva l'assunzione che tutti i nodi hanno una conoscenza di $n$, oppure una sua _buona approssimazione_. Per esempio, se tutti i nodi hanno come approssimazione di $n$ un valore del tipo $3.5n$, l'efficienza del protocollo $\text{RR}$ in termini asintotici non cambia.  
 
-Si supponga ora invece che i nodi abbiano un'approssimazione $N$ del numero di nodi $n$. Col protocollo `RR` il tempo di terminazione globale, dove si evidenzia che ci si riferisce al tempo in cui tutti i nodi terminano di eseguire il protocollo, e non il tempo in cui viene completato il task del problema, che rimane invariato, sarà $O(N^2)$. Se $N \approx n^2$ il tempo di terminazione del protocollo sarà dell'ordine di $O(n^4)$, e se $N \approx 2^n$ il tempo di completamento sarà $O(2^{2n}).$
+Si supponga ora invece che i nodi abbiano un'approssimazione $N$ del numero di nodi $n$. Col protocollo $\text{RR}$ il tempo di terminazione globale, dove si evidenzia che ci si riferisce al tempo in cui tutti i nodi terminano di eseguire il protocollo, e non il tempo in cui viene completato il task del problema, che rimane invariato, sarà $O(N^2)$. Se $N \approx n^2$ il tempo di terminazione del protocollo sarà dell'ordine di $O(n^4)$, e se $N \approx 2^n$ il tempo di completamento sarà $O(2^{2n}).$
 
 Sia il numero di nodi $n$ non noto al sistema. Si ricorre alla tecnica della **simulazione**, nella quale si provano tutti i possibili valori che i parametri mancanti (in questo caso il numero di nodi) possono assumere.  
 
-Dato che il sistema è totalmente sincrono, si esegue il protocollo RR con $n=1$, poi si ripete con $n=2$, e così via… Così facendo, esisterà un tempo $t$ nel quale verrà eseguito il protocollo col corretto valore di $n$, portando a termine così il task del broadcast su reti radio.
+Dato che il sistema è totalmente sincrono, si esegue il protocollo $\text{RR}$ con $n=1$, poi si ripete con $n=2$, e così via… Così facendo, esisterà un tempo $t$ nel quale verrà eseguito il protocollo col corretto valore di $n$, portando a termine così il task del broadcast su reti radio.
 ```python
 for stage k=1,2,...:
 	for phase j = 0,1,..,k:
@@ -97,7 +100,7 @@ $$
 TIME = \sum_{j=1}^n TIME(\text{time slots\_robin}(j)) = \sum_{j=1}^n\Theta(j^2) \in \Theta(n^3)
 $$
 ### Terminazione locale
-Si consideri il nodo $v_j$ con etichetta $id(v_j)=j,$ e si consideri l'esecuzione del protocollo di $RR$ di parametro $n=i$ in cui $v_j$ viene informato. Se $j<i$, si ha che $v_j$ può ricevere il messaggio da un nodo $v_k$ collegato ad esso, che ha ricevuto il messaggio in precedenza, e in tal caso lo trasmetterà direttamente nella fase $i$, altrimenti dovrà attendere la fase successiva $i+1$. Se $j>i$, allora $v_j$ non parlerà mai nella simulazione del `RR` $i$-esima. Esisterà comunque un tempo $i^*\geq j$ in cui  $v_j$  avrà opportunità di trasmettere il messaggio ai suoi vicini.  
+Si consideri il nodo $v_j$ con etichetta $id(v_j)=j,$ e si consideri l'esecuzione del protocollo di $RR$ di parametro $n=i$ in cui $v_j$ viene informato. Se $j<i$, si ha che $v_j$ può ricevere il messaggio da un nodo $v_k$ collegato ad esso, che ha ricevuto il messaggio in precedenza, e in tal caso lo trasmetterà direttamente nella fase $i$, altrimenti dovrà attendere la fase successiva $i+1$. Se $j>i$, allora $v_j$ non parlerà mai nella simulazione del $\text{RR}$ $i$-esima. Esisterà comunque un tempo $i^*\geq j$ in cui  $v_j$  avrà opportunità di trasmettere il messaggio ai suoi vicini.  
 In entrambi i casi, per come è costruito il protocollo, quando $v_j$ trasmetterà non ci potranno essere altri nodi che trasmetteranno nello stesso istante. Perciò $v_j$ informerà tutti i suoi vicini senza interferenze, e potrà concludere localmente il suo compito, passando allo stato $\text{done}.$
 
 Si osserva esplicitamente, che quando un nodo trasmette l'informazione, allora questo deve necessariamente terminare. Questo perché, essendo $n$ non noto, un agente non può sapere quale sia lo stage $k=n,$ ossia quello stage tale per cui si ha la certezza che il task è stato portato a termine. Di conseguenza, non si può far continuare a trasmettere continuamente come nel protocollo precedente.
@@ -106,7 +109,7 @@ Si osserva esplicitamente, che quando un nodo trasmette l'informazione, allora q
 Un nodo trasmette quando, il turno è modulo la sua etichetta, non ha mai trasmesso ed è informato.
 ```
 ### Ottimizzazione
-Una ottimizzazione intuitiva, è quella di non far crescere il valore simulato di $n$ in maniera lineare, bensì in maniera _esponenziale_. Ovvero, le simulazioni del protocollo `RR` si ripetono ponendo il parametro $n=2^i,$ per ogni $i>0$.  
+Una ottimizzazione intuitiva, è quella di non far crescere il valore simulato di $n$ in maniera lineare, bensì in maniera _esponenziale_. Ovvero, le simulazioni del protocollo $\text{RR}$ si ripetono ponendo il parametro $n=2^i,$ per ogni $i>0$.  
 ```python
 for stage i = 0, 1, 2, ... :
 	k = 2^i
@@ -141,7 +144,7 @@ for k=1,2,... stages:
 ```
 Si osserva che ad ogni iterazione interna, parlano tutti i nodi informati.
 ### Analisi 
-Il protocollo BGI, con alta probabilità, completa il broadcast in  $O(D)$ stages. Dato che ogni stage richiede $O(\log n)$ time steps, il protocollo BGI completa il task in $O(D \log n)$ time steps con alta probabilità.
+Il protocollo $\text{BGI}$, con alta probabilità, completa il broadcast in  $O(D)$ stages. Dato che ogni stage richiede $O(\log n)$ time steps, il protocollo $\text{BGI}$ completa il task in $O(D \log n)$ time steps con alta probabilità.
 #### Dimostrazione
 ##### Step 1: induzione
 Per prima cosa, si dimostra che tutti i nodi in $L_{k}$ risultano informati entro la fine dello stage $k$ con alta probabilità.
@@ -193,16 +196,14 @@ $$
 &< n\left(\frac{1}{n^{\frac{c}{8}-1}}\right) = \left(\frac{1}{n^{\frac{c}{8}-2}}\right) 
 \end{align}
 $$
-Scegliendo $c>24,$ si ottiene che per ogni livello $D$ tutti i nodi in $L_D$ risultano informati entro la fine dello stage $D$ con alta probabilità.
+Scegliendo $c>24,$ si ottiene che per ogni livello $k$ tutti i nodi in $L_k$ risultano informati entro la fine dello stage $k$ con alta probabilità.
 
 Si osserva esplicitamente che si è assunto che i nodi conoscano $d.$
-Se i nodi non conoscono $d,$ si può ricorrere nuovamente alla tecnica della simulazione. Si osserva che provando tutti i $d=2,\ldots,n,$ se il vero valore $d$ è costante, non si ha uno spreco di risorse eccessivo, ma se $d = \omega(\log n),$ essendo che il protocollo viene simulato per tutti i $d,$ la complessità per il completamento del task aumenta a $O(d \cdot D \log n),$ mentre per la sua terminazione, dovendo provare tutti i $d,$ sale a $O(n \cdot D \log n).$
+Se i nodi non conoscono $d,$ si può ricorrere nuovamente alla tecnica della simulazione. Si osserva che provando tutti i $d=2,\ldots,n,$ se il vero valore $d$ è costante, non si ha uno spreco di risorse eccessivo, ma se $d = \Omega(\log n),$ essendo che il protocollo viene simulato per tutti i $d,$ la complessità per il completamento del task aumenta a $O(d \cdot D \log n),$ mentre per la sua terminazione, dovendo provare tutti i $d,$ sale a $O(n \cdot D \log n).$
 Si può effettuare, come fatto in precedenza, la ricerca binaria, trasmettendo con probabilità $1/2^i$ per $i=0,1,\ldots,\log_2n.$   
 ### Grafi generali
-Si vuole studiare il problema anche per grafi non regolari generici.
-Si assuma di eseguire il protocollo BGI definito in precedenza, e di trovarsi nel seguente scenario:
-Si assuma, per induzione, che alla fine della fase $(j-1)-$esima, tutti i nodi in $L_{j-1}$ sono informati. Si fa presente come, in questa situazione, un agente al livello $k$ può avere archi entranti provenienti da agenti presenti nel livello $k$ stesso.
-Si vuole mostrare che BGI con la probabilità definita in precedenza, non funziona.
+Si vuole studiare il problema anche per grafi non regolari generici. Si assuma di eseguire il protocollo $\text{BGI}$ definito in precedenza, e di trovarsi nel seguente scenario.
+Si assuma, per induzione, che alla fine della fase $(j-1)-$esima, tutti i nodi in $L_{j-1}$ sono informati. Si fa presente come, in questa situazione, un agente al livello $k$ può avere archi entranti provenienti da agenti presenti nel livello $k$ stesso. Si vuole mostrare che $\text{BGI}$ con la probabilità definita in precedenza, non funziona.
 ![](RadioNetwork4.png)
 Si consideri un nodo $v \in L_j$ non ancora informato, sia $1/d$ la probabilità con cui i nodi parlano, e $d^{'}= \deg^{(in)}(v).$ La probabilità che un suo vicino entrante informato trasmetta, e che tutti gli altri rimangano in silenzio, è
 $$
@@ -216,7 +217,7 @@ E' fondamentale che, durante la fase $(j-1)-$esima, il numero nodi attivi che pa
 - Se i nodi hanno un vicinato variabile, ci saranno alcuni nodi in $L_j$ che avranno un vicinato interno proveniente da $L_{j-1}$ di cardinalità proporzionale a $d,$ mentre altri possono avere la maggioranza dei vicini provenienti dal livello $L_j$ stesso, e al termine della fase $j-1,$ non si può dire nulla in merito alla conoscenza dell'informazione dei nodi del livello $L_j,$ essendo queste delle variabili aleatorie.
 
 Bisogna quindi modificare il protocollo come segue:
-- Tutti i nodi che partecipano alla fase $j,$ sono quelli che sono stati informati alla fase $j-1$ precedente. Per capire il motivo di questo vincolo, si fa presente il seguente scenario: Si supponga di trovarsi all'inizio della fase $j-$esima, e che per ipotesi, tutti i nodi alla fase $j-1$ sono stati informati. Allora, può esistere un agente al livello $j-$esimo che viene informato al primo passo della fase $j-$esima. Tale agente, se non si pone il vincolo in questione, può cominciare a trasmettere con probabilità $1/d,$ rendendo non valida l'analisi fatta in precedenza. L'analisi non sarebbe valida perché, per ipotesi induttiva si può dire che tutti i nodi nella fase $j-1$ sono stati informati al termine della fase $j-1$, ma non si può dire nulla in merito a quelli della fase $j.$ Ponendo questo vincolo sulla trasmissione da parte degli agenti si annulla questa problematica.
+- Tutti i nodi che partecipano alla fase $j,$ sono quelli che sono stati informati alla fase $j-1$ precedente. Per capire il motivo di questo vincolo, si fa presente il seguente scenario: si supponga di trovarsi all'inizio della fase $j-$esima, e che per ipotesi, tutti i nodi alla fase $j-1$ sono stati informati. Allora, può esistere un agente al livello $j-$esimo che viene informato al primo passo della fase $j-$esima. Tale agente, se non si pone il vincolo in questione, può cominciare a trasmettere con probabilità $1/d,$ rendendo non valida l'analisi fatta in precedenza. L'analisi non sarebbe valida perché, per ipotesi induttiva si può dire che tutti i nodi nella fase $j-1$ sono stati informati al termine della fase $j-1$, ma non si può dire nulla in merito a quelli della fase $j.$ Ponendo questo vincolo sulla trasmissione da parte degli agenti si annulla questa problematica.
 - Non si conosce il grado entrante dal livello precedente di un nodo $v\in L_j$, sia questo $|N_{j-1}^{(in)}(v)|.$ Si osserva che $1 \leq |N_{j-1}^{(in)}(v)| \leq \max_{v\in V}deg(v).$ Si esegue quindi la simulazione binaria, trasmettendo con probabilità $1/2^i$ con $i=0,\ldots, \log (\max_{v\in V}{deg(v)})$ (o $i=0,\ldots, \log n$ se non si conosce il grado massimo di un nodo). 
 
 ```python

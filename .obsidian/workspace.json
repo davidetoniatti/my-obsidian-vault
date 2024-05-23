@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "f50c0815b133dd36",
+        "id": "ca51da99706fdb8c",
         "type": "tabs",
         "children": [
           {
-            "id": "ed41359e09d8104b",
+            "id": "d18a004a7dfee514",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ADRC/03 - Problema Wake-up.md",
+                "file": "ABD/04 - Hash function.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ADRC/03 - Problema Wake-up.md",
+                "file": "ABD/04 - Hash function.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ADRC/03 - Problema Wake-up.md",
+                "file": "ABD/04 - Hash function.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ADRC/03 - Problema Wake-up.md"
+                "file": "ABD/04 - Hash function.md"
               }
             }
           }
@@ -148,23 +148,34 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "ed41359e09d8104b",
+  "active": "d18a004a7dfee514",
   "lastOpenFiles": [
-    "ADRC/02 - Problema Broadcast.md",
-    "ADRC/03 - Problema Wake-up.md",
-    "ADRC/13 - Expanders.md",
-    "ADRC/15 - Radio Network.md",
-    "ADRC/14 - Majority Consensus.md",
-    "ADRC/12 - Modello GOSSIP.md",
+    "ABD/03 - Algoritmi probabilistici.md",
+    "ABD/02 - Richiami di probabilità.md",
+    "ABD/07 - Link analysis.md",
+    "ABD/06 - Data streams.md",
+    "ADRC/01 - Ambienti distribuiti.md",
+    "ADRC/06 - Saturazione.md",
+    "ADRC/07 - Leader Election.md",
     "ADRC/08 - Graph Coloring Distribuito.md",
+    "ADRC/09 - Maximal Independent Set Distribuito.md",
     "ADRC/10 - Leader Election Unlabeled Ring.md",
     "ADRC/11 - Distributed_Average_Finding_&_Distributed_Community_Detection.md",
-    "ADRC/09 - Maximal Independent Set Distribuito.md",
-    "ADRC/07 - Leader Election.md",
-    "ADRC/06 - Saturazione.md",
-    "ADRC/05 - Depth First Traversal.md",
-    "AR/04 - Il fenomeno Small World.md",
-    "ADRC/04 - Spanning Tree construction.md",
+    "ADRC/12 - Modello GOSSIP.md",
+    "ADRC/13 - Expanders.md",
+    "ADRC/14 - Majority Consensus.md",
+    "ADRC/15 - Radio Network.md",
+    "AGT/08 - PLS-completezza.md",
+    "AGT/07 - Meccanismi senza pagamenti e kidney exchange.md",
+    "AGT/06 - Algorithmic Mechanism Design III.md",
+    "AGT/05 - Algorithmic Mechanism Design II.md",
+    "AGT/04 - Algorithmic Mechanism Design I.md",
+    "AGT/03 - Local Connection Game.md",
+    "AGT/02 - Global Connection Game.md",
+    "AGT/01 - Introduzione.md",
+    "AR/09 - Web Search.md",
+    "AR/08 - Sistemi di voto.md",
+    "AR/07 - Seguire il gregge.md",
     "ADRC/attachments/Pasted image 20240512200440.png",
     "ADRC/attachments/expanders03.png",
     "ADRC/attachments/expanders01.png",
@@ -173,19 +184,8 @@
     "ADRC/attachments/radioNetworkUNO.png",
     "ADRC/attachments/RadioNetwork4.png",
     "ADRC/attachments/RadioNetwork3.png",
-    "ADRC/12 - Modello GOSSIP2.md",
-    "ADRC/11_Distributed_Average_Finding_&_Distributed_Community_Detection.md",
-    "Senza nome.md",
-    "ADRC/11 - Averaging e Distributed Community Detection.md",
     "attachments/Pasted image 20240511145854.png",
     "attachments",
-    "ABD/07 - Link analysis.md",
-    "SDCC/06 - Comunicazione nei sistemi distribuiti parte 2.md",
-    "SDCC/05 - Comunicazione nei sistemi distribuiti.md",
-    "ABD/06 - Data streams.md",
-    "ADRC/01 - Ambienti distribuiti.md",
-    "cose da fare.md",
-    "07 - Leader Election2.md",
     "ADRC/attachments/WorstCaseAsFar.png",
     "ADRC.zip",
     "ziUeKQ0c",

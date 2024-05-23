@@ -1,4 +1,4 @@
-In un sistema distribuito costituito dall'insieme delle entità $V$, il problema del **wake-up** consiste nel raggiungere una configurazione finale del sistema in cui tutti i nodi sono nello stato $\texttt{Awake}$, a partire da una situazione in cui un sottoinsieme di nodi $W \subseteq V$ iniziatori si trovano nello stato $\texttt{Awake}$ e i restanti nodi in $V\setminus W$ si trovano nello stato $\texttt{Asleep}$.
+In un sistema distribuito costituito dall'insieme delle entità $V$, il problema del **wake-up** consiste nel raggiungere una configurazione finale del sistema in cui tutti i nodi sono nello stato $\text{Awake}$, a partire da una situazione in cui un sottoinsieme di nodi $W \subseteq V$ iniziatori si trovano nello stato $\text{Awake}$ e i restanti nodi in $V \setminus W$ si trovano nello stato $\text{Asleep}$.
 # Il problema
 Formalmente, il problema è descritto dalla tripla $P = \langle P_{init}, P_{final}, R \rangle$ in cui, sia $W \subseteq V$ tale che $W \neq \emptyset$ :
 - $P_{init} = \forall x \in V, s(x) = \begin{cases} \text{awake} \quad&x \in W \\ \text{asleep} &x \in V \setminus W \end{cases}$
@@ -23,9 +23,9 @@ if state == "ASLEEP":
 		send("wake-up!") to N() - sender
 		state = "AWAKE"
 ```
-Si osserva che il protocollo WFLOOD è molto simile al protocollo FLOODING studiato nella sezione precedente. In particolare si osserva che il problema del broadcast è un caso particolare del problema del wake-up, nel quale è presente, nella configurazione iniziale, un solo nodo sveglio. In altri termini, il problema del wake-up è come il problema broadcast in cui però possono esserci più nodi che posseggono l'informazione da condividere con gli altri nodi.
+Si osserva che il protocollo **WFLOOD** è molto simile al protocollo **FLOODING** studiato nella sezione precedente. In particolare si osserva che il problema del broadcast è un caso particolare del problema del wake-up, nel quale è presente, nella configurazione iniziale, un solo nodo sveglio. In altri termini, il problema del wake-up è come il problema broadcast in cui però possono esserci più nodi che posseggono l'informazione da condividere con gli altri nodi.
 ## Correttezza
-La correttezza del WFLOOD segue direttamente dalla correttezza del FLOODING per il broadcast. Si da una dimostrazione esplicita, analoga a quella per il flooding.
+La correttezza del **WFLOOD** segue direttamente dalla correttezza del **FLOODING** per il broadcast. Si da una dimostrazione esplicita, analoga a quella per il flooding.
 ### Dimostrazione
 Sia $\{L_0,L_1,\ldots L_h\}$ una partizione a livelli di $V$ , dove
 $$
@@ -34,7 +34,7 @@ $$
 $$
 L_{d} = \{u \in V- \bigcup_{0 \leq i \leq d-1}L_i : \exists v \in L_{d-1} \text{ t.c. } (v,u) \in E\} 
 $$
-per $d=1,\ldots,h.$ Dalla definizione di $L_d$ si osserva esplicitamente che 
+per $d=1,\ldots,h=diam(G).$ Dalla definizione di $L_d$ si osserva esplicitamente che 
 $$
 \bigcup_{i=0}^h L_i = V \ \wedge \ L_i \cap L_j = \emptyset \ \forall i\neq j
 $$
@@ -66,7 +66,6 @@ Per le osservazioni appena fatte, si identifica la seguente relazione
 $$
 M(\text{Wake-up}/R) \geq M(\textnormal{Broadcast}/R_{bcast}) = \Omega(m)
 $$
-
 ### Ideal time complexity
 Per poter effettuare un'analisi dell'ideal time complexity, si impongono le restrizioni di clock sincronizzati e unitary bounded delay.
 Si osserva che il problema broadcast è un caso particolare del problema wake-up, nel quale un solo agente appartiene a $W.$ Tale caso identifica il worst-case in termini di complessità temporale per il problema wake-up, infatti:
@@ -109,7 +108,7 @@ Per ridurre il numero di messaggi, è necessario imporre un'ulteriore restrizion
 $$
 ID \equiv \text{Initial Distinct values}
 $$
-ossia, la rete presenta un unique labeling (in altri termini, ogni nodo della rete è etichettato univocamente.) Si vuole dimostrare il seguente lower bound:
+ossia, la rete presenta un unique labeling (in altri termini, ogni nodo della rete è etichettato univocamente). Si vuole dimostrare il seguente lower bound:
 Sotto le restrizioni $R \cup K \cup ID$ vale che
 $$
 M(\text{Wake-up}) \geq \frac{n \log n}{2} = \Omega(n \log n)

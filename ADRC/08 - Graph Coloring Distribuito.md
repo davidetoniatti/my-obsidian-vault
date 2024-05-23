@@ -222,8 +222,8 @@ $$
 &\leqslant n \left( \frac{3}{4} \right)^i
 \end{align}
 $$
-allora per $i = (c+1) 4\log_2{n}$, si ottiene
+allora per $i = (c+1) \log_{\frac{4}{3}}{n}$, si ottiene
 $$
 \mathbf{Pr}(\mathcal{E}_{i}) \leqslant \frac{n}{n^{c+1}} = \frac{1}{n^c}
 $$
-Concludendo, dopo $i = (c+1) 4\log_2{n} = O(\log{n})$ fasi tutti i nodi terminano con probabilità $1-\frac{1}{n^c}$, cioè con **alta probabilità** per $c>0.$
+Concludendo, dopo $i = (c+1) \log_{\frac{4}{3}}{n} = O(\log{n})$ fasi tutti i nodi terminano con probabilità $1-\frac{1}{n^c}$, cioè con **alta probabilità** per $c>0.$

@@ -3,7 +3,7 @@ Il problema di trovare un _agreement_ tra i nodi di una rete distribuita è uno 
 Si considera un grafo di $n$ nodi in cui ogni nodo può trovarsi in due stati, o colori: $0$ o $1$. Informalmente, il problema del **Majority Consensus** consiste nel progettare un protocollo con l'obiettivo di far *convergere* tutti i nodi verso uno dei due colori possibili. In particolare, si assume che inizialmente ci sia un certo sbilanciamento $s$ (*bias*) nella rete, ossia la maggioranza dei nodi è colorato di uno dei due colori, e il sistema deve convergere verso tale colore di maggioranza.
 Il problema viene affrontato in un sistema sincrono a tempo discreto, dunque per ogni istante di tempo $t$ si può definire esplicitamente la configurazione del sistema al tempo $t$, cioè il numero di nodi che sono colorati di $0$ e che sono colorati di $1$ al tempo $t$.
 
-Formalmente, sia $G=([n],E)$ un grafo di $n$ nodi, sia $C=\{ 0,1 \}$ un insieme di colori e sia $\mathbf{x}_{t}:[n]\to C$ una colorazione (o configurazione) della rete $G$ al tempo $t$. Partendo dall'assunzione che la colorazione iniziale $\mathbf{x}_{0}$ abbia un certo *bias* $s = s_{0}$, l'obiettivo è quello di far convergere il sistema ad un certo tempo $\tau$ finito in una colorazione $x_{\tau}$ **monocromatica**, cioè dove ogni nodo è colorato col colore più popolare in $\mathbf{x}_{0}$. In altri termini, si raggiunge una colorazione finale nella quale tutti i nodi sono colorati col colore che era di maggioranza inizialmente.
+Formalmente, sia $G=([n],E)$ un grafo di $n$ nodi, sia $C=\{ 0,1 \}$ un insieme di colori e sia $\mathbf{x}_{t}:[n]\to C$ una colorazione (o configurazione) della rete $G$ al tempo $t$. Partendo dall'assunzione che la colorazione iniziale $\mathbf{x}_{0}$ abbia un certo *bias* $s = s_{0}$, l'obiettivo è quello di far convergere il sistema ad un certo tempo $\tau$ finito in una colorazione $\mathbf{x}_{\tau}$ **monocromatica**, cioè dove ogni nodo è colorato col colore più popolare in $\mathbf{x}_{0}$. In altri termini, si raggiunge una colorazione finale nella quale tutti i nodi sono colorati col colore che era di maggioranza inizialmente.
 
 Si definiscono le seguenti quantità:
 - $a(\mathbf{x}_t) = a_{t}$ come il numero di nodi nella configurazione $\mathbf{x}_{t}$ che hanno colore $0$;
@@ -40,23 +40,23 @@ L'obiettivo delle successive analisi sarà calcolare il valore atteso della vari
 A tale scopo, si definiscono le seguenti variabili aleatorie
 $$
 \forall i \in [n], \forall t = 0,1,2,\dots\quad Y_{t}^i := \begin{cases}
-1, \quad \text{se il nodo $i$ è $0$ al round $t$} \\
+1, \quad \text{se il nodo $i$ è $0$ al round $t+1$} \\
 0, \quad \text{altrimenti}
 \end{cases}
 $$
 allora si può esprimere $a_{t+1}$ come somma di variabili aleatorie
 $$
-X_{t+1} = \sum_{i=1}^n Y_{t+1}^i
+X_{t+1} = \sum_{i=1}^n Y_{t}^i
 $$
 e dunque per la linearità del valore atteso
 $$
-\mathbf{E}[X_{t+1}| X_{t} = a] = \sum_{i=1}^n \mathbf{E}[Y_{t+1}^i|X_{t}=a] = \sum_{i=1}^n \mathbf{Pr}(Y_{t+1}^i = 1 | X_{t} = a) 
+\mathbf{E}[X_{t+1}| X_{t} = a] = \sum_{i=1}^n \mathbf{E}[Y_{t}^i|X_{t}=a] = \sum_{i=1}^n \mathbf{Pr}(Y_{t}^i = 1 | X_{t} = a) 
 $$
 L'unica differenza nei casi che verranno analizzata è la probabilità che un certo nodo si colori di $0$ data la colorazione al tempo $t$. Per calcolare tale probabilità è fondamentale sottolineare il fatto che il grafo è completo e le scelte da ogni nodo vengono effettuate u.a.r., includendo se stessi e con ripetizione. Allora è evidente che per l'analisi non è necessario studiare *quali* sono i nodi che colorati in un certo modo, ma *quanti* sono.
 ## Caso $k=1$
 Sia $k=1$, sia per ogni round $t$ il bias $s_t\geqslant 0$ arbitrario e sia $1$ il colore di maggioranza iniziale. Allora un generico nodo $i$ ad ogni round $t$ per scegliere il suo nuovo colore si basa solamente sul colore di un altro nodo pescato in modo uniforme. Allora
 $$
-\mathbf{Pr}(Y_{t+1}^i = 1 | X_{t} = a) = \frac{a}{n} 
+\mathbf{Pr}(Y_{t}^i = 1 | X_{t} = a) = \frac{a}{n} 
 $$
 dunque risulta che
 $$
@@ -80,12 +80,12 @@ $$
 Sia $k=2$, sia per ogni round $t$ il bias $s_t\geqslant 0$ arbitrario e sia $1$ il colore di maggioranza iniziale. Inoltre, si supponga che eventuali *ties* nella scelta di un colore siano risolti tramite il lancio di una moneta equa.
 Allora un certo nodo $i$ ha due modi diversi per colorarsi di $0$: pescando in modo uniforme due nodi di colore $0$, oppure pescare in modo uniforme un nodo di colore $0$ e un nodo di colore $1$, e ottenere testa nel lancio della moneta (si assume che testa favorisca il colore $0$). Allora vale che
 $$
-\mathbf{Pr}(Y_{t+1}^i = 1 | X_{t} = a) = \left( \frac{a}{n} \right)^2 + 2\left( \frac{a}{n} \cdot\frac{b}{n} \cdot\frac{1}{2} \right)
+\mathbf{Pr}(Y_{t}^i = 1 | X_{t} = a) = \left( \frac{a}{n} \right)^2 + 2\left( \frac{a}{n} \cdot\frac{b}{n} \cdot\frac{1}{2} \right)
 $$
 dato che $b=n-a$, si ottiene
 $$
 \begin{align}
-\mathbf{Pr}(Y_{t+1}^i = 1 | X_{t} = a) &= \left( \frac{a}{n} \right)^2 + 2\left( \frac{a}{n} \cdot\frac{n-a}{n} \cdot\frac{1}{2} \right) \\
+\mathbf{Pr}(Y_{t}^i = 1 | X_{t} = a) &= \left( \frac{a}{n} \right)^2 + 2\left( \frac{a}{n} \cdot\frac{n-a}{n} \cdot\frac{1}{2} \right) \\
 &=\left( \frac{a}{n} \right)^2 + \frac{a}{n}\left( 1-\frac{a}{n} \right) \\
 &= \left( \frac{a}{n} \right)^2 + \frac{a}{n} - \left( \frac{a}{n} \right)^2  \\
 &= \frac{a}{n}
@@ -126,14 +126,14 @@ Si assuma senza perdita di generalità che il colore di maggioranza iniziale sia
 Sia $X_t$ la variabile aleatoria che indica il numero di nodi che sono colorati col colore $0$ al termine del round $t$ (cioè all'inizio del round $t+1$) e sia $\forall i \in [n]$, $Y_t^i$ la variabile aleatoria tale che
 $$
 \quad Y_{t}^i := \begin{cases}
-1, \quad \text{se il nodo $i$ è $0$ al round $t$} \\
+1, \quad \text{se il nodo $i$ è $0$ al round $t+1$} \\
 0, \quad \text{altrimenti}
 \end{cases}
 $$
 Fissata la configurazione al tempo $t$, $X_{t}=a$, la probabilità che il nodo $i$ al tempo $t+1$ si colori di $0$ è pari a
 $$
 \begin{align}
-\mathbf{Pr}(Y_{t+1}^i = 1 | X_{t} = a)  &= \left( \frac{a}{n} \right)^3 + 3 \frac{a^2(n-a)}{n^3} \\
+\mathbf{Pr}(Y_{t}^i = 1 | X_{t} = a)  &= \left( \frac{a}{n} \right)^3 + 3 \frac{a^2(n-a)}{n^3} \\
 &= \frac{a^3}{n^3} + \frac{3a^2}{n^2} - \frac{3a^3}{n^3} \\
 &= \frac{a^2}{n^3} (a+3n-3a) \\
 &= \frac{a^2}{n^3} (3n-2a)
@@ -142,7 +142,7 @@ $$
 quindi il numero atteso di nodi colorati di $0$ al round $t+1$ è dato da
 $$
 \begin{align}
-\mathbf{E}[X_{t+1}| X_{t} = a] &= \sum_{i=1}^n \mathbf{E}[Y_{t+1}^i| X_{t} = a] \\
+\mathbf{E}[X_{t+1}| X_{t} = a] &= \sum_{i=1}^n \mathbf{E}[Y_{t}^i| X_{t} = a] \\
 &= \sum_{i=1}^n \mathbf{Pr}(Y_{t+1}^i=1| X_{t} = a) \\
 &= \sum_{i=1}^n \frac{a^2}{n^3} (3n-2a) \\
 &= \left( \frac{a}{n} \right)^2(3n-2a)

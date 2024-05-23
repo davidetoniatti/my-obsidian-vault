@@ -1,13 +1,13 @@
 A differenza del problema del broadcast in cui si deve condividere un'informazione con tutti i nodi della rete, si consideri la situazione in cui c'è una risorsa da distribuire in modo *mutualmente esclusivo* tra i nodi. In particolare esiste una sola copia della risorsa e in un qualunque istante temporale esiste un solo nodo che la possiede.
 In particolare si studia una strategia di condivisione nota come **depth first traversal**. L'idea alla base prevede che ogni nodo cerca di inoltrare il token ai suoi vicini fino a quando tutti i nodi a lui adiacenti hanno già ricevuto il token. Quando un nodo non può inoltrare il token in "avanti", lo rimanda "indietro" al nodo che glielo ha inoltrato precedentemente.
 # Il problema
-Formalmente, il problema è definito dalla seguente tripla $P = \langle P_{init}, P_{final}, R \rangle$ dove
+Formalmente, il problema è definito dalla seguente tripla $P = \langle P_{init}, P_{final}, R_{dfs} \rangle$ dove
 - $P_{init}$: solo l'initiator ha il token;
 - $P_{final}$: tutti i nodi hanno ricevuto il token seguendo l'ordine di una DFS;
 - $R_{dfs} = \begin{cases} \text{Total Reliability (TR)} \\ \text{Bidirectional Link (BL)} \\ \text{Connectivity (CN)} \\ \text{Unique Initiator (UI)}\end{cases}$
 # Protocollo BACK
-Il protocollo più semplice che risolve il problema DFT è il seguente:
-1. Quando un nodo riceve il token per la *prima volta*, ricorda il nodo che gli ha inviato il token (il padre) e inoltra il token ad uno dei suoi vicini non visitati con il messaggio $\text{TOKEN}$, aspettando la sua risposta;
+Il protocollo più semplice che risolve il problema **DFT** è il seguente:
+1. Quando un nodo riceve il token per la *prima volta*, ricorda il nodo che gli ha inviato il token (il *padre*) e inoltra il token ad uno dei suoi vicini non visitati con il messaggio $\text{TOKEN}$, aspettando la sua risposta;
 2. Quando il vicino riceve il token, se lo ha già ricevuto lo ritorna immediatamente con un messaggio $\text{BACK-EDGE}$, altrimenti lo inoltra a tutti i suoi vicini in modo sequenziale, per poi ritornarlo al nodo da cui lo ha ricevuto con un messaggio $\text{RETURN}$;
 3. Quando il nodo riceve il messaggio $\text{RETURN}$ dal suo vicino, inoltra il token ad un altro vicino;
 4. Infine, quando il nodo finisce tutti i vicini, invia il messaggio $\text{RETURN}$ al nodo da cui inizialmente aveva ricevuto il token, ossia il nodo che ha segnato come padre.
@@ -57,7 +57,7 @@ Procedure VISIT
 ```
 ## Message complexity
 Si osserva che nel protocollo appena descritto esistono tre tipologie di messaggi, che sono:
-- Messaggi TOKEN: usati per scambiare il token;
+- Messaggi $\text{TOKEN}$: usati per scambiare il token;
 - Messaggi $\text{BACK-EDGE}$: usati per indicare che un nodo ha già ricevuto il token;
 - Messaggi $\text{RETURN}$: usati per restituire il token dopo averlo ricevuto per la prima volta.
 Dato un arco $(x,y) \in E$, dove $x$ invia il token ad $y,$ sono possibili le seguenti situazioni
@@ -74,7 +74,7 @@ $$
 E quindi, in termini di message complexity il protocollo BACK risulta essere asintoticamente ottimo e, in particolar modo, $M(\text{DFT}/R_{dft}) = \Theta(m)$.
 ## Ideal Time Complexity
 Come sempre, si ipotizza di trovarsi in un sistema sincrono, con i vincoli di synchronized clock e unitary bounded delay.
-Si osserva che nel protocolo BACK ogni nodo esplora in modo sequenziale tutti i suoi vicini. Questo significa la ideal time complexity è pari a
+Si osserva che nel protocollo $\text{BACK}$ ogni nodo esplora in modo sequenziale tutti i suoi vicini. Questo significa la ideal time complexity è pari a
 $$
 T(\text{BACK})= M(\text{DFT}/R_{dft}) = \Theta(m)
 $$

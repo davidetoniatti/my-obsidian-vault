@@ -31,7 +31,7 @@ Per la dimostrazione, si effettua una visita in ampiezza a partire da un qualsia
 - $L_0 := \{ s \} = I_{0};$
 - $I_{t} := I_{t-1} \cup L_{t}, \ \forall t = 0,1,\dots,n-1.$
 dunque $L_t$ è l'insieme dei nodi nel livello $t \geqslant 0$ dell'albero BFS risultante dalla visita e $I_t$ è l'insieme di tutti i nodi che appartengono ad un livello al più $t$. 
-Si osserva che $L_1 = N(s)$, dunque $|L_{1}| \geqslant \alpha$ in quanto $|N(s)|$ è un intero. Inoltre, per costruzione, $N(I_{t-1}) = L_t$ e dunque $|I_{t}| = |I_{t-1}| + |L_{t}|$. Dato che $G$ è un $\alpha$-expander, si ottiene che se $|I_{t-1}| \leqslant \frac{n}{2}$, allora vale
+Si osserva che $L_1 = N(s)$ e , dunque $|L_{1}| \geqslant \alpha$ in quanto $|N(s)|$ è un intero. Inoltre, per costruzione, $N(I_{t-1}) = L_t$ e dunque $|I_{t}| = |I_{t-1}| + |L_{t}|$. Dato che $G$ è un $\alpha$-expander, si ottiene che se $|I_{t-1}| \leqslant \frac{n}{2}$, allora vale
 $$
 |I_{t}| = |I_{t-1}|+|L_{t}| = |I_{t-1}|+|N(I_{t-1})| \geqslant |I_{t-1}|+\alpha|I_{t-1}| = (1+\alpha)|I_{t-1}|
 $$
