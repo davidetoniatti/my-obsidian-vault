@@ -1,3 +1,4 @@
+
 Si definisce in maniera rigorosa e non ambigua il *modello di calcolo* sul quale verranno studiati gli algoritmi distribuiti, anche detti **protocolli**. Tale modello prende il nome di **ambiente distribuito** ed è utile non solo per definire algoritmi distribuiti, ma anche per l'analisi della loro *correttezza* e *stabilità*.
 Informalmente, un ambiente distribuito è composto da un **insieme di agenti** aventi ognuno delle **capacità computazionali**, che interagiscono tra di loro scambiandosi dei messaggi (*message passing*) tramite una serie di **interconnessioni,** andando a formare quindi una rete. Tale ambiente distribuito viene modellato mediante **grafo**, in particolar modo, data una rete costituita da agenti e interconnessioni tra di essi, il grafo sottostante ha un vertice per ciascun agente del sistema e un arco tra due nodi per ogni interconnessione tra i corrispettivi agenti.
 ## Entità

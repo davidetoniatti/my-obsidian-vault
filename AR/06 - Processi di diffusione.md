@@ -1,17 +1,18 @@
-La presenza di una rete influenza il comportamento degli individui che la popolano, modificando il loro comportamento, come visto con l'esperimento di Granovetter, perché gli individui, in virtù della presenza di una rete, interagiscono fra loro anche solamente osservando il comportamento gli uni degli altri.
-Molte delle iterazioni avvengono a livello locale piuttosto che globale; si è interessati al comportamento degli individui con i quali si è in relazione, piuttosto che al comportamento dell'intera popolazione.
-
+Si è studiato come il comportamento di un agente all'interno di una rete sociale possa venir influenzato dagli altri individui che la popolano. Sono diversi i processi per i quali idee e informazioni vengono adottate da una popolazione (cascate di informazioni, fenomeno rich-get-richier). Le analisi di tali processi possono avvenire in due livelli di risoluzione.
+1. Si considerano le reti come una popolazione relativamente amorfa di individui, e si studiano gli effetti di tali processi in maniera aggregata rispetto agli individui che la costituiscono;
+2. Si studia in maniera più dettagliata come i singoli individui possono venir influenzati dai propri vicini nella rete.
+Molte interazioni nelle reti avvengono a livello locale piuttosto che globale, ossia, dato un agente in una rete sociale, gli individui che possono influenzare il suo comportamento sono quelli con cui esso si trova in relazione.
 ```ad-note
 Gli individui che possono influenzare il nostro comportamento sono quelli con i quali siamo in relazione.
 ```
 ## Il concetto di omofilia
-Il fenomeno della chiusura triadica è strettamente connesso al concetto di omofilia che si esplicita in due direzioni:
-- La tendenza di individui a connettersi con altri individui che gli assomigliano; ad esempio, un individuo tende a non stabilire relazioni con chi ha idee politiche opposte alle sue. Oppure, se un individuo ama il mare, diventerà amico con gente che incontra al mare (dunque, che ama il mare come lui). Dunque le ragioni di tale tendenza sono:
+Il fenomeno della chiusura triadica è strettamente connesso al concetto di **omofilia** che si esplicita in due direzioni:
+- La tendenza di un individuo ad entrare in relazione con gli individui ad esso simili. Le ragioni di tale tendenza sono:
 	- **Selezione**: si tende ad essere amici a chi ci somiglia;
-	- **Opportunità**: se si ama il mare, difficilmente si incontreranno amanti della montagna.
--  La tendenza di individui nel diventare *simili* agli individui con i quali stanno in relazione: ad assumere i loro stessi gusti, adeguarsi ai loro comportamenti e a diventare a amici dei loro amici. La motivazione soggiacente a questa tendenza è l'esigenza di ridurre a tensione sociale, ma c'è anche una motivazione assolutamente razionale: se si vedono gli individui con cui si ha una relazione utilizzare un certo prodotto, allora si tenderà ad acquistare quel prodotto, sia perché si assume essere una buona idea dato che c'è fiducia in tali individui, sia per mantenere la similitudine con questi individui, dunque per non indebolire la relazione con loro.
+	- **Opportunità**: è più probabile entrare in contatto con individui con i quali si condividono determinati aspetti..
+-  La tendenza di un individuo nel diventare *simile* agli individui con i quali esso si trova in relazione: ad assumere i loro stessi gusti, adeguarsi ai loro comportamenti e a diventare a amici dei loro amici (chiusura triadica). La motivazione soggiacente a questa tendenza è l'esigenza di ridurre la tensione sociale, ma c'è anche una motivazione razionale: se si vedono gli individui con cui si ha una relazione utilizzare un certo prodotto, allora si tenderà ad acquistare quel prodotto, sia perché si assume essere una buona idea dato che c'è fiducia in tali individui, sia per mantenere la similitudine con questi individui, dunque per non indebolire la relazione con loro.
 ## Processi di diffusione
-Il processo di diffusione delle innovazioni è stato studiato in sociologia già a partire dalla metà del secolo scorso da [Ryan e Gross (1943)](https://www.proquest.com/openview/7de2b2276a089fe888071663de12b6a0/), osservando i processi di adozione di nuovi semi ibridi di mais da parte di un gruppo di agricoltori dell'Iowa: la maggior parte degli agricoltori iniziava a usare i nuovi semi solo dopo aver osservato che un certo numero di vicini li stava utilizzando.
+Il **processo di diffusione delle innovazioni** è stato studiato in sociologia già a partire dalla metà del secolo scorso da [Ryan e Gross (1943)](https://www.proquest.com/openview/7de2b2276a089fe888071663de12b6a0/), osservando i processi di adozione di nuovi semi ibridi di mais da parte di un gruppo di agricoltori dell'Iowa: la maggior parte degli agricoltori iniziava a usare i nuovi semi solo dopo aver osservato che un certo numero di vicini li stava utilizzando.
 
 Si vuole modellare il processo di diffusione in una rete, dunque è necessario stabilire le regole in base alle quali un nodo decide di cambiare. Si definisce un modello di decisioni **individuali**, ossia non vi è coalizzazione di gruppi di nodi per prendere collettivamente la stessa decisione, nel quale le scelte dei nodi sono guidate da **motivazione di puro interesse personale**, cioè la spinta a cambiare è tanto maggiore quanto maggiore è il vantaggio che si prevede che deriverà dal cambiamento.
 Si assume che nella rete sia stabilizzato un certo stato delle cose $B$, cioè tutti gli individui della rete hanno un prodotto/opinione/comportamento denominato con $B$. Ad un certo istante, nella rete alcuni individui cambiano il loro stato in $A$. Allora, <u>assumendo che chi è nello stato A non torni mai in B</u> in quale casi un individuo decide di cambiare il proprio stato da $B$ a $A$?
@@ -59,11 +60,9 @@ Si osserva che esistono almeno due configurazioni di equilibrio:
 - quando, dopo che $A$ è stato introdotto nella rete, tutti i nodi sono passati nello stato $A$;
 
 Si vedono ora alcuni esempi di processi di diffusione, nell'ottica di studiare quando termina il processo di diffusione, ossia quali configurazioni di equilibrio ha il network coordination game e perché proprio in tali configurazioni la diffusione si interrompe.
-
 #### Esempio 1
 ![[AR/attachments/06-img01.png|center|500]]
 In questo esempio, lo stato $A$ viene forzato all'inizio sui nodi $v$ e $w$; in questo caso $a = 3$ e $b = 2$, quindi $q = \frac{2}{3+2}$, ossia, per adottare $A$, un nodo deve avere i $2/5$ dei vicini nello stato $A$. Perciò in questo esempio, tutti i nodi della rete adottano $A$.
-
 #### Esempio 2
 ![[AR/attachments/06-img02.png|center|500]]
 1. se $a = 2$, $b = 3$, ossia $q = 2/5$, in questo caso non tutti i nodi della rete adottano $A$; infatti $A$ non riesce a raggiungere i nodi fuori dall'esagono.

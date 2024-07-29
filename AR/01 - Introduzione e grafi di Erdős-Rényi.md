@@ -19,10 +19,6 @@ In questo articolo, chiamato "Planetary-Scale Views on an Instant-Messaging Netw
 I dati sono stati utilizzati per costruire una rete sociale, in cui i nodi erano gli utenti e le connessioni erano i tentativi di comunicazioni tra un utente e l'altro.
 Si è scoperto, tra le altre cose, che all'interno del grafo c'era una componente fortemente connessa che conteneva un sacco di invidui. Su 240 milioni di utenti totali infatti, la componente scoperta ne conteneva 200 milioni.
 
-studio dal basso, si studia relazione per relazione nella rete, individuo x individuo
-componente gigante: componente connesa che contiene una frazione del numero di nodi, quindi (n k) nodi (non n, logn, UNA frazione di dei nodi).
-
-
 Talvolta, lo studio dei fenomeni verrà portato avanti a livello di popolazione, cioè senza considerare i singoli individui della rete.
 Ad esempio, all'interno delle reti sociali è presente un fenomeno, chiamato _rich get richer_, che fa sì che tanto più un nodo è popolare, e tanto più la sua popolarità aumenta.
 Quando si fa riferimento a tale fenomeno, ad esempio, si studia qual'è mediamente la frazione di individui che ha un elevato grado di popolarità. Dunque non si studia la popolarità di un individuo singolarmente.
@@ -52,7 +48,7 @@ Dunque, $G_{n,p}$ è un modello per la generazione di grafi casuali conosciuto c
 title: Attenzione
 $G_{n,p}$ indica un modello per la generazione di grafi, quindi non sarebbe propriamente corretto indicare con $G_{n,p}$ un grafo cosi generato, ma abusiamo di notazione dunque con $G_{n,p}$ si farà spesso riferimento a un grafo generato dal modello.
 ```
-In particolare, si studia l'esistenza di una componente gigante e il grado dei nodi in un grafo generato con questo modello.
+In particolare, si studia l'**esistenza di una componente gigante** e il **grado dei nodi** in un grafo generato con questo modello.
 
 Si osserva che fissato il numero $n$ dei nodi, al variare di $p$ si ottengono grafi $G_{n,p}$ con caratteristiche molto differenti:
 - quando $p=0$ sarà possibile ottenere un unico grafo $G_{n,0}$: quello che non contiene alcun arco;
@@ -68,10 +64,9 @@ se $p > \frac{\ln{64}}{n}$, allora $P( X \geq \frac{n}{2}) \geq 1-2^{-n/8}$
 
 ```
 Per dimostrare il teorema, si dimostra in primis il lemma seguente.
-```ad-Lemma
+#### Lemma
 se $X < n/2$ allora esiste un insieme $A \subset [n]$ tale che $n/4 \leq |A| < 3n/4$ e non esistono archi fra i nodi in $A$ e i nodi in $[n]-A$.
-```
-Dimostrazione.
+##### Dimostrazione
 Siano $C_1,C_2,\dots,C_k$ tutte le componenti connesse di $G_{n,p}$ e si assuma che siano ordinate per cardinalità non decrescente, ossia $|C_1| \leq |C_2| \leq \dots \leq |C_k|$.
 Poiché $X < n/2$, non esiste una componente connessa $C_i$ che contiene più di $n/2$ nodi, dunque vale $|C_i| < n/2 \quad \forall i=1,\dots,k$ . 
 
@@ -84,67 +79,63 @@ Vale che $|A| \geq n/4$ per costruzione e vale
 $$ |A| = (|C_{1}| + |C_{2}| + \dots + |C_{h-1}|) + |C_{h}| < n/4 + n/2 = 3n/4 $$
 dunque $n/4 \leq |A| < 3n/4$.
 
-Rimane da dimostrare che non esistono archi fra i nodi in $A$ e $[n]-A$ . Ma questo vale per costruzione, poiché $C_1,C_2,\dots,C_k$ sono tutte le componenti connesse di $G_{n,p}$ , non ci sono archi fra $A$ e $[n]-A$ altrimenti, se ci fosse un arco fra $C_i$ e $C_j$ con $i \leq h$ e $j>h$, allora $C_i \cup C_j$ sarebbe un'unica componente connessa.
-Dunque si è dimostrato che:
-1. $|A| \geq n/4$ per costruzione;
-2.  $|A| < 3n/4$;
-3. non ci sono archi fra $A$ e $[n]-A$.
-Sia denominato `good` l'insieme $A$ individuato dal lemma; osserviamo che questo lemma assicura che la probabilità che la più grande componente connessa di $G_{n,p}$ contenga meno di $n/2$ nodi è minore o uguale alla probabilità che $G_{n,p}$ contenga un insieme di nodi `good`, dato l'ipotesi $X < n/2$ implica l'esistenza di un insieme $A$.
+Rimane da dimostrare che non esistono archi fra i nodi in $A$ e $[n]-A$ . Ma questo vale per costruzione: poiché $C_1,C_2,\dots,C_k$ sono tutte le componenti connesse di $G_{n,p}$ , non ci sono archi fra $A$ e $[n]-A$ altrimenti, se ci fosse un arco fra $C_i$ e $C_j$ con $i \leq h$ e $j>h$, allora $C_i \cup C_j$ sarebbe un'unica componente connessa.
+#### Dimostrazione teorema
+Sia denominato `good` l'insieme $A$ individuato dal lemma; si osserva che questo lemma assicura che la probabilità che la più grande componente connessa di $G_{n,p}$ contenga meno di $\frac{n}{2}$ nodi è minore o uguale alla probabilità che $G_{n,p}$ contenga un insieme di nodi `good`, dato l'ipotesi $X < \frac{n}{2}$ implica l'esistenza di un insieme $A$.
 
-Si dimostra ora il teorema.
-Per dimostrare il teorema, è sufficiente calcolare $P(X < n/2)$, ossia la probabilità che la massima componente connessa in $G_{n,p}$ contenga meno di $n/2$ nodi. In virtù dell'osservazione precedente vale
+Per dimostrare il teorema, è sufficiente calcolare $\mathbf{Pr}\left( X < \frac{n}{2} \right)$, ossia la probabilità che la massima componente connessa in $G_{n,p}$ contenga meno di $\frac{n}{2}$ nodi. In virtù dell'osservazione precedente vale
 $$
 \begin{align}
-P\left( X < \frac{n}{2} \right) &\leq P(\exists A \subseteq [n] : A\text{ è \texttt{good}})\\
-&= P\left( \bigcup_{A \subseteq [n] \text{ e } \frac{n}{4} \leq |A| < \frac{3n}{4}} \left[\text{non ci sono archi fra }A \text{ e } [n]-A\right] \right) \\
-&\leq \sum_{\bigcup_{A \subseteq [n] \text{ e } \frac{n}{4} \leq |A| < \frac{3n}{4}}} P\left(\text{non ci sono archi fra }A \text{ e } [n]-A\right)
+\mathbf{Pr}\left( X < \frac{n}{2} \right) &\leq \mathbf{Pr}(\exists A \subseteq [n] : A\text{ è \texttt{good}})\\
+&= \mathbf{Pr}\left( \bigcup_{A \subseteq [n] \text{ e } \frac{n}{4} \leq |A| < \frac{3n}{4}} \left[\text{non ci sono archi fra }A \text{ e } [n]-A\right] \right) \\
+&\leq \sum_{A \subseteq [n] \text{ e } \frac{n}{4} \leq |A| < \frac{3n}{4}} \mathbf{Pr} \left(\text{non ci sono archi fra }A \text{ e } [n]-A\right)
 \end{align}
 $$
 dato un grafo $G_{n,p}$, e un sottoinsieme $A$ dei suoi nodi: la probabilità che non ci sia un arco tra $A$ e $[n]-A$ è pari $1-p$; dato che il numero di archi possibili fra $A$ è $[n]-A$ è dato dalla cardinalità di $A$ per la cardinalità di $[n]-A$, vale
 $$
-P\left(\text{non ci sono archi fra }A \text{ e } [n]-A\right) = (1-p)^{|A|\cdot |[n]-A|}
+\mathbf{Pr}\left(\text{non ci sono archi fra }A \text{ e } [n]-A\right) = (1-p)^{|A|\cdot |[n]-A|}
 $$
-dato che $(1-p)<1$, il suo valore è massimo quando l'esponente $|A|\cdot |[n]-A|$  minimo, cioè quando $|A| = n/4$, dunque 
+dato che $(1-p)<1$, il suo valore è massimo quando l'esponente $|A|\cdot |[n]-A|$  è minimo, cioè quando $|A| = n/4$, dunque 
 $$
 \begin{align}
-P\left(\text{non ci sono archi fra }A \text{ e } [n]-A\right) &= (1-p)^{|A|\cdot |[n]-A|} \\
-&= (1-p)^{n/4 \cdot (n-n/4)} = (1-p)^{3n^2/16}
+\mathbf{Pr} \left( X < \frac{n}{2} \right) &\leq \sum_{A \subseteq [n] \text{ e } \frac{n}{4} \leq |A| < \frac{3n}{4}} (1-p)^{\frac{n}{4}(n-\frac{n}{4})}
 \end{align}
 $$
 
 ricordando che $[n]$ contiene $2^n$ sottoinsiemi, vale
 $$
 \begin{align}
-P\left( X < \frac{n}{2} \right) &\leq 2^n(1-p)^{\frac{3n^2}{16}} \\
+\mathbf{Pr}\left( X < \frac{n}{2} \right) &\leq 2^n(1-p)^{\frac{3n^2}{16}} \\
 \end{align}
 $$
-Applicando il lemma a destra della disequazione, si ottiene
+Applicando  l'ipotesi $p> \frac{\ln64}{n}$ a destra della disequazione, si ottiene
 $$
 \begin{align}
-P\left( X < \frac{n}{2} \right) &< 2^n\left(1-\frac{\ln{64}}{n}\right)^{\frac{3n^2}{16}} \\
+\mathbf{Pr} \left( X < \frac{n}{2} \right) &< 2^n\left(1-\frac{\ln{64}}{n}\right)^{\frac{3n^2}{16}} \\
 &= 2^n\left[\left(1 - \frac{\ln{64}}{n}\right)^n\right]^{\frac{3n}{16}}\\
-&= 2^n\left[\left(1 - \frac{\ln{64}}{n}\right)^{-\frac{n}{64}(-\ln{64})}\right]^{\frac{3n}{16}}
+&= 2^n\left[\left(1 - \frac{\ln{64}}{n}\right)^{\frac{n}{\ln64}(\ln{64})}\right]^{\frac{3n}{16}}
 \end{align}
 $$
-Poiché $\lim_{n \rightarrow \infty} \left(1 - \frac{\ln{64}}{n}\right)^{-\frac{n}{64}} = e$ , allora per $n$ sufficientemente grande vale
-$$ \left(1 - \frac{\ln{64}}{n}\right)^{-\frac{n}{64}} = e^{-\ln{64}} = 64^{-1} $$
+Poiché $\lim_{n \rightarrow \infty} \left(1 - \frac{\ln{64}}{n}\right)^{\frac{n}{\ln64}} = e^{-1}$ , allora per $n$ sufficientemente grande vale
+$$ \left(1 - \frac{\ln{64}}{n}\right)^{\frac{n}{\ln64}(\ln{64})} = e^{-\ln{64}} = 64^{-1} $$
 e dunque 
 $$
-P\left( X < \frac{n}{2} \right) < 2^n [64^{-1}]^{3n/16} = 2^n[2^{-6}]^{3n/16} = 2^n 2^{-18n/16} = 2^{-n/8}
+\mathbf{Pr}) \left( X < \frac{n}{2} \right) < 2^n [64^{-1}]^{3n/16} = 2^n[2^{-6}]^{3n/16} = 2^n 2^{-18n/16} = 2^{-n/8}
 $$
 da cui segue il teorema.
 
-Il teorema appena dimostrato può essere generalizzato:
-TEOREMA.
-	1. se $p(n-1)<1$ allora quasi sicuramente tutte le componenti connesse di $G_{n,p}$ hanno $O(\log{n})$ nodi;
-	2. se $p(n-1)=1$ allora quasi sicuramente $G_{n,p}$ ha una componente connessa di circa $n^{2/3}$ nodi;
-	3. se $p(n-1)>1$ allora quasi sicuramente $G_{n,p}$ ha una componente connessa di circa $\Omega(n)$ nodi e tutte le altre componenti connesse hanno $O(\log{n})$ nodi.
+Il teorema appena dimostrato può essere generalizzato.
+```ad-Teorema
+1. se $p(n-1)<1$ allora quasi sicuramente tutte le componenti connesse di $G_{n,p}$ hanno $O(\log{n})$ nodi;
+2. se $p(n-1)=1$ allora quasi sicuramente $G_{n,p}$ ha una componente connessa di circa $n^{2/3}$ nodi;
+3. se $p(n-1)>1$ allora quasi sicuramente $G_{n,p}$ ha una componente connessa di circa $\Omega(n)$ nodi e tutte le altre componenti connesse hanno $O(\log{n})$ nodi.
+```
 Dove con *quasi sicuramente* significa che, al tendere di $n$ all'infinito la probabilità dell'evento tende a $1$; in altre parole, è meno forte di *con alta probabilità* (non deve tendere per forza rispetto ad un polinomio).
 In conclusione, la presenza di componenti giganti dipende dal prodotto $p(n-1)$.
 ### Grado dei nodi
 Il prodotto $p(n-1)$ rappresenta il valore atteso del grado di un nodo di $G_{n,p}$. Per $i \in [n]$, sia $\delta_i$ la variabile aleatoria che esprime il grado del nodo $i$, vale
 $$
-E[\delta_i] = \sum_{j \in [n]-{i}} \left[1\cdot p+0\cdot(1-p)\right] = \sum_{j \in [n]-{i}} p = (n-1)p
+\mathbf{E}[\delta_i] = \sum_{j \in [n]-{i}} \left[1\cdot p+0\cdot(1-p)\right] = \sum_{j \in [n]-{i}} p = (n-1)p
 $$
 Questo significa che, se $p$ è costante, il grado dei nodi in media cresce linearmente col numero dei nodi.
 
@@ -160,33 +151,33 @@ Sia $i \in [n]$: la probabilità che il nodo $i$ abbia grado $k$ è la probabili
 - la probabilità che **non** vi sia un arco fra $i$ e ciascuno dei nodi non contenuto nella $k$-upla è $(1-p)^{n-1-k}$;
 quindi 
 $$
-P(\delta_i = k) = {n-1 \choose k} p^k(1-p)^{n-k-1}
+\mathbf{Pr}(\delta_i = k) = {n-1 \choose k} p^k(1-p)^{n-k-1}
 $$
 sostituendo $p = \frac{\lambda}{k}$ ed esplicitando il coefficiente binomiale si ottiene
 $$
-P(\delta_i = k) = \frac{(n-1)\cdot(n-2)\cdot\dots\cdot(n-k)}{k!} \frac{\lambda^k}{n^k}\left(1-\frac{\lambda^k}{n^k}\right)^{n-k-1}
+\mathbf{Pr}(\delta_i = k) = \frac{(n-1)\cdot(n-2)\cdot\dots\cdot(n-k)}{k!} \frac{\lambda^k}{n^k}\left(1-\frac{\lambda^k}{n^k}\right)^{n-k-1}
 $$
 poiché $(1-x)< e^{-x}$, allora 
 $$ \left(1-\frac{\lambda}{n}\right)^{n-k-1} < e^{\frac{-\lambda(n-k-1)}{n}} $$
 dunque si ottiene
 $$
-P(\delta_i = k) < \frac{(n-1)\cdot(n-2)\cdot\dots\cdot(n-k)}{k!} \frac{\lambda^k}{n^k}e^{\frac{-\lambda(n-k-1)}{n}}
+\mathbf{Pr}(\delta_i = k) < \frac{(n-1)\cdot(n-2)\cdot\dots\cdot(n-k)}{k!} \frac{\lambda^k}{n^k}e^{\frac{-\lambda(n-k-1)}{n}}
 $$
 dato che $(n-1)\cdot(n-2)\cdot\dots\cdot(n-k) < n^k$, si ottiene
 $$
-P(\delta_i = k) < \frac{n^k}{k!} \frac{\lambda^k}{n^k}e^{\frac{-\lambda(n-k-1)}{n}}
+\mathbf{Pr}(\delta_i = k) < \frac{n^k}{k!} \frac{\lambda^k}{n^k}e^{\frac{-\lambda(n-k-1)}{n}}
 $$
 per $n$ sufficientemente grande, vale
 $$
-P(\delta_i = k) < \frac{\lambda^k}{k!} e^{-\lambda}
+\mathbf{Pr}(\delta_i = k) < \frac{\lambda^k}{k!} e^{-\lambda}
 $$
 utilizzando l'approssimazione di Stirling, si ottiene infine
 $$
-P(\delta_i = k) < \frac{(\lambda \cdot e)^k}{\sqrt{ 2\pi k } \cdot k^k } e^{-\lambda} = \frac{e^{-\lambda}}{\sqrt{ 2\pi k }} \left(\frac{\lambda \cdot e}{k}\right)^k
+\mathbf{Pr}(\delta_i = k) < \frac{(\lambda \cdot e)^k}{\sqrt{ 2\pi k } \cdot k^k } e^{-\lambda} = \frac{e^{-\lambda}}{\sqrt{ 2\pi k }} \left(\frac{\lambda \cdot e}{k}\right)^k
 $$
 dunque si conclude che la probabilità che un generico nodo abbia grado $k$ decresce molto velocemente al crescere di $k$; più precisamente, decresce come $k^{-k}$ ossia esponenzialmente in $k$.
 
-Calcoliamo infine quale sia la frazione del numero di nodi che hanno grado $k$. Indichiamo con $F_k$ la variabile aleatoria che esprime tale frazione e indichiamo con $\lambda_{i,k}$ la variabile aleatoria 
+Calcoliamo infine quale sia la frazione del numero di nodi che hanno grado $k$. Indichiamo con $F_k$ la variabile aleatoria che esprime tale frazione e indichiamo con $\delta_{i,k}$ la variabile aleatoria 
 $$
 \delta_{i,k} = \begin{cases}
 1 \quad \text{ se } \delta_{i} = k \\
@@ -200,9 +191,9 @@ $$
 il valore atteso di $F_k$ vale
 $$
 \begin{align}
-E[F_{k}] &= E\left[\frac{1}{n} \sum_{i \in [n]} \delta_{i,k}\right]  \\
-&= \frac{1}{n} \sum_{i \in [n]} E[\delta_{i,k}] \\
-&= \frac{1}{n} \sum_{i \in [n]} P(\lambda_{i}=k) \\
+\mathbf{E}[F_{k}] &= \mathbf{E}\left[\frac{1}{n} \sum_{i \in [n]} \delta_{i,k}\right]  \\
+&= \frac{1}{n} \sum_{i \in [n]} \mathbf{E}[\delta_{i,k}] \\
+&= \frac{1}{n} \sum_{i \in [n]} \mathbf{Pr}(\delta_{i}=k) \\
 &< \frac{e^{-\lambda}}{\sqrt{ 2\pi k }} \left(\frac{\lambda \cdot e}{k}\right)^k
 \end{align}
 $$

@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "ca51da99706fdb8c",
+        "id": "8efdc6474d6ae8ce",
         "type": "tabs",
         "children": [
           {
-            "id": "d18a004a7dfee514",
+            "id": "686cc060a6a3ad98",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ABD/04 - Hash function.md",
+                "file": "AR/06 - Processi di diffusione.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "f4a864b39cd2bdd0",
@@ -85,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ABD/04 - Hash function.md",
+                "file": "AR/06 - Processi di diffusione.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ABD/04 - Hash function.md",
+                "file": "AR/06 - Processi di diffusione.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ABD/04 - Hash function.md"
+                "file": "AR/06 - Processi di diffusione.md"
               }
             }
           }
@@ -148,51 +149,50 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "d18a004a7dfee514",
+  "active": "686cc060a6a3ad98",
   "lastOpenFiles": [
-    "ABD/03 - Algoritmi probabilistici.md",
-    "ABD/02 - Richiami di probabilità.md",
-    "ABD/07 - Link analysis.md",
-    "ABD/06 - Data streams.md",
-    "ADRC/01 - Ambienti distribuiti.md",
-    "ADRC/06 - Saturazione.md",
-    "ADRC/07 - Leader Election.md",
-    "ADRC/08 - Graph Coloring Distribuito.md",
-    "ADRC/09 - Maximal Independent Set Distribuito.md",
-    "ADRC/10 - Leader Election Unlabeled Ring.md",
-    "ADRC/11 - Distributed_Average_Finding_&_Distributed_Community_Detection.md",
-    "ADRC/12 - Modello GOSSIP.md",
-    "ADRC/13 - Expanders.md",
-    "ADRC/14 - Majority Consensus.md",
-    "ADRC/15 - Radio Network.md",
-    "AGT/08 - PLS-completezza.md",
-    "AGT/07 - Meccanismi senza pagamenti e kidney exchange.md",
-    "AGT/06 - Algorithmic Mechanism Design III.md",
-    "AGT/05 - Algorithmic Mechanism Design II.md",
-    "AGT/04 - Algorithmic Mechanism Design I.md",
-    "AGT/03 - Local Connection Game.md",
-    "AGT/02 - Global Connection Game.md",
-    "AGT/01 - Introduzione.md",
-    "AR/09 - Web Search.md",
-    "AR/08 - Sistemi di voto.md",
     "AR/07 - Seguire il gregge.md",
-    "ADRC/attachments/Pasted image 20240512200440.png",
-    "ADRC/attachments/expanders03.png",
-    "ADRC/attachments/expanders01.png",
-    "ADRC/attachments/expanders02.png",
-    "ADRC/attachments/RadioNEZWORKDUE.png",
-    "ADRC/attachments/radioNetworkUNO.png",
-    "ADRC/attachments/RadioNetwork4.png",
-    "ADRC/attachments/RadioNetwork3.png",
+    "AR/06 - Processi di diffusione.md",
+    "AR/05 - Reti come grafi dalla struttura disomogenea.md",
+    "AR/04 - Il fenomeno Small World.md",
+    "AR/attachments/Pasted image 20240726160444.png",
+    "AR/attachments/Pasted image 20240726160159.png",
+    "AR/08 - Sistemi di voto.md",
     "attachments/Pasted image 20240511145854.png",
+    "cose da fare.md",
+    "AR/attachments/Pasted image 20240724152028.png",
+    "AR/03 - Grafi geometrici aleatori e reti wireless.md",
+    "AR/02 - Questione di popolarità.md",
+    "AR/attachments/Pasted image 20240723150510.png",
+    "AR/attachments/Pasted image 20240723145932.png",
+    "AR/attachments/Pasted image 20240723145557.png",
+    "AR/01 - Introduzione e grafi di Erdős-Rényi.md",
+    "AR/attachments/Pasted image 20240717155259.png",
+    "AR/attachments/Pasted image 20240717154507.png",
+    "Senza nome.md",
+    "ABD/07 - Link analysis.md",
+    "AGT/03 - Local Connection Game.md",
+    "schifezze/Architetture decentralizzate new.md",
+    "ADRC/01 - Ambienti distribuiti.md",
+    "ADRC/12 - Modello GOSSIP.md",
+    "ADRC/14 - Majority Consensus.md",
+    "ADRC/09 - Maximal Independent Set Distribuito.md",
+    "ADRC/05 - Depth First Traversal.md",
+    "ADRC/06 - Saturazione.md",
+    "ADRC/04 - Spanning Tree construction.md",
+    "ADRC/03 - Problema Wake-up.md",
+    "ADRC/02 - Problema Broadcast.md",
+    "ADRC/11 - Distributed_Average_Finding_&_Distributed_Community_Detection.md",
+    "ADRC/10 - Leader Election Unlabeled Ring.md",
+    "ADRC/08 - Graph Coloring Distribuito.md",
+    "ADRC/attachments/Pasted image 20240512200440.png",
     "attachments",
-    "ADRC/attachments/WorstCaseAsFar.png",
     "ADRC.zip",
     "ziUeKQ0c",
     "Senza nome.canvas",
     "ADRC/attachments",
     "ADRC",
-    "SDCC/PCD",
+    "PCD",
     "AGT.zip",
     "zifsqmxy",
     "Excalidraw",
