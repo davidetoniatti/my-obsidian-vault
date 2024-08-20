@@ -157,7 +157,7 @@ sostituendo $p = \frac{\lambda}{k}$ ed esplicitando il coefficiente binomiale si
 $$
 \mathbf{Pr}(\delta_i = k) = \frac{(n-1)\cdot(n-2)\cdot\dots\cdot(n-k)}{k!} \frac{\lambda^k}{n^k}\left(1-\frac{\lambda^k}{n^k}\right)^{n-k-1}
 $$
-poiché $(1-x)< e^{-x}$, allora 
+poiché $(1-x)< e^{-x}$, allora non
 $$ \left(1-\frac{\lambda}{n}\right)^{n-k-1} < e^{\frac{-\lambda(n-k-1)}{n}} $$
 dunque si ottiene
 $$

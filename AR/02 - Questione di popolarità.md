@@ -1,4 +1,4 @@
-Nella lezione precedente, è stato introdotto un modello di grafi aleatori detto modello di [Erdős-Rényi](01%20-%20Introduzione%20e%20grafi%20di%20Erdős-Rényi.md#Il%20modello%20di%20Erdős-Rényi) . In un grafo generato con tale modello, al crescere di $k$, si è visto che il numero di nodi che hanno grado $k$ decresce esponenzialmente in $k$.
+Nella lezione precedente, è stato introdotto un modello di grafi aleatori detto modello di [Erdős-Rényi](01%20-%20Introduzione%20e%20grafi%20di%20Erdős-Rényi.md#Il%20modello%20di%20Erdős-Rényi). In un grafo generato con tale modello, al crescere di $k$, si è visto che il numero di nodi che hanno grado $k$ decresce esponenzialmente in $k$.
 Tale decrescita è data dal fatto che nel grafo $G_{n,p}$ gli archi vengono aggiunti in sequenza, indipendentemente gli uni dagli altri. Dunque, il grado di un nodo è dato dalla somma degli eventi indipendenti
 $$
 \delta_{i} = \sum_{j \in [n]-i} e_{ij}
@@ -16,7 +16,7 @@ Il punto cruciale sta nel fatto che la porzione di grafo che è già stata costr
 
 Questo risultato però non rispecchia pienamente la realtà; infatti, sono stati osservati fenomeni *sostanzialmente* differenti.
 
-Si consideri il grafo dato dalle informazioni nel *web*: si modella come un *grafo diretto* in cui ogni nodo è una pagina e un arco $(a,b)$ diretto nel grafo indica che la pagina $a$ contiene un hyperlink alla pagine $b$.
+Si consideri il grafo dato dalle informazioni nel *web*: si modella come un *grafo diretto* in cui ogni nodo è una pagina e un arco $(a,b)$ diretto nel grafo indica che la pagina $a$ contiene un hyperlink alla pagina $b$.
 In uno studio in cui si analizza la distribuzione degli archi entranti, o *gradi*, dei nodi nel grafo del web, è stato osservato che la frazione di pagine web che ha grado entrante $k$ è proporzionale a $k^{-c}$ per qualche costante $c$, invece che a $k^{-k}$.
 Una funzione che decresce in tale modo, cioè come l'inverso di un polinomio, è chiamata **power law**.
 ```ad-Definizione
@@ -247,7 +247,6 @@ Dunque si riformula anche la definizione dell'insieme $A_t(k)$ come
 $$A_t(k) := \bigg\{ j \leq t \left[ k \frac{1-p}{p} + 1 \right]^{ - \frac{1}{1-p} }  \bigg\} $$
 tale insieme ha cardinalità esattamente
 $$|A_t(k)| =  t \left[ k \frac{1-p}{p} + 1 \right]^{ - \frac{1}{1-p} }$$
-
 Per comodità, si definisce la funzione
 $$
 F(k) = \left[ k \frac{1-p}{p} + 1 \right]^{ - \frac{1}{1-p} }

@@ -57,7 +57,7 @@ Prima di entrare nei dettagli del problema del minimo raggio di trasmissione, si
 $$
 RA(u)=r_{u}=\max \{ d(u,v): c \in V \setminus \{ u \} \}
 $$
-Cosi facendo non dolo si ottiene un grafo fortemente connesso, ma proprio una *clique*, rendendo non necessaria la comunicazione multi-hop. Ma tale strategia non risulta essere funzionale per via della batteria di capacità limitata presente nei nodi. Dunque, l'obiettivo è assegnare a ciascun nodo un raggio di trasmissione il più piccolo possibile.
+Cosi facendo non solo si ottiene un grafo fortemente connesso, ma proprio una *clique*, rendendo non necessaria la comunicazione multi-hop. Ma tale strategia non risulta essere funzionale per via della batteria di capacità limitata presente nei nodi. Dunque, l'obiettivo è assegnare a ciascun nodo un raggio di trasmissione il più piccolo possibile.
 ```ad-Problema
 title: Problema MTR
 Dati $n$ nodi distribuiti casualmente e in modo uniforme in $[0,1]^2$, qual è il valore minimo $r^*$ tale che l'assegnazione omogenea di raggio di trasmissione $r^*$ a tutti i nodi induce un grafo di comunicazione che risulti essere connesso con alta probabilità?
@@ -68,6 +68,7 @@ Facendo riferimento alle osservazioni fatte in precedenza riguardo i grafi geome
 Si riformula quindi il problema nel modo seguente: dati $n$ punti distribuiti uniformemente a caso nel quadrato $Q\equiv [0,1]^2$, calcolare il valore minimo di $r(n)$ affinché $G(n,r(n))$ sia connesso.
 ## Connessione di $G(n,r)$
 In questa sezione si dimostra che:
+
 > Sia $r^*(n)$ il minimo valore per $r(n)$ che garantisce, con buona probabilità, ch $G(n,r(n))$ è connesso, allora $r^*(n) \in \Theta\left( \sqrt{ \frac{\ln{n}}{n} } \right)$.
 
 Per dimostrare tale affermazione, è necessario dimostrare due teoremi che mostrano rispettivamente una limitazione **superiore** ed una **inferiore** per il minimo raggio di trasmissione $r^{\star}(n)$.

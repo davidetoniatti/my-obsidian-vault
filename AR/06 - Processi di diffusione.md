@@ -52,7 +52,6 @@ dove $q = \frac{b}{a+b}$ è la **soglia di adozione** di $A$.
 Quando $q$ è molto piccolo, occorrono pochi vicini nello stato $A$ per indurre un nodo a cambiare stato, e $q$ è molto piccolo quando $a$ è molto più grande di $b$, ossia, quando lo stato $A$ è molto migliore dello stato $B$.
 Quando $a = b$ occorrono almeno la metà dei vicini nello stato $A$ per indurre un nodo a cambiare stato, e questo accade quando lo stato $A$ è confrontabile con lo stato $B$.
 Infine, quando $a$ è molto più piccolo di $b$, occorrono molti vicini nello stato $A$ per indurre un nodo a cambiare stato, e questo accade quando lo stato $A$ è peggiore dello stato $B$, e quindi è faticoso/rischioso/costoso adottare $A$.
-
 ### Game e configurazione di equilibrio
 Con configurazioni di equilibrio si intendono quelle configurazioni del network coordination game definito in cui nessun nodo cambia il proprio stato da $B$ ad $A$.
 Si osserva che esistono almeno due configurazioni di equilibrio:
@@ -67,7 +66,6 @@ In questo esempio, lo stato $A$ viene forzato all'inizio sui nodi $v$ e $w$; in 
 ![[AR/attachments/06-img02.png|center|500]]
 1. se $a = 2$, $b = 3$, ossia $q = 2/5$, in questo caso non tutti i nodi della rete adottano $A$; infatti $A$ non riesce a raggiungere i nodi fuori dall'esagono.
 2. se $a = 4$, $b = 2$, ossia $q = 1/3$, in questo caso dopo aver raggiunto tutti i nodi dell'esagono, $A$ è adottato dai nodi 2, 11 e 14; poi da 1, 3, 12, 13, 17 e infine da 15 e 16; tutti i nodi adottano $A$.
-
 ### Diffusioni e cascate complete
 Dai due esempio si possono trarre una serie di conclusioni:
 - non sempre tutti i nodi si adeguano all'innovazione;
@@ -77,7 +75,6 @@ Inoltre, l'eventualità che tutti i nodi arriveranno ad adottare $A$ dipende dai
 Questo insieme di nodi $V_0$ si identifica come insieme dei nodi **iniziatori**.
 Una volta che $A$ viene introdotto nella rete, inizia un processo di diffusione che procede in una sequenza di passi discreti: si indica con $V_i$ l'insieme dei nodi che adottano $A$ al passo $i$ di tale sequenza, ossia l'insieme di vicini dei nodi $V_0 \cup V_1 \cup \dots \cup V_{i-1}$ che adotta $A$.
 Viene generata una **cascata completa** se ad un certo passo $t$ tutti i nodi hanno adottato $A$, ossia se esiste un $t \geq 0$ tale che $\bigcup_{0 \leq i \leq t} V_i = V$.
-
 ### Cascate e cluster
 Dagli esempi svolti, si nota che l'innovazione ha difficoltà ad uscire da gruppi coesi di nodi.
 Si definisce **cluster di densità** $p$ un sottoinsieme di nodi $V' \subseteq V$ tale che la frazione di vicini che ogni suo nodo ha in $V'$ è almeno $p$.
@@ -120,7 +117,7 @@ Si suppone per assurdo che si generi una cascata completa: allora i nodi in $C$,
 Poniamo $V' = \bigcup_{0 \leq i \leq t-1} V_i$, ossia $V'$ sono tutti i nodi che al passo $t-1$ sono nello stato $A$ e $V'$ non contiene nodi di $C$.
 Allora,
 1. poiché $C$ è un cluster di densità $> 1 - q$ e $u \in C$, allora $\frac{ |N(u) \cap C| }{ |N(u)| } > 1 - q$ ;
-2. poiché $u \in V_t$ , allora $\frac{ |N(u) \cap V'| }{ |N(u)| } > 1 - q$
+2. poiché $u \in V_t$ , allora $\frac{ |N(u) \cap V'| }{ |N(u)| } \geqslant q$
 ossia, poiché $V' \cap C = \emptyset$
 $$
 1 = \frac{N(u)}{N(u)} \geqslant \frac{ |N(u) \cap (C \cup V')| }{ |N(u)| } = \frac{ |N(u) \cap C| }{ |N(u)| } + \frac{ |N(u) \cap V'| }{ |N(u)| } > 1

@@ -24,7 +24,7 @@ Nel 1998 **Watts** e **Strogatz** proposero un modello generativo di grafi aleat
 Il grafo generato in accordo con questo modello è composto da:
 - una componente **deterministica** che consiste in una **griglia bidimensionale**;
 - una componente **aletoria** al di sopra della griglia.
-In particolare, la griglia bidimensionale è un sottoinsieme di $\mathbb{N}^2$, i cui *punti* sono i nodi del grafo. Nella griglia ogni nodo ha un acro con i suoi vicini posti a destra, sinistra, sopra, sotto e in diagonale.
+In particolare, la griglia bidimensionale è un sottoinsieme di $\mathbb{N}^2$, i cui *punti* sono i nodi del grafo. Nella griglia ogni nodo ha un arco con i suoi vicini posti a destra, sinistra, sopra, sotto e in diagonale.
 Più formalmente, fissato un $n \in \mathbb{N}$:
 $$
 V \equiv \lbrace (i,j) \in \mathbb{N}^2 | 0 \leqslant i < n \land 0 \leqslant j < n \rbrace
@@ -87,16 +87,16 @@ Si riconsideri l'esperimento di Milgram. In esso, le distanze percorse dal messa
 Dunque, anche se per pochi salti la lettera percorre relativamente poca distanza, presto farà un salto che riduce drasticamente la distanza con la destinazione.
 Una maniera ragionevole per pensare a queste scale di risoluzione in un modello di rete, dalla prospettiva di un certo nodo $v$, è quella di considerare i gruppi di tutti i nodi entro una certa distanza da $v$, in maniera crescente, ossia i nodi a distanza comprese tra 2 e 4, 4 e 8 e cosi via.
 
-Si formalizza quanto osservato considerando una semplice griglia <u>bidimensionale</u>. Fissato un nodo $u$, si partizionano i nodi rimanenti in gruppi in base alla distanza da $u$: in particolare, i nodi nell'$h$-esimo gruppo si trovano a distanza compresa tra $2^h$ e $2^{h+1}$ da $u$.
+Si formalizza quanto osservato considerando una semplice griglia <u>bidimensionale</u>. Fissato un nodo $u$, si partizionano i nodi rimanenti in gruppi in base alla distanza da $u$: in pa rticolare, i nodi nell'$h$-esimo gruppo si trovano a distanza compresa tra $2^h$ e $2^{h+1}$ da $u$.
 Dato che i punti in una circonferenza crescono come il quadrato del raggio, avremo che i nodi nell'intervallo tra $2^h$ e $2^{h+1}$ sarà proporzionale a $2^{2h}$. Infatti
 $$\vert \lbrace x \in V \vert 2^h \leqslant d(u,x) < 2^{h+1} \rbrace \vert \approx (2^{h+1})^2\pi - (2^h)^2\pi = 4\pi 2^{2h} - \pi 2^{2h} = 3\pi 2^{2h} $$
-Scelto un nodo $v$ nel blocco $2^{h+1}-2^h$, la probabilità che l'arco random uscente da $u$ sia $(u,v)$ è **proporzionale a** $2^{-2h}$, ovvero $1$ diviso la distanza tra $u$ e $v$ che è compresa tra $2^{h}$ e $2^{h+1}$, tutto elevato a $q=2$.
+Scelto un nodo  $v$ nel blocco $2^{h+1}-2^h$, la probabilità che l'arco random uscente da $u$ sia $(u,v)$ è **proporzionale a** $2^{-2h}$, ovvero $1$ diviso la distanza tra $u$ e $v$ che è compresa tra $2^{h}$ e $2^{h+1}$, tutto elevato a $q=2$.
 
 Si calcola ora quanto vale la probabilità che l'arco random uscente da $u$ cada nel blocco $2^{h+1}-2^h$.
 Sia l'evento $\mathcal{E}_x$ che occorre se esiste l'arco random tra $u$ e il nodo $x$ a distanza $2^h \leqslant d(u,x) < 2^{h+1}$.
 Sappiamo che tale evento occorre con probabilità
 $$\mathbf{Pr}(\mathcal{E}_x) \propto d(u,x)^{-2} \propto 2^{-2h}$$
-Sia quindi l'evento $\mathcal{E}$ che occorre quando esiste un arco random che collega $u$ all'intervallo desiderato. Tale probabilità sarà pari a
+Sia quindi l'evento $\mathcal{E}$ che occorre quando esiste un arco random che collega $u$ all'intervallo desiderato. Tale pro b abilità sarà pari a
 $$
 \begin{align*}
 	\mathbf{Pr}(\mathcal{E})
@@ -118,7 +118,7 @@ $$
 \mathbf{Pr}((u,v) \in E) = \frac{1}{Z}\cdot \frac{1}{d(u,v)}
 $$
 con $Z =\sum_{v \in V \setminus \{ u \}} \frac{1}{d(u,v)}$.
-Si osserva che in un anello ogni nodo $u \in V$ ha due vicini a distanza due, due vicini a distanza tre, ..., due vicini a distanza $\frac{n}{2}$. Dunque per ogni $u \in V$ vale
+Si osserva che in un anello ogni nodo $u \in V$ ha due vicini a distanza due, due vicini a distanza tre, ..., due vicini a distanza $\frac{n}{2}$. Dunque per ogni $u \in V$ vale 2
 $$
 \begin{align}
 Z &=\sum_{v \in V \setminus \{ u \}} \frac{1}{d(u,v)} = 2\sum_{h=1}^{n/2} \frac{1}{h} \\
