@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "1414d2ef1cf3efda",
+        "id": "f9dc8b0173cdf173",
         "type": "tabs",
         "children": [
           {
-            "id": "6c05e8c974ae337d",
+            "id": "7abe1b2ec06ac530",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AR/04 - Il fenomeno Small World.md",
+                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "f4a864b39cd2bdd0",
@@ -85,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "AR/04 - Il fenomeno Small World.md",
+                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "AR/04 - Il fenomeno Small World.md",
+                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "AR/04 - Il fenomeno Small World.md"
+                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md"
               }
             }
           }
@@ -140,34 +141,39 @@
   "left-ribbon": {
     "hiddenItems": {
       "switcher:Apri selezione rapida": false,
-      "graph:Apri vista grafo": false,
       "canvas:Crea nuova lavagna": false,
+      "graph:Apri vista grafo": false,
       "daily-notes:Apri nota del giorno": false,
       "templates:Inserisci modello": false,
       "command-palette:Apri riquadro comandi": false,
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "6c05e8c974ae337d",
+  "active": "7abe1b2ec06ac530",
   "lastOpenFiles": [
-    "AR/03 - Grafi geometrici aleatori e reti wireless.md",
+    "AR/attachments/Pasted image 20240830112057.png",
+    "AR/06 - Processi di diffusione.md",
     "AR/05 - Reti come grafi dalla struttura disomogenea.md",
     "AR/04 - Il fenomeno Small World.md",
-    "AR/06 - Processi di diffusione.md",
     "AR/02 - Questione di popolarità.md",
     "AR/01 - Introduzione e grafi di Erdős-Rényi.md",
-    "AR/08 - Sistemi di voto.md",
+    "AR/attachments/Pasted image 20240829152505.png",
+    "AR/attachments/Pasted image 20240829152156.png",
+    "AR/attachments/Pasted image 20240829152123.png",
+    "AR/attachments/Pasted image 20240829151120.png",
+    "AR/attachments/Pasted image 20240828105023.png",
+    "AGT/02 - Global Connection Game.md",
+    "study_plan_draft.md",
     "AR/07 - Seguire il gregge.md",
+    "AR/08 - Sistemi di voto.md",
+    "AR/09 - Web Search.md",
+    "AR/03 - Grafi geometrici aleatori e reti wireless.md",
     "AR/attachments/Pasted image 20240726160444.png",
     "AR/attachments/Pasted image 20240726160159.png",
     "attachments/Pasted image 20240511145854.png",
     "cose da fare.md",
     "AR/attachments/Pasted image 20240724152028.png",
     "AR/attachments/Pasted image 20240723150510.png",
-    "AR/attachments/Pasted image 20240723145932.png",
-    "AR/attachments/Pasted image 20240723145557.png",
-    "AR/attachments/Pasted image 20240717155259.png",
-    "AR/attachments/Pasted image 20240717154507.png",
     "Senza nome.md",
     "ABD/07 - Link analysis.md",
     "AGT/03 - Local Connection Game.md",
@@ -181,10 +187,6 @@
     "ADRC/04 - Spanning Tree construction.md",
     "ADRC/03 - Problema Wake-up.md",
     "ADRC/02 - Problema Broadcast.md",
-    "ADRC/11 - Distributed_Average_Finding_&_Distributed_Community_Detection.md",
-    "ADRC/10 - Leader Election Unlabeled Ring.md",
-    "ADRC/08 - Graph Coloring Distribuito.md",
-    "ADRC/attachments/Pasted image 20240512200440.png",
     "attachments",
     "ADRC.zip",
     "ziUeKQ0c",

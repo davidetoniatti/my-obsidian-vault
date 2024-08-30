@@ -87,7 +87,7 @@ Si riconsideri l'esperimento di Milgram. In esso, le distanze percorse dal messa
 Dunque, anche se per pochi salti la lettera percorre relativamente poca distanza, presto farà un salto che riduce drasticamente la distanza con la destinazione.
 Una maniera ragionevole per pensare a queste scale di risoluzione in un modello di rete, dalla prospettiva di un certo nodo $v$, è quella di considerare i gruppi di tutti i nodi entro una certa distanza da $v$, in maniera crescente, ossia i nodi a distanza comprese tra 2 e 4, 4 e 8 e cosi via.
 
-Si formalizza quanto osservato considerando una semplice griglia <u>bidimensionale</u>. Fissato un nodo $u$, si partizionano i nodi rimanenti in gruppi in base alla distanza da $u$: in pa rticolare, i nodi nell'$h$-esimo gruppo si trovano a distanza compresa tra $2^h$ e $2^{h+1}$ da $u$.
+Si formalizza quanto osservato considerando una semplice griglia <u>bidimensionale</u>. Fissato un nodo $u$, si partizionano i nodi rimanenti in gruppi in base alla distanza da $u$: in particolare, i nodi nell'$h$-esimo gruppo si trovano a distanza compresa tra $2^h$ e $2^{h+1}$ da $u$.
 Dato che i punti in una circonferenza crescono come il quadrato del raggio, avremo che i nodi nell'intervallo tra $2^h$ e $2^{h+1}$ sarà proporzionale a $2^{2h}$. Infatti
 $$\vert \lbrace x \in V \vert 2^h \leqslant d(u,x) < 2^{h+1} \rbrace \vert \approx (2^{h+1})^2\pi - (2^h)^2\pi = 4\pi 2^{2h} - \pi 2^{2h} = 3\pi 2^{2h} $$
 Scelto un nodo  $v$ nel blocco $2^{h+1}-2^h$, la probabilità che l'arco random uscente da $u$ sia $(u,v)$ è **proporzionale a** $2^{-2h}$, ovvero $1$ diviso la distanza tra $u$ e $v$ che è compresa tra $2^{h}$ e $2^{h+1}$, tutto elevato a $q=2$.
@@ -244,9 +244,9 @@ $$
 $$
 ## Perché $q=d$ funziona bene in $\mathbb{R}^d$
 Gli elementi che permettono di dimostrare che la ricerca decentralizzata si comporta bene nell'anello sono:
-1. Fissato $d$, il numero di nodi a distanza al più $d$ dalla destinazione $t$ è, approssimativamente, pari a $d$;
+1. Fissato $d(v,t)$, il numero di nodi a distanza al più $d(v,t)$ dalla destinazione $t$ è, approssimativamente, pari a $d(v,t)$;
 2. Il fattore di normalizzazione è $Z\leqslant 2\ln n$
-Ciò permette di mostrare che, sia $v$ il nodo che detiene il messaggio tale che $d(v,t) = d$, la probabilità che $v$ abbia un vicino a distanza minore o uguale a $\frac{d}{2}$ da $t$ è proporzionale a $\frac{1}{\ln n}$ indipendentemente da $d.$ Infatti, sia $I =\left\{  u \in V: d(u,t) \leqslant \frac{d(v,t)}{2}  \right\}$ con $|I|=d(v,t)$, si è mostrato che
+Ciò permette di mostrare che, sia $v$ il nodo che detiene il messaggio tale che $d(v,t)$, la probabilità che $v$ abbia un vicino a distanza minore o uguale a $\frac{d(v,t)}{2}$ da $t$ è proporzionale a $\frac{1}{\ln n}$ indipendentemente da $d(v,t)$. Infatti, sia $I =\left\{  u \in V: d(u,t) \leqslant \frac{d(v,t)}{2}  \right\}$ con $|I|=d(v,t)$, si è mostrato che
 $$
 \mathbf{Pr}\left( \exists z \in V: (v,z)\in E \land d(z,t) \leqslant \frac{d(v,t)}{2} \right) \geqslant \frac{1}{3\ln n}
 $$
@@ -261,7 +261,7 @@ $$
 &\geqslant \frac{4\alpha}{9\beta \ln n}
 \end{align}
 $$
-Allora, anche nel caso $q=d=2$, la probabilità che $v$ abbia un vicino a distanza minore uguale a $\frac{d}{2}$ da $t$ è proporzionale a $\frac{1}{\ln n}$ indipendentemente da $d$.
+Allora, anche nel caso $q=d=2$, la probabilità che $v$ abbia un vicino a distanza minore uguale a $\frac{d(v,t)}{2}$ da $t$ è proporzionale a $\frac{1}{\ln n}$ indipendentemente da $d(v,t)$.
 Allo stesso modo, si possono fare considerazioni analoghe per $d>2$.
 ## Ricerca miope con $q \neq d$
 Sia $d=1$ e $q=0$.
@@ -273,7 +273,7 @@ con $Z = n-1$ poiché deve essere
 $$
 \sum_{v \in V \setminus \{ u \}} \mathbf{Pr}((u,v) \in E) = \sum_{v \in V \setminus \{ u \}} \frac{1}{Z} = 1
 $$
-Nel caso $q=d=1$ è "facile" entrare in regioni del grafo contenenti nodi sempre più vicini a $t$ (gli insiemi $I$): più precisamente, la probabilità di *dimezzare* la distanza del possessore del messaggio da $t$ è la stessa indipendentemente da dove tale nodo con il messaggio si trova
+Nel caso $q=d=1$ è *facile* entrare in regioni del grafo contenenti nodi sempre più vicini a $t$ (gli insiemi $I$): più precisamente, la probabilità di *dimezzare* la distanza del possessore del messaggio da $t$ è la stessa indipendentemente da dove tale nodo con il messaggio si trova.
 Si mostra ora, informalmente, che nel caso $q=0,d=1$ è *difficile* entrare in regioni di grafo vicine a $t$, in particolare entrare nell'insieme
 $$
 R=\{ u \in [n]: d(u,t) \leqslant \sqrt{ n } \}
@@ -283,9 +283,9 @@ $$
 \mathbf{Pr}((v,u) \in E) > \frac{1}{n}
 $$
 $>$ perché $\frac{1}{n-1} > \frac{1}{n}$ e perché $\frac{1}{n-1}$ è la probabilità di esistenza di un arco random, ma $u$ e $v$ potrebbero anche essere vicini lungo l'anello.
-Allora, per ogni $u \not\in R$ vale
+Allora, per ogni $v \not\in R$ vale
 $$
-\mathbf{Pr}(\exists u \in R: (u,v) \in E) > \frac{\mid R \mid}{n} = \frac{2\sqrt{ n }}{n} = \frac{2}{\sqrt{ n }}
+\mathbf{Pr}(\exists u \in R: (v,u) \in E) > \frac{\mid R \mid}{n} = \frac{2\sqrt{ n }}{n} = \frac{2}{\sqrt{ n }}
 $$
 allora, detta $Y$ la variabile aleatoria che rappresenta il numero di passi per raggiungere da $s$ un nodo in $R$, vale
 $$

@@ -1,4 +1,4 @@
-Si è studiato come il comportamento di un agente all'interno di una rete sociale possa venir influenzato dagli altri individui che la popolano. Sono diversi i processi per i quali idee e informazioni vengono adottate da una popolazione (cascate di informazioni, fenomeno rich-get-richier). Le analisi di tali processi possono avvenire in due livelli di risoluzione.
+Si è studiato come il comportamento di un agente all'interno di una rete sociale possa venir influenzato dagli altri individui che la popolano. Sono diversi i processi per i quali idee e informazioni vengono adottate da una popolazione (cascate di informazioni, fenomeno rich-get-richer). Le analisi di tali processi possono avvenire in due livelli di risoluzione.
 1. Si considerano le reti come una popolazione relativamente amorfa di individui, e si studiano gli effetti di tali processi in maniera aggregata rispetto agli individui che la costituiscono;
 2. Si studia in maniera più dettagliata come i singoli individui possono venir influenzati dai propri vicini nella rete.
 Molte interazioni nelle reti avvengono a livello locale piuttosto che globale, ossia, dato un agente in una rete sociale, gli individui che possono influenzare il suo comportamento sono quelli con cui esso si trova in relazione.
@@ -17,7 +17,7 @@ Il **processo di diffusione delle innovazioni** è stato studiato in sociologia 
 Si vuole modellare il processo di diffusione in una rete, dunque è necessario stabilire le regole in base alle quali un nodo decide di cambiare. Si definisce un modello di decisioni **individuali**, ossia non vi è coalizzazione di gruppi di nodi per prendere collettivamente la stessa decisione, nel quale le scelte dei nodi sono guidate da **motivazione di puro interesse personale**, cioè la spinta a cambiare è tanto maggiore quanto maggiore è il vantaggio che si prevede che deriverà dal cambiamento.
 Si assume che nella rete sia stabilizzato un certo stato delle cose $B$, cioè tutti gli individui della rete hanno un prodotto/opinione/comportamento denominato con $B$. Ad un certo istante, nella rete alcuni individui cambiano il loro stato in $A$. Allora, <u>assumendo che chi è nello stato A non torni mai in B</u> in quale casi un individuo decide di cambiare il proprio stato da $B$ a $A$?
 ### Modello del processo di diffusione
-Il modellamento del processo di diffusione individuale basato sul vantaggio personale avviene mediante un *Network Coordination Game*. Sia $(u,v)$ un arco della rete, si assume che il beneficio reciproco di adottare $A$ o $B$ sia il seguente:
+Questo processo di diffusione individuale basato sul vantaggio personale viene modellato mediante un *Network Coordination Game*. Sia $(u,v)$ un arco della rete, si assume che il beneficio reciproco di adottare $A$ o $B$ sia il seguente:
 - se $u$ e $v$ adottano entrambi $A$ allora entrambi hanno un beneficio pari ad $a$;
 - se $u$ e $v$ adottano entrambi $B$ allora entrambi hanno un beneficio pari ad $b$;
 - altrimenti, nessuno dei due ha alcun beneficio dalla reciproca relazione.
@@ -145,23 +145,18 @@ Dunque dato un grafo infinito, qual è la soglia di adozione massima $q_{max}$ i
 #### Esempio: $G$ è una catena infinita
 Se $|V_0| = 1$, ossia, $V_0$ contiene un solo nodo, allora occorre $q = 1/2$ per generare una cascata completa
 ![[AR/attachments/06-img03.png|center]]
-Anche scegliendo un insieme più grande, non è possibile generare una cascata con $q < 1/2$, perché i nodi al confine con $V_0$ ($x$ e $y$) hanno comunque bisogno di $q = 1/2$ per passare ad $A$.
+Anche scegliendo un insieme più grande, non è possibile generare una cascata con $q > 1/2$, perché i nodi al confine con $V_0$ ($x$ e $y$) hanno comunque bisogno di $q = 1/2$ per passare ad $A$.
 ![[AR/attachments/06-img04.png|center]]
 Allora in una catena infinita: $q_{max} = 1/2$.
 
 #### Esempio: $G$ è una griglia infinita
 Se $|V_0| = 1$, allora occorre $q = 1/8$ per generare una cascata completa.
-
 ![[AR/attachments/06-img05.png|center|500]]
-
 Se $|V_0| = 2$, allora scegliendo i due nodi come nodi adiacenti, occorre $q = 1/4$ per influenzare $u,v,x,y$ e poi per generare una cascata completa.
-
 ![[AR/attachments/06-img06.png|center|500]]
 
 Se $|V_0| = 3$, allora scegliendo i tre nodi come nodi adiacenti, occorre $q = 3/8$ per influenzare $v$ e $y$, poi $u,v,x,y$ e cosi via fino a generare una cascata completa.
-
-![[AR/attachments/06-img06.png|center|500]]
-
+![center|600](Pasted%20image%2020240828105023.png)
 Aumentando $|V_0|$ non si riesce ad aumentare la soglia di adozione: una volta influenzati tutti i nodi nel rettangolo (giallo) che contiene gli iniziatori, occorre uscire da esso e per farlo è necessario $q = 3/8$.
 
 ![[AR/attachments/06-img07.png|center|500]]
@@ -174,7 +169,6 @@ Dai due esempi si osserva che:
 
 Ci si chiede, poiché la soglia di adozione massima è una caratteristica della rete (ovvero, della sua topologia), se esistono topologie nelle quali la soglia di adozione massima è maggiore di $1/2$;
 ossia, se esistono topologie nelle quali innovazioni di qualità mediocre soppiantino uno status quo di qualità maggiore. Il prossimo teorema risponde a questa domanda.
-
 #### Teorema
 Poiché la soglia di adozione massima è una caratteristica della rete, indicheremo come $q_G$ **la soglia di adozione massima di un grafo** $G$.
 ```ad-Teorema
@@ -185,8 +179,8 @@ q_G \leqslant \frac{1}{2}
 $$
 ```
 ##### Dimostrazione
-Si supponga per assurdo che esista un insieme finito di iniziatori $V_0$ che, con soglia di adozione $q > 1/2$, generi una cascata completa nel grafo $G$.
-Sia $V_t$ l'insieme dei nodi che adottano $A$ al passo $t$ e sia, per ogni $t \geqslant 0, S_t = \bigcup_{0 \leqslant i \leqslant t} V_i$ l'insieme dei nodi che, al passo $t$, sono nello stato $A$.
+Si supponga per assurdo che esista un insieme finito di iniziatori $V_0$ che, con soglia di adozione $q > 1/2$, generi una cascata completa nel grafo $G.$
+Sia $V_t$ l'insieme dei nodi che adottano $A$ al passo $t$ e sia, per ogni $t \geqslant 0, S_t = \bigcup_{0 \leqslant i \leqslant t} V_i$ l'insieme dei nodi che, al passo $t$, sono nello stato $A.$
 
 Sia **l'interfaccia al passo** $t$ l'insieme $I_t$ degli archi che, al passo $t$, hanno un estremo in $S_t$ e l'altro estremo in $V-S_t$
 $$
@@ -198,23 +192,22 @@ Per fare ciò, si dimostra che se $I_t \neq I_{t+1}$, allora $|I_t| > |I_{t+1}|$
 Se $I_t \neq I_{t+1}$, allora esiste un nodo $v$ che adotta $A$ al passo $t+1$, ossia $V_{t+1} \neq \emptyset$ e perché un nodo $v$ appartenga a $V_{t+1}$ deve esistere $u \in N(v)$ tale che $u \in S_t$, ossia, per ogni $v \in V_{t+1}$ esiste (almeno) un arco $(u,v) \in I_t$ tale che $u \in S_t$.
 Allora, per ogni nodo $v \in V_{t+1}$:
 - gli archi incidenti su $v$ il cui altro estremo è in $S_t$ sono in $I_t$ ma non in $I_{t+1}$, come $(u,v)$ in figura;
-- gli archi incidenti su $v$ il cui altro estremo è in $S_{t+1}$ sono in $I_{t+1}$ ma non in $I_t$, come $(v,z)$ in figura.
+- gli archi incidenti su $v$ il cui altro estremo non è in $S_{t+1}$ sono in $I_{t+1}$ ma non in $I_t$, come $(v,z)$ in figura.
 
 ![[06-img08.png|center|500]]
 
 ossia
 $$
-I_{t+1} = I_t - \left[ \bigcup_{v \in V_{t+1}} \{ (u,v) \in E: u \in S_t \}  \right] \cup \left[ \bigcup_{v \in V_{t+1}} \{ (z,v) \in E: z \in V - S_{t+1} \} \right]
+I_{t+1} = I_t - \left[ \bigcup_{v \in V_{t+1}} \{ (u,v) \in E: u \in S_t \}  \right] \cup \left[ \bigcup_{v \in V_{t+1}} \{ (u,v) \in E: u \in V - S_{t+1} \} \right]
 $$
 
-- se $v \neq z$ con $v,z \notin S_t$, allora $\{ (u,v) \in E : u \in S_t \} \cap \{ (u,z) \in E : u \in S_t \} = \emptyset$; dunque $| \bigcup_{v \in V_{t+1}} \{ (u,v) \in E : u \in S_t \}| = \sum_{v \in V_{t+1}} | \{ (u,v) \in E : u \in S_t \} |$
-- se $v \neq z$ con $v,z \in V_{t+1}$, allora $\{ (u,v) \in E : u \in V - S_{t+1} \} \cap \{ (u,z) \in E : u \in V - S_{t+1} \} = \emptyset$; dunque $| \bigcup_{v \in V_{t+1}} \{ (u,v) \in E : u \in V - S_{t+1} \}| = \sum_{v \in V_{t+1}} | \{ (u,v) \in E : u \in V - S_{t+1} \} |$
+- se $x \neq z$ con $x,z \notin S_t$, allora $\{ (u,x) \in E : u \in S_t \} \cap \{ (u,z) \in E : u \in S_t \} = \emptyset$; dunque $| \bigcup_{v \in V_{t+1}} \{ (u,v) \in E : u \in S_t \}| = \sum_{v \in V_{t+1}} | \{ (u,v) \in E : u \in S_t \} |$
+- se $x \neq z$ con $x,z \in V_{t+1}$, allora $\{ (u,x) \in E : u \in V - S_{t+1} \} \cap \{ (u,z) \in E : u \in V - S_{t+1} \} = \emptyset$; dunque $| \bigcup_{v \in V_{t+1}} \{ (u,v) \in E : u \in V - S_{t+1} \}| = \sum_{v \in V_{t+1}} | \{ (u,v) \in E : u \in V - S_{t+1} \} |$
 
 ossia
 $$
 |I_{t+1}| = |I_t| - \sum_{v \in V_{t+1}} | \{ (u,v) \in E : u \in S_t \} | + \sum_{v \in V_{t+1}} | \{ (u,v) \in E : u \in V - S_{t+1} \} |
 $$
-
 ma vale che
 $$
 | \{ (u,v) \in E : u \in S_t \} | = | N(v) \cap S_t |
@@ -231,7 +224,7 @@ Per ogni $v \in V_{t+1}$, deve essere
 $$
 \frac{ |N(v) \cap S_t| }{ |N(v)| } \geqslant q > \frac{1}{2}
 $$
-ma dato che $S_t \subseteq S_{t+1}$ e vale
+ma dato che $S_t \subset S_{t+1}$ e vale
 $$
 1 = \frac{ |N(v) \cap S_t| }{ |N(v)| } + \frac{ |N(v) - S_t| }{ |N(v)| } > \frac{1}{2} + \frac{ |N(v) - S_t| }{ |N(v)| }
 $$
@@ -243,8 +236,8 @@ dunque
 $$
 \begin{align}
 |I_{t+1}| &= |I_t| - \sum_{v \in V_{t+1}} |N(v) \cap S_t| + \sum_{v \in V_{t+1}} |N(v) - S_{t+1}| \\
-&= \sum_{v \in V_{t+1}} \left( |N(v) \cap S_t| - |N(v) - S_{t+1}| \right) \\
-&< \sum_{v \in V_{t+1}} \left( |N(v) \cap S_t| - |N(v) - S_t| \right) \\
+&= |I_t| - \sum_{v \in V_{t+1}} \left( |N(v) \cap S_t| - |N(v) - S_{t+1}| \right) \\
+&< |I_t| - \sum_{v \in V_{t+1}} \left( |N(v) \cap S_t| - |N(v) - S_t| \right) \\
 &< |I_t|
 \end{align}
 $$ 
@@ -254,24 +247,18 @@ Allora l'eventualità $I_t \neq I_{t+1}$ non può verificarsi per più di $k$ pa
 Allora, esiste $T$ tale che, per ogni $t \geqslant T, I_t = I_{t+1}$; ossia, dal passo $T$ la diffusione si interrompe.
 Ma in un grafo infinito una cascata completa può verificarsi solo in seguito a un processo di diffusione infinito, allora $V_0$ non genera una cascata completa.
 ### Nodi eterogenei
-Il modello di diffusione considerato fino ad ora è un modello uniforme, cioè tutti i nodi associano lo stesso beneficio reciproco nell'adottare $A$ o $B$ che è, rispettivamente $a$ o $b$.
+Il modello di diffusione considerato fino ad ora è un modello uniforme, cioè tutti i nodi associano lo stesso beneficio nell'adottare $A$ o $B$ che risulta, rispettivamente, $a$ o $b$.
 Tuttavia, questo modello è poco realistico: ciascun individuo nella rete ha un proprio beneficio nell'adottare $A$ o $B$, che può dipendere, ad esempio, dalle sue capacità di adattarsi al nuovo stato.
 
 Allora, per ogni nodo $u$ nella rete, $a_u$ e $b_u$ sono il beneficio che $u$ ottiene nel relazionarsi, rispettivamente, con un nodo che adotta $A$ o con un nodo che adotta $B$.
 Si assume, cioè, che il beneficio reciproco di adottare $A$ o $B$ da parte dei nodi adiacenti $u$ e $v$ sia quello illustrato nella seguente tabella.
-
 ![[AR/attachments/06-img09.png|center|500]]
-
 Allora, un nodo $v \in V$ nello stato $B$ passa allo stato $A$ sulla base del valore $q_v = \frac{b_v}{a_v + b_v}$.
-
 ![[AR/attachments/06-img10.png|center|500]]
-
-Osservando la figura, in cui accanto ad ogni nodo $v$ è indicata la sua soglia di adesione $q_v$, che anche se il nodo $1$ è in posizione centrale, non riuscirebbe a portare nessuno in $A$ se non fosse che $q_3 = 0.1$ è molto piccolo.
-Allora, **non è sufficiente scegliere gli iniziatori in base alla loro centralità nella rete**, occorre anche considerare *la loro possibilità di avere accesso a nodi facilmente influenzabili*.
-Così, nel caso di nodi eterogenei, a struttura che impedisce la generazione di una cascata completa è il blocking cluster.
+Osservando la figura, in cui accanto ad ogni nodo $v$ è indicata la sua soglia di adesione $q_v$, che anche se il nodo $1$ è in posizione centrale, non riuscirebbe a portare nessuno in $A$ se non fosse che $q_3 = 0.1$ è molto piccolo. Allora, **non è sufficiente scegliere gli iniziatori in base alla loro centralità nella rete**, occorre anche considerare *la loro possibilità di avere accesso a nodi facilmente influenzabili*. Così, nel caso di nodi eterogenei, la struttura che impedisce la generazione di una cascata completa è il blocking cluster.
 
 ```ad-info
-$V' \subseteq V$ è un **blocking cluster** se, per ogni $v \in V'$
+$V' \subseteq V$ è un **blocking cluster** se, per ogni $v \in V'$, vale
 $$
 \frac{ |N(v) \cap V'| }{ |N(v)| } \geqslant 1 - q_v
 $$
@@ -285,10 +272,11 @@ Sia $G=(V,E)$ un grafo. Nel modello a nodi eterogenei, l’insieme di iniziatori
 ##### Dimostrazione
 ESERCIZIO.
 ## Azione collettiva
-Si vuole ora mostrare come modellare mediante processi di diffusione situazioni nelle quali è richiesto che un'azione abbia luogo *collettivamente*. Si supponga di voler organizzare una protesta contro un regime dittatoriale. Ciascun individuo decide di aderire alla protesta solo se sa con certezza che un numero sufficientemente elevato di individui aderirà alla protesta. Poiché l'ambientazione è quella di una dittatura, la libertà di stampa è ostacolata e, in generale, le comunicazioni sono rese difficoltose.
+Si vogliono modellare, mediante processi di diffusione, situazioni nelle quali è richiesto che un'azione abbia luogo *collettivamente*, ossia, dove la coordinazione di una grande porzione della popolazione risulti essere fondamentale al fine di raggiungere un dato obiettivo, e la rete ha lo scopo di veicolare informazioni riguardo la volontà degli individui di partecipare o meno a tale azione.
+Si supponga di voler organizzare una protesta contro un regime dittatoriale. Ciascun individuo decide di aderire alla protesta solo se sa con certezza che un numero sufficientemente elevato di individui aderirà alla protesta. Poiché l'ambientazione è quella di una dittatura, la libertà di stampa è ostacolata e, in generale, le comunicazioni sono rese difficoltose.
 ### Modello
 Ogni nodo $v$ sceglie una *soglia di confidenza* $k_v$ : aderirà alla protesta solo se almeno $k_v$ individui aderiranno alla protesta, ossia se oltre a lui, aderiranno altri $k_v - 1$ individui.
-Poiché le comunicazioni circolano con difficoltà nella rete, le uniche informazioni che $v$ può ottenere sono circa l'adesione o meno alla protesta da parte degli individui con i quali h una relazione personale, ovvero, i suoi vicini nel grafo.
+Poiché le comunicazioni circolano con difficoltà nella rete, le uniche informazioni che $v$ può ottenere sono circa l'adesione o meno alla protesta da parte degli individui con i quali ha una relazione personale, ovvero, i suoi vicini nel grafo.
 Inoltre, da ciascun nodo $u$ in $N(v)$, $v$ può sapere quale sia la soglia di adesione di $u$ e, assumendo che siano strong ties, $v$ sa che i vicini gli comunicano la loro vera soglia di adesione.
 Ma $v$ non può sapere se $u$ ha o meno dei vicini che non siano anche suoi vicini, e non può neanche sapere se $u$ aderirà alla protesta: in base a quello che vede, $v$ può solo provare a dedurre cosa faranno i suoi vicini.
 Si vede ora con degli esempi, in che modo i nodi arrivano a prendere una decisione.
@@ -314,77 +302,71 @@ In questo esempio invece, $u, v, x$ si vedono l’un l’altro, così, $u$ sa ch
 In assenza di comunicazioni adeguate che abbiano luogo nella rete, l'azione collettiva si verifica difficilmente, ed ecco perché i regimi dittatoriali tendono a favorire *l’ignoranza pluralistica* che permette di concludere erroneamente che pochi individui abbiano una certa opinione, come accadeva nell’esempio 2.
 Invece, l’esempio 3 permette di osservare l’importanza di disporre di una base di conoscenza comune, cioè l'importanza dei mezzi di diffusione delle informazioni, permettendo che tutti siano coscienti del fatto che un certo messaggio è conosciuto da tutti.
 ## Diffusione in presenza di compatibilità
-Non è infrequente che due stat $A$ e $B$ possano coesistere, dunque ora si studieranno i processi di diffusione in presenza di compatibilità, cioè quando un nodo può essere nello stato $A$, nello stato $B$ o nello stato $AB$ nel modello *nodi omogenei*, cioè i benefici del trovarsi in un certo stato, dipendono soltanto dallo stato e sono gli stessi per tutti i nodi.
-Naturalmente, un nodo adotta lo stato misto $AB$ ogniqualvolta ne trae beneficio, ma non può adottarlo sempre, perché adottare sia $A$ che $B$ ha un costo maggiore. In ogni caso, mentre i benefici ottenuti dall'adottare $AB$ sono proporzionali al numeri di vicini nel grafo, ossia si guadagna per ogni vicino che adotta $A$ e per ogni vicino che adotta $B$, il costo di adozione di $AB$ viene pagato una sola volta.
-
-Sia $(u,v)$ un arco della rete: il beneficio reciproco di adottare $A$,$B$ o $AB$ sia quello illustrato nella tabella seguente.
+Non è infrequente che due stati $A$ e $B$ possano coesistere, dunque ora si studieranno i processi di diffusione in presenza di compatibilità, cioè quando un nodo può essere nello stato $A$, nello stato $B$ o nello stato $AB$ nel modello *nodi omogenei*, cioè i benefici del trovarsi in un certo stato, dipendono soltanto dallo stato e sono gli stessi per tutti i nodi.
+Naturalmente, un nodo adotta lo stato misto $AB$ quando ne trae beneficio, ma non può adottarlo sempre, perché adottare sia $A$ che $B$ ha un costo maggiore. In ogni caso, il costo di adozione di $AB$ viene pagato una sola volta dal nodo, mentre è in grado di trarre guadagno da tutti i suoi vicini. In particolare, sia $u \in V$ un nodo nello stato $AB$ e sia $v \in N(u)$, allora:
+- se lo stato si $v$ è $A$, allora $u$ trae un beneficio pari ad $a$ dalla comunicazione con $v$;
+- se lo stato si $v$ è $B$, allora $u$ trae un beneficio pari ad $B$ dalla comunicazione con $v$;
+- se lo stato si $v$ è $B$, allora entrambi i nodi possono comunicare mediante lo stato migliore, scegliendo quello che massimizza il beneficio: guadagnano quindi $\max\{ a,b \}.$
 
 ![[AR/attachments/06-img14.png|center|500]]
-
-Sia invece, per ogni nodo $u$, il costo per $u$ di essere nello stato $AB$ pari a $c$.
+Sia, per ogni nodo $u$, il costo per $u$ di essere nello stato $AB$ pari a $c$.
 Siano $V_{A},V_{B},V_{C}$ gli insiemi dei nodi che sono, rispettivamente, negli stati $A,B$ e $AB$ (tutti i nodi hanno uno stato, dunque $V_{A} \cup V_{B} \cup V_{C} = V$).
 Il beneficio per un nodo $u$ di essere nello stato $AB$ è
 $$
-\sum_{v \in V_{A} \cap N(u)} a + \sum_{v \in V_{B} \cap N(u)} b + \sum_{v \in V_{AB} \cap N(u)} \max \{a,b\} - c 
+p_{AB}(u)=\sum_{v \in V_{A} \cap N(u)} a + \sum_{v \in V_{B} \cap N(u)} b + \sum_{v \in V_{AB} \cap N(u)} \max \{a,b\} - c 
 $$
 Il beneficio per essere negli stati $A$ e $B$, rispettivamente, è
 $$
-\sum_{v \in (V_{A} \cup V_{AB}) \cap N(u)} a \\
+p_{A}(u)=\sum_{v \in (V_{A} \cup V_{AB}) \cap N(u)} a \\
 $$
 $$
-\sum_{v \in (V_{B} \cup V_{AB}) \cap N(u)} b \\
+p_{b}(u) = \sum_{v \in (V_{B} \cup V_{AB}) \cap N(u)} b \\
 $$
 
-Si studia ora la capacità di cascata di una rete in presenza di compatibilità, in particolare:
+Si studia la capacità di cascata di una rete in presenza di compatibilità, in particolare:
 - si analizza un esempio nel caso particolare in cui $G$ è una catena infinita;
-- descrivendo i risultati di uno studio qualitativo nel caso bidimensionale ($G$ griglia infinita);
-- dimostrando che, nel caso unidimensionale, l'andamento del processo di diffusione conferma quanto osservato dall'analisi qualitativa.
-Si indica con $p_A(u), p_B(u)$ e $p_{AB}(u)$ il beneficio di un nodo $u$ nell'adottare, rispettivamente, $A,B$ o $AB$.
+- si descrivono i risultati di uno studio qualitativo nel caso bidimensionale ($G$ griglia infinita);
+- si dimostra che, nel caso unidimensionale, l'andamento del processo di diffusione conferma quanto osservato dall'analisi qualitativa.
 ### Esempio: G è una catena infinita
 Siano $a = 5, b = 3, c = 1$.
-
-Per simmetrica, è sufficiente considerare una catena infinita solo a destra, il cui primo nodo è nello stato $A$ (giallo) e tutti gli altri sono nello stato $B$ (blu).
-
+Per simmetria, è sufficiente considerare una catena infinita solo a destra, il cui primo nodo è nello stato $A$ (giallo) e tutti gli altri sono nello stato $B$ (blu).
 ![[AR/attachments/06-img15.png|center|500]]
 
-Al primo passo, $u$ adotta $AB$ (verde): infatti $p_A(u) = 5, p_B(u) = 3$ e $p_{AB}(u) = 5+3-1 = 7$
-
+**Step 1.**
+Il nodo $u$ adotta $AB$ (verde): infatti $p_A(u) = 5, p_B(u) = 3$ e $p_{AB}(u) = 5+3-1 = 7$.
 ![[AR/attachments/06-img16.png|center|500]]
 
-Al secondo passo $v$ adotta $AB$: infatti $p_A(u) = 5, p_B(u) = 3+3 = 6$ e $p_{AB}(u) = 5+3-1 = 7$
-
+**Step 2.**
+Il nodo $v$ adotta $AB$: infatti $p_A(u) = 5, p_B(u) = 3+3 = 6$ e $p_{AB}(u) = 5+3-1 = 7$
 ![[AR/attachments/06-img17.png|center|500]]
 
-Al terzo passo: $z$ adotta $AB$ per le stesse ragioni di $v$, ma ora a $u$ conviene abbandonare $AB$ e passare ad $A$ perché $p_A(u) = 10, p_B(u) = 0$ e $p_{AB}(u) = 5+5-1 = 9$
-
+**Step 3.**
+Il nodo $z$ adotta $AB$ per le stesse ragioni di $v$, ma ora a $u$ conviene abbandonare $AB$ e passare ad $A$ perché $p_A(u) = 10, p_B(u) = 3$ e $p_{AB}(u) = 5+5-1 = 9$
 ![[AR/attachments/06-img18.png|center|500]]
 
-A questo punto, il fenomeno si ripete:
-
+A questo punto, il fenomeno si ripete...
 ![[AR/attachments/06-img19.png|center|500]]
 
-dopo un periodo transitorio durante il quale un nodo adotta lo stato misto, esso passerà ad adottare definitivamente il nuovo stato e quindi si genera una cascata completa nella quale il vecchio stato viene completamente soppiantato dal nuovo.
+Dunque, dopo un periodo transitorio durante il quale un nodo adotta lo stato misto, esso passa ad adottare definitivamente il nuovo stato $A$: si genera una cascata completa nella quale il vecchio stato viene completamente soppiantato dal nuovo.
 
-Si ricorda che, nel caso di esclusività fra $A$ e $B$, la soglia di adozione $q$ è definita come $q = \frac{a}{a+b}$. Essa rappresenta la frazione minima dei vicini di un nodo che deve essere nello stato $A$ per convincere quel nodo a passare anch'esso allo stato $A$, e tale frazione dipende dai benefici relativi che ha quel nodo nel trovarsi in uno dei due stati.
-Riscrivendo $q$ come 
+Si ricorda che, nel caso di esclusività fra $A$ e $B$, la soglia di adozione $q$ è definita come $q = \frac{a}{a+b}$. Essa rappresenta la frazione minima dei vicini di un nodo che deve essere nello stato $A$ per convincere quel nodo a passare anch'esso allo stato $A$, e tale frazione dipende dai benefici relativi che ha quel nodo nel trovarsi in uno dei due stati. Riscrivendo $q$ come 
 $$
 q = \frac{1}{\frac{a}{b}+1} 
 $$
 si evidenzia il ruolo giocato dal rapporto fra il *valore* di $A$ e il *valore* di $B$ nella decisione di un nodo di rimanere nello stato $A$ o passare allo stato $B$.
-Nel caso di esclusività fra $A$ e $B$, abbiamo dimostrato che **non si può generare una cascata completa (in un grafo infinito) se** $q > \frac{1}{2}$, ossia, se il *valore* di $A$ non è almeno pari al *valore* di $B$.
+Nel caso di esclusività fra $A$ e $B$, abbiamo dimostrato che **non si può generare una cascata completa (in un grafo infinito) se** $q > \frac{1}{2},$ ossia, se il *valore* di $A$ non è almeno pari al *valore* di $B$, cioè se $b > a$.
 
-Si analizza ora nel caso di compatibilità fra $A$ e $B$.
-Intanto si osserva che l'operazione di dividere per $b$ ha permesso di ridursi a studiare i processi di diffusione in funzione del solo parametro $a/b$ (ciò è equivalente a fissare $b=1$ e studiare i processi di diffusione in funzione di $a$).
+Si analizza ora nel caso di **compatibilità** fra $A$ e $B.$
+Intanto si osserva che l'operazione di dividere per $b$ ha permesso di ridursi a studiare i processi di diffusione in funzione del solo parametro $a/b$, e ciò è equivalente a fissare $b=1$ e studiare i processi di diffusione in funzione di $a$.
 Analogamente, nel caso di compatibilità fra $A$ e $B$, si fissa $b=1$ e si studiano i processi di diffusione in funzione di $a$ e $c$.
 
-Uno studio qualitativo ha evidenziato uno strano comportamento:
-- lo stato $A$ si impone quando $a$ è molto grande rispetto a $c$;
-- invece, lo stato $A$ fa fatica a imporsi quando $c$ è molto grande rispetto ad $a$;
+Uno studio qualitativo di Kleinberg ha evidenziato uno strano comportamento:
+- lo stato $A$ si impone quando $a\gg c$;
+- invece, lo stato $A$ fa fatica a imporsi quando $c\gg a$;
 - infine, $A$ fa fatica a imporsi anche quando $c$ non è né troppo grande né troppo piccolo rispetto ad $a$ - questo è strano.
-Per comprendere questa stranezza, consideriamo sempre la catena infinita $G$ con parametri $a$ e $c$.
 
+Per comprendere questa stranezza, si consideri sempre la catena infinita $G$ con parametri $a$ e $c$. Ci si chiede quale stato sia più conveniente per $u$.
 ![[AR/attachments/06-img20.png|center|500]]
-
 Se $x$ è nello stato $A$ (giallo) e $v$ nello stato $B$ (blu), poiché $p_A(u) = a, p_B(u) = 1, p_{AB}(u) = a+1-c$ :
 - se $p_{A}(u) \geqslant p_{B}(u)$ e $p_{A}(u) \geqslant p_{AB}(u)$, $u$ adotterà $A$, e questo accade quando $a \geqslant 1 \land a \geqslant a+1-c$, ossia quando $a \geqslant 1 \land c \geqslant 1$;
 - se $p_{B}(u) > p_{A}(u)$ e $p_{B}(u) > p_{AB}(u)$, $u$ rimarrà in $B$, e questo accade quando $1 > a \land 1 > a+1-c$, ossia quando $a < 1 \land a < c$;
@@ -400,8 +382,48 @@ Si riassume tutto ciò nel seguente grafico nel piano $ac$
 Si possono trarre delle conclusioni:
 - se $u$ è rimasto nello stato $B$, allora la diffusione dello stato $A$ è stata bloccata sul nascere: il processo di diffusione non ha avuto nemmeno inizio;
 - se $u$ è passato allo stato $A$, allora, al passo successivo il nodo $v$ (adiacente a $u$) passerà allo stato $A$, e così via: si è innescato il processo di diffusione di $A$, che genererà una diffusione completa senza mai passare per lo stato misto $AB$.
-Resta da studiare cosa accade quando i parametri cadono nella regione verde, cioè quando siamo nella situazione nella figura seguente, dove $u$ ha adottato $AB$.
-
+Resta da studiare cosa accade quando i parametri cadono nella regione verde, cioè quando siamo nella situazione nella figura seguente, dove $u$ ha adottato $AB$ e dunque $c < 1$ e $a \geqslant c$.
 ![[AR/attachments/06-img22.png|center|500]]
+Ci si chiede quale stato conviene adottare al nodo $v$.
 
-Si vede ora quale stato conviene adottare al nodo $v$.
+Si ha che $p_A(v) = a$, $p_B(v) = 2$ e $p_{AB}(v) = \max\{ a,1 \}+1-c$. Dunque, considerando la figura sotto:
+- $p_{AB}(v) = 2-c$ se $a <1$, ossia, $(a,c)$ è nel triangolo $T$;
+- $p_{AB}(v) = a+1-c$ se $a >1$, ossia, $(a,c)$ è nel rettangolo $R$ essendo $c<1$;
+
+![|center|600](Pasted%20image%2020240829151120.png)
+
+Dunque:
+- se $(a,c) \in T$: $a<1$, quindi $p_{A}(v) < p_{B}(v)$ e inoltre $p_{AB}(v)< p_{B}(v)$, dunque $v$ adotta $B$;
+- se $(a,c) \in R$: $a>1$ e
+	- quando $a > 2$ allora  $p_{B}(v) < p_{A}(v) < p_{AB}(v)$, dunque $v$ adotta $AB$ (ricorda che $p_{AB}(v) = a+1-c$ con $a>2$ e $c<1$, dunque maggiore stretto di $p_A(v)=a$);
+	- quando $a < 2$ allora  $p_{B}(v) > p_{A}(v)$ e inoltre $p_{B}(v)> p_{AB}(v)$ quando $2>a+1-c$, cioè $1<a<2$. Allora quando $a < c+1$, $v$ adotta $B$ e quando $a > c+1$, $v$ adotta $AB$.
+
+Quindi, se $(a,c) \in R$
+- al passo 2, $v$ non passa in $A$ in nessun caso;
+- se $v$ al passo 2 rimane in $B$, allora la diffusione di $A$ si blocca a tale passo 2;
+Perciò, le coppie $(a,c) \in R$ che possono dar luogo a una cascata completa sono quelle nella regione $P$ in figura.
+![center|600](Pasted%20image%2020240829152123.png)
+Quando $(a,c) \in P$, la situazione è la seguente
+![center|600](Pasted%20image%2020240829152156.png)
+poiché $(a,c) \in P$, al passo 3 il nodo $z$ adotta $AB$ per le stesse motivazioni per cui, al passo 2, $v$ adotta $AB$. Successivamente, al passo 3, $u$ cambia il suo stato: poiché $(a,c) \in P$, allora $a>1$, quindi
+$$
+p_{AB}(u) = a + \max\{ a,1 \}-c = 2a-c < 2a = p_{A}(u)
+$$
+e dunque il nodo $u$ adotta $A$, come in figura.
+![center|600](Pasted%20image%2020240829152505.png)
+
+In conclusione:
+- se $(a,c)$ è contenuto nella regione azzurra, ossia $a<1 \lor (a>1 \land c<1 \land c>a-1)$, lo stato $A$ non si diffonde: si blocca immediatamente o al passo 2;
+- se $(a,c)$ è contenuto nella regione gialla, ossia $a>1 \land c>1$, lo stato $A$ si diffonde immediatamente senza passare per $AB$;
+- se $(a,c)$ è contenuto nella regione verde, ossia $a>1 \land c<1 \land c < a-1$, dopo una fase transitoria, in cui i nodi adottano $AB$, prende piede definitivamente lo stato $A$.
+
+```ad-info
+Non si è analizzato il caso $a=1,c=1,c=a-1$.
+```
+
+In sintesi
+- lo stato $A$ non si diffonde se $A$ è peggiore di $B$, oppure se $A$ è migliore di $B$ ma il costo di $AB$ è elevato quando rapportato al beneficio di poter usare $A$, ossia, se $a<1$ oppure $a>1 \land c>1 \land c>a-1$;
+- Lo stato $A$ si diffonde immediatamente, senza che alcun nodo passi nello stato $AB$ se $A$ è migliore di $B$ e, inoltre, il costo di $AB$ è elevato, ossia, se $a>1 \land c>1$;
+- Dopo una fase transitoria, in cui i nodi adottano lo stato $AB$, prende piede definitivamente lo stato $A$ se $B$ è peggiore di $A$ e, inoltre, il costo di $AB$ è basso sia in assoluto che in relazione al beneficio di poter usare $A$, ossia, se $a<1 \land c<1 \land c<a-1$.
+
+E questo conferma il risultato dello studio qualitativo di Kleinberg.
