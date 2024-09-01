@@ -194,8 +194,7 @@ Allora, per ogni nodo $v \in V_{t+1}$:
 - gli archi incidenti su $v$ il cui altro estremo è in $S_t$ sono in $I_t$ ma non in $I_{t+1}$, come $(u,v)$ in figura;
 - gli archi incidenti su $v$ il cui altro estremo non è in $S_{t+1}$ sono in $I_{t+1}$ ma non in $I_t$, come $(v,z)$ in figura.
 
-![[06-img08.png|center|500]]
-
+![](Pasted%20image%2020240830185959.png)
 ossia
 $$
 I_{t+1} = I_t - \left[ \bigcup_{v \in V_{t+1}} \{ (u,v) \in E: u \in S_t \}  \right] \cup \left[ \bigcup_{v \in V_{t+1}} \{ (u,v) \in E: u \in V - S_{t+1} \} \right]
@@ -240,7 +239,7 @@ $$
 &< |I_t| - \sum_{v \in V_{t+1}} \left( |N(v) \cap S_t| - |N(v) - S_t| \right) \\
 &< |I_t|
 \end{align}
-$$ 
+$$
 Dunque è stato dimostrato che, per ogni $t \geqslant 0, |I_t| > |I_{t+1}|$ oppure $I_t = I_{t+1}$.
 Poiché $V_0$ è un insieme finito e i nodi di $G$ hanno grado finito, allora l'interfaccia iniziale ha dimensione finita, ossia $|I_0| = k$ per qualche $k \in \mathbb{N}$.
 Allora l'eventualità $I_t \neq I_{t+1}$ non può verificarsi per più di $k$ passi, perché ogni volta che $I_t \neq I_{t+1}$ è anche $|I_t| > |I_{t+1}|$ e la dimensione dell'interfaccia non può essere minore di zero (neanche uguale a zero in tempo finito su un grafo infinito).
@@ -275,10 +274,8 @@ ESERCIZIO.
 Si vogliono modellare, mediante processi di diffusione, situazioni nelle quali è richiesto che un'azione abbia luogo *collettivamente*, ossia, dove la coordinazione di una grande porzione della popolazione risulti essere fondamentale al fine di raggiungere un dato obiettivo, e la rete ha lo scopo di veicolare informazioni riguardo la volontà degli individui di partecipare o meno a tale azione.
 Si supponga di voler organizzare una protesta contro un regime dittatoriale. Ciascun individuo decide di aderire alla protesta solo se sa con certezza che un numero sufficientemente elevato di individui aderirà alla protesta. Poiché l'ambientazione è quella di una dittatura, la libertà di stampa è ostacolata e, in generale, le comunicazioni sono rese difficoltose.
 ### Modello
-Ogni nodo $v$ sceglie una *soglia di confidenza* $k_v$ : aderirà alla protesta solo se almeno $k_v$ individui aderiranno alla protesta, ossia se oltre a lui, aderiranno altri $k_v - 1$ individui.
-Poiché le comunicazioni circolano con difficoltà nella rete, le uniche informazioni che $v$ può ottenere sono circa l'adesione o meno alla protesta da parte degli individui con i quali ha una relazione personale, ovvero, i suoi vicini nel grafo.
-Inoltre, da ciascun nodo $u$ in $N(v)$, $v$ può sapere quale sia la soglia di adesione di $u$ e, assumendo che siano strong ties, $v$ sa che i vicini gli comunicano la loro vera soglia di adesione.
-Ma $v$ non può sapere se $u$ ha o meno dei vicini che non siano anche suoi vicini, e non può neanche sapere se $u$ aderirà alla protesta: in base a quello che vede, $v$ può solo provare a dedurre cosa faranno i suoi vicini.
+Ogni nodo $v$ sceglie una *soglia di confidenza* $k_v$: aderirà alla protesta solo se almeno $k_v$ individui aderiranno alla protesta, ossia se oltre a lui, aderiranno altri $k_v - 1$ individui.
+Ogni nodo $v$ può ottenere informazioni riguardo l'adesione alla protesta solo da i suoi vicini nel grafo. Inoltre, da ciascun nodo $u \in N(v)$, può sapere quale sia la soglia di adesione di $u$ e, assumendo che siano strong ties, $v$ sa che i vicini gli comunicano la loro vera soglia di adesione. Ma $v$ non può sapere se $u$ ha dei vicini non in comune, ossia, non può sapere se $\exists w \in N(u): w \not\in N(v)$. Infine, $v$ non può neanche sapere se $u$ aderirà alla protesta: in base a quello che vede, $v$ può solo provare a dedurre cosa faranno i suoi vicini.
 Si vede ora con degli esempi, in che modo i nodi arrivano a prendere una decisione.
 #### Esempio 1
 Si osservi la figura seguente:
@@ -299,10 +296,10 @@ Poiché il grafo è perfettamente simmetrico, nessuno aderisce alla protesta anc
 
 In questo esempio invece, $u, v, x$ si vedono l’un l’altro, così, $u$ sa che $v$ e $x$, per partecipare, hanno bisogno che altri due partecipino, ma $u$ sa anche che anche $v$ e $x$ sanno esattamente le stesse cose che sa egli stesso e, poiché si fidano uno dell’altro, partecipano tutti e tre, senza aver bisogno di conoscere altro della rete, ossia indipendentemente da $y$.
 ### Conclusioni
-In assenza di comunicazioni adeguate che abbiano luogo nella rete, l'azione collettiva si verifica difficilmente, ed ecco perché i regimi dittatoriali tendono a favorire *l’ignoranza pluralistica* che permette di concludere erroneamente che pochi individui abbiano una certa opinione, come accadeva nell’esempio 2.
+In assenza di comunicazioni adeguate che abbiano luogo nella rete, l'azione collettiva si verifica difficilmente, ed ecco perché i regimi dittatoriali tendono a favorire l’*ignoranza pluralistica* che permette di concludere erroneamente che pochi individui abbiano una certa opinione, come accadeva nel secondo esempio.
 Invece, l’esempio 3 permette di osservare l’importanza di disporre di una base di conoscenza comune, cioè l'importanza dei mezzi di diffusione delle informazioni, permettendo che tutti siano coscienti del fatto che un certo messaggio è conosciuto da tutti.
 ## Diffusione in presenza di compatibilità
-Non è infrequente che due stati $A$ e $B$ possano coesistere, dunque ora si studieranno i processi di diffusione in presenza di compatibilità, cioè quando un nodo può essere nello stato $A$, nello stato $B$ o nello stato $AB$ nel modello *nodi omogenei*, cioè i benefici del trovarsi in un certo stato, dipendono soltanto dallo stato e sono gli stessi per tutti i nodi.
+Non è infrequente che due stati $A$ e $B$ possano coesistere, dunque ora si studieranno i processi di diffusione in presenza di compatibilità, cioè quando un nodo può stare nello stato $A$, nello stato $B$ o nello stato $AB$ nel modello *nodi omogenei*, cioè i benefici del trovarsi in un certo stato, dipendono soltanto dallo stato e sono gli stessi per tutti i nodi.
 Naturalmente, un nodo adotta lo stato misto $AB$ quando ne trae beneficio, ma non può adottarlo sempre, perché adottare sia $A$ che $B$ ha un costo maggiore. In ogni caso, il costo di adozione di $AB$ viene pagato una sola volta dal nodo, mentre è in grado di trarre guadagno da tutti i suoi vicini. In particolare, sia $u \in V$ un nodo nello stato $AB$ e sia $v \in N(u)$, allora:
 - se lo stato si $v$ è $A$, allora $u$ trae un beneficio pari ad $a$ dalla comunicazione con $v$;
 - se lo stato si $v$ è $B$, allora $u$ trae un beneficio pari ad $B$ dalla comunicazione con $v$;

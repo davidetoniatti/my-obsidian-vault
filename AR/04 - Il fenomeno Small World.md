@@ -107,7 +107,7 @@ $$
 \end{align*}
 $$
 per qualche costante $\alpha, \beta$.
-Dunque la probabilità che un arco random che parta da $u$ consenta un salto di risoluzione $h$ è **indipendente** dalla risoluzione $h$, che sia $2^4$ o $2^{100}$.
+Dunque la probabilità che un arco random che parta da $u$ consenta un salto di risoluzione $h$ è **indipendente** dalla risoluzione $h$, che sia $2^4$ o $2^{100}.$
 Ciò implica che i weak ties sono distribuiti in maniera **uniforme** tra le risoluzioni, ammesso che $q$ sia pari al valore ottimale $d$. Intuitivamente, non occorrono molti passi sulla griglia prima di arrivare ad un nodo il cui arco random diminuisce **drasticamente** (di un ordine di grandezza) la distanza dall'obiettivo.
 ## Analisi formale sulle prestazioni della ricerca miope nel modello (caso $d=1$)
 Si analizzano formalmente le prestazioni dell‘algoritmo di ricerca decentralizzata applicata al modello generativo introdotto nel solo caso $d =1$, ossia quando i nodi sono disposti su un anello al quale sono aggiunti gli archi random con coefficiente di clustering $q=1$.
@@ -118,7 +118,7 @@ $$
 \mathbf{Pr}((u,v) \in E) = \frac{1}{Z}\cdot \frac{1}{d(u,v)}
 $$
 con $Z =\sum_{v \in V \setminus \{ u \}} \frac{1}{d(u,v)}$.
-Si osserva che in un anello ogni nodo $u \in V$ ha due vicini a distanza due, due vicini a distanza tre, ..., due vicini a distanza $\frac{n}{2}$. Dunque per ogni $u \in V$ vale 2
+Si osserva che in un anello ogni nodo $u \in V$ ha due vicini a distanza due, due vicini a distanza tre, ..., due vicini a distanza $\frac{n}{2}$. Dunque per ogni $u \in V$ vale
 $$
 \begin{align}
 Z &=\sum_{v \in V \setminus \{ u \}} \frac{1}{d(u,v)} = 2\sum_{h=1}^{n/2} \frac{1}{h} \\

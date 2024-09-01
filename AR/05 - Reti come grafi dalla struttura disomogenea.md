@@ -163,7 +163,7 @@ Siano $X = \{x_1,\dots,x_n\}$ insieme di variabili booleane e $f = c_1 \land c_{
 L'insieme dei nodi $V$ è composto dai nodi $T$ e $F$ che rappresentano le assegnazioni vero e falso. Questi due nodi sono posizionati nel grafo in modo tale che essi dovranno necessariamente appartenere a due comunità differenti affinché $G$ sia partizionabile in due strong web-community.
 
 Per ogni variabile $x_i \in X$, si costruisce il seguente **gadget variabile**:
-1. Si inseriscono in $V$ i nodi $x_{i},\overline{x_{i}},y_{i},z_{i},t_{i},f_{i}$;
+1. Si inseriscono in $V$ i nodi $x_{i},\overline{x_{i}}$ (chiamiamoli *nodi letterali* di $x_{i}$) e i nodi $y_{i},z_{i},t_{i},f_{i}$;
 2. Si inseriscono in $E$ gli archi:                       $(x_{i},y_{i}),(x_{i},z_{i}),(\overline{x_{i}},z_{i}),(\overline{x_{i}},y_{i}),(y_{i},t_{i}),(z_{i},f_{i}),(t_{i},T),(f_{i},F);$
 3. Per il nodo $x_i$ si aggiungono dei vicini senza nome, tanti quante sono le clausole che contengono la variabile $x_i$ più uno;
 4. Per il nodo $\overline{x_{i}}$ si aggiungono dei vicini senza nome, tanti quante sono le clausole che contengono la variabile $\overline{x_i}$ più uno;
@@ -174,26 +174,28 @@ Poiché $y_i$ ha grado 3, allora almeno 1 tra $x_i$ e $\overline{x_{i}}$ deve ap
 Per ogni clausola $c_j$ di $f$, si costruisce il seguente **gadget clausola**:
 1. Si inseriscono in $V$ i nodi $c_{j},l_{j_{1}},l_{j_{2}},l_{j_{3}}$;
 2. Si inseriscono in $E$ gli archi dal nodo $c_j$ verso i nodi $l_{j_{1}},l_{j_{2}},l_{j_{3}}$ e dai nodi $l_{j_{1}},l_{j_{2}},l_{j_{3}}$ al nodo $T$;
-3. Si inseriscono in $E$ gli archi per collegare il nodo $c_j$ ai letterali che compongono la clausola corrispondente: si inserisce l'arco $(c_j,x_i)$ se $c_j$ contiene il letterale $x_i$ e si inserisce l'arco $(c_j,\overline{x_{i}})$ se $c_j$ contiene il letterale $\overline{x_{i}}$.
+3. Si inseriscono in $E$ gli archi per collegare il nodo $c_j$ ai nodi letterali che compongono la clausola corrispondente: si inserisce l'arco $(c_j,x_i)$ se $c_j$ contiene il letterale $x_i$ e si inserisce l'arco $(c_j,\overline{x_{i}})$ se $c_j$ contiene il letterale $\overline{x_{i}}$.
 Un esempio di gadget clausola con $c_j = x_i \lor \lnot x_{2} \lor \lnot x_{3}$.
 ![|center](Pasted%20image%2020240726160444.png)
-Si osserva che, sempre per il [lemma precedente](#Lemma), dato che $l_{j1},l_{j2},l_{j3}$ hanno tutti grado 2, allora se $G$ è partizionabile in due strong web-community certamente sia $l_{j1},l_{j2},l_{j3}$ che $c_j$ devono essere nella stessa comunità a cui appartiene $T$. Inoltre poiché $c_j$ ha grado esattamente $6$ e $3$ dei suoi vicini sono nella comunità a cui appartiene $T$, allora **almeno uno** tra i suoi nodi variabile (i suoi letterali) (nell'esempio $x_1, \overline{x_{2}}, \overline{x_3}$) deve appartenere alla comunità in cui si trova $T,$ altrimenti, $c_j$ avrebbe tanti vicini nella comunità di $T$ quanti nella comunità di $F$, il che implica che $T$ e $F$ appartengano alla stessa comunità, contraddicendo l'ipotesi (si dimostra tra poco che se $G$ è partizionabile in due strong web-community, allora $T$ ed $F$ appartengono a comunità distinte).
+Si osserva che, sempre per il [lemma precedente](#Lemma), dato che $l_{j1},l_{j2},l_{j3}$ hanno tutti grado 2, allora se $G$ è partizionabile in due strong web-community certamente sia $l_{j1},l_{j2},l_{j3}$ che $c_j$ devono essere nella stessa comunità a cui appartiene $T$. Inoltre poiché $c_j$ ha grado esattamente $6$ e $3$ dei suoi vicini sono nella comunità a cui appartiene $T$, allora **almeno uno** tra i suoi nodi letterali (nell'esempio $x_1, \overline{x_{2}}, \overline{x_3}$) deve appartenere alla comunità in cui si trova $T,$ altrimenti, $c_j$ avrebbe tanti vicini nella comunità di $T$ quanti nella comunità di $F$, il che implica che $T$ e $F$ appartengano alla stessa comunità, contraddicendo l'ipotesi (si dimostra tra poco che se $G$ è partizionabile in due strong web-community, allora $T$ ed $F$ appartengono a comunità distinte).
 
 Un esempio di grafo $G$ è il seguente, con
 $$ f(x_{1},x_{2},x_{3}) = (x_{i}\lor \lnot x_{2} \lor x_{3}) \land (\lnot x_{1} \lor \lnot x_{2} \lor \lnot x_{3}) $$
 ![|center|700](05-ar_img04.png)
 
-Si mostra ora che affinché $G$ sia partizionabile in due strong web-communities è necessario che $T$ e $F$ appartengano a due comunità differenti, mostrando che se $T$ e $F$ fanno parte della stessa comunità $C,$ allora tutti i nodi $V$ sono in $C$.
+Si mostra ora che se $T$ e $F$ appartengano a due comunità differenti, allora $G$ è partizionabile in due strong web-communities, mostrando che se $T$ e $F$ fanno parte della stessa comunità $C,$ allora tutti i nodi $V$ sono in $C$.
 Poiché $T$ e $F$ sono in $C$ e poiché per ogni $1 \leqslant j \leqslant m$ i nodi $l_{j1},l_{j2},l_{j3}$ hanno grado 2, allora $l_{j1},l_{j2},l_{j3}, c_{j}$ devono esser contenuti in $C$.
 Inoltre, poiché $T$ e $F$ sono in $C$ e poiché per ogni $1 \leqslant i \leqslant n$ i nodi $t_{i},f_{i}$ hanno grado 2, allora $t_{i},f_{i},y_{i}, z_{i}$ devono esser contenuti in $C$.
-Allora, per ogni $1 \leqslant i \leqslant n$, se il letterale $x_i$ è contenuto in $k$ clausole allora il nodo $x_i$ ha $k+2$ vicini <u>con nome</u> in $C$. Perciò, per poter essere inserito in $V-C$ il nodo $x_i$ dovrebbe avere almeno $k+2$ vicini in $V-C$, ma gli altri vicini di $x_i$ sono i $k+1$ nodi senza nome, che sono $k+1$: non abbastanza per permettere a $x_i$ di far parte di $C$. Perciò, $x_i$ e i $k+1$ nodi senza nome ad esso collegati devono essere in $C$.
+Allora, per ogni $1 \leqslant i \leqslant n$, se il letterale $x_i$ è contenuto in $k$ clausole allora il nodo $x_i$ ha $k+2$ vicini <u>con nome</u> in $C$. Perciò, per poter essere inserito in $V-C$ il nodo $x_i$ dovrebbe avere almeno $k+2$ vicini in $V-C,$ ma gli altri vicini di $x_i$ sono i $k+1$ nodi senza nome, che sono $k+1$: non abbastanza per permettere a $x_i$ di far parte di $C$. Perciò, $x_i$ e i $k+1$ nodi senza nome ad esso collegati devono essere in $C$.
 Analogamente vale per il letterale $\lnot x_i$ e il corrispettivo nodo $\overline{x_{i}}$.
 
-Riassumendo, affinché $G$ sia partizionabile in due strong web-communities è necessario che $T$ e $F$ appartengano a due comunità differenti, e se $T$ e $F$ sono in due comunità differenti, allora per ogni variabile $x_i \in X$ anche i nodi $x_i$ e $\overline{x_{i}}$ associati appartengono a due comunità distinte (uno nella stessa comunità di $T$, l'altro nella stessa comunità di $F$). Questo significa che ogni partizione di $G$ in due strong web-communities corrisponde ad una assegnazione di verità $a$ per $X$.
-Si ricorda inoltre che se $T$ e $F$ sono in due comunità differenti, allora per ogni clausola $c_j$ il nodo $c_j$ **deve** appartenere alla comunità che contiene $T$, e questo è possibile solo se *almeno* uno dei nodi nei gadget variabile collegato a $c_j$ è contenuto nella comunità di $T$.
+Riassumendo:
+- se $T$ e $F$ appartengano a due comunità differenti, allora $G$ è partizionabile in due strong web-communities;
+- se $T$ e $F$ sono in due comunità differenti, allora per ogni variabile $x_i \in X$ anche i nodi $x_i$ e $\overline{x_{i}}$ associati appartengono a due comunità distinte (uno nella stessa comunità di $T$, l'altro nella stessa comunità di $F$). Questo significa che ogni partizione di $G$ in due strong web-communities corrisponde ad una assegnazione di verità $a$ per $X$;
+- se $T$ e $F$ sono in due comunità differenti, allora ogni nodo $c_j$ **deve** appartenere alla comunità che contiene $T$, e questo è possibile solo se *almeno* uno dei nodi letterali collegato a $c_j$ è contenuto nella comunità di $T$.
 
 Si conclude la prova mostrando che $G$ è partizionabile in due strong web-communities se e soltanto se $f$ è soddisfacibile.
-- $(\implies)$. Se $G$ è partizionabile in due strong web-communities, allora $T$ e $F$ **non** sono nella stessa comunità. Allora, per ogni variabile $x_i \in X$ i due nodi $x_i$ e $\overline{x_{i}}$ devono essere contenuti in due comunità distinte. Dunque, si pone la seguente assegnazione di verità: $a(x_i) = \texttt{true}$ se $x_i$ si trova nella stessa comunità di $T$ e $a(x_i) = \texttt{false}$ se $\overline{x_i}$ si trova nella stessa comunità di $T$. Poiché ogni clausola ha un letterale nella stessa comunità di $T$ per quanto osservato prima, ogni clausola è soddisfatta da questa assegnazione di verità e quindi $f$ è soddisfacibile.
+- $(\implies)$. Se $G$ è partizionabile in due strong web-communities, allora $T$ e $F$ **non** sono nella stessa comunità. Allora, per ogni variabile $x_i \in X$ i due nodi $x_i$ e $\overline{x_{i}}$ devono essere contenuti in due comunità distinte. Dunque, si pone la seguente assegnazione di verità: $a(x_i) = \texttt{true}$ se $x_i$ si trova nella stessa comunità di $T$ e $a(x_i) = \texttt{false}$ se $\overline{x_i}$ si trova nella stessa comunità di $T$. Poiché ogni nodo clausola $c_j$ ha un nodo letterale nella stessa comunità di $T$ per quanto osservato prima, ogni clausola $c_j$ è soddisfatta da questa assegnazione di verità e quindi $f$ è soddisfacibile.
 - $(\impliedby)$. Se $f$ è soddisfacibile, sia $a$ una assegnazione di verità per $X$ che soddisfa ogni clausola $c_j$ in $f$. Si inseriscono nella stessa comunità di $T$:
 	- tutti i nodi $c_j, l_{j1},l_{j2},l_{j3}$ per ogni $j \in [m]$;
 	- tutti i nodi $x_i,y_i,t_i$ e i senza nome adiacenti ad $x_i$ tali che $a(x_i) = \texttt{true}$;
@@ -209,22 +211,20 @@ Si osserva infine che entrambi i metodi richiedono la scelta di un arco da rimuo
 ## Betweenness di un arco
 Un particolare criterio per rimuovere archi in un metodo partitivo è basato sul concetto di **betweenness** di un arco. Tale concetto a sua volta si basa sulle proprietà di un arco di essere _bridge_ o _local bridge_.
 Per definizione, rimuovere un arco bridge disconnette due porzioni di grafo, mentre rimuovere un local bridge certamente peggiora la connettività tra due regioni del grafo: i local bridge connettono regioni che, senza tali archi, avrebbero difficoltà ad interagire.
-Inoltre, gli archi bridge e local bridge sono dei _weak ties_. Perciò l'idea si basa sul fatto che, rimuovendo tutti i weak ties da un grafo, rimangono solamente gruppi di nodi connessi da relazioni forti (_strong ties_), e tali gruppi rispecchiano il concetto intuitivo di comunità (ovvero gruppi di persone collegati da legami forti).
-Purtroppo però esistono casi in cui anche rimuovendo tutti i weak ties non avviene un partizionamento in comunità.
+Inoltre, gli archi bridge e local bridge sono dei _weak ties_. Perciò l'idea si basa sul fatto che, rimuovendo tutti i weak ties da un grafo, rimangono solamente gruppi di nodi connessi da relazioni forti (_strong ties_), e tali gruppi rispecchiano il concetto intuitivo di comunità (ovvero gruppi di persone collegati da legami forti). Esistono però casi in cui anche rimuovendo tutti i weak ties non avviene un partizionamento in comunità.
 ![Esempio weak ties|center||500](05-ar_img05.png)
-Si utilizza dunque una proprietà differente, basata sulla nozione di traffico: gli archi che formano dei *ponti* tra gruppi di nodi coesi sono quelli attraverso i quali passa più traffico, misurato come *flusso* che attraversa gli archi a partire da un nodo $s$ fino a raggiungere un nodo $t$.
-Dunque, si considerano come "nuovi archi ponte" tutti quegli archi attraverso i quali passa una grande quantità di flusso, e che se rimossi rendono più difficile la comunicazione tra due comunità.
-Secondo questo criterio si rimuovono gli archi sui quali passa maggior flusso, finché non si ottiene un partizionamento accettabile della rete.
+Si utilizza dunque una proprietà differente, basata sulla nozione di traffico: gli archi che formano dei *ponti* tra gruppi di nodi coesi sono quelli attraverso i quali *passa più traffico*, misurato come *flusso* che attraversa gli archi a partire da un nodo $s$ fino a raggiungere un nodo $t$.
+Dunque, si considerano come nuovi "archi ponte" tutti quegli archi attraverso i quali passa una grande quantità di flusso, e che se rimossi rendono più difficile la comunicazione tra due comunità. Secondo questo criterio si rimuovono gli archi sui quali passa maggior flusso, finché non si ottiene un partizionamento accettabile della rete.
 
 Formalmente, dato un grafo $G=(V,E)$ non orientato, per ogni coppia di nodi $s,t \in V$ e per ogni arco $(u,v) \in E$ si definisce
 $$
-\sigma_{st}(u,v) := \text{numero di shortest path fra $s$ e $t$ che attraversano }(u,v)
+\sigma_{st}(u,v) := \text{numero di cammini minimi fra $s$ e $t$ che attraversano }(u,v)
 $$
 Si definisce poi con
 $$
 b_{st}(u,v) = \frac{\sigma_{st}(u,v)}{\sigma_{st}}
 $$
-la **edge-betweenness relativa di** $(u,v)$ rispetto ai nodi $s,t$, che indica la frazione degli shortest path fra $s$ e $t$ che passano per l'arco $(u,v).$ Con $\sigma_{st}$ si denota il numero totale di shortest path tra $s$ e $t$.
+la **edge-betweenness relativa di** $(u,v)$ rispetto ai nodi $s,t$, che indica la frazione dei cammini minimi fra $s$ e $t$ che passano per l'arco $(u,v).$ Con $\sigma_{st}$ si denota il numero totale di cammini minimi tra $s$ e $t$.
 Infine, la **edge-betweenness** $b(u,v)$ di un arco $(u,v) \in E$ è la semi-somma delle *edge-betweenness relative* ad ogni coppia di nodi
 $$
 b(u,v) = \frac{1}{2}\sum_{s,t \in V} b_{st}(u,v)
@@ -242,19 +242,18 @@ La parte più complessa di questo metodo è il calcolo della betweenness.
 Per ogni nodo $s \in V$, l'algoritmo per il calcolo della edge-betweenness esegue i seguenti tre passi:
 1. Calcolare il sottografo $T(s)$ dei cammini minimi uscenti da $s$ mediante una visita BFS;
 2. Mediante una visita top-down di $T(s)$, calcolare $\sigma_{sv}$ per ogni $v \in V$;
-3. mediante una visita bottom-up di $T(s)$, e usando quanto calcolato al punto precedente, calcolare per ogni $(u,v) \in T(s)$ tutte le edge-betweenness relative a cammini minimi che partono da $s$, cioè il valore $$ b_{s}(u,v) = \sum_{t \in V - \{ s \}} b_{st}(u,v) $$
+3. Mediante una visita bottom-up di $T(s)$, e usando quanto calcolato al punto precedente, calcolare per ogni $(u,v) \in T(s)$ tutte le edge-betweenness relative a cammini minimi che partono da $s$, cioè il valore $$ b_{s}(u,v) = \sum_{t \in V - \{ s \}} b_{st}(u,v) $$
 Dopo aver calcolato $b_s(u,v)$ per ogni $s \in V$, si può ricavare il valore della edge-betweenness per $(u,v)$ come segue
 $$
 b(u,v) = \frac{1}{2} \sum_{s \in V}b_{s}(u,v)
 $$
-Si osserva che nel punto $3$ si calcolano $b_s(u,v)$ solo per gli archi di $T(s),$  in quanto se $(u,v)$ non appartiene al sottografo degli shortest path $T(s)$ allora vuol dire che non appartiene nessun shortest path, e quindi non avrebbe senso calcolarlo (per definizione di betweenness).
+Si osserva che nel punto $3$ si calcolano $b_s(u,v)$ solo per gli archi di $T(s),$  in quanto se $(u,v)$ non appartiene al sottografo dei cammini minimi $T(s)$ allora vuol dire che non appartiene nessun cammino minimo, e quindi non avrebbe senso calcolarlo (per definizione di betweenness).
 
 Si vedono ora in dettaglio i passaggi con un esempio.
 ### Fase 1: BFS
 Per calcolare $T(s)$ si effettua una BFS opportunamente modificata.
-Sia $L_h$ l'insieme dei nodi che si trovano a distanza $h$ dalla sorgente. Allora un nodo $v$ si trova a livello $h$ se $v \in L_h$.
-Se un nodo $v$ si trova al livello $h$, allora certamente **tutti** i cammini minimi da $s$ a $v$ termineranno con archi che partono da $L_{h-1}$.
-Perciò, tutti gli archi $(u,v)$ con $u \in L_{h-1}$ e $v \in L_h$ faranno parte di $T(s)$.
+Sia $L_h$ l'insieme dei nodi che si trovano a distanza $h$ dalla sorgente: tali nodi si trovano al **livello** $h$.
+Se un nodo $v$ si trova al livello $h$, allora certamente **tutti** i cammini minimi da $s$ a $v$ termineranno con archi che partono da $L_{h-1}$. Perciò, tutti gli archi $(u,v)$ con $u \in L_{h-1}$ e $v \in L_h$ faranno parte di $T(s)$.
 Dunque si calcola $T(s)$ nella seguente maniera:
 1. Inizialmente $L_0 = \lbrace s \rbrace$ e $T(s) = \emptyset$.
 2. Per ogni $h \geqslant 0$ calcolare $L_{h+1}$ come tutti quei nodi $v \in V$ **fuori** $L_0 \cup L_1 \cup \dots \cup L_h$ tali che hanno almeno un vicino in $u \in L_h$, ovvero come $$ L_{h+1} \equiv \lbrace v \in V \setminus (L_0 \cup L_1 \cup ... \cup L_h) | \exists u \in L_h : (u,v) \in E  \rbrace$$
@@ -262,10 +261,7 @@ Dunque si calcola $T(s)$ nella seguente maniera:
 ![BFS|center|500](05-ar_img06.png)
 ### Fase 2: visita top-down
 Mediante una visita top-down di $T(s)$, si calcola per ogni $v \in V$ la quantità $\sigma_{sv}$, ovvero il numero di cammini minimi che vanno da $s$ a $v$.
-
-Si osservi che per ogni nodo $v$ nel livello 1, il numero di cammini minimi sarà pari ad 1 (perché $v$ è diretto vicino di $s$).
-
-Invece al livello 2, il numero di cammini minimi di un generico nodo $v \in L_2$ è pari alla somma di tutti i $\sigma_{su}$, tali che esiste $(u,v)$ con $u \in L_1$. Più in generale, per ogni $v \in L_h$, si calcola $\sigma_{sv}$ con la seguente formula ricorsiva
+Si osservi che per ogni nodo $v$ nel livello 1, il numero di cammini minimi sarà pari ad 1 (perché $v$ è diretto vicino di $s$). Invece al livello 2, il numero di cammini minimi di un generico nodo $v \in L_2$ è pari alla somma di tutti i $\sigma_{su}$, tali che esiste $(u,v)$ con $u \in L_1$. Più in generale, per ogni $v \in L_h$, si calcola $\sigma_{sv}$ con la seguente formula ricorsiva
 $$
 \begin{align*}
 	\sigma_{sv} &= 1  &h = 1\\
@@ -275,20 +271,21 @@ $$
 
 ![Fase2|center|600](05-ar_img07.png)
 ### Fase 3: visita bottom-up
-Si devono calcolare per ogni $(u,v) \in T(s)$ tutte le edge-betweenness relative a cammini minimi che partono da $s$, cioè il valore $$ b_{s}(u,v) = \sum_{t \in V - \{ s \}} b_{st}(u,v) $$
+Si devono calcolare per ogni $(u,v) \in T(s)$ tutte le edge-betweenness relative a cammini minimi che partono da $s$, cioè il valore
+$$
+b_{s}(u,v) = \sum_{t \in V - \{ s \}} b_{st}(u,v)
+$$
 Sia $d$ il numero di livelli in $T(s)$.
-Si consideri un arco $(y,x) \in T(s)$ con $y \in L_{d-1}$ e $x \in L_d$. 
-Allora tutti gli shortest path che partono da $s$ e passano per l'arco $(y,x)$ sono tutti gli shortest path che terminano in $y$.
-Perciò il flusso che passa su $(y,x)$ rispetto a $s$ sarà pari al rapporto tra il numero di shortest path che vanno da $s$ a $y$ (ovvero $\sigma_{sy}$) e il numero complessivo di shortest path che vanno da $s$ ad $x$ (ovvero $\sigma_{sx}$).
+Si consideri un arco $(y,x) \in T(s)$ con $y \in L_{d-1}$ e $x \in L_d$. Allora tutti i cammini minimi che partono da $s$ e passano per l'arco $(y,x)$ sono tutti i cammini minimi che terminano in $y$. Perciò il flusso che passa su $(y,x)$ rispetto a $s$ sarà pari al rapporto tra il numero di shortest path che vanno da $s$ a $y$ (ovvero $\sigma_{sy}$) e il numero complessivo di shortest path che vanno da $s$ ad $x$ (ovvero $\sigma_{sx}$).
 $$b_s(y,x) = \sum_{t \in V \setminus \lbrace s \rbrace} b_{st}(y,x) = b_{sx}(y,x) = \frac{\sigma_{sx}(y,x)}{\sigma_{sx}} = \frac{\sigma_{sy}}{\sigma_{sx}}$$
-Analogamente possiamo applicare questo ragionamento per tutti gli archi che collegano nodi dell'ultimo livello, come mostrato nella seguente [figura](#^94bfa8).
+Analogamente si può applicare questo ragionamento per tutti gli archi che collegano nodi dell'ultimo livello, come mostrato nella seguente [figura](#^94bfa8).
 ![Fase3|center](05-ar_img08.png) ^94bfa8
 Adesso, si considerino gli archi che entrano nel livello $L_{d-1}$. 
-Rifacendosi all'[immagine di esempio](#^7f8792), consideriamo l'arco $(z, y)$, con $z \in L_{d-2}$ e $y \in L_{d-1}$.
+Rifacendosi all'[immagine di esempio](#^7f8792), si consideri l'arco $(z, y)$, con $z \in L_{d-2}$ e $y \in L_{d-1}$.
 ![|center|400](05-ar_img09.png) ^7f8792
-Si osserva che gli shortest path che passano per $(z,y)$ sono:
-- gli shortest path da $s$ a $y$ che passano per $z$, ossia $\frac{\sigma_{sz}}{\sigma_{sy}}$;
-- per ogni discendente $x$ di $y$, gli shortest path che passano attraverso $z$ e attraverso $y$, cioè una frazione $\frac{\sigma_{sz}}{\sigma_{sy}}$ della frazione di shortest path da $s$ ad $x$ che passano per l'arco $(y,x)$, ovvero $\frac{\sigma_{sz}}{\sigma_{sy}} \cdot \frac{\sigma_{sy}}{\sigma_{sx}} = \frac{\sigma_{sz}}{\sigma_{sx}}$.
+Si osserva che i cammini minimi che passano per $(z,y)$ sono:
+- i cammini minimi da $s$ a $y$ che passano per $z$, ossia $\frac{\sigma_{sz}}{\sigma_{sy}}$;
+- per ogni discendente $x$ di $y$, i cammini minimi che passano attraverso $z$ e attraverso $y$, cioè una frazione $\frac{\sigma_{sz}}{\sigma_{sy}}$ della frazione dei cammini minimi da $s$ ad $x$ che passano per l'arco $(y,x)$, ovvero $\frac{\sigma_{sz}}{\sigma_{sy}} \cdot \frac{\sigma_{sy}}{\sigma_{sx}} = \frac{\sigma_{sz}}{\sigma_{sx}}$.
 dunque per l'arco $(z,y)$ vale
 $$
 b_{s}(z,y) = \frac{\sigma_{sz}}{\sigma_{sy}} + \frac{\sigma_{sz}}{\sigma_{sy}} \sum_{(y,x) \in T(s)} b_{s}(y,x)
@@ -304,23 +301,21 @@ Si osserva che si assume $\sigma_{ss} = 1$.
 ![center|600](Pasted%20image%2020240830112057.png)
 Per comprendere al meglio, si vedono un paio di esempi.
 #### Esempio 1
-Rifacendosi all'[immagine di esempio](#^7f8792), i $\frac{3}{5}$ degli shortest path da $s$ a $x$ passano per $(y,x)$; di questi, $1/3$ passa per $(z,y)$, $1/3$ passa per $(a,y)$  e $1/3$ passa per $(b,y)$. Dunque per $(z,y)$ passano $1/3$ degli shortest path da $s$ a $y$ e $1/3 \cdot 3/5 = 1/5$ degli shortest path da $s$ a $x$, allora
+Rifacendosi all'[immagine di esempio](#^7f8792), i $\frac{3}{5}$ dei cammini minimi da $s$ a $x$ passano per $(y,x)$; di questi, $1/3$ passa per $(z,y)$, $1/3$ passa per $(a,y)$  e $1/3$ passa per $(b,y)$. Dunque per $(z,y)$ passano $1/3$ dei cammini minimi da $s$ a $y$ e $1/3 \cdot 3/5 = 1/5$ dei cammini minimi da $s$ a $x$, allora
 $$
 b_{s}(z,y) = \frac{1}{3}+\frac{1}{5} = \frac{8}{15}
 $$
 #### Esempio 2
 Si consideri l'arco $(a,c)$ della figura seguente.
 ![|center|400](05-ar_img10.png)
-Allora $1/2$ degli shortest path da $s$ a $c$ passano per l'arco $(a,c)$, ossia $\frac{\sigma_{sa}}{\sigma_{sc}}=\frac{1}{2}$. Si considerano ora i nodi $w$ e $x$ discendenti di $c$.
-- $2/5$ degli shortest path da $s$ a $x$ passano per l'arco $(c,x)$: di questi, $1/2$ passano per l'arco $(b,c)$ e $1/2$ passano per l'arco $(a,c)$;
-- $2/4$ degli shortest path da $s$ a $w$ passano per l'arco $(c,w)$: di questi, $1/2$ passano per l'arco $(b,c)$ e $1/2$ passano per l'arco $(a,c)$;
+Allora $1/2$ dei cammini minimi da $s$ a $c$ passano per l'arco $(a,c)$, ossia $\frac{\sigma_{sa}}{\sigma_{sc}}=\frac{1}{2}$. Si considerano ora i nodi $w$ e $x$ discendenti di $c$.
+- $2/5$ dei cammini minimi da $s$ a $x$ passano per l'arco $(c,x)$: di questi, $1/2$ passano per l'arco $(b,c)$ e $1/2$ passano per l'arco $(a,c)$;
+- $2/4$ dei cammini minimi da $s$ a $w$ passano per l'arco $(c,w)$: di questi, $1/2$ passano per l'arco $(b,c)$ e $1/2$ passano per l'arco $(a,c)$;
 Dunque vale
 $$
 b_{s}(a,c) = \frac{1}{2}+\frac{1}{2}\cdot \frac{2}{5} + \frac{1}{2} \cdot \frac{2}{4} = \frac{19}{20}
 $$
 ### Fase finale - Calcolo betweenness
 Concludendo, si calcola la betweenness di tutti gli archi come già descritto in precedenza $$b(u,v) = \frac{1}{2} \sum_{s \in V} b_s(u,v)$$
-Notiamo che questa procedura permette di calcolare la betweenness degli archi in tempo *polinomiale* nella grandezza della rete (e non esponenziale).
-Infatti la [fase 1](#Fase%201%20BFS) è una semplice visita in ampiezza del grafo (e si può calcolare in tempo $O(|V| + |E|)$), la [fase 2](#Fase%202%20visita%20top-down) è un'ulteriore visita in ampiezza di $T(s)$ (e si può calcolare ancora in tempo $O(|V| + |E|)$), e infine la [fase 3](#Fase%203%20visita%20bottom-up) è nuovamente una visita in ampiezza, partendo però dal livello più basso (ancora una volta $O(|V| + |E|)$).
-Dato che si itera il procedimento per ogni nodo del grafo, e dato che nel caso peggiore si trattano grafi molto densi con $\Theta(n^2)$ archi, la complessità temporale dell'esecuzione di questo algoritmo per il calcolo delle betweennes sarà $O(nm) \in O(n^3)$.
+Notiamo che questa procedura permette di calcolare la betweenness degli archi in tempo *polinomiale* nella grandezza della rete (e non esponenziale). Infatti la [fase 1](#Fase%201%20BFS) è una semplice visita in ampiezza del grafo (e si può calcolare in tempo $O(|V| + |E|)$), la [fase 2](#Fase%202%20visita%20top-down) è un'ulteriore visita in ampiezza di $T(s)$ (e si può calcolare ancora in tempo $O(|V| + |E|)$), e infine la [fase 3](#Fase%203%20visita%20bottom-up) è nuovamente una visita in ampiezza, partendo però dal livello più basso (ancora una volta $O(|V| + |E|)$). Dato che si itera il procedimento per ogni nodo del grafo, e dato che nel caso peggiore si trattano grafi molto densi con $\Theta(n^2)$ archi, la complessità temporale dell'esecuzione di questo algoritmo per il calcolo delle betweenness sarà $O(nm) \in O(n^3)$.
 # Rilassare il modello

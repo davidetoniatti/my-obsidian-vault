@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md",
+                "file": "AR/06 - Processi di diffusione.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "f4a864b39cd2bdd0",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md",
+                "file": "AR/06 - Processi di diffusione.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md",
+                "file": "AR/06 - Processi di diffusione.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "AR/05 - Reti come grafi dalla struttura disomogenea.md"
+                "file": "AR/06 - Processi di diffusione.md"
               }
             }
           }
@@ -151,12 +150,16 @@
   },
   "active": "7abe1b2ec06ac530",
   "lastOpenFiles": [
-    "AR/attachments/Pasted image 20240830112057.png",
-    "AR/06 - Processi di diffusione.md",
     "AR/05 - Reti come grafi dalla struttura disomogenea.md",
-    "AR/04 - Il fenomeno Small World.md",
+    "AR/06 - Processi di diffusione.md",
+    "AR/07 - Seguire il gregge.md",
+    "AR/03 - Grafi geometrici aleatori e reti wireless.md",
     "AR/02 - Questione di popolarità.md",
     "AR/01 - Introduzione e grafi di Erdős-Rényi.md",
+    "AR/04 - Il fenomeno Small World.md",
+    "AR/08 - Sistemi di voto.md",
+    "AR/attachments/Pasted image 20240830185959.png",
+    "AR/attachments/Pasted image 20240830112057.png",
     "AR/attachments/Pasted image 20240829152505.png",
     "AR/attachments/Pasted image 20240829152156.png",
     "AR/attachments/Pasted image 20240829152123.png",
@@ -164,16 +167,11 @@
     "AR/attachments/Pasted image 20240828105023.png",
     "AGT/02 - Global Connection Game.md",
     "study_plan_draft.md",
-    "AR/07 - Seguire il gregge.md",
-    "AR/08 - Sistemi di voto.md",
     "AR/09 - Web Search.md",
-    "AR/03 - Grafi geometrici aleatori e reti wireless.md",
     "AR/attachments/Pasted image 20240726160444.png",
     "AR/attachments/Pasted image 20240726160159.png",
     "attachments/Pasted image 20240511145854.png",
     "cose da fare.md",
-    "AR/attachments/Pasted image 20240724152028.png",
-    "AR/attachments/Pasted image 20240723150510.png",
     "Senza nome.md",
     "ABD/07 - Link analysis.md",
     "AGT/03 - Local Connection Game.md",
