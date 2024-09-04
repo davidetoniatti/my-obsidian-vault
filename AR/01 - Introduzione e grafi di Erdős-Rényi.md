@@ -60,35 +60,35 @@ Una componente gigante in un grafo è una componente connessa che contiene una f
 Si dimostra ora che se $p > \frac{\ln{64}}{n}$ allora con alta probabilità il grafo $G_{n,p}$ contiene una componente connessa costituita da almeno metà dei suoi nodi. Formalmente, si definisce $X$ come la variabile aleatoria corrispondente al numero di nodi nella più grande componente connessa di $G_{n,p}$ ; dunque si dimostra il teorema seguente.
 ```ad-Teorema
 title: Teorema
-se $p > \frac{\ln{64}}{n}$, allora $P( X \geq \frac{n}{2}) \geq 1-2^{-n/8}$
+se $p > \frac{\ln{64}}{n}$, allora $P( X \geqslant \frac{n}{2}) \geqslant 1-2^{-n/8}$
 
 ```
 Per dimostrare il teorema, si dimostra in primis il lemma seguente.
 #### Lemma
-se $X < n/2$ allora esiste un insieme $A \subset [n]$ tale che $n/4 \leq |A| < 3n/4$ e non esistono archi fra i nodi in $A$ e i nodi in $[n]-A$.
+se $X < n/2$ allora esiste un insieme $A \subset [n]$ tale che $n/4 \leqslant |A| < 3n/4$ e non esistono archi fra i nodi in $A$ e i nodi in $[n]-A$.
 ##### Dimostrazione
-Siano $C_1,C_2,\dots,C_k$ tutte le componenti connesse di $G_{n,p}$ e si assuma che siano ordinate per cardinalità non decrescente, ossia $|C_1| \leq |C_2| \leq \dots \leq |C_k|$.
+Siano $C_1,C_2,\dots,C_k$ tutte le componenti connesse di $G_{n,p}$ e si assuma che siano ordinate per cardinalità non decrescente, ossia $|C_1| \leqslant |C_2| \leqslant \dots \leqslant |C_k|$.
 Poiché $X < n/2$, non esiste una componente connessa $C_i$ che contiene più di $n/2$ nodi, dunque vale $|C_i| < n/2 \quad \forall i=1,\dots,k$ . 
 
 Dunque si sceglie un indice $h$ tale che
-$$ C_1+C_2+\dots+C_{h-1} < n/4 \quad\text{e}\quad C_1+C_2+\dots+C_{h-1}+C_{h} \geq n/4 $$
+$$ C_1+C_2+\dots+C_{h-1} < n/4 \quad\text{e}\quad C_1+C_2+\dots+C_{h-1}+C_{h} \geqslant n/4 $$
 Si osserva che $h < k$. Infatti sia $h=k$; se le prime $k-1$ componenti contengono complessivamente meno di $n/4$ nodi, allora la somma del numero di nodi di tutte le componenti è minore di $n$, dato che la componente $k$-esima contiene per ipotesi meno di $n/2$ nodi. Ma questo è assurdo, dato che l'unione delle componenti è proprio l'insieme dei nodi di $G_{n,p}$, e $G_{n,p}$ è composto per definizione da $n$ nodi.
 
 Sia $A$ l'unione delle prime $h$ componenti, $A = C_1 \cup \dots \cup C_h$ . Allora $A \neq \emptyset$ dato che le componenti non possono essere vuote, e $[n]-A \neq \emptyset$ dato che $h < k$.
-Vale che $|A| \geq n/4$ per costruzione e vale
+Vale che $|A| \geqslant n/4$ per costruzione e vale
 $$ |A| = (|C_{1}| + |C_{2}| + \dots + |C_{h-1}|) + |C_{h}| < n/4 + n/2 = 3n/4 $$
-dunque $n/4 \leq |A| < 3n/4$.
+dunque $n/4 \leqslant |A| < 3n/4$.
 
-Rimane da dimostrare che non esistono archi fra i nodi in $A$ e $[n]-A$ . Ma questo vale per costruzione: poiché $C_1,C_2,\dots,C_k$ sono tutte le componenti connesse di $G_{n,p}$ , non ci sono archi fra $A$ e $[n]-A$ altrimenti, se ci fosse un arco fra $C_i$ e $C_j$ con $i \leq h$ e $j>h$, allora $C_i \cup C_j$ sarebbe un'unica componente connessa.
+Rimane da dimostrare che non esistono archi fra i nodi in $A$ e $[n]-A$ . Ma questo vale per costruzione: poiché $C_1,C_2,\dots,C_k$ sono tutte le componenti connesse di $G_{n,p}$ , non ci sono archi fra $A$ e $[n]-A$ altrimenti, se ci fosse un arco fra $C_i$ e $C_j$ con $i \leqslant h$ e $j>h$, allora $C_i \cup C_j$ sarebbe un'unica componente connessa.
 #### Dimostrazione teorema
 Sia denominato `good` l'insieme $A$ individuato dal lemma; si osserva che questo lemma assicura che la probabilità che la più grande componente connessa di $G_{n,p}$ contenga meno di $\frac{n}{2}$ nodi è minore o uguale alla probabilità che $G_{n,p}$ contenga un insieme di nodi `good`, dato l'ipotesi $X < \frac{n}{2}$ implica l'esistenza di un insieme $A$.
 
 Per dimostrare il teorema, è sufficiente calcolare $\mathbf{Pr}\left( X < \frac{n}{2} \right)$, ossia la probabilità che la massima componente connessa in $G_{n,p}$ contenga meno di $\frac{n}{2}$ nodi. In virtù dell'osservazione precedente vale
 $$
 \begin{align}
-\mathbf{Pr}\left( X < \frac{n}{2} \right) &\leq \mathbf{Pr}(\exists A \subseteq [n] : A\text{ è \texttt{good}})\\
-&= \mathbf{Pr}\left( \bigcup_{A \subseteq [n] \text{ e } \frac{n}{4} \leq |A| < \frac{3n}{4}} \left[\text{non ci sono archi fra }A \text{ e } [n]-A\right] \right) \\
-&\leq \sum_{A \subseteq [n] \text{ e } \frac{n}{4} \leq |A| < \frac{3n}{4}} \mathbf{Pr} \left(\text{non ci sono archi fra }A \text{ e } [n]-A\right)
+\mathbf{Pr}\left( X < \frac{n}{2} \right) &\leqslant \mathbf{Pr}(\exists A \subseteq [n] : A\text{ è \texttt{good}})\\
+&= \mathbf{Pr}\left( \bigcup_{A \subseteq [n] \text{ e } \frac{n}{4} \leqslant |A| < \frac{3n}{4}} \left[\text{non ci sono archi fra }A \text{ e } [n]-A\right] \right) \\
+&\leqslant \sum_{A \subseteq [n] \text{ e } \frac{n}{4} \leqslant |A| < \frac{3n}{4}} \mathbf{Pr} \left(\text{non ci sono archi fra }A \text{ e } [n]-A\right)
 \end{align}
 $$
 dato un grafo $G_{n,p}$, e un sottoinsieme $A$ dei suoi nodi: la probabilità che non ci sia un arco tra $A$ e $[n]-A$ è pari $1-p$; dato che il numero di archi possibili fra $A$ è $[n]-A$ è dato dalla cardinalità di $A$ per la cardinalità di $[n]-A$, vale
@@ -98,14 +98,14 @@ $$
 dato che $(1-p)<1$, il suo valore è massimo quando l'esponente $|A|\cdot |[n]-A|$  è minimo, cioè quando $|A| = n/4$, dunque 
 $$
 \begin{align}
-\mathbf{Pr} \left( X < \frac{n}{2} \right) &\leq \sum_{A \subseteq [n] \text{ e } \frac{n}{4} \leq |A| < \frac{3n}{4}} (1-p)^{\frac{n}{4}(n-\frac{n}{4})}
+\mathbf{Pr} \left( X < \frac{n}{2} \right) &\leqslant \sum_{A \subseteq [n] \text{ e } \frac{n}{4} \leqslant |A| < \frac{3n}{4}} (1-p)^{\frac{n}{4}(n-\frac{n}{4})}
 \end{align}
 $$
 
 ricordando che $[n]$ contiene $2^n$ sottoinsiemi, vale
 $$
 \begin{align}
-\mathbf{Pr}\left( X < \frac{n}{2} \right) &\leq 2^n(1-p)^{\frac{3n^2}{16}} \\
+\mathbf{Pr}\left( X < \frac{n}{2} \right) &\leqslant 2^n(1-p)^{\frac{3n^2}{16}} \\
 \end{align}
 $$
 Applicando  l'ipotesi $p> \frac{\ln64}{n}$ a destra della disequazione, si ottiene
@@ -143,7 +143,7 @@ Si studia ora il potere espressivo di un grafo $G_{n,p}$, ossia se tale grafo de
 Se il grado medio di un nodo è $(n-1)p$, e $p$ è costante, allora mediamente il numero di contatti di un individuo in una rete sociale è proporzionale agli individui che costituiscono tale rete.
 Questo fatto non è propriamente ragionevole, dunque al fine di modellare significativamente reti reali di grandi dimensioni è opportuno che $p$ sia una funzione decrescente di $n$, del tipo $p=p(n)=\frac{\lambda}{n}$, con $\lambda$ costante positiva.
 
-Fissato $p$ in questo modo e fissato un intero $k \leq n$, si vuole calcolare con quale probabilità un nodo in $G_{n,p}$ ha grado $k$.
+Fissato $p$ in questo modo e fissato un intero $k \leqslant n$, si vuole calcolare con quale probabilità un nodo in $G_{n,p}$ ha grado $k$.
 
 Sia $i \in [n]$: la probabilità che il nodo $i$ abbia grado $k$ è la probabilità che esattamente $k$ altri nodi siano adiacenti a $i$:
 - il numero di possibili $k$-uple di nodi scelti nell'insieme $[n] - {i}$ è $n-1 \choose k$;

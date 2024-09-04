@@ -91,7 +91,7 @@ $$
       &= \frac{p}{i-1} + (1-p)\cdot\mathbf{Pr} \Big( \bigcup_{h < i : (h,j) \in E} \mbox{viene scelto } h \Big)\\
       \textbf{(1)}&= \frac{p}{i-1} + (1-p)\cdot\sum_{h < i : (h,j) \in E} \mathbf{Pr} \left( \mbox{viene scelto } h \right)\\
       \textbf{(2)}&= \frac{p}{i-1} + \frac{(1-p)}{i-1}\cdot \sum_{h < i : (h,j) \in E} 1\\
-      &= \frac{p}{i-1} + \frac{(1-p)}{i-1} \cdot\sum_{1 \leq h < i} \delta_{h,j} 
+      &= \frac{p}{i-1} + \frac{(1-p)}{i-1} \cdot\sum_{1 \leqslant h < i} \delta_{h,j} 
 \end{align*}
 $$
 dove:
@@ -107,21 +107,21 @@ $$
 $$
 Infatti
 $$
-\mathbf{Pr}(\exists j < i : (i,j) \in E ) = \sum_{1 \leq j < i} \mathbf{Pr}( (i,j) \in E )
+\mathbf{Pr}(\exists j < i : (i,j) \in E ) = \sum_{1 \leqslant j < i} \mathbf{Pr}( (i,j) \in E )
 $$
 Questo si può dimostrare per induzione su $i$:
 -   per $i = 2$ vale $$
-     \sum_{1 \leq j < 2} \mathbf{Pr}( (2,j) \in E ) = \mathbf{Pr}( (2,1) \in E ) = 1
+     \sum_{1 \leqslant j < 2} \mathbf{Pr}( (2,j) \in E ) = \mathbf{Pr}( (2,1) \in E ) = 1
      $$ e questo è vero **per costruzione**.
--   sia vero per $k \leq i - 1$, $\sum_{1 \leq j < k} \mathbf{Pr}( (k,j) \in E )=1$ per ipotesi induttiva, allora per $k = i$ si ottiene
+-   sia vero per $k \leqslant i - 1$, $\sum_{1 \leqslant j < k} \mathbf{Pr}( (k,j) \in E )=1$ per ipotesi induttiva, allora per $k = i$ si ottiene
 $$
 \begin{align*}
-	\sum_{1 \leq j < i} \mathbf{Pr}( (i,j) \in E )
-	&= \sum_{1 \leq j < i} \left[ \frac{p}{i-1} + \frac{(1-p)}{i-1} \sum_{1 \leq h < i} \delta_{h,j}  \right]\\ 
-	&= \sum_{1 \leq j < i} \frac{p}{i-1} + \sum_{1 \leq j < i} \Big( \frac{(1-p)}{i-1} \sum_{1 \leq h < i} \delta_{h,j} \Big) \;\;\; \mbox{spezzo la serie}\\
-	&= \frac{(i-1)p}{i-1} + \frac{(1-p)}{i-1} \sum_{1 \leq j < i} \sum_{1 \leq h < i} \delta_{h,j}\\
-	&= p + \frac{(1-p)}{i-1} \sum_{1 \leq h < i} \underbrace{ \sum_{1 \leq j < i} \delta_{h,j} }_{h \scriptsize{\mbox{ ha 1 solo arco uscente}}} \;\;\; \mbox{inverto le due serie}\\
-	&= p + \frac{(1-p)}{i-1} \sum_{1 \leq h < i} 1\\
+	\sum_{1 \leqslant j < i} \mathbf{Pr}( (i,j) \in E )
+	&= \sum_{1 \leqslant j < i} \left[ \frac{p}{i-1} + \frac{(1-p)}{i-1} \sum_{1 \leqslant h < i} \delta_{h,j}  \right]\\ 
+	&= \sum_{1 \leqslant j < i} \frac{p}{i-1} + \sum_{1 \leqslant j < i} \Big( \frac{(1-p)}{i-1} \sum_{1 \leqslant h < i} \delta_{h,j} \Big) \;\;\; \mbox{spezzo la serie}\\
+	&= \frac{(i-1)p}{i-1} + \frac{(1-p)}{i-1} \sum_{1 \leqslant j < i} \sum_{1 \leqslant h < i} \delta_{h,j}\\
+	&= p + \frac{(1-p)}{i-1} \sum_{1 \leqslant h < i} \underbrace{ \sum_{1 \leqslant j < i} \delta_{h,j} }_{h \scriptsize{\mbox{ ha 1 solo arco uscente}}} \;\;\; \mbox{inverto le due serie}\\
+	&= p + \frac{(1-p)}{i-1} \sum_{1 \leqslant h < i} 1\\
 	&= p + \frac{(1-p)}{i-1}(i-1)\\
 	&= p + (1 - p) = 1
 \end{align*}
@@ -139,13 +139,13 @@ La dimostrazione della presenza di una Power Law nel modello definito procede in
 4.  Individuazione di una *power law*.
 #### 1 - Legge aleatoria
 Sia $D_j(t)$ la variabile aleatoria che esprime il numero di archi entranti nel nodo $j$ al passo $t$ del processo di generazione del grafo.
-Si osserva che, per costruzione, la variabile $D_j(t)$ è definita per $t \geqslant j$ e che $D_j(j) = 0$  per ogni $j$: esprime la condizione iniziale della variabile.
+Si osserva che, per costruzione, la variabile $D_j(t)$ è definita per $t \geqslantslant j$ e che $D_j(j) = 0$  per ogni $j$: esprime la condizione iniziale della variabile.
 Si osserva che il grado entrante di un nodo $j$ al passo $t+1$ può aumentare di **al più** una unità rispetto al passo $t$. In particolare, $D_j(t+1) = D_j(t) +1$ se e solo se l'arco $(t+1,j)$ viene creato.
 Dunque sia la variazione nel tempo del grado entrante del nodo $j$ espressa come la differenza $D_j(t+1) - D_j(t)$; la probabilità che il grado entrante di $j$ aumenti di uno vale
 $$
 \begin{align*}
    \mathbf{Pr}(D_j(t+1) - D_j(t) = 1) &= \mathbf{Pr}(\delta_{t+1, j} = 1)\\
-   &= \frac{p}{(t+1)-1} + \frac{(1-p)}{(t+1)-1} \sum_{1 \leq h < (t+1)} \delta_{h,j}\\
+   &= \frac{p}{(t+1)-1} + \frac{(1-p)}{(t+1)-1} \sum_{1 \leqslant h < (t+1)} \delta_{h,j}\\
    &= \frac{p}{t} + \frac{(1-p)}{t}D_j(t)
 \end{align*}
 $$
@@ -161,14 +161,14 @@ $$
    X_j(t+1) - X_j(t) = \frac{p}{t} + \frac{(1-p)}{t}X_j(t)
 \end{cases}
 $$    
-$\forall t \geq j$.
+$\forall t \geqslant j$.
 A questo punto si approssima il comportamento di tale funzione *discreta* con una funzione definita su un dominio *continuo*
 $$
 \begin{cases}
 	   x_j(j) = 0\\
 	   \\
 	   \frac{d}{dt}x_j(t) = \frac{p}{t} + \frac{(1-p)}{t}x_j(t)
-\end{cases} \quad \forall t \geqslant j
+\end{cases} \quad \forall t \geqslantslant j
 $$    
 Non è detto che questa approssimazione si avvicini alla legge reale.
 Si osserva infine che la seconda equazione del sistema è una *equazione differenziale*, cioè una equazione che lega una funzione alla sua derivata, del tipo $f'(x) = a \cdot f(x) + b$.
@@ -221,30 +221,30 @@ x_j(t) = \frac{p}{1-p} \left[ \left( \frac{t}{j}  \right)^{1-p} - 1 \right]
 $$
 #### 4 - Individuazione Power Law
 In conclusione si calcola, dati $k$ e $t$, quanto vale la frazione dei nodi che al tempo $t$ ha esattamente grado entrante $k$.
-Si definisce l'insieme $A_t(k) = \lbrace j \leq t : x_j(t) \geq k \rbrace$, ovvero l'insieme dei nodi che hanno grado entrante **almeno** $k$ al tempo $t$ (secondo l'approssimazione continua e deterministica).
+Si definisce l'insieme $A_t(k) = \lbrace j \leqslant t : x_j(t) \geqslant k \rbrace$, ovvero l'insieme dei nodi che hanno grado entrante **almeno** $k$ al tempo $t$ (secondo l'approssimazione continua e deterministica).
 Allora la frazione dei nodi con grado $k$ sarà la differenza tra il numero di nodi con grado <u>almeno</u> $k$ e il numero di nodi con grado <u>almeno</u> $k+1$, fratto il numero di nodi inseriti fino al tempo $t$ (che equivale a $t$, dato che al passo $t$ l'insieme dei nodi è $[t]$).
 In formule, si deve calcolare
 $$
 \frac{1}{t} | A_t(k) - A_t(k+1) | = \frac{1}{t} \left( |A_t(k)| - |A_t(k+1)| \right)
 $$
-Per definizione, un nodo $j$ appartiene all'insieme $A_t(k)$ se e solo se $j \leq t$ e $x_j(t) \geqslant k$.
-Ma dalla precedente equazione differenziale vale che $x_j(t) = \frac{p}{1-p} \left[ \left( \frac{t}{j}  \right)^{1-p} - 1 \right]$, perciò $x_j(t) \geq k$ se e solo se $\frac{p}{1-p} \left[ \left( \frac{t}{j} \right)^{1-p} - 1 \right] \geq k$.
+Per definizione, un nodo $j$ appartiene all'insieme $A_t(k)$ se e solo se $j \leqslant t$ e $x_j(t) \geqslantslant k$.
+Ma dalla precedente equazione differenziale vale che $x_j(t) = \frac{p}{1-p} \left[ \left( \frac{t}{j}  \right)^{1-p} - 1 \right]$, perciò $x_j(t) \geqslant k$ se e solo se $\frac{p}{1-p} \left[ \left( \frac{t}{j} \right)^{1-p} - 1 \right] \geqslant k$.
 A questo punto, si risolve la disequazione per trovare i valori di $j$ che rispettano la disuguaglianza
 $$
 \begin{align*}
- \frac{p}{1-p} \left[ \left( \frac{t}{j}  \right)^{1-p} - 1 \right] &\geq k\\
- \left( \frac{t}{j}  \right)^{1-p} - 1 &\geq k\frac{1-p}{p}\\
- \left( \frac{t}{j}  \right)^{1-p} &\geq k\frac{1-p}{p} + 1\\
- \frac{t}{j} &\geq \left[ k\frac{1-p}{p} + 1 \right]^{ \frac{1}{1-p} }\\
- j &\leq t \left[ k \frac{1-p}{p} + 1 \right]^{ - \frac{1}{1-p} }
+ \frac{p}{1-p} \left[ \left( \frac{t}{j}  \right)^{1-p} - 1 \right] &\geqslant k\\
+ \left( \frac{t}{j}  \right)^{1-p} - 1 &\geqslant k\frac{1-p}{p}\\
+ \left( \frac{t}{j}  \right)^{1-p} &\geqslant k\frac{1-p}{p} + 1\\
+ \frac{t}{j} &\geqslant \left[ k\frac{1-p}{p} + 1 \right]^{ \frac{1}{1-p} }\\
+ j &\leqslant t \left[ k \frac{1-p}{p} + 1 \right]^{ - \frac{1}{1-p} }
 \end{align*}
 $$
 Si osservi che, poiché $k \frac{1-p}{p} + 1$ è maggiore di 1 e l'esponente $- \frac{1}{1-p}$ è minore di 0, è vero che
-$$\left[ k \frac{1-p}{p} + 1 \right]^{ - \frac{1}{1-p} } \leq 1 \implies t \left[ k \frac{1-p}{p} + 1 \right]^{ - \frac{1}{1-p} } \leq t$$
-Riformulando l'affermazione precedente, il nodo $j$ appartiene all'insieme $A_t(k)$ se e soltanto se $j \leq t \left[ k \frac{1-p}{p} + 1 \right]^{ - \frac{1}{1-p} }$.
+$$\left[ k \frac{1-p}{p} + 1 \right]^{ - \frac{1}{1-p} } \leqslant 1 \implies t \left[ k \frac{1-p}{p} + 1 \right]^{ - \frac{1}{1-p} } \leqslant t$$
+Riformulando l'affermazione precedente, il nodo $j$ appartiene all'insieme $A_t(k)$ se e soltanto se $j \leqslant t \left[ k \frac{1-p}{p} + 1 \right]^{ - \frac{1}{1-p} }$.
 
 Dunque si riformula anche la definizione dell'insieme $A_t(k)$ come
-$$A_t(k) := \bigg\{ j \leq t \left[ k \frac{1-p}{p} + 1 \right]^{ - \frac{1}{1-p} }  \bigg\} $$
+$$A_t(k) := \bigg\{ j \leqslant t \left[ k \frac{1-p}{p} + 1 \right]^{ - \frac{1}{1-p} }  \bigg\} $$
 tale insieme ha cardinalità esattamente
 $$|A_t(k)| =  t \left[ k \frac{1-p}{p} + 1 \right]^{ - \frac{1}{1-p} }$$
 Per comodità, si definisce la funzione
@@ -304,7 +304,7 @@ Anche in questo caso si è interessati a questioni di popolarità, però invece 
 Per affrontare tale questione, si considerino i nodi in ordine di popolarità <u>non crescente</u>.  
 Ovvero, siano i nodi $[n]$ e sia $\forall j \in [n], \delta_{j}$ la popolarità, o grado entrante, di $j$. Si assume che i nodi siano ordinati in maniera tale che:
 $$
-\delta(1) \geq \delta(2) \geq ... \geq \delta(n)
+\delta(1) \geqslant \delta(2) \geqslant ... \geqslant \delta(n)
 $$
 Si assume inoltre che il numero di nodi avente una certa popolarità <u>aumenti</u> al diminuire della popolarità.
 Ovvero il numero di nodi con popolarità 100 sarà <u>minore</u> di quelli con popolarità 99, che a sua volta sarà più piccolo di quelli con popolarità 98, ecc...

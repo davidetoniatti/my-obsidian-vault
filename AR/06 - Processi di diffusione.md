@@ -21,9 +21,7 @@ Questo processo di diffusione individuale basato sul vantaggio personale viene m
 - se $u$ e $v$ adottano entrambi $A$ allora entrambi hanno un beneficio pari ad $a$;
 - se $u$ e $v$ adottano entrambi $B$ allora entrambi hanno un beneficio pari ad $b$;
 - altrimenti, nessuno dei due ha alcun beneficio dalla reciproca relazione.
-Dato che in genere un nodo nella rete ha più di un vicino, si adotta un modello lineare.
-Detti $N_A$ il numero di vicini di $u$ nello stato $A$ e $N_B$ il numero di vicini di $u$ nello stato $B$: se $u$ rimane nello stato $B$ ha un beneficio pari a $b \cdot N_B$, se $u$ passa allo stato $A$ ha un beneficio pari ad $a \cdot N_A$.
-Allora $u$ rimane nello stato $B$ se $b \cdot N_B > a \cdot N_A$ , mentre $u$ passa allo stato $A$ se $a \cdot N_A \geqslant b \cdot N_B$.
+Dato che in genere un nodo nella rete ha più di un vicino, si adotta un modello lineare. Detti $N_A$ il numero di vicini di $u$ nello stato $A$ e $N_B$ il numero di vicini di $u$ nello stato $B$: se $u$ rimane nello stato $B$ ha un beneficio pari a $b \cdot N_B$, se $u$ passa allo stato $A$ ha un beneficio pari ad $a \cdot N_A$. Allora $u$ rimane nello stato $B$ se $b \cdot N_B > a \cdot N_A$ , mentre $u$ passa allo stato $A$ se $a \cdot N_A \geqslant b \cdot N_B$.
 
 ```ad-note
 A partià di beneficio, $u$ passa ad $A$, ossia l'innovazione è preferibile al vecchio stato.
@@ -73,8 +71,7 @@ Dai due esempio si possono trarre una serie di conclusioni:
 Inoltre, l'eventualità che tutti i nodi arriveranno ad adottare $A$ dipende dai nodi sui quali si forza lo stato $A$ all'inizio del processo: dal loro numero e dalla loro posizione all'interno della rete.
 
 Questo insieme di nodi $V_0$ si identifica come insieme dei nodi **iniziatori**.
-Una volta che $A$ viene introdotto nella rete, inizia un processo di diffusione che procede in una sequenza di passi discreti: si indica con $V_i$ l'insieme dei nodi che adottano $A$ al passo $i$ di tale sequenza, ossia l'insieme di vicini dei nodi $V_0 \cup V_1 \cup \dots \cup V_{i-1}$ che adotta $A$.
-Viene generata una **cascata completa** se ad un certo passo $t$ tutti i nodi hanno adottato $A$, ossia se esiste un $t \geq 0$ tale che $\bigcup_{0 \leq i \leq t} V_i = V$.
+Una volta che $A$ viene introdotto nella rete, inizia un processo di diffusione che procede in una sequenza di passi discreti: si indica con $V_i$ l'insieme dei nodi che adottano $A$ al passo $i$ di tale sequenza, ossia l'insieme di vicini dei nodi $V_0 \cup V_1 \cup \dots \cup V_{i-1}$ che adotta $A$. Viene generata una **cascata completa** se ad un certo passo $t$ tutti i nodi hanno adottato $A$, ossia se esiste un $t \geq 0$ tale che $\bigcup_{0 \leq i \leq t} V_i = V$.
 ### Cascate e cluster
 Dagli esempi svolti, si nota che l'innovazione ha difficoltà ad uscire da gruppi coesi di nodi.
 Si definisce **cluster di densità** $p$ un sottoinsieme di nodi $V' \subseteq V$ tale che la frazione di vicini che ogni suo nodo ha in $V'$ è almeno $p$.
@@ -87,10 +84,11 @@ Nell'esempio 2, il sottoinsieme di nodi $\{4,5,6,7,8,9,10\}$ è un cluster di de
 Sia $G=(V,E)$ un grafo e sia $V' \subseteq V$: si indica con $G-V'$ il grafo ottenuto rimuovendo da $G$ tutti i nodi in $V'$ e tutti gli archi incidenti su nodi in $V'$.
 ```
 
-Valgono i seguenti teoremi.
-#### Teorema 1
-Sia $G=(V,E)$ un grafo e siano $V_0 \subseteq V$ l'insieme di iniziatori e $q$ la soglia di adozione di $A$: se $V_0$ non genera una cascata completa allora $G-V_0$ contiene un cluster di densità $1-q$.
+Vale il seguente teorema.
+#### Teorema
+Sia $G=(V,E)$ un grafo e siano $V_0 \subseteq V$ l'insieme di iniziatori e $q$ la soglia di adozione di $A$: $V_0$ non genera una cascata completa se e solo se $G-V_0$ contiene un cluster di densità $1-q$.
 ##### Dimostrazione
+###### $(\implies)$
 Se $V_0$ non genera una cascata completa, allora esistono nodi che non adottano $A$.
 Sia $t$ il passo tale che $V_t \neq \emptyset$ e $V_{t+1} = \emptyset$, ossia $t+1$ è il passo in cui $A$ non si diffonde più.
 Sia $V_A = \bigcup_{0 \leq i \leq t} V_i$ , cioè l'insieme di tutti e soli i nodi che adottano $A$. Poiché esistono nodi che non adottano $A$, vale $V-V_A \neq \emptyset$. Poiché i nodi in $V-V_A$ non adottano $A$, allora vale per ogni $v \in V-V_A$:
@@ -103,12 +101,10 @@ $$
 $$
 allora vale
 $$
-\frac{ |N(v) \cap (V-V_{A})| }{ |N(v)| } \geqslant 1-q
+\frac{ |N(v) \cap (V-V_{A})| }{ |N(v)| } > 1-q
 $$
-ossia, $V-V_A$ è un cluster di densità $1 - q$ ed è contenuto in $G – V_0$.
-#### Teorema 2
-Sia $G=(V,E)$ un grafo e siano $V_0 \subseteq V$ l'insieme di iniziatori e $q$ la soglia di adozione di $A$: se $G-V_0$ contiene un cluster di densità maggiore di $1-q$ allora $V_0$ non genera una cascata completa.
-##### Dimostrazione
+ossia, $V-V_A$ è un cluster di densità maggiore di $1 - q$ ed è contenuto in $G – V_0$.
+###### $(\impliedby)$
 Se $G-V_0$ contiene un cluster di densità maggiore di  $1-q$, cioè, esiste $C \subseteq V - V_0$ tale che, per ogni $v \in C$,
 $$
 \frac{ |N(v) \cap C| }{ |N(v)| } > 1 - q
@@ -125,19 +121,20 @@ $$
 
 dunque un assurdo.
 _____
-I teoremi appena dimostrati mettono in risalto il fatto che le innovazioni si diffondono con relativa facilità all'interno dei cluster; invece, incontrano difficoltà ad uscire dai cluster.
+Il teorema appena dimostrato mette in risalto il fatto che le innovazioni si diffondono con relativa facilità all'interno dei cluster; invece, incontrano difficoltà ad uscire dai cluster.
 Perciò, si può concludere che, mentre l'esperimento di Granovetter ha permesso di mettere in luce la forza dei weak ties, in quanto fonte di vantaggi informativi, lo studio dei processi di diffusione ne evidenzia la debolezza, in quanto ostacolo alla diffusione.
 
-Ci si chiede ora se è possibile superare lo stallo nel quale, a causa della presenza di cluster sufficientemente densi, uno stato $A$ smette di diffondersi. In generale, si possono scegliere gli iniziatori in posizioni tali che ciascun cluster ne contenga almeno uno, oppure è possibile aumentare l'appetibilità di $A$.
-Quanto alta può essere tenuta la soglia di adozione perché si generi una cascata completa?
+Ci si chiede ora se è possibile superare lo stallo nel quale, a causa della presenza di cluster sufficientemente densi, uno stato $A$ smette di diffondersi. In generale, si possono scegliere gli iniziatori in posizioni tali che ciascun cluster ne contenga almeno uno, oppure è possibile aumentare l'appetibilità di $A$. Quanto alta può essere tenuta la *soglia di adozione* perché si generi una cascata completa?
 ### Capacità di cascata
 Quanto alta può essere tenuta la soglia di adozione perché si generi una cascata completa?
 Innanzi tutto, dipende dalla struttura della rete; alcune strutture ostacolano maggiormente di altre la generazione di cascate complete.
 
-**PROBLEMA**: dato un grafo $G=(V,E)$, qual è la soglia di adozione massima $q_{max}$ in $G$ affinché un *piccolo* insieme $V_0$ di iniziatori di un nuovo stato $A$ generi una cascata completa?
+```ad-Problema
+title: Problema
+Dato un grafo $G=(V,E)$, qual è la soglia di adozione massima $q_{max}$ in $G$ affinché un *piccolo* insieme $V_0$ di iniziatori di un nuovo stato $A$ generi una cascata completa?
+```
 
-Il valore $q_{max}$ prende il nome di **capacità di cascata di** $G$.
-Con $V_0$  *piccolo* si intende che $|V_0| \ll |V|$ .
+Il valore $q_{max}$ prende il nome di **capacità di cascata di** $G$. Con $V_0$  *piccolo* si intende che $|V_0| \ll |V|$ .
 
 Per studiare questo problema, si consideri la seguente ipotesi di lavoro.
 $G$ è un grafo infinito, ossia contiene un numero **infinito** di nodi e l'insieme $V_0$ degli iniziatori può essere un qualsiasi insieme finito di nodi di $G$.
@@ -148,7 +145,6 @@ Se $|V_0| = 1$, ossia, $V_0$ contiene un solo nodo, allora occorre $q = 1/2$ per
 Anche scegliendo un insieme più grande, non è possibile generare una cascata con $q > 1/2$, perché i nodi al confine con $V_0$ ($x$ e $y$) hanno comunque bisogno di $q = 1/2$ per passare ad $A$.
 ![[AR/attachments/06-img04.png|center]]
 Allora in una catena infinita: $q_{max} = 1/2$.
-
 #### Esempio: $G$ è una griglia infinita
 Se $|V_0| = 1$, allora occorre $q = 1/8$ per generare una cascata completa.
 ![[AR/attachments/06-img05.png|center|500]]
@@ -162,13 +158,12 @@ Aumentando $|V_0|$ non si riesce ad aumentare la soglia di adozione: una volta i
 ![[AR/attachments/06-img07.png|center|500]]
 
 Allora, in una griglia infinita: $q_{max} = 3/8$.
-
+____
 Dai due esempi si osserva che:
 - la soglia di adozione massima è più bassa nella griglia, che ha una topologia più ricca, che non nella catena;
 - in entrambi i casi, essa non supera $1/2$, cioè affinché si generi una cascata completa, $A$ deve essere almeno tanto appetibile quanto $B$.
 
-Ci si chiede, poiché la soglia di adozione massima è una caratteristica della rete (ovvero, della sua topologia), se esistono topologie nelle quali la soglia di adozione massima è maggiore di $1/2$;
-ossia, se esistono topologie nelle quali innovazioni di qualità mediocre soppiantino uno status quo di qualità maggiore. Il prossimo teorema risponde a questa domanda.
+Ci si chiede, poiché la soglia di adozione massima è una caratteristica della rete (ovvero, della sua topologia), se esistono topologie nelle quali la soglia di adozione massima è maggiore di $1/2$; ossia, se esistono topologie nelle quali innovazioni di qualità mediocre soppiantino uno status quo di qualità maggiore. Il prossimo teorema risponde a questa domanda.
 #### Teorema
 Poiché la soglia di adozione massima è una caratteristica della rete, indicheremo come $q_G$ **la soglia di adozione massima di un grafo** $G$.
 ```ad-Teorema
@@ -180,15 +175,11 @@ $$
 ```
 ##### Dimostrazione
 Si supponga per assurdo che esista un insieme finito di iniziatori $V_0$ che, con soglia di adozione $q > 1/2$, generi una cascata completa nel grafo $G.$
-Sia $V_t$ l'insieme dei nodi che adottano $A$ al passo $t$ e sia, per ogni $t \geqslant 0, S_t = \bigcup_{0 \leqslant i \leqslant t} V_i$ l'insieme dei nodi che, al passo $t$, sono nello stato $A.$
-
-Sia **l'interfaccia al passo** $t$ l'insieme $I_t$ degli archi che, al passo $t$, hanno un estremo in $S_t$ e l'altro estremo in $V-S_t$
+Sia $V_t$ l'insieme dei nodi che adottano $A$ al passo $t$ e sia, per ogni $t \geqslant 0, S_t = \bigcup_{0 \leqslant i \leqslant t} V_i$ l'insieme dei nodi che, al passo $t$, sono nello stato $A.$ Sia **l'interfaccia al passo** $t$ l'insieme $I_t$ degli archi che, al passo $t$, hanno un estremo in $S_t$ e l'altro estremo in $V-S_t$
 $$
 I_t = \{ (u,v) \in E: u \in S_t \land v \in V-S_t \}
 $$
-Allora si dimostra che, per ogni $t \geqslant 0, |I_t| > |I_{t+1}|$ oppure $I_t = I_{t+1}$.
-
-Per fare ciò, si dimostra che se $I_t \neq I_{t+1}$, allora $|I_t| > |I_{t+1}|$.
+Allora si dimostra che, per ogni $t \geqslant 0, |I_t| > |I_{t+1}|$ oppure $I_t = I_{t+1}$. In particolare, si dimostra che se $I_t \neq I_{t+1}$, allora $|I_t| > |I_{t+1}|$.
 Se $I_t \neq I_{t+1}$, allora esiste un nodo $v$ che adotta $A$ al passo $t+1$, ossia $V_{t+1} \neq \emptyset$ e perché un nodo $v$ appartenga a $V_{t+1}$ deve esistere $u \in N(v)$ tale che $u \in S_t$, ossia, per ogni $v \in V_{t+1}$ esiste (almeno) un arco $(u,v) \in I_t$ tale che $u \in S_t$.
 Allora, per ogni nodo $v \in V_{t+1}$:
 - gli archi incidenti su $v$ il cui altro estremo è in $S_t$ sono in $I_t$ ma non in $I_{t+1}$, come $(u,v)$ in figura;
@@ -203,7 +194,7 @@ $$
 - se $x \neq z$ con $x,z \notin S_t$, allora $\{ (u,x) \in E : u \in S_t \} \cap \{ (u,z) \in E : u \in S_t \} = \emptyset$; dunque $| \bigcup_{v \in V_{t+1}} \{ (u,v) \in E : u \in S_t \}| = \sum_{v \in V_{t+1}} | \{ (u,v) \in E : u \in S_t \} |$
 - se $x \neq z$ con $x,z \in V_{t+1}$, allora $\{ (u,x) \in E : u \in V - S_{t+1} \} \cap \{ (u,z) \in E : u \in V - S_{t+1} \} = \emptyset$; dunque $| \bigcup_{v \in V_{t+1}} \{ (u,v) \in E : u \in V - S_{t+1} \}| = \sum_{v \in V_{t+1}} | \{ (u,v) \in E : u \in V - S_{t+1} \} |$
 
-ossia
+dunque
 $$
 |I_{t+1}| = |I_t| - \sum_{v \in V_{t+1}} | \{ (u,v) \in E : u \in S_t \} | + \sum_{v \in V_{t+1}} | \{ (u,v) \in E : u \in V - S_{t+1} \} |
 $$
@@ -218,7 +209,6 @@ perché per ogni $v \in V_{t+1}, (u,v) \in I_t$ se e solo se $u \in N(v) \cap S_
 $$
 |I_{t+1}| = |I_t| - \sum_{v \in V_{t+1}} | N(v) \cap S_t | + \sum_{v \in V_{t+1}} | N(v) - S_{t+1} |
 $$
-
 Per ogni $v \in V_{t+1}$, deve essere
 $$
 \frac{ |N(v) \cap S_t| }{ |N(v)| } \geqslant q > \frac{1}{2}
@@ -241,16 +231,12 @@ $$
 \end{align}
 $$
 Dunque è stato dimostrato che, per ogni $t \geqslant 0, |I_t| > |I_{t+1}|$ oppure $I_t = I_{t+1}$.
-Poiché $V_0$ è un insieme finito e i nodi di $G$ hanno grado finito, allora l'interfaccia iniziale ha dimensione finita, ossia $|I_0| = k$ per qualche $k \in \mathbb{N}$.
-Allora l'eventualità $I_t \neq I_{t+1}$ non può verificarsi per più di $k$ passi, perché ogni volta che $I_t \neq I_{t+1}$ è anche $|I_t| > |I_{t+1}|$ e la dimensione dell'interfaccia non può essere minore di zero (neanche uguale a zero in tempo finito su un grafo infinito).
-Allora, esiste $T$ tale che, per ogni $t \geqslant T, I_t = I_{t+1}$; ossia, dal passo $T$ la diffusione si interrompe.
+Poiché $V_0$ è un insieme finito e i nodi di $G$ hanno grado finito, allora l'interfaccia iniziale ha dimensione finita, ossia $|I_0| = k$ per qualche $k \in \mathbb{N}$. Allora l'eventualità $I_t \neq I_{t+1}$ non può verificarsi per più di $k$ passi, perché ogni volta che $I_t \neq I_{t+1}$ è anche $|I_t| > |I_{t+1}|$ e la dimensione dell'interfaccia non può essere minore di zero (neanche uguale a zero in tempo finito su un grafo infinito). Dunque esiste $T$ tale che, per ogni $t \geqslant T, I_t = I_{t+1}$; ossia, dal passo $T$ la diffusione si interrompe.
 Ma in un grafo infinito una cascata completa può verificarsi solo in seguito a un processo di diffusione infinito, allora $V_0$ non genera una cascata completa.
 ### Nodi eterogenei
-Il modello di diffusione considerato fino ad ora è un modello uniforme, cioè tutti i nodi associano lo stesso beneficio nell'adottare $A$ o $B$ che risulta, rispettivamente, $a$ o $b$.
-Tuttavia, questo modello è poco realistico: ciascun individuo nella rete ha un proprio beneficio nell'adottare $A$ o $B$, che può dipendere, ad esempio, dalle sue capacità di adattarsi al nuovo stato.
+Il modello di diffusione considerato fino ad ora è un modello uniforme, cioè tutti i nodi associano lo stesso beneficio nell'adottare $A$ o $B$ che risulta, rispettivamente, $a$ o $b$. Tuttavia, questo modello è poco realistico: ciascun individuo nella rete ha un proprio beneficio nell'adottare $A$ o $B$, che può dipendere, ad esempio, dalle sue capacità di adattarsi al nuovo stato.
 
-Allora, per ogni nodo $u$ nella rete, $a_u$ e $b_u$ sono il beneficio che $u$ ottiene nel relazionarsi, rispettivamente, con un nodo che adotta $A$ o con un nodo che adotta $B$.
-Si assume, cioè, che il beneficio reciproco di adottare $A$ o $B$ da parte dei nodi adiacenti $u$ e $v$ sia quello illustrato nella seguente tabella.
+Allora, per ogni nodo $u$ nella rete, $a_u$ e $b_u$ sono il beneficio che $u$ ottiene nel relazionarsi, rispettivamente, con un nodo che adotta $A$ o con un nodo che adotta $B$. Si assume, cioè, che il beneficio reciproco di adottare $A$ o $B$ da parte dei nodi adiacenti $u$ e $v$ sia quello illustrato nella seguente tabella.
 ![[AR/attachments/06-img09.png|center|500]]
 Allora, un nodo $v \in V$ nello stato $B$ passa allo stato $A$ sulla base del valore $q_v = \frac{b_v}{a_v + b_v}$.
 ![[AR/attachments/06-img10.png|center|500]]
@@ -263,13 +249,10 @@ $$
 $$
 ```
 
-Infatti
 ```ad-Teorema
 title: Teorema
 Sia $G=(V,E)$ un grafo. Nel modello a nodi eterogenei, l’insieme di iniziatori $v_0 \subseteq V$ non genera una cascata completa se e solo se $G – V_0$ contiene un blocking cluster.
 ```
-##### Dimostrazione
-ESERCIZIO.
 ## Azione collettiva
 Si vogliono modellare, mediante processi di diffusione, situazioni nelle quali è richiesto che un'azione abbia luogo *collettivamente*, ossia, dove la coordinazione di una grande porzione della popolazione risulti essere fondamentale al fine di raggiungere un dato obiettivo, e la rete ha lo scopo di veicolare informazioni riguardo la volontà degli individui di partecipare o meno a tale azione.
 Si supponga di voler organizzare una protesta contro un regime dittatoriale. Ciascun individuo decide di aderire alla protesta solo se sa con certezza che un numero sufficientemente elevato di individui aderirà alla protesta. Poiché l'ambientazione è quella di una dittatura, la libertà di stampa è ostacolata e, in generale, le comunicazioni sono rese difficoltose.
@@ -296,14 +279,13 @@ Poiché il grafo è perfettamente simmetrico, nessuno aderisce alla protesta anc
 
 In questo esempio invece, $u, v, x$ si vedono l’un l’altro, così, $u$ sa che $v$ e $x$, per partecipare, hanno bisogno che altri due partecipino, ma $u$ sa anche che anche $v$ e $x$ sanno esattamente le stesse cose che sa egli stesso e, poiché si fidano uno dell’altro, partecipano tutti e tre, senza aver bisogno di conoscere altro della rete, ossia indipendentemente da $y$.
 ### Conclusioni
-In assenza di comunicazioni adeguate che abbiano luogo nella rete, l'azione collettiva si verifica difficilmente, ed ecco perché i regimi dittatoriali tendono a favorire l’*ignoranza pluralistica* che permette di concludere erroneamente che pochi individui abbiano una certa opinione, come accadeva nel secondo esempio.
-Invece, l’esempio 3 permette di osservare l’importanza di disporre di una base di conoscenza comune, cioè l'importanza dei mezzi di diffusione delle informazioni, permettendo che tutti siano coscienti del fatto che un certo messaggio è conosciuto da tutti.
+In assenza di comunicazioni adeguate che abbiano luogo nella rete, l'azione collettiva si verifica difficilmente, ed ecco perché i regimi dittatoriali tendono a favorire l’*ignoranza pluralistica* che permette di concludere erroneamente che pochi individui abbiano una certa opinione, come accadeva nel secondo esempio. Invece, l’esempio 3 permette di osservare l’importanza di disporre di una base di conoscenza comune, cioè l'importanza dei mezzi di diffusione delle informazioni, permettendo che tutti siano coscienti del fatto che un certo messaggio è conosciuto da tutti.
 ## Diffusione in presenza di compatibilità
 Non è infrequente che due stati $A$ e $B$ possano coesistere, dunque ora si studieranno i processi di diffusione in presenza di compatibilità, cioè quando un nodo può stare nello stato $A$, nello stato $B$ o nello stato $AB$ nel modello *nodi omogenei*, cioè i benefici del trovarsi in un certo stato, dipendono soltanto dallo stato e sono gli stessi per tutti i nodi.
 Naturalmente, un nodo adotta lo stato misto $AB$ quando ne trae beneficio, ma non può adottarlo sempre, perché adottare sia $A$ che $B$ ha un costo maggiore. In ogni caso, il costo di adozione di $AB$ viene pagato una sola volta dal nodo, mentre è in grado di trarre guadagno da tutti i suoi vicini. In particolare, sia $u \in V$ un nodo nello stato $AB$ e sia $v \in N(u)$, allora:
-- se lo stato si $v$ è $A$, allora $u$ trae un beneficio pari ad $a$ dalla comunicazione con $v$;
-- se lo stato si $v$ è $B$, allora $u$ trae un beneficio pari ad $B$ dalla comunicazione con $v$;
-- se lo stato si $v$ è $B$, allora entrambi i nodi possono comunicare mediante lo stato migliore, scegliendo quello che massimizza il beneficio: guadagnano quindi $\max\{ a,b \}.$
+- se lo stato di $v$ è $A$, allora $u$ trae un beneficio pari ad $a$ dalla comunicazione con $v$;
+- se lo stato di $v$ è $B$, allora $u$ trae un beneficio pari ad $B$ dalla comunicazione con $v$;
+- se lo stato di $v$ è $AB$, allora entrambi i nodi possono comunicare mediante lo stato migliore, scegliendo quello che massimizza il beneficio: guadagnano quindi $\max\{ a,b \}.$
 
 ![[AR/attachments/06-img14.png|center|500]]
 Sia, per ogni nodo $u$, il costo per $u$ di essere nello stato $AB$ pari a $c$.
@@ -319,7 +301,6 @@ $$
 $$
 p_{b}(u) = \sum_{v \in (V_{B} \cup V_{AB}) \cap N(u)} b \\
 $$
-
 Si studia la capacità di cascata di una rete in presenza di compatibilità, in particolare:
 - si analizza un esempio nel caso particolare in cui $G$ è una catena infinita;
 - si descrivono i risultati di uno studio qualitativo nel caso bidimensionale ($G$ griglia infinita);

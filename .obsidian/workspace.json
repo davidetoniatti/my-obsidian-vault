@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "f9dc8b0173cdf173",
+        "id": "4108667b2576c021",
         "type": "tabs",
         "children": [
           {
-            "id": "7abe1b2ec06ac530",
+            "id": "b57d36d4ab05f90c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "AR/06 - Processi di diffusione.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "AR/06 - Processi di diffusione.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "AR/06 - Processi di diffusione.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,13 +118,11 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "AR/06 - Processi di diffusione.md"
-              }
+              "state": {}
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -148,29 +140,30 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "7abe1b2ec06ac530",
+  "active": "b57d36d4ab05f90c",
   "lastOpenFiles": [
+    "AR/08 - Sistemi di voto.md",
+    "AR/attachments/Pasted image 20240904234445.png",
+    "AR/attachments/Pasted image 20240904234041.png",
+    "AR/attachments/Pasted image 20240904233050.png",
+    "AR/attachments/Pasted image 20240904230345.png",
+    "AR/attachments/Pasted image 20240904225448.png",
+    "AR/attachments/Pasted image 20240904225028.png",
+    "AR/attachments/Pasted image 20240904224953.png",
+    "AR/attachments/Pasted image 20240904224841.png",
+    "AR/attachments/Pasted image 20240904224615.png",
+    "AR/attachments/Pasted image 20240904171107.png",
+    "AR/09 - Web Search.md",
     "AR/05 - Reti come grafi dalla struttura disomogenea.md",
-    "AR/06 - Processi di diffusione.md",
     "AR/07 - Seguire il gregge.md",
     "AR/03 - Grafi geometrici aleatori e reti wireless.md",
     "AR/02 - Questione di popolarità.md",
     "AR/01 - Introduzione e grafi di Erdős-Rényi.md",
+    "AR/06 - Processi di diffusione.md",
+    "ABD/06 - Data streams.md",
     "AR/04 - Il fenomeno Small World.md",
-    "AR/08 - Sistemi di voto.md",
-    "AR/attachments/Pasted image 20240830185959.png",
-    "AR/attachments/Pasted image 20240830112057.png",
-    "AR/attachments/Pasted image 20240829152505.png",
-    "AR/attachments/Pasted image 20240829152156.png",
-    "AR/attachments/Pasted image 20240829152123.png",
-    "AR/attachments/Pasted image 20240829151120.png",
-    "AR/attachments/Pasted image 20240828105023.png",
     "AGT/02 - Global Connection Game.md",
     "study_plan_draft.md",
-    "AR/09 - Web Search.md",
-    "AR/attachments/Pasted image 20240726160444.png",
-    "AR/attachments/Pasted image 20240726160159.png",
-    "attachments/Pasted image 20240511145854.png",
     "cose da fare.md",
     "Senza nome.md",
     "ABD/07 - Link analysis.md",
@@ -184,7 +177,6 @@
     "ADRC/06 - Saturazione.md",
     "ADRC/04 - Spanning Tree construction.md",
     "ADRC/03 - Problema Wake-up.md",
-    "ADRC/02 - Problema Broadcast.md",
     "attachments",
     "ADRC.zip",
     "ziUeKQ0c",

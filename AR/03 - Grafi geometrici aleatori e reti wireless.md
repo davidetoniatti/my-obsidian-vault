@@ -147,7 +147,7 @@ Dunque dopo qualche passaggio algebrico si ottiene
 $$
 \begin{align*}
     \mathbf{Pr}(\exists C : C = \emptyset)
-    &\leq \frac{5n}{\gamma^2_1 \ln{n}} \left(  1 - \frac{\gamma^2_1 \ln{n}}{5n} \right)^n\\
+    &\leqslant \frac{5n}{\gamma^2_1 \ln{n}} \left(  1 - \frac{\gamma^2_1 \ln{n}}{5n} \right)^n\\
     &< \frac{5n}{\gamma^2_1 \ln{n}} \left( e^{-\frac{\gamma^2_1 \ln{n}}{5n}} \right)^n\\
     &= \frac{5n}{\gamma^2_1 \ln{n}} e^{-\frac{\gamma^2_1 \ln{n}}{5}}\\
     &= \frac{5n}{\gamma^2_1 \ln{n}} n^{-\frac{\gamma^2_1}{5}}\\

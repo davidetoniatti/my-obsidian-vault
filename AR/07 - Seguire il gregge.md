@@ -1,16 +1,21 @@
-Con questa serie di lezioni si tratta la parte finale del corso nella quale si studia un diverso aspetto delle reti: **il contenuto informativo** di una rete, che può indurre gli individui che la compongono a modificare il proprio comportamento (*questa lezione*), che deve essere sintetizzato per derivare una informazione cumulativa che tenga conto, in qualche modo, dei pezzi di informazione derivanti dai singoli individui ([08 - Sistemi di voto](08%20-%20Sistemi%20di%20voto.md)) e dal quale deve essere individuato ed estratto quello rilevante ad una certa richiesta ([09 - Web Search](09%20-%20Web%20Search.md)).
+Con questa serie di lezioni si tratta la parte finale del corso nella quale si studia un diverso aspetto delle reti, ovvero **il contenuto informativo** di una rete, il quale:
+- può indurre gli individui che la compongono a modificare il proprio comportamento (*questa lezione*);
+- deve essere sintetizzato per derivare una informazione cumulativa che tenga conto, in qualche modo, dei pezzi di informazione derivanti dai singoli individui ([08 - Sistemi di voto](08%20-%20Sistemi%20di%20voto.md));
+- dal quale deve essere individuato ed estratto quello rilevante ad una certa richiesta ([09 - Web Search](09%20-%20Web%20Search.md)).
 # Reti e Informazioni
-Si è già mostrato che l'informazione presente in una rete può indurre gli individui che la compongono a modificare il proprio comportamento, parlando di *processi di diffusione*.
-Nello studio dei [processi di diffusione](06%20-%20Processi%20di%20diffusione.md) si è visto come il comportamento dei singoli individui veniva influenzato dalla _diretta comunicazione_ col proprio vicinato. Ora si vedrà come le decisioni dei singoli individui possono essere influenzate dalle *osservazioni* fatte verso il comportamento degli altri, senza lo scambio diretto di alcuna informazione. In sostanza come è possibile _estrapolare informazioni_ dal comportamento della massa.
+Si è già mostrato che l'informazione presente in una rete può indurre gli individui che la compongono a modificare il proprio comportamento, parlando di *processi di diffusione*. Nello studio dei [processi di diffusione](06%20-%20Processi%20di%20diffusione.md) si è visto come il comportamento dei singoli individui veniva influenzato dalla _diretta comunicazione_ col proprio vicinato.
+Ora si vedrà come le decisioni dei singoli individui possono essere influenzate dalle *osservazioni* fatte verso il comportamento degli altri, senza lo scambio diretto di alcuna informazione. In sostanza come è possibile _estrapolare informazioni_ dal comportamento della massa.
+
 ```ad-important
 title: Importante
 L'informazione presente in una rete può indurre gli individui che la compongono a modificare il proprio comportamento.
 ```
+
 Si vede qualche esempio di tale fenomeno.
 ### Esempio 1: cenare in una città sconosciuta
-Come primo esempio si supponga di essere in vacanza in un nuovo posto e di dover scegliere un ristorante nel quale mangiare. In base alle ricerche personali risulta che il ristorante **A** è il migliore che ci sia in zona, e quindi si sceglie tale ristorante. Poco prima di entrare però si osserva che nel ristorante accanto, il ristorante **B**, c'è moltissima clientela, mentre il ristorante **A** è praticamente vuoto. Non è del tutto irrazionale pensare che tutte le persone che vanno al ristorante **B** abbiano **informazioni private** che non si conoscono, e supporre che in realtà il ristorante **B** è il migliore. In effetti, il fatto che il ristorante **A** sia quasi vuoto non aiuta: verrebbe da pensare che si è in possesso di informazioni non del tutto esatte o complete. Dunque si decide di andare al ristorante **B**.
+Si supponga di essere in vacanza in un nuovo posto e di dover scegliere un ristorante nel quale mangiare. In base alle ricerche personali risulta che il ristorante **A** è il migliore che ci sia in zona, e quindi si sceglie tale ristorante. Poco prima di entrare però si osserva che nel ristorante accanto, il ristorante **B**, c'è moltissima clientela, mentre il ristorante **A** è praticamente vuoto. Non è del tutto irrazionale pensare che tutte le persone che vanno al ristorante **B** abbiano **informazioni private** che non si conoscono, e supporre che in realtà il ristorante **B** è il migliore. In effetti, il fatto che il ristorante **A** sia quasi vuoto non aiuta: verrebbe da pensare che si è in possesso di informazioni non del tutto esatte o complete. Dunque si decide di andare al ristorante **B**.
 
-In questo caso si dirà che è avvenuta una **cascata informativa** (o **herding**). In poche parole, una cascata informativa occorre quando gli individui prendono decisioni in maniera sequenziale, osservando ciò che hanno fatto gli altri prima e cercando di inferire qualche informazione aggiuntiva che ha spinto gli altri ad agire in tale maniera.
+In questo caso si dirà che è avvenuta una **cascata informativa** (o **herding**). Una cascata informativa occorre quando gli individui prendono decisioni in maniera sequenziale, osservando ciò che hanno fatto gli altri prima e cercando di inferire qualche informazione aggiuntiva che ha spinto gli altri ad agire in tale maniera.
 ### Esempio 2: a naso in su
 La cosa più interessante è che gli individui _"imitano"_ gli altri per via di una serie di ragionamenti ed inferenze più che sensate. Naturalmente, l'imitazione può verificarsi anche a causa della pressione sociale, all'esigenza di volersi conformare, senza alcuna causa informativa sottostante, e non è sempre facile distinguere questi due fenomeni. 
 
@@ -54,7 +59,7 @@ Per formalizzare meglio la meccanica precedentemente descritta è necessario enu
 #### Teorema di Bayes
 Siano $A,B \in \Omega$ due eventi di probabilità non nulla, allora
 $$
-\mathbf{Pr}(A|B) = \frac{\mathbf{Pr}(B|A)\mathbf{Pr}(A)}{\mathbf{Pr}(B)}
+\mathbf{Pr}(A|B) = \frac{\mathbf{Pr}(B|A)\mathbf{Pr}(A)}{\mathbf{Pr}(B|A)\mathbf{Pr}(A) + \mathbf{Pr}(B|A^{\mathcal{C}}) \mathbf{Pr}(A^{\mathcal{C}})  }
 $$
 ##### Dimostrazione
 Per definizione di probabilità condizionata, vale che
@@ -83,10 +88,7 @@ $$
 &= \mathbf{Pr}(B | A)\mathbf{Pr}(A) + \mathbf{Pr}(B | A^{\mathcal{C}})\mathbf{Pr}(A^{\mathcal{C}})
 \end{align}
 $$
-dunque
-$$
-\mathbf{Pr}(B|A) = \frac{\mathbf{Pr}(A\cap B)}{\mathbf{Pr}(B | A)\mathbf{Pr}(A) + \mathbf{Pr}(B | A^{\mathcal{C}})\mathbf{Pr}(A^{\mathcal{C}})}
-$$
+dunque segue il teorema.
 #### Analisi
 Si utilizza quest'ultima legge per analizzare il gioco delle due urne. Si considerino gli eventi:
 - $MR$: *"l'urna è a maggioranza rossa"*;
@@ -192,8 +194,7 @@ Per semplicità si assuma che le decisioni da prendere sono **binarie**, dove le
 - $Y$: individuo **accetta** una proposta;
 - $N$: individuo **rifiuta** una proposta;
 Solo una una delle due alternativa è quella *giusta*. Sia $\mathbf{Pr}(Y) = p$ la probabilità che accettare la proposta sia la scelta giusta, e dunque sia $\mathbf{Pr}(N) = 1-p$ la probabilità che rifiutare la proposta sia la scelta giusta.
-Se un individuo accetta una proposta può avere un profitto o una perdita: se accettare è la scelta giusta, allora ottiene un profitto $v_g > 0$; se accettare **non** è la scelta giusta, allora ottiene una perdita $v_b < 0$.
-Se un individuo rifiuta una proposta, allora non ottiene alcun profitto o perdita.
+Se un individuo accetta una proposta può avere un profitto o una perdita: se accettare è la scelta giusta, allora ottiene un profitto $v_g > 0$; se accettare **non** è la scelta giusta, allora ottiene una perdita $v_b < 0$. Se un individuo rifiuta una proposta, allora non ottiene alcun profitto o perdita.
 Affinché sia equivalente per un individuo accettare o non accettare la proposta in assenza di informazioni che permettano di guadagnare evidenza in favore di una delle due alternative deve essere:
 $$
 v_{g}p + v_{b}(1-p) = 0
@@ -220,13 +221,14 @@ $$
 e questo accade se $p'\geqslant p$, ovvero se non peggiora la probabilità che accettare sia la strategia corretta.
 #### Punto 6: massa critica
 Si studia ora quanto deve essere grande una massa critica per scatenare l'*herding*.
-Si indica con $S \in \{Y,N\}^*$ la sequenza dei *segnali privati* ricevuti dagli individui. Si analizza come varia la probabilità che $Y$ sia la scelta migliore rispetto alla sequenza $S$.
+___
+Si indica con $S \in \{A,R\}^*$ la sequenza dei *segnali privati* ricevuti dagli individui. Si analizza come varia la probabilità che $Y$ sia la scelta migliore rispetto alla sequenza $S$.
 Sia $|S|=1$, cioè viene ricevuto un solo segnale. Se questo segnale è $A$, allora la probabilità che $Y$ sia la scelta corretta è
 $$
 \begin{align}
 \mathbf{Pr}(Y|A) &= \frac{\mathbf{Pr}(A|Y)\mathbf{Pr}(Y)}{\mathbf{Pr}(A|Y) \mathbf{Pr}(Y) + \mathbf{Pr}(A|N) \mathbf{Pr}(N) }  \\
 &= \frac{qp}{qp + (1-q)(1-p)} \\
-\left( q > \frac{1}{2} \right)&>\frac{qp}{qp + q(1-p)} = \frac{qp}{qp + q-qp)}=p
+\left( q > \frac{1}{2} \right)&>\frac{qp}{qp + q(1-p)} = \frac{qp}{qp + q-qp}=p
 \end{align}
 $$
 viceversa la probabilità che la scelta corretta sia $N$ ricevendo il segnale $A$ è
@@ -283,8 +285,7 @@ $$
 =p \ &\text{se } a=r
 \end{cases} 
 $$
-Perciò se un individuo conosce l'intera sequenza di segnali privati dei giocatori precedenti, riesce a prendere la scelta che massimizza la probabilità di vincita in base alla maggioranza: se ci sono stati più segnali $A$ conviene votare $Y$, se ce ne sono stati più $R$ conviene votare $N$.
-Si osserva che il caso in cui $a=r$ equivale sostanzialmente al caso in cui un'individuo non ha alcuna informazione aggiuntiva riguardo la decisione da prendere, e quindi deve rifarsi unicamente al suo segnale privato.
+Perciò se un individuo conosce l'intera sequenza di segnali privati dei giocatori precedenti, riesce a prendere la scelta che massimizza la probabilità di vincita in base alla maggioranza: se ci sono stati più segnali $A$ conviene votare $Y$, se ce ne sono stati più $R$ conviene votare $N$. Si osserva che il caso in cui $a=r$ equivale sostanzialmente al caso in cui un'individuo non ha alcuna informazione aggiuntiva riguardo la decisione da prendere, e quindi deve rifarsi unicamente al suo segnale privato.
 
 Senza perdita di generalità si supponga che l'$n$-esimo individuo riesca ad inferire tutta la sequenza $S$ degli $n-1$ segnali privati precedenti, e che $a=r$. Sia $\sigma_{n} \in \{ A,R \}$ il segnale privato che riceve l'$n$-esimo individuo. Dato che $a=r$ per ipotesi, vale
 $$
@@ -305,14 +306,14 @@ e anche in questo caso l'individuo $n$ segue il suo segnale privato.
 Invece se $a \geqslant r+2$, allora all'$n$-esimo individuo conviene sempre scegliere $Y$ qualunque sia il suo segnale, scatenando così una cascata imitativa. Questo fatto vale simmetricamente per $N$ quando $r \geqslant a+2$.
 
 Individuata la condizione per la quale scatta la cascata imitativa, si individua la situazione in cui si verifica $a \geqslant r+2$ (o $r\geqslant a+2$).
-Fin quando i due segnali $A$ e $R$ si alternano non può scattare la cascata, infatti $|a-r| \leqslant 1$. Quando si hanno due segnali consecutivi, allora può scattare la cascata, ma non sicuramente. Infatti in una sequenza del tipo $ARAR \dots ARAA$, due $A$ consecutive bastano per scatenare la cascata imitativa per $Y$, ovvero bastano per avere $a \geqslant r+2$; ma nella stessa sequenza, due $R$ consecutive non sono sufficienti a far scattare una cascata imitativa di $N$. Infatti nella sequenza $RARA \dots RARR$ vale che $a-r=1$.
+Fin quando i due segnali $A$ e $R$ si alternano non può scattare la cascata, infatti $|a-r| \leqslant 1$. Quando si hanno due segnali consecutivi, allora può scattare la cascata, ma non sicuramente. Infatti in una sequenza del tipo $ARAR \dots ARAA$, due $A$ consecutive bastano per scatenare la cascata imitativa per $Y$, ovvero bastano per avere $a \geqslant r+2;$ ma nella stessa sequenza, due $R$ consecutive non sono sufficienti a far scattare una cascata imitativa di $N$. Infatti nella sequenza $ARAR \dots ARR$ vale che $a-r=1$.
 Perciò per scatenare con certezza una cascata imitativa sono necessari **almeno 3 segnali identici consecutivi**.
 
 Si calcola ora la probabilità che una cascata si scateni entro il passo $n$. Sia $\mathcal{H}_{n}$ l'evento
 $$
 \mathcal{H}_{n} = \text{la cascata imitativa si innesca entro il passo }n 
 $$
-Sia $\sigma_i \in \{A,R\}$ il segnale privato dell'$i$-esimo individuo, e siano $\mathcal{A}$ e $\mathbf{B}$ gli eventi
+Sia $\sigma_i \in \{A,R\}$ il segnale privato dell'$i$-esimo individuo, e siano $\mathcal{A}$ e $\mathcal{B}$ gli eventi
 $$
 \begin{align}
 \mathcal{A} &= (\sigma_{1}=\sigma_{2}=\sigma_{3}) \lor (\sigma_{2}=\sigma_{3}=\sigma_{4}) \lor \dots \lor (\sigma_{n-3}=\sigma_{n-2}=\sigma_{n-1})  \\
@@ -360,7 +361,7 @@ Applicando tale uguaglianza per ogni $i$ si ottiene
 $$
 \mathbf{Pr}(\lnot \mathcal{H}_{n}) \leqslant (3q-3q^2)^{n/3}
 $$
-Si osserva infine che $(3q-3q^2)^{n/3} < 1$ per ogni $q \in [0,1]$
+Si osserva infine che $3q-3q^2 < 1$ per ogni $q \in [0,1]$
 ![](Pasted%20image%2020240301164006.png)
 Dunque si conclude che la cascata imitativa si innesca **quasi sicuramente** al crescere degli individui
 $$
