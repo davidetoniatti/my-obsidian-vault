@@ -1,4 +1,4 @@
-I modelli finora trattati, ossia il modello di [Erdős-Rényi](01%20-%20Introduzione%20e%20grafi%20di%20Erdős-Rényi.md#Il%20modello%20di%20Erdős-Rényi) e il modello rich-get-richer, si prestano a generare grafi che corrispondono a *reti virtuali*, cioè reti in cui gli archi rappresentano relazioni virtuali fra individui (relazioni di amicizia o collegamenti logici).
+I modelli finora trattati, ossia il modello di [Erdős-Rényi](01%20-%20Introduzione%20e%20grafi%20di%20Erdős-Rényi.md#Il%20modello%20di%20Erdős-Rényi) e il modello [Rich get Richer](02%20-%20Questione%20di%20popolarità.md), si prestano a generare grafi che corrispondono a *reti virtuali*, cioè reti in cui gli archi rappresentano relazioni virtuali fra individui (relazioni di amicizia o collegamenti logici).
 Si vogliono ora studiare modelli in grado di rappresentare reti fisiche ( ad esempio un sistema distribuito di calcolatori), per le quali bisogna tenere in considerazione la struttura geometrica dello spazio nel quale i nodi sono inseriti.
 ## Grafi geometrici
 Sia $(\mathbb{R},\mid\mid\cdot\mid\mid)$ uno **spazio metrico** di dimensione $d\geq1$ e sia $r > 0$ una costante detta **raggio**. Un **grafo geometrico** consiste in un insieme $V$ di punti in tale spazio metrico, di cui si conoscono le coordinate; in particolare
@@ -73,7 +73,7 @@ In questa sezione si dimostra che:
 
 Per dimostrare tale affermazione, è necessario dimostrare due teoremi che mostrano rispettivamente una limitazione **superiore** ed una **inferiore** per il minimo raggio di trasmissione $r^{\star}(n)$.
 ### Teorema 1: delimitazione superiore
-Se $n$ punti sono scelti uniformemente a caso nel quadrato $Q \equiv \left[ 0,1 \right]^2$, allora esiste una costante $\gamma_{1}>0$ tale che se $r(n) \geq \gamma_{1}\left(\sqrt{ \frac{\ln{n}+c}{n} }\right)$ allora $G(n,r(n))$ è connesso con *alta probabilità*.
+Se $n$ punti sono scelti uniformemente a caso nel quadrato $Q \equiv \left[ 0,1 \right]^2$, allora esiste una costante $\gamma_{1}>0$ tale che se $r(n) \geq \gamma_{1}\left(\sqrt{ \frac{\ln{n}}{n} }\right)$ allora $G(n,r(n))$ è connesso con *alta probabilità*.
 ### Teorema 2: delimitazione inferiore
 Per ogni costante $c>0$, se $r(n)\geqslant\sqrt{ \frac{\ln n+c}{n} }$ allora la probabilità che $G(n,r(n))$ sia non connesso è strettamente maggiore di zero.
 ## Dimostrazione Teorema 1: delimitazione superiore

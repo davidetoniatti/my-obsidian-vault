@@ -16,26 +16,17 @@ Il risultato dell'esperimento di Milgram suggerisce che in una rete sociale esis
 > Allora con due "hop" si possono raggiungere $100 \cdot 100 = 10000$ altre persone.
 > E se a loro volta gli amici dei miei amici conoscono 100 persone, in tre "hop" si possono raggiungere altri $100 \cdot 100 \cdot 100 = 1000000$ persone, e così via...
 
-Questo ragionamento però non è del tutto consistente: infatti si assume che ogni persona conosca altre $100$ persone *distinte*. Questa assunzione è poco plausibile nella realtà: se una persona è amica stretta di due persone distinte, è *molto probabile* che queste due persone si conosceranno e diventeranno amiche, formando un *triangolo* tra questi individui.
-La caratteristica di una rete di avere molti di questi *triangoli* è detta **chiusura triadica** (**triadic closure**), la quale diminuisce di molto il numero di individui raggiungibili con percorsi brevi rispetto al modello con crescita esponenziale.
+Questo ragionamento però non è del tutto consistente: infatti si assume che ogni persona conosca altre $100$ persone *distinte*. Questa assunzione è poco plausibile nella realtà: se una persona è amica stretta di due persone distinte, è *molto probabile* che queste due persone si conosceranno e diventeranno amiche, formando un *triangolo* tra questi individui. La caratteristica di una rete di avere molti di questi *triangoli* è detta **chiusura triadica** (**triadic closure**), la quale diminuisce di molto il numero di individui raggiungibili con percorsi brevi rispetto al modello con crescita esponenziale.
 ![La chiusura triadica diminuisce di molto il numero di persone raggiungibili con percorsi brevi.|center|600](04-ar_img01.png)
 # Il modello Watts-Strogatz
 Nel 1998 **Watts** e **Strogatz** proposero un modello generativo di grafi aleatori che genera grafi che soddisfano le due proprietà viste nell'esperimento di Milgram: la presenza di numerose chiusure triadiche e la presenza di molti cammini minimi tra coppie di nodi (Small World).
 Il grafo generato in accordo con questo modello è composto da:
 - una componente **deterministica** che consiste in una **griglia bidimensionale**;
-- una componente **aletoria** al di sopra della griglia.
-In particolare, la griglia bidimensionale è un sottoinsieme di $\mathbb{N}^2$, i cui *punti* sono i nodi del grafo. Nella griglia ogni nodo ha un arco con i suoi vicini posti a destra, sinistra, sopra, sotto e in diagonale.
-Più formalmente, fissato un $n \in \mathbb{N}$:
-$$
-V \equiv \lbrace (i,j) \in \mathbb{N}^2 | 0 \leqslant i < n \land 0 \leqslant j < n \rbrace
-$$
-$$
-E_1 \equiv \lbrace \lbrace (i,j), (a,b) \rbrace \in V^2 | \left[ a \equiv_n i+\alpha \land b \equiv_n j+\beta \right] \; \forall \alpha,\beta = -1, 0, 1 \ \land \ (i,j) \neq (a,b) \rbrace
-$$
-Se si fa attenzione alla definizione di $E_1$ (ovvero l'insieme degli archi della componente deterministica), si può vedere che la griglia ha una sorta di *periodicità*, ovvero i nodi a un bordo della griglia sono collegati ai nodi sul bordo opposto.
-In questa modo si ottiene un primo grafo con un'alta quantità di *triangoli* (prima proprietà desiderata).
+- una componente **aleatoria** al di sopra della griglia.
+In particolare, la griglia bidimensionale è un sottoinsieme di $\mathbb{N}^2$, i cui *punti* sono i nodi del grafo. Nella griglia ogni nodo ha un arco con i suoi vicini posti a destra, sinistra, sopra, sotto e in diagonale. La griglia inoltre ha una sorta di *periodicità*, ovvero i nodi a un bordo della griglia sono collegati ai nodi sul bordo opposto.
+In questa modo si ottiene un primo grafo con un'alta quantità di *triangoli*, prima proprietà desiderata.
 ![center|500](04-ar_img02.png)
-Per costruire la componente aleatoria si fissa un $k>1$, e per ogni nodo $v \in V$ si aggiungono come ulteriori vicini altri $k$ nodi scelti <u>uniformemente a caso</u>.
+Per costruire la componente aleatoria si fissa $k>1$ e per ogni nodo $v \in V$ si aggiungono come ulteriori vicini altri $k$ nodi scelti <u>uniformemente a caso</u>.
 
 Osservando un grafo generato in accordo a questo modello, si individua una certa dicotomia tra gli archi deterministici e quelli aleatori:
 - Gli archi della griglia, cioè quelli deterministici, rappresentano le relazioni fra nodi *fisicamente* vicini: questi si frequentano di più rispetto a nodi *fisicamente* lontani. Allora gli archi della griglia rappresentano **legami forti** tra i nodi (**strong ties**). Dato che facilmente due individui che hanno un amico comune vicino si incontrano, i triangoli fra gli archi deterministici sono *sempre presenti* (o quasi sempre);
@@ -43,8 +34,7 @@ Osservando un grafo generato in accordo a questo modello, si individua una certa
 
 Dunque un grafo generato dal modello Watts-Strogatz contiene molti triangoli; ora è doveroso chiedersi se esistono numerosi percorsi brevi tra coppie di nodi.
 Intuitivamente parlando, se si considerano cammini composti dai soli archi aleatori, è poco probabile incontrare due volte uno stesso nodo in brevi distanze, dato che gli archi sono distribuiti uniformemente nel grafo. Dunque, molto probabilmente, in $h$ passi è possibile raggiungere $k^h$ nodi. Successivamente *Bollobàs & Ching* diedero una dimostrazione formale a questo fenomeno. Più precisamente dimostrarono la presenza di cammini brevi in un modello con molta meno *randomness*.
-Si considera un nuovo modello simile a quello Watts-Strogatz, dove però solo un nodo su $k$ ha archi random, e il numero di archi random è pari a 1.
-Si partiziona poi la rete in quadrati di dimensione $k\times k$, detti "**città**", contenenti $k^2$ individui, e si considera il fenomeno small-world a livello di città. Essendo che soltanto un nodo su $k$ ha un arco random, ci si aspetta che circa $k$ individui in una città posseggano un arco random ciascuno: ogni città ha, collettivamente e mediamente, $k$ archi random verso altre città selezionate u.a.r. Tale formulazione è la stessa del modello Watts-Strogatz, con la differenza che le città svolgono il ruolo dei singoli nodi: si possono trovare cammini brevi tra ogni coppia di città.
+Si considera un nuovo modello simile a quello Watts-Strogatz, dove però solo un nodo su $k$ ha archi random, e il numero di archi random è pari a 1. Si partiziona poi la rete in quadrati di dimensione $k\times k$, detti "**città**", contenenti $k^2$ individui, e si considera il fenomeno small-world a livello di città. Essendo che soltanto un nodo su $k$ ha un arco random, ci si aspetta che circa $k$ individui in una città posseggano un arco random ciascuno: ogni città ha, collettivamente e mediamente, $k$ archi random verso altre città selezionate u.a.r. Tale formulazione è la stessa del modello Watts-Strogatz, con la differenza che le città svolgono il ruolo dei singoli nodi: si possono trovare cammini brevi tra ogni coppia di città.
 Allora per trovare un cammino breve tra due individui, si trova prima un cammino breve tra le due città a cui questi appartengono e si usano tali archi, assieme agli archi deterministici contenuti all'interno delle città, per far si che venga ottenuto un cammino breve tra i due nodi. Questo è il punto cruciale del modello Watts-Strogatz: introdurre una piccola fonte di randomness, nella forma di weak ties, è sufficiente a rendere il mondo *piccolo*, con cammini brevi per ogni coppia di nodi.
 ## Navigabilità del modello Watts-Strogatz
 Assodato che nel modello di Watts-Strogatz esistono numerosi percorsi brevi tra coppie di nodi, ci si chiede se questi cammini sono facilmente rintracciabili dai nodi che conoscono solo il loro vicinato e non l'intera struttura della rete.
@@ -58,11 +48,9 @@ Si consideri la figura: il nodo $s$ vuole mandare un messaggio al nodo $d$. Segu
 In effetti, è stato dimostrato che nel modello di Watts-Strogatz la ricerca decentralizzata di un percorso da $s$ a $t$ non individua un percorso breve, e *mediamente individua un percorso molto più lungo di un cammino minimo*.
 Questo è vero perché nel modello di Watts-Strogatz l'estremo di un arco random uscente da un nodo è scelto uniformemente a caso fra tutti i nodi: non si tiene conto di quanto sono *vicini* i nodi che congiunge l'arco random. Detto altrimenti, *gli archi random sono **troppo** casuali*.
 # Un modello per la ricerca decentralizzata
-Si vuole definire un modello di generazione di reti sociali che, rispetto al modello di Watts-Strogatz, consenta in più una ricerca decentralizzata di cammini che non siano troppo più lunghi dei cammini minimi.
-Intuitivamente, per garantire questa proprietà gli archi random devono essere scelti in modo da tener conto di quanto sono *vicini* i nodi che tali archi congiungono.
-
-Il nuovo modello è basato su un'ossatura deterministica, ovvero la stessa griglia bidimensionale e *periodica* del modello di Watts-Strogatz, e da una componente aleatoria, ovvero da ogni nodo esce un arco random.
-Nella componente aleatoria, la probabilità che l'arco random uscente dal nodo $u$ sia $(u,v)$ è inversalmente proporzionale alla distanza <u>sulla griglia</u> dei nodi $u$ e $v$; formalmente
+Si vuole definire un modello di generazione di reti sociali che, rispetto al modello di Watts-Strogatz, consenta in più una ricerca decentralizzata di cammini che non siano troppo più lunghi dei cammini minimi. Intuitivamente, per garantire questa proprietà gli archi random devono essere scelti in modo da tener conto di quanto sono *vicini* i nodi che tali archi congiungono.
+## Il modello
+Il nuovo modello è basato su un'ossatura deterministica, ovvero la stessa griglia bidimensionale e *periodica* del modello di Watts-Strogatz, e da una componente aleatoria, ovvero da ogni nodo esce un arco random. Nella componente aleatoria, la probabilità che l'arco random uscente dal nodo $u$ sia $(u,v)$ è inversamente proporzionale alla distanza <u>sulla griglia</u> dei nodi $u$ e $v$; formalmente
 $$
 \mathbf{Pr}((u,v) \in E) = \frac{1}{Z_{u}} \cdot \frac{1}{d(u,v)^q}
 $$
@@ -72,7 +60,6 @@ dove
 - $q$ è un parametro che prende il nome di **esponente di clustering**, che definisce la *randomness* degli archi random.
 
 Il parametro $q$ permette di generare diversi modelli. Ad esempio, per $q=0$ gli archi sono totalmente casuali, in quanto la probabilità che tale arco esista è uguale per tutti (uniforme); per valori di $q$ molto grandi invece, si ottiene che la probabilità che esistano archi molto lunghi è piccola, perciò la componente aleatoria risulta molto simile alla componente deterministica.
-
 Il funzionamento della ricerca decentralizzata dipende dalla scelta di $q$: per $q=0$ questa non funziona bene. In realtà è possibile dimostrare che se la componente deterministica è una griglia *simmetrica e periodica* $d$-dimensionale (nodi nello spazio $\mathbb{R}^d$) allora l'esponente di clustering ottimale è proprio $q = d$.
 ## Analisi intuitiva sulle prestazioni della ricerca miope nel modello
 Si vede ora qualche intuizione in supporto all'affermazione
@@ -131,7 +118,7 @@ $$
 \mathbf{E}[X] \in O(\ln^2{n})
 $$
 Prima di procedere con la dimostrazione, si fanno alcune considerazioni.
-Si ricorda che la **ricerca decentralizzata** consiste essenzialmente nel passare il messaggio al nodo vicino che più si avvicina al destinatario. Dunque l'algoritmo costruisce un percorso da $s$ a $t$ trasmettendo al passo uno il messaggio ad un suo vicino (più prossimo alla destinazione), che, a sua volta, al passo 2, trasmette al suo vicino più prossimo alla destinazione, e cosi via fino a quando il messaggio raggiunge $t$. Allora si suddivida in fasi il processo di trasmissione del messaggio da un nodo all'altro in base a distanze dalla sorgente $t$ che si <u>dimezzano</u>: durante la **fase** $j$ il messaggio è in possesso di un nodo $u$ tale che
+Si ricorda che la **ricerca decentralizzata** consiste essenzialmente nel passare il messaggio al nodo vicino che più si avvicina al destinatario. Dunque l'algoritmo costruisce un percorso da $s$ a $t$ trasmettendo al passo uno il messaggio ad un suo vicino (più prossimo alla destinazione), che, a sua volta, al passo 2, trasmette al suo vicino più prossimo alla destinazione, e cosi via fino a quando il messaggio raggiunge $t$. Allora si suddivida in fasi il processo di trasmissione del messaggio da un nodo all'altro in base a distanze dalla destinazione $t$ che si <u>dimezzano</u>: durante la **fase** $j$ il messaggio è in possesso di un nodo $u$ tale che
 $$
 \frac{d(s,t)}{2^{j+1}} < d(u,t) \leqslant \frac{d(s,t)}{2^j}
 $$
@@ -316,7 +303,7 @@ Allora una volta entrati nella regione $R$, entrare in $R_2$ utilizzando gli arc
 
 Nel caso $q>1$ invece, gli archi random sono troppo corti, cioè è *difficile* usare archi random che coprano grandi distanze. Di conseguenza, la ricerca miope in questo caso riesce a fare poco meglio rispetto ad utilizzare solo archi dell'anello per raggiungere $t$.
 
-In conclusione, si osserva che in effetti è possibile dimostrare il seguente teorema
+In conclusione, si osserva che in effetti è possibile dimostrare il seguente teorema.
 ```ad-Teorema
 title: Teorema
 Sia $X$ la variabile aleatoria che indica la lunghezza del cammino trovato dalla ricerca miope su un anello di $n$ nodi.

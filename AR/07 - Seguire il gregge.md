@@ -1,7 +1,7 @@
 Con questa serie di lezioni si tratta la parte finale del corso nella quale si studia un diverso aspetto delle reti, ovvero **il contenuto informativo** di una rete, il quale:
 - può indurre gli individui che la compongono a modificare il proprio comportamento (*questa lezione*);
-- deve essere sintetizzato per derivare una informazione cumulativa che tenga conto, in qualche modo, dei pezzi di informazione derivanti dai singoli individui ([08 - Sistemi di voto](08%20-%20Sistemi%20di%20voto.md));
-- dal quale deve essere individuato ed estratto quello rilevante ad una certa richiesta ([09 - Web Search](09%20-%20Web%20Search.md)).
+- deve essere sintetizzato per derivare una informazione cumulativa che tenga conto, in qualche modo, dei pezzi di informazione derivanti dai singoli individui ([Sistemi di voto](08%20-%20Sistemi%20di%20voto.md));
+- dal quale deve essere individuato ed estratto quello rilevante ad una certa richiesta ([Web Search](09%20-%20Web%20Search.md)).
 # Reti e Informazioni
 Si è già mostrato che l'informazione presente in una rete può indurre gli individui che la compongono a modificare il proprio comportamento, parlando di *processi di diffusione*. Nello studio dei [processi di diffusione](06%20-%20Processi%20di%20diffusione.md) si è visto come il comportamento dei singoli individui veniva influenzato dalla _diretta comunicazione_ col proprio vicinato.
 Ora si vedrà come le decisioni dei singoli individui possono essere influenzate dalle *osservazioni* fatte verso il comportamento degli altri, senza lo scambio diretto di alcuna informazione. In sostanza come è possibile _estrapolare informazioni_ dal comportamento della massa.

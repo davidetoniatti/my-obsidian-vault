@@ -1,4 +1,4 @@
-Si studia in che modo sintetizzare le informazioni in possesso dei singoli individui in una rete la fine di derivare una **singola informazione cumulativa**, che  permetterà di prendere una decisione fra una serie di alternative, fra le quali si vuole scegliere la migliore, o stilare una graduatoria di esse. Nel fenomeno dell'[Herding](07%20-%20Seguire%20il%20gregge.md), un individuo prende una decisione sulla base delle scelte degli individui che lo precedono nella scelta, e questo può indurre a decisioni sbagliate, ossia, non sempre è buona idea seguire il comportamento della massa. Nei **sistemi di voto** si vuole estrapolare una informazione dalla rete tramite una votazione che, in qualche modo, rispecchi le informazioni della rete e in cui i singoli individui decidono in maniera del tutto **indipendente** dagli altri.
+Si studia in che modo sintetizzare le informazioni in possesso dei singoli individui in una rete al fine di derivare una **singola informazione cumulativa**, che permetterà di prendere una decisione fra una serie di alternative, fra le quali si vuole scegliere la migliore, o stilare una graduatoria di esse. Nel fenomeno dell'[Herding](07%20-%20Seguire%20il%20gregge.md), un individuo prende una decisione sulla base delle scelte degli individui che lo precedono nella scelta, e questo può indurre a decisioni sbagliate, ossia, non sempre è buona idea seguire il comportamento della massa. Nei **sistemi di voto** si vuole estrapolare una informazione dalla rete tramite una votazione che, in qualche modo, rispecchi le informazioni della rete e in cui i singoli individui decidono in maniera del tutto **indipendente** dagli altri.
 Dunque ci si pone nello scenario nel quale un insieme di individui deve prendere una decisione di gruppo, ricevendo ciascuno di essi un *segnale privato* e prendendo *decisioni individuali*: ciascun individuo effettua una scelta senza osservare il comportamento degli altri individui.
 # Un nuovo modello di decision making
 1. Ogni individuo deve prendere una decisione fra due alternative: $X$ o $Y$. Una delle due scelte è la scelta *giusta*, l'altra quella *sbagliata*; in particolare, se $X$ è la scelta giusta si scriverà $X>Y$ e viceversa. Le due alternativa, a priori, sono equiprobabili $\mathbf{Pr}(X>Y)=\mathbf{Pr}(Y>X) = \frac{1}{2}$.
@@ -43,7 +43,7 @@ Si consideri ora la strategia di un giocatore rispetto al suo segnale privato:
 - se estrae giallo, allora $$ \mathbf{Pr}(UG|g) = \frac{\mathbf{Pr}(g|UG)\mathbf{Pr}(UG)}{\mathbf{Pr}(g|UG)\mathbf{Pr}(UG) + \mathbf{Pr}(g|UV)\mathbf{Pr}(UV)} = \frac{\frac{10}{10}\frac{1}{2}}{\frac{10}{10}\frac{1}{2}+\frac{1}{10}\frac{1}{2}} = \frac{10}{11} $$
 - se estrae verde, allora $$ \mathbf{Pr}(UV|v) = \frac{\mathbf{Pr}(v|UV)\mathbf{Pr}(UV)}{\mathbf{Pr}(v|UV)\mathbf{Pr}(UV) + \mathbf{Pr}(v|UG)\mathbf{Pr}(UG)} = \frac{\frac{9}{10}\frac{1}{2}}{\frac{9}{10}\frac{1}{2}+0} = 1 $$
 Si vuole capire il ragionamento che uno dei giocatori deve fare al fine di dare una risposta che massimizzi la probabilità di vincere. Sia $G$ un giocatore: $G$ sa che tutti e tre vincono se almeno due danno la risposta corretta, allora si chiede quale sia il caso in cui la sua risposta risulti *veramente influente* ai fini della vittoria. Si osserva che, se la risposta degli altri due giocatori sono concordi, allora la risposta di $G$ non è influente in quanto non modifica la maggioranza indipendentemente dalla risposta. Allora l'unico caso in cui la risposta di $G$ è influente è quando le risposte degli altri due giocatori sono *discordi*. 
-Si osserva che , se le risposte degli altri due giocatori sono discordi, allora uno di essi ha risposto $UV$, ossia, assumendo che gli altri due giocatori rispondano *sinceramente* (in accordo ai propri segnali privati), le risposte di tali giocatori sono discordi quando uno di loro estrae verde, ossia, quando l'urna è sicuramente $UV$.
+Si osserva che, se le risposte degli altri due giocatori sono discordi, allora uno di essi ha risposto $UV$, ossia, assumendo che gli altri due giocatori rispondano *sinceramente* (in accordo ai propri segnali privati), le risposte di tali giocatori sono discordi quando uno di loro estrae verde, ossia, quando l'urna è sicuramente $UV$.
 Quindi, indipendentemente dalla pallina estratta da $G$, assumendo che gli altri due giocatori rispondano sinceramente, la risposta di $G$ è influente ai fini della vittoria *solo* quando l'urna è $UV$: ciò implica che a $G$ conviene rispondere sempre $UV$ indipendentemente dall'estrazione.
 Naturalmente, se gli altri due giocatori non rispondono sinceramente, la strategia si fotte.
 ### Voto non sincero nelle giurie - unanimità
@@ -60,8 +60,7 @@ Si devono aggregare i voti dei giurati per giungere ad un verdetto di colpevolez
 $$
 \mathbf{Pr}(C|S) \gg \frac{1}{2} 
 $$
-Si assume quindi che per condannare un imputato è necessario che **tutti** i giurati votino a favore della condanna.
-Ci si chiede quando la risposta di un giurato $G$ risulti veramente influente ai fini del verdetto:
+Si assume quindi che per condannare un imputato è necessario che **tutti** i giurati votino a favore della condanna. Ci si chiede quando la risposta di un giurato $G$ risulti veramente influente ai fini del verdetto:
 
 - se fra tutti gli altri giurati ne esiste uno che vota a favore dell'innocenza, allora il voto di $G$ è ininfluente, indipendentemente da quale esso sia;
 - se fra tutti gli altri giurati, nessuno vota a favore dell'innocenza, ossia, tutti votano a favore della colpevolezza, allora è proprio il voto di $G$ a decidere il verdetto.
@@ -96,7 +95,7 @@ Le due forme possibili di espressione di voto sono equivalenti:
 - Derivare (2) da (1) è immediato: sia $r_{h} = \langle a_{h_{1}}, a_{h_{2}}, \dots, a_{h_{n}} \rangle$ il ranking di $h\in V$. Per ogni $i \in [n]$ e per ogni $j \in [n]$ tale che $j > i$, si pone $a_{hi} >_h a_{hj}$.
 - Derivare (1) da (2) si procede come segue:
 	- poiché $>_h$ è completa e transitiva, allora $\exists l \in [n]$ tale che $\forall j \in [n] \setminus \{l\}$ vale $|\{ i \in [n]: a_{l} >_{h} a_{i} \}| > | \{ i \in [n]: a_{j} >_{h} a_{i} \}|$ (Lemma 1);
-	- allora, per ogni $j \in [n]\setminus \{ l \}$, vale $a_{l} >_{h} a_{j}$;
+	- allora, per ogni $j \in [n]\setminus \{ l \}$, vale $a_{l} >_{h} a_{j}$ (Lemma 2);
 	- si pone quindi $a_{h1} = a_l$ e, osservando che $>_h$ è completa e transitiva anche se $A \setminus \{a_{h1}\}$, si ripete tale ragionamento su quest'ultimo insieme per individuare $a_{h2}$. Si itera per individuare $a_{h3}, \dots, a_{hn}$.
 
 Si dimostrano ora formalmente i due lemmi ora utilizzati
@@ -146,7 +145,7 @@ Un sistema di voto è quindi una regola che permette di associare un voto collet
 Si supponga che i voti individuali dei $k$ votanti siano espressi mediante relazioni binarie $>_{1},\dots,>_{k}$ e sia $\succ$ il simbolo per indicare la relazione binaria $f_{n,k}(>_1,\dots,>_k)$, ossia, $\succ$ è il voto collettivo corrispondente a $>_{1},\dots,>_{k}$. Il **sistema di voto a maggioranza** è descritto dal predicato $\sigma_{M}$ tale che
 $$
 \begin{align}
-\sigma_{M}(>_{1},\dots,&>_{k}) = \forall i \in [n], \forall j \in [n] \\
+\sigma_{M}(>_{1},\dots,&>_{k},\succ) = \forall i \in [n], \forall j \in [n] \\
  &\left[ i \succ j \iff |\{ h \in [k]: a_{i} >_{h} a_{j} \}| > |\{ h \in [k]: a_{j} >_{h} a_{i} \}| \right]
 \end{align}
 $$
@@ -223,7 +222,7 @@ tale che
 $$
 \rho_{h}(a_{hi}) = n-i
 $$
-e le alternative vengono ordinate per peso finale non crescente.
+e le alternative vengono ordinate per peso finale $\rho$ non crescente.
 Anche in questa tipologia di sistemi di voto si manifesta il paradosso di Condorcet, sotto forma di **ex equo**, ossia, sotto forma di pareggi.
 
 ```ad-note
@@ -258,7 +257,7 @@ Un sistema di voto, per essere considerato affidabile, deve garantire come minim
 Si ricorda che una delle anomalie di cui soffrono i sistemi di voto è il paradosso di Condorcet. Nei sistemi di voto che si considerano ora, si ha che il voto aggregato (o collettivo) viene descritto mediante un ranking, ed un ranking corrisponde **sempre** ad una relazione binaria transitiva. Inoltre, per produrre un ranking potrebbe essere necessario introdurre anche una regola che risolve gli ex aequo. Pertanto, la problematica descritta dal paradosso di Condorcet non si verifica.
 ### Due principi per i sistemi di voto
 Si enunciano ora due proprietà che un sistema di voto affidabile ragionevole deve possedere.
-Sia $\sigma$ un sistema di voto; sia $[n]$ un insieme di alternative e sia $[k]$ un insieme di votanti tali che, per ogni $h \in [k]$, il votante $h$ esprime il ranking $r_{h} = \langle a_{h1}, \dots, a_{hn} \rangle$ sulle $n$ alternative; sia $r$ il voto collettivo corrispondente ai voti individuali $r_{1},r_{2},\dots,r_{k}$ derivato in accordo a $\sigma$, ossia $\sigma(r_{1},r_{2},\dots,r_{k},r)=\text{vero}$ e siano, per ogni $h \in [k]$, $\rho_{h}$ la funzione peso  Borda Count associata a $r_h$ e $\rho$ la funzione peso associata a $r$.
+Sia $\sigma$ un sistema di voto; sia $[n]$ un insieme di alternative e sia $[k]$ un insieme di votanti tali che, per ogni $h \in [k]$, il votante $h$ esprime il ranking $r_{h} = \langle a_{h1}, \dots, a_{hn} \rangle$ sulle $n$ alternative; sia $r$ il voto collettivo corrispondente ai voti individuali $r_{1},r_{2},\dots,r_{k}$ derivato in accordo a $\sigma$, ossia $r$ deve essere tale che il predicato $\sigma(r_{1},r_{2},\dots,r_{k},r)$ sia vero, e siano, per ogni $h \in [k]$, $\rho_{h}$ la funzione peso **Borda Count** associata a $r_h$ e $\rho$ la funzione peso associata a $r$.
 #### Principio di Unanimità (U)
 Il sistema di voto $\sigma$ soddisfa il **principio di unanimità** se
 $$
@@ -270,7 +269,7 @@ Il sistema di voto $\sigma$ soddisfa il **Principio di Indipendenza dalle Altern
 $$
 \begin{align}
 \forall i,j \in [&n], \forall (r_{1},r_{2},\dots,r_{k}),(r'_{1},r'_{2},\dots,r'_{k}) \in \Pi([n])^k  \\
-&\left[[ \forall h \in [k] \ \ \rho_{h}(i)>\rho(j) \iff \rho'_{h}(i) > \rho'_{h}(j)]  \\
+&\left[[ \forall h \in [k] \ \ \rho_{h}(i)>\rho_{h}(j) \iff \rho'_{h}(i) > \rho'_{h}(j)]  \\
 \implies [\rho(i) > \rho(j) \iff \rho'(i) > \rho'(j )]\right]
 \end{align}
 $$
@@ -286,7 +285,7 @@ Quindi, per ogni insieme $[k]$ di votanti esiste un $j \in [k]$ tale che il voto
 
 ```ad-note
 title: Forma compatta del teorema
-Se $\sigma$ soddisfa **U** e **IIA** allora per ogni $k \in \mathbb{N}$ e per ogni $n \in \mathbb{N}$ con $n>2$, esiste un $j \in [k]$ tale che per ogni $(r_1,r_2,\dots,r_k) \in \Pi([n])^k$, sia $r$ tale che $\sigma(r_1,r_2,\dots,r_k,r)=\text{vero}$, allora $r=r_j$.
+Se $\sigma$ soddisfa **U** e **IIA** allora per ogni $k \in \mathbb{N}$ e per ogni $n \in \mathbb{N}$ con $n>2$, esiste un $j \in [k]$ tale che per ogni $(r_1,r_2,\dots,r_k) \in \Pi([n])^k$, il voto collettivo $r$ tale che $\sigma(r_1,r_2,\dots,r_k,r)=\text{vero}$ vale $r=r_j$.
 ```
 ## Dimostrazione del teorema di Arrow
 Prima di procedere con la dimostrazione del teorema, si danno le seguenti definizioni.
@@ -321,7 +320,7 @@ Si crea un nuovo profilo $P' = \langle r'_1,r'_2,\dots,r'_k \rangle$ come segue:
 - per ogni $i \in [k]$ tale che $\rho_{i}(y) > \rho_{i}(z)$, $r'_{i}$ è ottenuto da $r_{i}$ spostando $z$ alla sinistra di $y$, in modo che $\rho'_{i}(z) = \rho'_{i}(y)+1$
 ![center](Pasted%20image%2020240904102714.png)
 
-Essendo che $x$ non è stato in alcun modo coinvolta negli spostamenti, $x$ è un'alternativa polarizzante anche per $P'$. Inoltre, per ogni $i \in [k]$, in $r_i$ e $r'_i$ non sono variati gli ordini relativi di $x$ e $y$ e di $x$ e $z$. Infine, per ogni $i \in [k]$, $\rho'_{i}(y)< \rho'_{i}(z)$, cioè $y$ sta **sempre** in una posizione inferiore rispetto a $z$.
+Essendo che $x$ non è stato in alcun modo coinvolta negli spostamenti, $x$ è un'alternativa polarizzante anche per $P'$. Inoltre, per ogni $i \in [k]$, in $r_i$ e $r'_i$ non sono variati gli ordini relativi di $x$ e $y$ e di $x$ e $z$. Infine, per ogni $i \in [k]$, $\rho'_{i}(y)< \rho'_{i}(z)$, cioè $y$ sta **sempre** in una posizione inferiore  rispetto a $z$ ($z$ è preferito a $y$ per ogni votante).
 Poiché per ogni $i \in [k]$, in $r_i$ e $r'_i$ non sono variati gli ordini relativi di $x$ e $z,$ allora per **IIA** vale
 $$
 \rho(x) < \rho(z) \iff \rho'(x) < \rho'(z)
@@ -339,16 +338,17 @@ Inoltre, per ogni $i \in [k]$ vale $\rho'_{i}(y) < \rho'_{i}(z)$: allora, per il
 Si sceglie un'alternativa $x \in [n]$.
 - Nel profilo $P^0 = \langle r_{1}^0, r_{2}^0,\dots,r_{k}^0 \rangle$ l'alternativa $x$ è in ultima posizione in tutti i ranking: per ogni $i \in [k]$, $\rho_{i}^0(x) = 0$;
 - Nel profilo $P^1 = \langle r_{1}^1, r_{2}^1,\dots,r_{k}^1 \rangle$ l'alternativa $x$ è in prima posizione nel ranking $r_{1}^1$ e in ultima posizione in tutti i restanti ranking: $\rho_{1}^1(x)=n-1$  e per ogni $i \in [k] \setminus \{ 1 \}$, $\rho_{i}^1(x) = 0$;
-- In generale, nel profilo $P^h = \langle r_{1}^h, r_{2}^h,\dots,r_{k}^h \rangle$ l'alternativa $x$ è in prima posizione nei ranking da $1$ ad $h$ e in ultima posizione nei ranking da $h+1$ a $k$ nel profilo $P^h$, ossia $$ \begin{align}
-\forall i \leqslant h, &\rho_{i}^h(x)=n-1 \\ \forall i > h, &\rho_{i}^h(x) = 0
+- In generale, nel profilo $P^h = \langle r_{1}^h, r_{2}^h,\dots,r_{k}^h \rangle$ l'alternativa $x$ è in prima posizione nei ranking da $1$ ad $h$ e in ultima posizione nei ranking da $h+1$ a $k$, ossia, sia $\rho^h_{i}$ la funzione peso associata al ranking $i$ del profilo $P^h$ ($r_{i}^h$) $$ \begin{align}
+\forall i \leqslant h, \quad &\rho_{i}^h(x)=n-1 \\ \forall i > h, \quad &\rho_{i}^h(x) = 0
 \end{align} $$
-Per ogni $h \in \{ 0,\dots,k \}$ si indica con $r^h$ il ranking collettivo associato a $P^h$ e con $\rho^h$ la funzione peso ad esso associata.
+Per ogni $h \in \{ 0,\dots,k \}$ si indica con $r^h$ il ranking collettivo corrispondente a $P^h$ e con $\rho^h$ la funzione peso ad esso associata.
 ![center](Pasted%20image%2020240904111301.png)
 
 Quindi, per ogni $h \in [k]$, i due profili $P^{h-1}$ e $P^h$ variano **solo** per il modo in cui l'$h$-esimo votante giudica $x$: nel profilo $P^{h-1}$ l'$h$-esimo votante giudica $x$ ultima, ossia, $\rho_{h}^{h-1}(x)=0$, mentre nel profilo $P^h$ l'$h$-esimo votante giudica $x$ prima, ossia $\rho_{h}^h(x) = n-1$. Le posizione relative delle altre alternative rimangono invariate nei due profili.
+
 ![center](Pasted%20image%2020240904111604.png)
 
-In virtù del principio **U**, vale $\rho^0(x) = 0$ e $\rho^k(x) = n-1$. Allora esiste un profilo $j \in [k]$ (si osserva che $j>0$ perché $\rho_{0}^0(x)=0$) tale che $\rho^h(x)=0$ per ogni $h<j$, e $\rho^j(x) > 0$. Quindi, poiché $x$ è polarizzante per $P^j$ , e $\rho^j(x)=n-1$, risulta essere $j$ il **dittatore potenziale**. Si osserva quindi che il votante $j$ ha molto potere nel posizionare $x$ nella graduatoria finale: lo fa passare dall'ultima alla prima posizione.
+In virtù del principio **U**, vale $\rho^0(x) = 0$ e $\rho^k(x) = n-1$. Allora esiste un profilo $j \in [k]$ (si osserva che $j>0$ perché $\rho_{0}^0(x)=0$) tale che $\rho^h(x)=0$ per ogni $h<j$, e $\rho^j(x) > 0$. Quindi, poiché $x$ è polarizzante per $P^j$ allora $\rho^j(x)=n-1$, e dunque risulta essere $j$ il **dittatore potenziale**. Si osserva quindi che il votante $j$ ha molto potere nel posizionare $x$ nella graduatoria finale: lo fa passare dall'ultima alla prima posizione.
 ### Passo 3: si mostra che $j$ è, effettivamente, il dittatore cercato
 Sia $Q = \langle r_{1}^Q, r_{2}^Q,\dots,r_{k}^Q \rangle$ un profilo di $k$ votanti per $n$ alternative; per ogni $h \in [k]$, si indica con $\rho^Q_{h}$ la funzione peso associata a $r_{h}^Q$ e si indica con $r^Q$ il ranking collettivo che soddisfa $\sigma$ corrispondente a $Q$ e con $\rho^Q$ la funzione peso associata a $r^Q$.
 Si deve dimostrare che, qualunque sia $Q$, risulta $r^Q = r_j^Q$, ossia, che qualunque sia $Q$, comunque si scelgono due alternative $y,z \in [n]$,
@@ -368,6 +368,7 @@ Quindi da $Q$ si è costruito il profilo $T$ dove
 - per $h <j$, $x$ è in testa di $r_h^T$ ($\rho_{h}^T(x) = n-1$);
 - per $h =j$, ossia in $r_{j}^T$, $y$ è in testa, seguito da $x$;
 - per $h >j$, $x$ è in coda di $r_h^T$ ($\rho_{h}^T(x) = 0$);
+
 Si consideri ora il profilo $P^j$, dove si ricorda che in esso
 $$
 \forall i \leqslant j, \rho_{i}^j(x) = n-1 \land \forall i > j, \rho_{i}^j(x) = 0
@@ -389,49 +390,56 @@ In esso si è mostrato che $\rho^{j-1}(x)=0$, allora
 $$
 \rho^{j-1}(x)< \rho^{j-1}(y)
 $$
-Poiché l'ordine relativo di $x$ e $y$ è lo stesso in $P^{j-1}$ e in $T$, essendo che in $P^{j-1}$ per ogni $h\geqslant j$ vale $\rho_{h}^j(x)=0$, allora per **IIA** vale
+Poiché l'ordine relativo di $x$ e $y$ è lo stesso in $P^{j-1}$ e in $T$, allora per **IIA** vale
 $$
 \rho^T(x) < \rho^T(y)
 $$
-Quindi
-- dalla stessa posizione relativa di $x$ e $y$ in $P^{j-1}$ e in $T$, dal fatto che $\rho^{j-1}(x)< \rho^{j-1}(y)$ e in virtù di **IIA**, si è concluso che $$ \rho^T(x) < \rho^T(y) $$
-- dalla stessa posizione relativa di $x$ e $z$ in $P^{j}$ e in $T$, dal fatto che $\rho^{j}(x)> \rho^{j}(z)$ e in virtù di **IIA**, si è concluso che $$ \rho^T(z) < \rho^T(x) $$
-ossia
+Quindi vale che
 $$
-\rho^T(y) > \rho^T(z)
+\rho^T(y) > \rho^T(x) > \rho^T(x) \implies \rho^T(y)>\rho^T(z)
 $$
+
 Si osserva che, per tutti i votanti, l'ordine relativo di $z$ e $y$ è lo stesso in $Q$ e in $T$ (si è assunto che $\rho_{j}^Q(y) > \rho_{j}^Q(z)$) e, quindi per **IIA**, vale
 $$
 \rho^Q(y) > \rho^Q(z)
 $$
-ed essendo $y$ e $z$ variabili mute, e quindi interscambiabili, questo mostra che
+Riassumendo, a partire dall'assunzione che $\rho_{j}^Q(y) > \rho_{j}^Q(z)$ e costruendo il profilo $T$, si è dimostrato che
 $$
-\rho^Q_{j}(y) < \rho^Q_{j}(z) \implies \rho^Q(y) < \rho^Q(z)
+\rho_{j}^Q(y) > \rho_{j}^Q(z) \implies \rho^Q(y)>\rho^Q(z)
+$$
+essendo $y$ e $z$ variabili mute, e quindi interscambiabili, si può dimostrare allo stesso modo che
+$$
+\rho_{j}^Q(y) < \rho_{j}^Q(z) \implies \rho^Q(y)<\rho^Q(z)
+$$
+dalle due implicazioni si conclude che
+$$
+\rho^Q_{j}(y) < \rho^Q_{j}(z) \iff \rho^Q(y) < \rho^Q(z)
 $$
 #### Passo 3.2
 Si dimostra che se $y \neq x$, allora
 $$
 \rho^Q(y) > \rho^Q(x) \iff \rho_{j}^Q(y)> \rho_{j}^Q(x)
 $$
-Poiché $n > 2$, allora esiste $z \in [n]$ tale che $z \neq x$ e $z \neq y$. Si deriva da $T^0,T^1,\dots,T^k$ una nuova sequenza $T^0,T^1,\dots,T^k$ di profili spostando l'alternativa $z$:
-- si indica $T^h$ come $T^h = \langle t_{1}^h,t_{2}^\mathbf{h},\dots,t_{k}^n \rangle$ (vedi immagine);
+Poiché $n > 2$, allora esiste $z \in [n]$ tale che $z \neq x$ e $z \neq y$. Si deriva da $P^0,P^1,\dots,P^k$ una nuova sequenza $T^0,T^1,\dots,T^k$ di profili spostando l'alternativa $z$:
+- si indica $T^h$ come $T^h = \langle t_{1}^h,t_{2}^{h},\dots,t_{k}^h \rangle$ (vedi immagine);
 - $T^0$ è ottenuto spostando $z$ in ultima posizione in ciascun ranking del profilo $P^0$. Quindi, in $T^0$, ciascun ranking avrà $x$ in penultima posizione e $z$ in ultima;
-- per $h>0$, $T^h$ viene ottenuto dal profilo $P^h$ come segue: l'alternativa $z$ viene spostata in prima posizione in tutti i ranking $t_{i}^h$ cone $i \leqslant h$, e viene spostata in ultima posizione in tutti gli altri, ossia $$ \forall i \leqslant h, \ \rho_{i}^{T^h}(z) = n-1 \quad \land \quad \forall i > h, \ \rho_{i}^{T^h}(z) = 0 $$
+- per $h>0$, $T^h$ viene ottenuto dal profilo $P^h$ come segue: l'alternativa $z$ viene spostata in prima posizione in tutti i ranking $t_{i}^h$ con $i \leqslant h$, e viene spostata in ultima posizione in tutti gli altri, ossia $$ \forall i \leqslant h, \ \rho_{i}^{T^h}(z) = n-1 \quad \land \quad \forall i > h, \ \rho_{i}^{T^h}(z) = 0 $$
 ![center|600](Pasted%20image%2020240904150152.png)
+
 Quindi, i ranking individuali $t_i^h$ per $i=1,\dots,h$ avranno $z$ in prima posizione ed $x$ in seconda posizione, mentre per i ranking individuali con $i>h$ si ha $z$ in ultima posizione e $x$ in penultima.
 Per ogni $h \in \{ 0,1,\dots,k \}$ si indica con $t^h$ il ranking collettivo associato a $T^h$ e con $\rho^{T^h}$ la funzione peso ad esso associata. Esattamente come per i profili $P^0,P^1,\dots,P^k$, esiste $l\in [k]$ tale che
 $$
 \rho^{T^h}(z) = 0  \ \ \forall h < l \quad \land \quad \rho^{T^l}(z)= n-1
 $$
-e esattamente come si è dimostrato per il dittatore potenziale $j$ al punto 3.1, si può dimostrare che per ogni profilo $Q$, se $y\neq z$ e $v\neq z$ allora
+e esattamente come si è dimostrato per il dittatore potenziale $j$ al punto 3.1, si può dimostrare che, per ogni profilo $Q$, se $y\neq z$ e $v\neq z$ allora
 $$
 \rho^{Q}(y)>\rho^{Q}(v) \iff \rho^{Q}_{l}(y)>\rho^{Q}_{l}(v)
 $$
-Si mostra quindi che per ogni profilo $Q$, se $y\neq z$ e $v\neq z$ allora
+quindi, in particolare, per ogni profilo $Q$, se $y\neq z$ e $x\neq z$ allora
 $$
 \rho^{Q}(y)>\rho^{Q}(x) \iff \rho^{Q}_{l}(y)>\rho^{Q}_{l}(x)
 $$
-Per fare ciò, bisogna dimostrare che $l=j$. Lo si fa mostrando che: 1. non può essere $l<j$ e 2. non può essere $l>j$.
+Allora, per concludere la dimostrazione del teorema, è sufficiente dimostrare che $l=j$. Lo si fa mostrando che: 1. non può essere $l<j$ e 2. non può essere $l>j$.
 1. Si mostra che esiste almeno un profilo $P$ tale che $\rho^{P} \neq \rho^{P}_{l}$. Avendo scelto $j$ tale che $\forall h<j, \rho^{h}(x)=0$ e $\rho^j(x)>0$, allora nel profilo $P^{j-1}$ vale che $\rho^{j-1}(x)=0$ e quindi $$ \rho^{j-1}(x) < \rho^{j-1}(y) $$ ma poiché $\rho_{i}^{h}(x)=n-1$ per ogni $i\leqslant h$, allora $\rho_{l}^{j-1}=n-1$ e dunque $\rho_{l}^{j-1}(x)>\rho_{l}^{j-1}(y)$, ossia $\rho^{j-1}\neq \rho_{l}^{j-1}$.
 2. Si mostra che esiste almeno un profilo $P$ tale che $\rho^P \neq \rho^{P}_{l}$. Nel profilo $P^{j}$ vale che $\rho^{j}(x)=n-1$ e quindi $$ \rho^{j}(x)>\rho^{j}(y) $$ ma poiché $\rho_{i}^{h}(x)=0$ per ogni $i>h$, allora $\rho^{j}_{l}(x)=0$, allora $\rho^{j}_{l}(x) < \rho^{j}_{l}(y)$, ossia $\rho^{j}\neq \rho^{j}_{l}$.
 Quindi, $l=j$.

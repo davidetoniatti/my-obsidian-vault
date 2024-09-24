@@ -139,7 +139,7 @@ La dimostrazione della presenza di una Power Law nel modello definito procede in
 4.  Individuazione di una *power law*.
 #### 1 - Legge aleatoria
 Sia $D_j(t)$ la variabile aleatoria che esprime il numero di archi entranti nel nodo $j$ al passo $t$ del processo di generazione del grafo.
-Si osserva che, per costruzione, la variabile $D_j(t)$ è definita per $t \geqslantslant j$ e che $D_j(j) = 0$  per ogni $j$: esprime la condizione iniziale della variabile.
+Si osserva che, per costruzione, la variabile $D_j(t)$ è definita per $t \geqslant j$ e che $D_j(j) = 0$  per ogni $j$: esprime la condizione iniziale della variabile.
 Si osserva che il grado entrante di un nodo $j$ al passo $t+1$ può aumentare di **al più** una unità rispetto al passo $t$. In particolare, $D_j(t+1) = D_j(t) +1$ se e solo se l'arco $(t+1,j)$ viene creato.
 Dunque sia la variazione nel tempo del grado entrante del nodo $j$ espressa come la differenza $D_j(t+1) - D_j(t)$; la probabilità che il grado entrante di $j$ aumenti di uno vale
 $$
@@ -168,7 +168,7 @@ $$
 	   x_j(j) = 0\\
 	   \\
 	   \frac{d}{dt}x_j(t) = \frac{p}{t} + \frac{(1-p)}{t}x_j(t)
-\end{cases} \quad \forall t \geqslantslant j
+\end{cases} \quad \forall t \geqslant j
 $$    
 Non è detto che questa approssimazione si avvicini alla legge reale.
 Si osserva infine che la seconda equazione del sistema è una *equazione differenziale*, cioè una equazione che lega una funzione alla sua derivata, del tipo $f'(x) = a \cdot f(x) + b$.
@@ -203,8 +203,7 @@ $$\int \frac{dy}{y} = \int \frac{d \left[p + (1-p) x_j(t) \right]}{p + (1-p)x_j(
 $$\ln{\left( p + (1-p) x_j(t) \right)} = (1-p) \ln{(t)} + c$$
 Da cui, elevando a potenza, si ottiene
 $$p + (1-p) x_j(t) = t^{1-p} \cdot e^c = C \cdot t^{1-p}$$
-
-Per calcolare la costante $C$ è sufficiente  considerare la condizione iniziale per cui $x_j(j) = 0$, ottenendo che
+Per calcolare la costante $C$ è sufficiente considerare la condizione iniziale per cui $x_j(j) = 0$, ottenendo che
 $$p = C \cdot j^{1-p} \implies C = \frac{p}{ j^{(1-p)} }$$
 Infine, si conclude ottenendo
 $$
@@ -227,8 +226,7 @@ In formule, si deve calcolare
 $$
 \frac{1}{t} | A_t(k) - A_t(k+1) | = \frac{1}{t} \left( |A_t(k)| - |A_t(k+1)| \right)
 $$
-Per definizione, un nodo $j$ appartiene all'insieme $A_t(k)$ se e solo se $j \leqslant t$ e $x_j(t) \geqslantslant k$.
-Ma dalla precedente equazione differenziale vale che $x_j(t) = \frac{p}{1-p} \left[ \left( \frac{t}{j}  \right)^{1-p} - 1 \right]$, perciò $x_j(t) \geqslant k$ se e solo se $\frac{p}{1-p} \left[ \left( \frac{t}{j} \right)^{1-p} - 1 \right] \geqslant k$.
+Per definizione, un nodo $j$ appartiene all'insieme $A_t(k)$ se e solo se $j \leqslant t$ e $x_j(t) \geqslant k$. Ma dalla precedente equazione differenziale vale che $x_j(t) = \frac{p}{1-p} \left[ \left( \frac{t}{j}  \right)^{1-p} - 1 \right]$, perciò $x_j(t) \geqslant k$ se e solo se $\frac{p}{1-p} \left[ \left( \frac{t}{j} \right)^{1-p} - 1 \right] \geqslant k$.
 A questo punto, si risolve la disequazione per trovare i valori di $j$ che rispettano la disuguaglianza
 $$
 \begin{align*}

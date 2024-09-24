@@ -2,7 +2,7 @@
 ## Attività caratterizzanti (48cfu)
 - [x] Algoritmi Distribuiti e Reti Complesse (9cfu)
 	- Voto: 30
-- [ ] Analisi di Reti / Algorithmic Game Theory (9cfu) - /30L
+- [x] Analisi di Reti / Algorithmic Game Theory (9cfu) - 30L
 - [ ] Machine Learning (9cfu)
 - [ ] Natural Language Processing (9cfu)
 - [ ] Principles Of Cryptocurrency Design (6cfu)
