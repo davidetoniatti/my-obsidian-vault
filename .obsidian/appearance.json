@@ -9,5 +9,6 @@
   "textFontFamily": "SF Pro Text",
   "theme": "obsidian",
   "cssTheme": "Tokyo Night Storm",
-  "interfaceFontFamily": "SF Pro Rounded"
+  "interfaceFontFamily": "SF Pro Rounded",
+  "showViewHeader": true
 }

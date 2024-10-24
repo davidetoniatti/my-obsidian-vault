@@ -14,7 +14,7 @@
 - [ ] Calcolo delle probabilità (6cfu)
 - [x] Inferenza statistica e teoria dell'informazione (6cfu)
 	- Voto: 30
-- [ ] Information Retriveal (6cfu)
+- [ ] Information Retrieval (6cfu)
 ## A scelta (9cfu)
 - [ ] [?]
 ## Tipo D (6cfu)

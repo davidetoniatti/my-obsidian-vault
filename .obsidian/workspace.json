@@ -4,19 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "3b7e66732a2bffdf",
+        "id": "342eb3360d80a875",
         "type": "tabs",
         "children": [
           {
-            "id": "e4c6483211b61198",
+            "id": "e63238e48280c4d4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "study_plan_draft.md",
+                "file": "IR/03 - Compression.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "03 - Compression"
             }
           }
         ]
@@ -39,7 +41,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Esplora risorse"
             }
           },
           {
@@ -54,7 +58,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Ricerca"
             }
           },
           {
@@ -62,7 +68,9 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Segnalibri"
             }
           }
         ]
@@ -85,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "study_plan_draft.md",
+                "file": "ML/01 - Foundation.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -93,7 +101,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Riferimenti a 01 - Foundation"
             }
           },
           {
@@ -102,10 +112,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "study_plan_draft.md",
+                "file": "ML/01 - Foundation.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Collegamenti in uscita da 01 - Foundation"
             }
           },
           {
@@ -116,7 +128,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Etichette"
             }
           },
           {
@@ -125,8 +139,20 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "study_plan_draft.md"
-              }
+                "file": "IR/03 - Compression.md"
+              },
+              "icon": "lucide-list",
+              "title": "Struttura di 03 - Compression"
+            }
+          },
+          {
+            "id": "18ba096d03de19cc",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           }
         ],
@@ -145,56 +171,57 @@
       "daily-notes:Apri nota del giorno": false,
       "templates:Inserisci modello": false,
       "command-palette:Apri riquadro comandi": false,
-      "obsidian-excalidraw-plugin:Create new drawing": false
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e4c6483211b61198",
+  "active": "e63238e48280c4d4",
   "lastOpenFiles": [
-    "study_plan_draft.md",
-    "AR/07 - Seguire il gregge.md",
-    "AR/08 - Sistemi di voto.md",
-    "AR/09 - Web Search.md",
-    "AR/05 - Reti come grafi dalla struttura disomogenea.md",
-    "AR/06 - Processi di diffusione.md",
-    "AR/03 - Grafi geometrici aleatori e reti wireless.md",
-    "AR/02 - Questione di popolarità.md",
-    "AR/attachments/Pasted image 20240921163517.png",
-    "AR/01 - Introduzione e grafi di Erdős-Rényi.md",
-    "AR/04 - Il fenomeno Small World.md",
-    "AR/attachments/Pasted image 20240910122458.png",
-    "AR/attachments/Pasted image 20240904234445.png",
-    "AR/attachments/Pasted image 20240904234041.png",
-    "AR/attachments/Pasted image 20240904233050.png",
-    "AR/attachments/Pasted image 20240904230345.png",
-    "AR/attachments/Pasted image 20240904225448.png",
-    "AR/attachments/Pasted image 20240904225028.png",
-    "AR/attachments/Pasted image 20240904224953.png",
-    "AR/attachments/Pasted image 20240904224841.png",
-    "ABD/06 - Data streams.md",
-    "AGT/02 - Global Connection Game.md",
-    "cose da fare.md",
-    "Senza nome.md",
-    "ABD/07 - Link analysis.md",
-    "AGT/03 - Local Connection Game.md",
-    "schifezze/Architetture decentralizzate new.md",
-    "ADRC/01 - Ambienti distribuiti.md",
-    "ADRC/12 - Modello GOSSIP.md",
-    "ADRC/14 - Majority Consensus.md",
-    "ADRC/09 - Maximal Independent Set Distribuito.md",
-    "ADRC/05 - Depth First Traversal.md",
-    "ADRC/06 - Saturazione.md",
-    "ADRC/04 - Spanning Tree construction.md",
-    "ADRC/03 - Problema Wake-up.md",
-    "attachments",
-    "ADRC.zip",
-    "ziUeKQ0c",
-    "Senza nome.canvas",
-    "ADRC/attachments",
-    "ADRC",
-    "PCD",
-    "AGT.zip",
-    "zifsqmxy",
-    "Excalidraw",
-    "zizKgNdo"
+    "IR/02 - Index Construction.md",
+    "IR/03 - Compression.md",
+    "IR/attachments/03 - Compression/B28CD0FE819C4C26DC18323F1B3C2908.png",
+    "IR/attachments/03 - Compression/E463F85969AAA3AB8869EA76F661E191.png",
+    "IR/attachments/03 - Compression/E01D47BAF623186BD1420848B77F7BE3.png",
+    "IR/attachments/03 - Compression/01484F18153F19F258854CD4E0081AC0.png",
+    "IR/attachments/03 - Compression/02797542FAC6CA26CEF313C88EFC805D.png",
+    "IR/attachments/03 - Compression/E8139DB3EC5A30E9CD62AFAFAC3EC737.png",
+    "IR/attachments/03 - Compression/0804A55F9605FC8310CDCD8D1B787728.png",
+    "IR/attachments/03 - Compression/D5CC5A947DFAC255C303435E139C4A46.png",
+    "IR/attachments/03 - Compression",
+    "IR/attachments/03 - Compression/0E70ECBA7BEAEDD4603B8238D5D4384E.png",
+    "IR/attachments/02 - Index Construction/2DF46993891DDB4FC3B5363565A09205.png",
+    "IR/attachments/02 - Index Construction",
+    "IR/01 - Inverted-Index.md",
+    "PCD/1 - Consenso distribuito.md",
+    "ML_Strazio/Kernel Regression - Nadaraya-Watson Model.md",
+    "ML_Strazio/K-nearest neighbor.md",
+    "ML_Strazio/Ensemble methods.md",
+    "ML_Strazio/Convessità.md",
+    "ML_Strazio/Bagging.md",
+    "ML_Strazio/Backpropagation.md",
+    "ML_Strazio/Adaboost.md",
+    "ML_Strazio/Supervised Learning.md",
+    "ML/01 - Foundation.md",
+    "ML/attachments/01 - Foundation",
+    "ML/attachments",
+    "ML_Strazio/Prediction Risk.md",
+    "ML_Strazio/0 - Machine Learning.md",
+    "ML_Strazio/Gradient Descent.md",
+    "ML_Strazio/From Learning to Optimization.md",
+    "ML_Strazio/img",
+    "ML_Strazio/Support Vector Machines.md",
+    "ML_Strazio/Some Loss Functions.md",
+    "ML_Strazio/Some Base Function.md",
+    "ML_Strazio/SVM and Gradient Descent.md",
+    "ML_Strazio/SVM - removing separability assumption.md",
+    "ML_Strazio/Probabilistic classification - generative models.md",
+    "ML_Strazio/Probabilistic PCA.md",
+    "ML_Strazio/Probabilistic Model for Regression.md",
+    "ML_Strazio",
+    "IR/attachments/01 - Inverted-Index",
+    "IR/attachments/IR/01 - Inverted-Index",
+    "IR/attachments/IR",
+    "IR/attachments",
+    "Senza nome.canvas"
   ]
 }
