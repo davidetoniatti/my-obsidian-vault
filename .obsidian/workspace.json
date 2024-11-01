@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "342eb3360d80a875",
+        "id": "6622d53793fffdff",
         "type": "tabs",
         "children": [
           {
-            "id": "e63238e48280c4d4",
+            "id": "600e4a0376229ccc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "IR/03 - Compression.md",
+                "file": "IR/02 - Index Construction.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "03 - Compression"
+              "title": "02 - Index Construction"
             }
           }
         ]
@@ -77,7 +77,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "f4a864b39cd2bdd0",
@@ -139,10 +140,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "IR/03 - Compression.md"
+                "file": "2024-10-03.md"
               },
               "icon": "lucide-list",
-              "title": "Struttura di 03 - Compression"
+              "title": "Struttura di 2024-10-03"
             }
           },
           {
@@ -175,24 +176,40 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e63238e48280c4d4",
+  "active": "600e4a0376229ccc",
   "lastOpenFiles": [
-    "IR/02 - Index Construction.md",
-    "IR/03 - Compression.md",
-    "IR/attachments/03 - Compression/B28CD0FE819C4C26DC18323F1B3C2908.png",
-    "IR/attachments/03 - Compression/E463F85969AAA3AB8869EA76F661E191.png",
-    "IR/attachments/03 - Compression/E01D47BAF623186BD1420848B77F7BE3.png",
-    "IR/attachments/03 - Compression/01484F18153F19F258854CD4E0081AC0.png",
-    "IR/attachments/03 - Compression/02797542FAC6CA26CEF313C88EFC805D.png",
-    "IR/attachments/03 - Compression/E8139DB3EC5A30E9CD62AFAFAC3EC737.png",
-    "IR/attachments/03 - Compression/0804A55F9605FC8310CDCD8D1B787728.png",
-    "IR/attachments/03 - Compression/D5CC5A947DFAC255C303435E139C4A46.png",
-    "IR/attachments/03 - Compression",
-    "IR/attachments/03 - Compression/0E70ECBA7BEAEDD4603B8238D5D4384E.png",
-    "IR/attachments/02 - Index Construction/2DF46993891DDB4FC3B5363565A09205.png",
-    "IR/attachments/02 - Index Construction",
     "IR/01 - Inverted-Index.md",
-    "PCD/1 - Consenso distribuito.md",
+    "IR/02 - Index Construction.md",
+    "PCD/01 - Consenso distribuito.md",
+    "PCD/attachments/01 - Consenso distribuito",
+    "PCD/attachments/01 - Consenso distribuito/BE0196D03C9066F13269E8353A0978C5.png",
+    "PCD/attachments",
+    "IR/04 - Scoring, term weighting and the vector space model.md",
+    "IR.zip",
+    "ziilcaSQ",
+    "IR/attachments/04 - Scoring, term weighting and the vector space model/251C15B20D74D5B2C21222EB32352D9E.png",
+    "IR/attachments/04 - Scoring, term weighting and the vector space model/DABFEFCBDC73EDE3C6EDE24BFFE8777B.png",
+    "IR/attachments/04 - Scoring, term weighting and the vector space model/8F619F309DEDAA06DC91599929DC99CA.png",
+    "IR/attachments/04 - Scoring, term weighting and the vector space model/9AEBB8227C38232D2B07FC8B3E0AAC09.png",
+    "IR/attachments/04 - Scoring, term weighting and the vector space model",
+    "IR/attachments/04 - Scoring, term weighting and the vector space model/9F3B416A7892704709A9C193EA612A5F.png",
+    "study_plan_draft.md",
+    "IR/03 - Compression.md",
+    "ML/01 - Foundation.md",
+    "2024-10-03.md",
+    "ML/attachments/attachments/01 - Foundation",
+    "ML/attachments/attachments",
+    "PCD/pcd parte 2.md",
+    "ABD/attachments/charMatrix.png",
+    "ABD/attachments/Pasted image 20240225191254.png",
+    "ABD/attachments/WebStructure.png",
+    "ADRC/attachments/adrc_ex1.png",
+    "AGT/07 - Meccanismi senza pagamenti e kidney exchange.md",
+    "AR/08 - Sistemi di voto.md",
+    "AR/09 - Web Search.md",
+    "ADRC/08 - Graph Coloring Distribuito.md",
+    "IR/attachments/03 - Compression",
+    "IR/attachments/02 - Index Construction",
     "ML_Strazio/Kernel Regression - Nadaraya-Watson Model.md",
     "ML_Strazio/K-nearest neighbor.md",
     "ML_Strazio/Ensemble methods.md",
@@ -201,27 +218,11 @@
     "ML_Strazio/Backpropagation.md",
     "ML_Strazio/Adaboost.md",
     "ML_Strazio/Supervised Learning.md",
-    "ML/01 - Foundation.md",
     "ML/attachments/01 - Foundation",
-    "ML/attachments",
     "ML_Strazio/Prediction Risk.md",
     "ML_Strazio/0 - Machine Learning.md",
     "ML_Strazio/Gradient Descent.md",
     "ML_Strazio/From Learning to Optimization.md",
-    "ML_Strazio/img",
-    "ML_Strazio/Support Vector Machines.md",
-    "ML_Strazio/Some Loss Functions.md",
-    "ML_Strazio/Some Base Function.md",
-    "ML_Strazio/SVM and Gradient Descent.md",
-    "ML_Strazio/SVM - removing separability assumption.md",
-    "ML_Strazio/Probabilistic classification - generative models.md",
-    "ML_Strazio/Probabilistic PCA.md",
-    "ML_Strazio/Probabilistic Model for Regression.md",
-    "ML_Strazio",
-    "IR/attachments/01 - Inverted-Index",
-    "IR/attachments/IR/01 - Inverted-Index",
-    "IR/attachments/IR",
-    "IR/attachments",
     "Senza nome.canvas"
   ]
 }

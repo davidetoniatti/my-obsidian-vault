@@ -1,24 +1,24 @@
-In questo capitolo, si studiano tecniche e metodi utilizzati per comprimere un indice inverso. Nella prima sezione, sono descritti diversi metodi per la compressione del dizionario, mentre la seconda sezione si concentra sulla compressione delle posting list.
+In questo capitolo, si studiano alcune tecniche utilizzate per comprimere un indice inverso. Nella prima sezione, sono descritti diversi metodi per la compressione del dizionario, mentre la seconda sezione si concentra sulla compressione delle posting list.
 # Compressione in IR
-In generale, la compressione porta una serie di vantaggi:
+La compressione porta una serie di vantaggi:
 - Permette di risparmiare spazio su disco (e quindi DANARI);
-- Permette un migliore uso della memoria centrale. In particolare, è possibile memorizzare un numero maggiore di posting list ricorrenti in memoria, rendendo l'elaborazione delle query frequenti molto rapida, riducendo dunque il tempo di risposta. A tale scopo è chiaro che la decompressione delle posting list deve essere più efficiente rispetto alla ricerca di quest'ultime, non compresse, su disco. Questo è il motivo principale per il quale si utilizza la compressione in IR;
-- Permette una trasmissione dei dati da disco a memoria più veloce. Gli algoritmi di decompressione efficienti funzionano così velocemente sull'hardware moderno che il tempo totale di trasferimento di una porzione di dati compressi dal disco e la successiva decompressione è solitamente inferiore al trasferimento della stessa porzione di dati in forma non compressa.
+- Permette un migliore uso della memoria centrale. In particolare, tramite la compressione sarà possibile memorizzare un maggior numero di posting list ricorrenti (cioè molto richieste) in memoria, rendendo l'elaborazione delle query frequenti molto rapida e dunque riducendo il tempo di risposta. A tale scopo è chiaro che la decompressione delle posting list deve essere più efficiente rispetto alla ricerca di quest'ultime, non compresse, su disco. Questo è il motivo principale per il quale si utilizza la compressione in IR;
+- Permette una trasmissione dei dati da disco a memoria più veloce. Gli algoritmi di decompressione efficienti funzionano così velocemente sull'hardware moderno che il tempo totale di trasferimento di una porzione di dati compressi dal disco e la successiva decompressione è solitamente inferiore al tempo di trasferimento della stessa porzione di dati in forma non compressa.
 
 In particolare, comprimere il dizionario di un indice inverso porta i seguenti vantaggi:
 - Rende il dizionario sufficientemente piccolo in modo da poter risiedere in memoria centrale;
 - Lo può rendere talmente piccolo da poter mantenere anche alcune posting list in memoria centrale;
-la compressione delle posting list invece porta i seguenti vantaggi:
+La compressione delle posting list invece porta i seguenti vantaggi:
 - Riduce lo spazio utilizzato su disco;
 -  Riduce il tempo necessario per leggere le posting list su disco;
-- I grandi motori di ricerca tengono un significativo numero di posting list in memoria: comprimendole, si mantengono un maggior numero di posting list in memoria centrale.
+- I grandi motori di ricerca tengono un significativo numero di posting list in memoria: comprimendole, si possono mantenere un maggior numero di posting list in memoria centrale.
 ## Caratteristiche fondamentali
 In particolare, uno schema di compressione per poter essere applicato nel campo dell'IR, deve rispettare almeno le seguenti caratteristiche:
 - **Lossless compression.** La compressione non deve portare a perdita di informazione;
 - **Decompressione efficiente.** Il tempo per leggere i dati compressi e decomprimerli deve essere minore del tempo necessario a leggere i dati non compressi.
 ### Lossless compression
-Una compressione è detta **lossless** quando la fase di compressione non porta a perdita di informazione. In IR si utilizzano esclusivamente compressioni lossless. Esistono però altre tipologie di compressione, come quella **jpeg**, che sono lossy.
-Alcuni step nell'elaborazione dei documenti per la creazione dell'indice possono essere di tipo lossy, come ad esempio la rimozione delle stop-words. Tra queste tecniche vi sono:
+Una compressione è detta **lossless** quando la fase di compressione non porta a perdita di informazione. In IR si utilizzano esclusivamente compressioni lossless.
+Alcuni step nell'elaborazione dei documenti per la creazione dell'indice possono essere di tipo lossy (cioè con perdita di informazioni), come ad esempio la rimozione delle stop-words. Tra queste tecniche vi sono:
 - **No numbers**: rimozione dei numeri.
 - **Case folding**: non si considerano le maiuscole.
 - **30 stopwords**: rimozione delle top 30 stopwords.
@@ -43,10 +43,10 @@ Si consideri il dataset RCV1 (Reuters dataset). La legge di Heap approssima molt
 Lo spazio occupato dalle posting lists dipende anche dalla frequenza dei token nei vari documenti. In particolare, più frequente è un token, e più sarà presente in diversi documenti, quindi più $\text{docID}$ sono salvati nella postings list di quel token.
 La **legge di Zipf** viene utilizzata per stimare la frequenza relativa di ogni termine. Essa esprime che nei linguaggi naturali ci sono, tendenzialmente, poche parole con una elevata frequenza, e tante parole con una frequenza molto più bassa. In particolare, la legge stima che, dati i tokens ordinati per frequenza (dal più frequente al meno frequente), l'$i$-esimo termine più frequente ha una frequenza proporzionale a
 $$
-cf_{i} \approx \frac{1}{i} = \frac{K}{i}
+\text{cf}_{i} \approx \frac{1}{i} = \frac{K}{i}
 $$
-dove $K$ è una costante di normalizzazione, mentre $cf_{i}$ indica la *collection frequency* dell'$i$-esimo termine più frequente nella collezione.
-Una conseguenza della legge di Zipf è che se il termine più frequente appare $cf_{1}$ volte, allora il secondo termine più frequente apparirà più o meno $\frac{cf_{1}}{2}$, il terzo termine più frequente apparirà più o meno $\frac{cf_{1}}{3}$ volte, e cosi via.
+dove $K$ è una costante di normalizzazione, mentre $\text{cf}_{i}$ indica la *collection frequency* dell'$i$-esimo termine più frequente nella collezione.
+Una conseguenza della legge di Zipf è che se il termine più frequente appare $\text{cf}_{1}$ volte, allora il secondo termine più frequente apparirà più o meno $\frac{\text{cf}_{1}}{2}$, il terzo termine più frequente apparirà più o meno $\frac{\text{cf}_{1}}{3}$ volte, e cosi via.
 # Compressione del dizionario
 Si vedono alcune delle possibili tecniche utili alla compressione del dizionario di un indice inverso.
 ## Struttura dati dizionario - versione naive
@@ -62,7 +62,7 @@ la struttura è tale da permettere una ricerca veloce, tramite ricerca binaria, 
 Memorizzando in questa struttura dati il dataset di Reuters, la dimensione totale del dizionario risulta pari a 11.2MB.
 ## Dizionario come stringa
 Memorizzare i termini in celle di lunghezza fissa porta ad un importante spreco di memoria. Infatti, i termini nella lingua inglese sono mediamente lunghi 8 caratteri (dunque 8 byte), dunque in media sono sprecati 12 byte di memoria per ogni termine nel dizionario. Inoltre, in tali celle non è possibile memorizzare quelle poche parole che risultano più lunghe di 20 caratteri.
-Queste limitazioni vengono superate memorizzando i termini del dizionario come una lunga stringa di caratteri. Allora ogni array del dizionario al posto di un termine mantiene un puntatore che punta al primo carattere del termine, che l'array rappresenta, nella stringa dei termini del dizionario. Si osserva che, dato un puntatore alla prima lettera di un termine, il puntatore successivo indica la fine di quest'ultimo. 
+Queste limitazioni vengono superate memorizzando i termini del dizionario come una lunga stringa di caratteri. Allora ogni array del dizionario al posto di un termine mantiene un puntatore che punta al primo carattere del termine che l'array rappresenta nella stringa dei termini del dizionario. Si osserva che, dato un puntatore alla prima lettera di un termine, il puntatore successivo indica la fine di quest'ultimo. 
 ![center|600](0804A55F9605FC8310CDCD8D1B787728.png)
 Memorizzando RCV1 usando quest'ultima strategia, allora sono necessari, per ogni termine:
 - 4 byte per memorizzare la frequenza del termine;

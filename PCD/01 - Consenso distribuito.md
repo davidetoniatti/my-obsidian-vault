@@ -4,17 +4,18 @@ Si considera il seguente sistema distribuito:
 - Ogni nodo può eseguire computazioni locali arbitrarie e inviare messaggi di lunghezza arbitraria ad ogni altro nodo.
 Nel **Byzantine Broadcast problem**, introdotto negli anni '80 da sir [Leslie Lamport](https://en.wikipedia.org/wiki/Leslie_Lamport), un nodo designato come *sorgente* riceve in input un messaggio $b$ (ad esempio, un bit), che deve diffondere nella rete. Si vorrebbe che tutti i nodi raggiungano il consenso sul bit $b$. Per raggiungere tale scopo, si deve definire un **protocollo**.
 ## Scenario operativo
-Per analizzare il problema, si deve definire bene lo scenario operativo, ossia le .condizioni in cui lavorano gli agenti della rete. In particolare
+Per analizzare il problema, si definisce lo scenario operativo, ossia le condizioni in cui lavorano gli agenti della rete.
+![center|200](BE0196D03C9066F13269E8353A0978C5.png)
 ### 1. Non tutti i nodi seguono il protocollo
 I nodi **non** seguono necessariamente il protocollo, cioè ci sono degli agenti *onesti* che rispettano il protocollo e degli agenti *corrotti* che non lo seguono. Si osserva che se cosi non fosse, risulterebbe banale progettare un protocollo che risolve il problema.
-In particolare, sia $f$ il numero di nodi corrotti (o *faulty*) con $0 \leq f \leq n$ e, naturalmente, sia $n-f$ il numero di nodi onesti. Inoltre, sia $1 \in [n]$ il nodo sorgente al quale viene affidato l'input $b$ da propagare all'interno della rete. Si vuole progettare un protocollo al termine del quale ogni nodo *onesto* $i$ dia in output un valore $y_i$ tale che rispetti le seguenti proprietà:
+In particolare, sia $f$ il numero di nodi corrotti (o *faulty*) con $0 \leq f \leq n$ e sia $n-f$ il numero di nodi onesti. Inoltre, sia $1 \in [n]$ il nodo sorgente al quale viene affidato l'input $b$ da propagare all'interno della rete. Si vuole progettare un protocollo al termine del quale ogni nodo *onesto* $i$ dia in output un valore $y_i$ tale che rispetti le seguenti proprietà:
 1. **Terminazione**: tutti i nodi onesti restituiscono un output rispettivo $y_i$ entro un tempo finito;
 2. **Validità**:  se la sorgente è onesta, allora tutti i nodi onesti restituiscono in output il bit $b$ in input alla sorgente. Formalmente, se la sorgente è un nodo onesto, allora $$y_{i} = b \quad \forall i \text{ nodo onesto.}$$
 3. **Consistenza**: tutti i nodi onesti devono restituire in output lo stesso valore. Formalmente, se $i$ e $j$ sono due nodi onesti e $y_i,y_j$ sono i loro rispettivi output, allora $y_i = y_j$.
 I $n-f$ nodi onesti applicheranno il protocollo in modo rigoroso, mentre gli $f$ nodi corrotti possono comportarsi come vogliono: si può fare l'assunzione *worst-case* per la quale tutti i nodi corrotti si coalizzano al fine di far fallire il protocollo. Inoltre, non si è a conoscenza di quali siano i nodi corrotti.
 ### 2. I messaggi inviati arrivano ai destinatari
 Si assume di trovarsi in un sistema sincrono, in cui:
-- Esiste un **clock globale** noto a tutti i nodi che scandisce il tempo in round discreti: 0,1,2,...
+- Esiste un **clock globale** noto a tutti i nodi che scandisce il tempo in round discreti: $0,1,2,\dots$
 - Ogni messaggio inviato in un round $t$ arriva al destinatario <u>prima</u> del round $t+1$.
 ### 3. Si conosce il numero di nodi
 In particolare, la rete è composta da $n$ nodi $\{ 1,\dots,n \}$ e la sorgente è il nodo $1$ (**permissioned model**).
